@@ -19,7 +19,7 @@ def main():
 
     # To ask: is it ok to have the screen as a global variable or how can we make the screen object passable into the
     # other scripts that we will use? Will we need to pass the screen object into every class constructor
-    # (OOP approach) or into every function call (functional approach)?
+    # (OOP approach) or into every function call (functional approach)?a
 
 
 
