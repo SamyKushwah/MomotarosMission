@@ -74,19 +74,19 @@ def load_debug_level(screen):
 
 
 class Controllable:
-    gravity = 0
+    gravity = 1
 
     def __init__(self):
-        self.x = 10
-        self.y = 768 - 350
+        x = 10
+        y = 768 - 350
         self.vel_x = 0
         self.vel_y = 0
-        self.is_jumping = False
+        self.is_jumping = True
 
         # basic sprite info
         self.width = 100
         self.height = 100
-        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.rect = pygame.Rect(x, y, self.width, self.height)
 
         self.image = pygame.image.load("player.png")
 
@@ -102,7 +102,7 @@ class Controllable:
 
                 if event.key == pygame.K_UP:
                     if not self.is_jumping:
-                        self.vel_y = -5
+                        self.vel_y = -20
                         print('up')
                         self.is_jumping = True
 
@@ -110,13 +110,14 @@ class Controllable:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     self.vel_x = 0
 
+        if self.is_jumping:
+            self.vel_y += Controllable.gravity
+
         # Update player position
-        self.x += self.vel_x
-        self.y += self.vel_y
-        self.rect.move(self.vel_x, self.vel_y)
+        self.rect.x += self.vel_x
+        self.rect.y += self.vel_y
 
-
-        self.vel_y += Controllable.gravity
+        self.rect.update(self.rect)
 
         # Check for collision and print character in another function
 
@@ -124,22 +125,21 @@ class Controllable:
         for wall in list_of_walls:
             print(self.rect.bottom)
             if self.rect.colliderect(wall):
-                print('bruh')
                 if self.vel_x > 0:
                     self.rect.right = wall.left
                 elif self.vel_x < 0:
                     self.rect.left = wall.right
 
                 if self.vel_y > 0:
+                    print('bruh')
                     self.rect.bottom = wall.top
-                    print(wall.top)
-                elif self.vel_y < 0:
-                    self.rect.top = wall.bottom
                     self.vel_y = 0
                     self.is_jumping = False
+                elif self.vel_y < 0:
+                    self.rect.top = wall.bottom
 
     def draw_sprite(self, screen):
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.image, (self.rect.x, self.rect.y))
         pygame.display.update()
 
 
