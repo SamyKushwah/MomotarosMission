@@ -8,7 +8,10 @@ class Level:
         #self.animals = Animals()
         self.platform_list = []
         self.obstacle_list = []
-        pygame.display.set_caption("Momotaro's Journey")
+        self.coin_list = []
+        self.demon_list = []
+        self.coins_collected = 0
+        self.lvl_complete = False
 
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -22,7 +25,10 @@ class Level:
     def add_platform(self,x,y,height,width):
         temp_platform = Platform(x,y,height,width)
         self.platform_list.append(temp_platform)
-
+    
+    #def add_demon(self,x,y)
+    #def add_obstacle(self,x,y)
+    #def add_coin(self,x,y)
 
 class Platform:
     def __init__(self, x, y, width, height):
