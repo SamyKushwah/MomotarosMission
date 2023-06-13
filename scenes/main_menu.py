@@ -8,10 +8,18 @@ def run_main_menu(screen, clock, high_score):
     # main menu elements setup
     middle = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 
-    test_image = pygame.Surface([100, 50])
+    background = pygame.image.load("images/background_menu.jpg")
+    background = pygame.transform.scale(background, (1024, 768))
+
+    test_image = pygame.Surface([200, 100])
     test_image.fill('azure')
 
-    play_button = button.Button(test_image, 'Comic Sans MS', 100, "Play")
+    play_button = button.Button(test_image, 'Comic Sans MS', 70, "Play")
+
+    font = pygame.font.SysFont("Comic Sans MS", 100)
+    text_color = (234, 114, 110)
+    title_top = font.render("Momotaro's", False, text_color)
+    title_bottom = font.render("Mission", False, text_color)
 
     # driver loop setup
     running = True
@@ -28,7 +36,9 @@ def run_main_menu(screen, clock, high_score):
                     return "play"
 
         # fill the background
-        screen.fill("aquamarine4")
+        screen.blit(background, (0, 0))
+        screen.blit(title_top, (middle.x - (title_top.get_rect().width / 2), middle.y - title_top.get_rect().height - 100))
+        screen.blit(title_bottom, (middle.x - (title_bottom.get_rect().width / 2), middle.y + 75))
 
         # draw the play button
         play_button.draw(screen, middle)
