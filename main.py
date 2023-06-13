@@ -34,8 +34,9 @@ def main():
         if selected_level == 1:
             screen.fill((0, 0, 0))
             collidables = []
-            collidables.append(load_debug_level(screen))
-            collidables.append(load_platform(screen))
+            collidables.append((load_debug_level(screen), "Floor"))
+            collidables.append((load_platform(screen), "Floor"))
+            collidables.append((load_wall(screen), "Wall"))
 
             player.poll_movement()
             player.check_collision(collidables)
@@ -76,22 +77,24 @@ def load_debug_level(screen):
 
 def load_platform(screen):
     platform_image = pygame.image.load("platform.png")
-    platform_x = 724
-    platform_y = 768 - 400
+    platform_x = 524
+    platform_y = 768 - 380
 
     screen.blit(platform_image, (platform_x, platform_y))
 
     return pygame.Rect(platform_x, platform_y, 300, 50)
 
+def load_wall(screen):
+    wall_image = pygame.image.load("wall.png")
+    wall_x = 1024-50
+    wall_y = 0
 
-class Borders:
-    def __init__(self):
-        self.rect = None
-        self.collide_type = None
+    screen.blit(wall_image, (wall_x, wall_y))
 
-    def __int__(self, rect, collide_type):
-        self.rect = rect
-        self.collide_type = collide_type
+    return pygame.Rect(wall_x, wall_y, 50, 568)
+
+
+
 
 class Controllable:
     gravity = 1
@@ -130,8 +133,7 @@ class Controllable:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     self.vel_x = 0
 
-        if self.is_jumping:
-            self.vel_y += Controllable.gravity
+        self.vel_y += Controllable.gravity
 
         # Update player position
         self.rect.x += self.vel_x
@@ -142,14 +144,27 @@ class Controllable:
         # Check for collision and print character in another function
 
     def check_collision(self, list_of_walls):
-        for wall in list_of_walls:
+        for pair in list_of_walls:
+            wall = pair[0]
+            wall_type = pair[1]
             print(self.rect.bottom)
+
             if self.rect.colliderect(wall):
-                if self.vel_x > 0:
-                    self.rect.right = wall.left
-                elif self.vel_x < 0:
-                    self.rect.left = wall.right
-                else:
+                if wall_type == "Wall":
+                    if self.vel_x > 0:
+                        self.rect.right = wall.left
+                    elif self.vel_x < 0:
+                        self.rect.left = wall.right
+                    else:
+                        if self.vel_y > 0:
+                            print('bruh')
+                            self.rect.bottom = wall.top
+                            self.vel_y = 0
+                            self.is_jumping = False
+                        elif self.vel_y < 0:
+                            self.rect.top = wall.bottom
+                            self.vel_y = 0
+                elif wall_type == "Floor":
                     if self.vel_y > 0:
                         print('bruh')
                         self.rect.bottom = wall.top
@@ -158,7 +173,6 @@ class Controllable:
                     elif self.vel_y < 0:
                         self.rect.top = wall.bottom
                         self.vel_y = 0
-
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
