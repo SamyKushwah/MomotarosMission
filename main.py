@@ -33,10 +33,12 @@ def main():
 
         if selected_level == 1:
             screen.fill((0, 0, 0))
-            ground = load_debug_level(screen)
+            collidables = []
+            collidables.append(load_debug_level(screen))
+            collidables.append(load_platform(screen))
 
             player.poll_movement()
-            player.check_collision((ground,))
+            player.check_collision(collidables)
             player.draw_sprite(screen)
 
         else:
@@ -72,6 +74,24 @@ def load_debug_level(screen):
 
     return pygame.Rect(ground_x, ground_y, 1024, 200)
 
+def load_platform(screen):
+    platform_image = pygame.image.load("platform.png")
+    platform_x = 724
+    platform_y = 768 - 400
+
+    screen.blit(platform_image, (platform_x, platform_y))
+
+    return pygame.Rect(platform_x, platform_y, 300, 50)
+
+
+class Borders:
+    def __init__(self):
+        self.rect = None
+        self.collide_type = None
+
+    def __int__(self, rect, collide_type):
+        self.rect = rect
+        self.collide_type = collide_type
 
 class Controllable:
     gravity = 1
@@ -129,14 +149,16 @@ class Controllable:
                     self.rect.right = wall.left
                 elif self.vel_x < 0:
                     self.rect.left = wall.right
+                else:
+                    if self.vel_y > 0:
+                        print('bruh')
+                        self.rect.bottom = wall.top
+                        self.vel_y = 0
+                        self.is_jumping = False
+                    elif self.vel_y < 0:
+                        self.rect.top = wall.bottom
+                        self.vel_y = 0
 
-                if self.vel_y > 0:
-                    print('bruh')
-                    self.rect.bottom = wall.top
-                    self.vel_y = 0
-                    self.is_jumping = False
-                elif self.vel_y < 0:
-                    self.rect.top = wall.bottom
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
