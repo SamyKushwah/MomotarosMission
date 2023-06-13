@@ -1,21 +1,16 @@
-from Characters import Characters
+from Characters import Characters #Samy
 
 
 class momotaro(Characters):
-    def __init__(self, name, coins, health, x, y):
-        super().__init__(name, coins)
+    def __init__(self, name, x, y, health, coins=0):
+        super().__init__(name, x, y)
         self._health = health
-        self._x = x
-        self._y = y
+        self._coins = coins
 
     @property
     def health(self):
         return self._health
 
     @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
+    def coins(self):
+        return self._coins
