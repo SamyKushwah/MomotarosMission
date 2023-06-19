@@ -8,6 +8,15 @@ import math
     author: Jessica Halvorsen <j.halvorsen@ufl.edu>
 
 """
+
+"""
+def draw_coins(screen, level_coins, gold, silver):
+    for i in range(0, 2):
+        curr_num = int(level_coins[i])
+        if curr_num >= 1:
+    # print first gold coin for the current level
+"""
+
 def run_level_select_screen(screen):
     # load background image and scale it to fit in the screen window
     background = pygame.image.load("../images/level_select_screen/level-no-circle.png")
@@ -33,14 +42,16 @@ def run_level_select_screen(screen):
     credits_btn = button.Button(credits_img)
 
     # TODO: decide how we want to do the coins being gold/silver
+    # load level information about coins from the save file
+    with open("../game_data", 'r') as file:
+        level_coins = [line.rstrip() for line in file]
 
-    coin_gold_img = pygame.image.load("../images/level_select_screen/gold-coin.png")
-    coin_gold_img = pygame.transform.scale(coin_gold_img, (h / 12, h / 12))
-    coin_gold_btn = button.Button(coin_gold_img)
+    # load gold and silver coin images
+    gold_3_img = pygame.image.load("../images/level_select_screen/3-gold-coins.png")
+    gold_3_img = pygame.transform.scale(gold_3_img, (w / 5, h / 7))
 
-    coin_silver_img = pygame.image.load("../images/level_select_screen/silver-coin.png")
-    coin_silver_img = pygame.transform.scale(coin_silver_img, (h / 12, h / 12))
-    coin_silver_btn = button.Button(coin_silver_img)
+    gold_0_img = pygame.image.load("../images/level_select_screen/3-silver-coins.png")
+    gold_0_img = pygame.transform.scale(gold_0_img, (w / 5, h / 7))
 
     # driver loop setup
     running = True
@@ -77,20 +88,21 @@ def run_level_select_screen(screen):
                 button_3.image = button_3_img
                 credits_img = pygame.transform.scale(credits_img, (w / 6, h / 18))
                 credits_btn.image = credits_img
-                coin_gold_img = pygame.transform.scale(coin_gold_img, (h / 12, h / 12))
-                coin_gold_btn.image = coin_gold_img
-                coin_silver_img = pygame.transform.scale(coin_silver_img, (h / 12, h / 12))
-                coin_silver_btn.image = coin_silver_img
+                # draw correct color coin in the correct location
+                gold_3_img = pygame.transform.scale(gold_3_img, (w / 5, h / 7))
+                gold_0_img = pygame.transform.scale(gold_0_img, (w / 5, h / 7))
+                # coin_gold_img = pygame.transform.scale(coin_gold_img, (h / 12, h / 12))
+                # coin_silver_img = pygame.transform.scale(coin_silver_img, (h / 12, h / 12))
                 break
 
         # draw the background and buttons with scaled position
         screen.blit(background, (0, 0))
-        button_1.draw(screen, (w * (1.5 / 7), (h * 4) / 5))
+        button_1.draw(screen, (w * (1.5 / 7), h * (4 / 5)))
         button_2.draw(screen, (w * (3.5 / 7), h * (7 / 10)))
         button_3.draw(screen, (w * (5.5 / 7), h * (7 / 9)))
         credits_btn.draw(screen, (w * 0.90, h * 0.95))
-        coin_gold_btn.draw(screen, (125, 690))
-        coin_silver_btn.draw(screen, (425, 610))
+        screen.blit(gold_3_img, (w * (0.8 / 7), h * (5 / 6)))
+        screen.blit(gold_0_img, (w * (2.8 / 7), h * (8.15 / 11)))
         pygame.display.flip()
 
 
@@ -100,3 +112,4 @@ def run_level_select_screen(screen):
 # tori gate: https://pixabay.com/photos/miyajima-gate-tori-547290/
 # mountain lake: https://pixabay.com/photos/mount-fuji-japan-mountains-landmark-395047/
 # buddha: https://pixabay.com/photos/buddha-buddha-statue-spiritual-4014365/
+
