@@ -107,6 +107,9 @@ class Controllable:
         self.is_jumping = True
         self.grav_on = True
 
+        self.friction = 0
+        self.keys_down = 0
+
         # basic sprite info
         self.width = 100
         self.height = 100
@@ -115,25 +118,57 @@ class Controllable:
         self.image = pygame.image.load("player.png")
 
     def poll_movement(self):
-        for event in pygame.event.get():
+        events = pygame.event.get()
+
+        '''
+        if len(events) == 0 and self.vel_x != 0:
+            if self.vel_x > 0:
+                self.vel_x += -1
+            else:
+                self.vel_x += 1'''
+        for event in events:
             if event.type == pygame.KEYDOWN:
+                print('keydown')
+                self.keys_down += 1
                 if event.key == pygame.K_LEFT:
                     self.vel_x = -20
                     print('left')
+                    #self.friction = 0
                 elif event.key == pygame.K_RIGHT:
                     self.vel_x = 20
                     print('right')
+                    #self.friction = 0
 
                 if event.key == pygame.K_UP:
                     if not self.is_jumping:
                         self.vel_y = -20
                         print('up')
-                        self.grav_on= True
-
+                        self.grav_on = True
 
             elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
+                    print('keyup')
+                    self.keys_down -= 1
+                    #self.friction = 5
+
+                    if self.keys_down == 0:
+                        self.vel_x = 0
+
+            '''
+            elif event.type == pygame.KEYUP:
+                if self.vel_x != 0 and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                    if self.vel_x > 0:
+                        self.vel_x += -20
+                    else:
+                        self.vel_x += 20
+                    
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    self.vel_x = 0
+                    self.vel_x = 0'''
+        if self.friction:
+            if self.vel_x > 0:
+                self.vel_x += -1 * self.friction
+            else:
+                self.vel_x += self.friction
 
         if self.grav_on:
             self.vel_y += Controllable.gravity
@@ -154,17 +189,16 @@ class Controllable:
     def new_check_collision(self, list_of_walls):
         pixel_margin = 25
         for wall in list_of_walls:
-            print(wall.bottom)
-            print(self.rect.bottom)
-            print(self.is_jumping)
+            #print(wall.bottom)
+            #print(self.rect.bottom)
+            #print(self.is_jumping)
             if self.rect.colliderect(wall):
                  # Check which two sides of the rectangles are touching
+
                 if abs(self.rect.left - wall.right) < pixel_margin and not (abs(self.rect.top - wall.bottom) < pixel_margin):
                     self.rect.left = wall.right
-                    #self.vel_x = 0
                 elif abs(self.rect.right - wall.left) < pixel_margin and not (abs(self.rect.top - wall.bottom) < pixel_margin):
                     self.rect.right = wall.left
-                    #self.vel_x = 0
                 elif abs(self.rect.top - wall.bottom) < pixel_margin:
                     self.rect.top = wall.bottom
                     self.vel_y = 0
