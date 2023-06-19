@@ -34,12 +34,12 @@ def main():
         if selected_level == 1:
             screen.fill((0, 0, 0))
             collidables = []
-            collidables.append((load_debug_level(screen), "Floor"))
-            collidables.append((load_platform(screen), "Floor"))
-            collidables.append((load_wall(screen), "Wall"))
+            collidables.append(load_debug_level(screen))
+            collidables.append(load_platform(screen))
+            collidables.append(load_wall(screen))
 
             player.poll_movement()
-            player.check_collision(collidables)
+            player.new_check_collision(collidables)
             player.draw_sprite(screen)
 
         else:
@@ -105,6 +105,7 @@ class Controllable:
         self.vel_x = 0
         self.vel_y = 0
         self.is_jumping = True
+        self.grav_on = True
 
         # basic sprite info
         self.width = 100
@@ -127,13 +128,15 @@ class Controllable:
                     if not self.is_jumping:
                         self.vel_y = -20
                         print('up')
-                        self.is_jumping = True
+                        self.grav_on= True
+
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                     self.vel_x = 0
 
-        self.vel_y += Controllable.gravity
+        if self.grav_on:
+            self.vel_y += Controllable.gravity
 
         # Update player position
         self.rect.x += self.vel_x
@@ -141,7 +144,39 @@ class Controllable:
 
         self.rect.update(self.rect)
 
+        if self.vel_y != 0:
+            self.is_jumping = True
+        else:
+            self.is_jumping = False
+
         # Check for collision and print character in another function
+
+    def new_check_collision(self, list_of_walls):
+        pixel_margin = 25
+        for wall in list_of_walls:
+            print(wall.bottom)
+            print(self.rect.bottom)
+            print(self.is_jumping)
+            if self.rect.colliderect(wall):
+                 # Check which two sides of the rectangles are touching
+                if abs(self.rect.left - wall.right) < pixel_margin and not (abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.rect.left = wall.right
+                    #self.vel_x = 0
+                elif abs(self.rect.right - wall.left) < pixel_margin and not (abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.rect.right = wall.left
+                    #self.vel_x = 0
+                elif abs(self.rect.top - wall.bottom) < pixel_margin:
+                    self.rect.top = wall.bottom
+                    self.vel_y = 0
+                elif abs(self.rect.bottom - wall.top) < pixel_margin and self.is_jumping:
+                    self.rect.bottom = wall.top
+                    self.vel_y = 0
+                    self.is_jumping = False
+                    self.grav_on = False
+            else:
+                self.grav_on = True
+
+
 
     def check_collision(self, list_of_walls):
         for pair in list_of_walls:
@@ -176,7 +211,7 @@ class Controllable:
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
-        pygame.display.update()
+        #pygame.display.update()
 
 
 if __name__ == "__main__":
