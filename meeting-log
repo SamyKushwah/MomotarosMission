@@ -2,4 +2,5 @@
           Started working on movement, main menu, and finding sprites.
 6/14/23 - Design of main menu and level screen were completed, movmement forward, backward and jumping was made functional (still can be made more fluid), landing on platforms
           and running into walls was done, level 1 design began and structural components of the code were created. 
-6/19/23 - 
+6/19/23 - Each member shared individual progress. Working on merging different scripts together. Making more sprites and fixing screens. Furthering level design and
+          physics of the levels.
