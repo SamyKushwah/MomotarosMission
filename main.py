@@ -27,7 +27,8 @@ def main():
     # Debugging menu to test player movement
     running = True
     selected_level = None
-    player = Controllable()
+    player = Momotaro()
+    player.sprites_init()
     while running:
 
 
@@ -111,7 +112,7 @@ class Controllable:
         self.keys_down = 0
 
         # basic sprite info
-        self.scale_factor = 50   # Used to scale the image and rectangle of the character
+        self.scale_factor = 1/5  # Used to scale the image and rectangle of the character
         self.width = 100
         self.height = 100
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
@@ -119,7 +120,8 @@ class Controllable:
         self.image = pygame.image.load("player.png")
         self.idle_image = None
         self.right_mvmnt_frames = None
-        self.left_mvmt_frames = None
+        self.left_mvmnt_frames = None
+        self.frame_index = 0 #index used to loop through a list of animation sprites
 
     def poll_movement(self):
         events = pygame.event.get()
@@ -257,22 +259,44 @@ class Momotaro(Controllable):
 
         self.right_mvmnt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Right).png"), pygame.image.load("./MomotaroSprites/MomoWalkingfl(Right).png")]
 
-        self.left_mvmt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Left).png"), pygame.image.load("./MomotaroSprites/MomoWalkingfl(Left).png")]
+        self.left_mvmnt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Left).png"), pygame.image.load("./MomotaroSprites/MomoWalkingfl(Left).png")]
 
         self.x = 10  # Beginning X and Y where the character spawns (spawn in air)
-        self.y = 768 - 350
+        self.y = 768 - 600
         self.width = 411
         self.height = 542
         self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
         self.rect.scale_by_ip(self.scale_factor, self.scale_factor)
 
-        # Scale the sprites
+        # Scale the images
+        self.idle_image = pygame.transform.scale(self.idle_image, (int(self.idle_image.get_width() * self.scale_factor), int(self.idle_image.get_height() * self.scale_factor)))
 
+        for index in range(len(self.right_mvmnt_frames)):
+            frame = self.right_mvmnt_frames[index]
+            self.right_mvmnt_frames[index] = pygame.transform.scale(frame, (int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
 
+        for index in range(len(self.left_mvmnt_frames)):
+            frame = self.left_mvmnt_frames[index]
+            self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
+            int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
 
     def draw_sprite(self, screen):
+        #print(self.vel_x)
+        #print(self.rect.x)
+        #print(self.idle_image.get_height())
+        #screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         if self.vel_x == 0:
-            screen.blit(self.image, (self.rect.x, self.rect.y))
+            screen.blit(self.idle_image, (self.rect.x, self.rect.y))
+        elif self.vel_x > 0:
+            screen.blit(self.right_mvmnt_frames[self.frame_index],(self.rect.x, self.rect.y))
+            self.frame_index += 1
+            self.frame_index %= 2
+        elif self.vel_x < 0:
+            screen.blit(self.left_mvmnt_frames[self.frame_index],(self.rect.x, self.rect.y))
+            self.frame_index += 1
+            self.frame_index %= 2
+
+        pygame.display.update()
 
 if __name__ == "__main__":
     main()
