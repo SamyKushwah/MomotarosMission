@@ -4,3 +4,10 @@ Began logging work on the branch in addition to the meeting logs
 
 15:30
 Fixed a bug that would half horizontal movement on key release
+
+
+6/20/23:
+
+Known issues: holding down one direction and tapping in another locks
+		the movement towards the newly tapped direction for
+		as long as the first direction is held.

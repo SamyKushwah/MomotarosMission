@@ -97,25 +97,29 @@ def load_wall(screen):
 
 
 class Controllable:
-    gravity = 1
+    gravity = 1         # Adjust number to change how fast he falls
 
     def __init__(self):
-        x = 10
-        y = 768 - 350
+        self.x = 10          # Beginning X and Y where the character spawns (spawn in air)
+        self.y = 768 - 350
         self.vel_x = 0
         self.vel_y = 0
         self.is_jumping = True
         self.grav_on = True
 
-        self.friction = 0
+        #self.friction = 0
         self.keys_down = 0
 
         # basic sprite info
+        self.scale_factor = 50   # Used to scale the image and rectangle of the character
         self.width = 100
         self.height = 100
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
 
         self.image = pygame.image.load("player.png")
+        self.idle_image = None
+        self.right_mvmnt_frames = None
+        self.left_mvmt_frames = None
 
     def poll_movement(self):
         events = pygame.event.get()
@@ -128,26 +132,26 @@ class Controllable:
                 self.vel_x += 1'''
         for event in events:
             if event.type == pygame.KEYDOWN:
-                print('keydown')
+                #print('keydown')
                 self.keys_down += 1
                 if event.key == pygame.K_LEFT:
                     self.vel_x = -20
-                    print('left')
+                    #print('left')
                     #self.friction = 0
                 elif event.key == pygame.K_RIGHT:
                     self.vel_x = 20
-                    print('right')
+                    #print('right')
                     #self.friction = 0
 
                 if event.key == pygame.K_UP:
                     if not self.is_jumping:
                         self.vel_y = -20
-                        print('up')
+                        #print('up')
                         self.grav_on = True
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
-                    print('keyup')
+                    #print('keyup')
                     self.keys_down -= 1
                     #self.friction = 5
 
@@ -163,12 +167,12 @@ class Controllable:
                         self.vel_x += 20
                     
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    self.vel_x = 0'''
+                    self.vel_x = 0
         if self.friction:
             if self.vel_x > 0:
                 self.vel_x += -1 * self.friction
             else:
-                self.vel_x += self.friction
+                self.vel_x += self.friction'''
 
         if self.grav_on:
             self.vel_y += Controllable.gravity
@@ -211,7 +215,7 @@ class Controllable:
                 self.grav_on = True
 
 
-
+    ''' Old code - not used anymore
     def check_collision(self, list_of_walls):
         for pair in list_of_walls:
             wall = pair[0]
@@ -241,12 +245,34 @@ class Controllable:
                         self.is_jumping = False
                     elif self.vel_y < 0:
                         self.rect.top = wall.bottom
-                        self.vel_y = 0
+                        self.vel_y = 0'''
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
-        #pygame.display.update()
+        pygame.display.update()
 
+class Momotaro(Controllable):
+    def sprites_init(self):
+        self.idle_image = pygame.image.load("./MomotaroSprites/MomoStandingIdle.png")
+
+        self.right_mvmnt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Right).png"), pygame.image.load("./MomotaroSprites/MomoWalkingfl(Right).png")]
+
+        self.left_mvmt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Left).png"), pygame.image.load("./MomotaroSprites/MomoWalkingfl(Left).png")]
+
+        self.x = 10  # Beginning X and Y where the character spawns (spawn in air)
+        self.y = 768 - 350
+        self.width = 411
+        self.height = 542
+        self.rect = pygame.Rect(self.x, self.y, self.width, self.height)
+        self.rect.scale_by_ip(self.scale_factor, self.scale_factor)
+
+        # Scale the sprites
+
+
+
+    def draw_sprite(self, screen):
+        if self.vel_x == 0:
+            screen.blit(self.image, (self.rect.x, self.rect.y))
 
 if __name__ == "__main__":
     main()
