@@ -285,16 +285,32 @@ class Momotaro(Controllable):
         #print(self.rect.x)
         #print(self.idle_image.get_height())
         #screen.blit(self.idle_image, (self.rect.x, self.rect.y))
+
+        animation_delay = 4 # increase this number to change how fast the animation plays
+
         if self.vel_x == 0:
             screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         elif self.vel_x > 0:
-            screen.blit(self.right_mvmnt_frames[self.frame_index],(self.rect.x, self.rect.y))
-            self.frame_index += 1
-            self.frame_index %= 2
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_mvmnt_frames[index],(self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_mvmnt_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+
         elif self.vel_x < 0:
-            screen.blit(self.left_mvmnt_frames[self.frame_index],(self.rect.x, self.rect.y))
-            self.frame_index += 1
-            self.frame_index %= 2
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
 
         pygame.display.update()
 
