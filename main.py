@@ -193,7 +193,7 @@ class Controllable:
         # Check for collision and print character in another function
 
     def new_check_collision(self, list_of_walls):
-        pixel_margin = 25
+        pixel_margin = 30
         for wall in list_of_walls:
             #print(wall.bottom)
             #print(self.rect.bottom)
