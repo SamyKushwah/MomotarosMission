@@ -1,9 +1,13 @@
 import pygame
 def run_start_screen(screen):
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("../images/start_screen.png")
+    background = pygame.image.load("../images/start_screen/start_screen_bkgnd.png")
     w, h = pygame.display.get_surface().get_size()
     background = pygame.transform.scale(background, (w, h))
+
+    # load title image
+    title_img = pygame.image.load("../images/start_screen/main-title.png")
+    title_img = pygame.transform.scale(title_img, (w * (3 / 4), h / 4))
 
     # driver loop setup
     running = True
@@ -12,26 +16,26 @@ def run_start_screen(screen):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
+
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # Screen was clicked somewhere
                 return "play"
+
             # if screen is resized
             elif event.type == pygame.VIDEORESIZE:
-                screen = pygame.display.set_mode(event.size, pygame.RESIZABLE)
+                # resize screen and get new dimensions
                 background = pygame.transform.scale(background, event.size)
+                w, h = pygame.display.get_surface().get_size()
+
+                # resize title image
+                title_img = pygame.transform.scale(title_img, (w * (3 / 4), h / 4))
 
         # draw the background and title
         screen.blit(background, (0, 0))
+
+        loc = (w - title_img.get_size()[0]) / 2
+        screen.blit(title_img, (loc, h / 8))
+
         pygame.display.flip()
-
-
-# background was created using the following images:
-# https://craftpix.net/freebies/free-mountain-backgrounds-pixel-art/?num=1&count=58&sq=japanese%20mountain%20scene&pos=8
-# https://pixabay.com/photos/pagoda-senso-ji-temple-asakusa-2405537/
-
-# creating a resizeable screen
-# https://stackoverflow.com/questions/62899967/how-to-make-my-pygame-game-window-resizeable
-# https://stackoverflow.com/questions/36653519/how-do-i-get-the-size-width-x-height-of-my-pygame-window
-
 

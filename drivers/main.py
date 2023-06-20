@@ -1,10 +1,12 @@
+# Example file showing a circle moving on screen
 import pygame
 import sys
-from scenes import start_screen, level_select, level_1_screen
+from scenes import start_screen, level_select, level_1_screen, pause_screen
 
 # screen setup
 pygame.init()
-screen = pygame.display.set_mode((1024, 768), pygame.RESIZABLE)
+# 1024, 768
+screen = pygame.display.set_mode((1536, 1152), pygame.RESIZABLE)
 clock = pygame.time.Clock()
 
 """
@@ -43,6 +45,19 @@ while running:
             case "credits":
                 # bring the user to the credits page
                 print("you made it to the credits!")
+            case "pause":
+                # bring the user to the pause page
+                selection = pause_screen.run_pause_screen(screen)
+            case "resume":
+                # resume current level
+                print("resume!")
+            case "restart":
+                # restart current level
+                selection = level_1_screen.run_level_1_screen(screen)
+            case "home":
+                # bring user back to level selection screen
+                selection = level_select.run_level_select_screen(screen)
+
     # limits FPS to 60
     # dt is delta time in seconds since last frame, used for framerate-independent physics.
     dt = clock.tick(60) / 1000
