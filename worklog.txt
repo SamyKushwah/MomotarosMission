@@ -15,3 +15,6 @@ Known issues: holding down one direction and tapping in another locks
 Implemented Momotaro class, image scaling, and movement animations
 
 6/21/23
+
+Added second character movement and controls
+Fixed movement bug with locking you in one direction
