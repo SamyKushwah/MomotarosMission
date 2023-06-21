@@ -29,6 +29,7 @@ def main():
     selected_level = None
     player = Momotaro()
     player.sprites_init()
+    player_2 = Bird()
     while running:
 
 
@@ -39,9 +40,17 @@ def main():
             collidables.append(load_platform(screen))
             collidables.append(load_wall(screen))
 
-            player.poll_movement()
+            events = pygame.event.get()
+
+            player.poll_movement(events)
             player.new_check_collision(collidables)
             player.draw_sprite(screen)
+
+
+
+            player_2.poll_movement(events)
+            player_2.new_check_collision(collidables)
+            player_2.draw_sprite(screen)
 
         else:
             for event in pygame.event.get():
@@ -123,9 +132,8 @@ class Controllable:
         self.left_mvmnt_frames = None
         self.frame_index = 0 #index used to loop through a list of animation sprites
 
-    def poll_movement(self):
-        events = pygame.event.get()
-
+    def poll_movement(self, events):
+        #events = pygame.event.get()
         '''
         if len(events) == 0 and self.vel_x != 0:
             if self.vel_x > 0:
@@ -133,20 +141,24 @@ class Controllable:
             else:
                 self.vel_x += 1'''
         for event in events:
+
             if event.type == pygame.KEYDOWN:
                 #print('keydown')
-                self.keys_down += 1
+
                 if event.key == pygame.K_LEFT:
+                    self.keys_down += 1
                     self.vel_x = -20
                     #print('left')
                     #self.friction = 0
                 elif event.key == pygame.K_RIGHT:
+                    self.keys_down += 1
                     self.vel_x = 20
                     #print('right')
                     #self.friction = 0
 
                 if event.key == pygame.K_UP:
                     if not self.is_jumping:
+                        self.keys_down += 1
                         self.vel_y = -20
                         #print('up')
                         self.grav_on = True
@@ -158,6 +170,9 @@ class Controllable:
                     #self.friction = 5
 
                     if self.keys_down == 0:
+                        self.vel_x = 0
+                    elif self.keys_down < 0:
+                        self.keys_down = 0
                         self.vel_x = 0
 
             '''
@@ -313,6 +328,76 @@ class Momotaro(Controllable):
                 self.frame_index += 1
 
         pygame.display.update()
+
+class Bird(Controllable):
+    def poll_movement(self, events):
+        #events = pygame.event.get()
+
+        '''
+        if len(events) == 0 and self.vel_x != 0:
+            if self.vel_x > 0:
+                self.vel_x += -1
+            else:
+                self.vel_x += 1'''
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                # print('keydown')
+                if event.key == pygame.K_a:
+                    self.keys_down += 1
+                    self.vel_x = -20
+                    # print('left')
+                    # self.friction = 0
+                elif event.key == pygame.K_d:
+                    self.keys_down += 1
+                    self.vel_x = 20
+                    # print('right')
+                    # self.friction = 0
+
+                if event.key == pygame.K_w:
+                    #if not self.is_jumping:
+                        self.keys_down += 1
+                        self.vel_y = -20
+                        # print('up')
+                        self.grav_on = True
+
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_a or event.key == pygame.K_d or event.key == pygame.K_w:
+                    # print('keyup')
+                    self.keys_down -= 1
+                    # self.friction = 5
+
+                    if self.keys_down == 0:
+                        self.vel_x = 0
+
+            '''
+            elif event.type == pygame.KEYUP:
+                if self.vel_x != 0 and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
+                    if self.vel_x > 0:
+                        self.vel_x += -20
+                    else:
+                        self.vel_x += 20
+
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    self.vel_x = 0
+        if self.friction:
+            if self.vel_x > 0:
+                self.vel_x += -1 * self.friction
+            else:
+                self.vel_x += self.friction'''
+
+        if self.grav_on:
+            self.vel_y += Controllable.gravity
+
+        # Update player position
+        self.rect.x += self.vel_x
+        self.rect.y += self.vel_y
+
+        self.rect.update(self.rect)
+
+        if self.vel_y != 0:
+            self.is_jumping = True
+        else:
+            self.is_jumping = False
 
 if __name__ == "__main__":
     main()
