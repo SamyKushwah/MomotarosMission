@@ -7,5 +7,6 @@
           file to assign the correct coin images for each level, decided to make the pause screen a blurred/lightened image of the current level with text 
           on top to display options to resume, restart, or go home. Began the design of level 1. 
 6/20/23 - worked on enchancing image and text quality by recreating images with more pixels- did this for every screen. Changed pause screen to be a cloud 
-          background and added links to resume, restart and home page. Attemped to start the design of level 1- still trying to 
-          get a good design going. Brainstorming/trial and error for good design for win/lose screens 
+          background and added links to resume, restart and home page. Attempted to start the design of level 1- still trying to
+          get a good design going. Brainstorming/trial and error for good design for win/lose screens
+6/21/23 - completed the platforms for level 1. Made temporary win/lose screens with button functionality to go to different screens.

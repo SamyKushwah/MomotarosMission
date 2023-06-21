@@ -1,19 +1,12 @@
-# Example file showing a circle moving on screen
 import pygame
 import sys
-from scenes import start_screen, level_select, level_1_screen, pause_screen
+from scenes import start_screen, level_select, level_1_screen, pause_screen, win_screen, lose_screen
 
 # screen setup
 pygame.init()
 # 1024, 768
 screen = pygame.display.set_mode((1536, 1152), pygame.RESIZABLE)
 clock = pygame.time.Clock()
-
-"""
-screen_w = 1024
-screen_h = 768
-screen = screen.Screen(screen_w, screen_h)
-"""
 
 # driver loop
 running = True
@@ -49,14 +42,17 @@ while running:
                 # bring the user to the pause page
                 selection = pause_screen.run_pause_screen(screen)
             case "resume":
-                # resume current level
-                print("resume!")
+                # resume current level - currently goes to win screen just for debugging
+                selection = win_screen.run_win_screen(screen)
             case "restart":
                 # restart current level
                 selection = level_1_screen.run_level_1_screen(screen)
             case "home":
                 # bring user back to level selection screen
                 selection = level_select.run_level_select_screen(screen)
+            case "next":
+                # bring user to next level - currently goes to lose screen for debugging
+                selection = lose_screen.run_lose_screen(screen)
 
     # limits FPS to 60
     # dt is delta time in seconds since last frame, used for framerate-independent physics.
