@@ -47,7 +47,6 @@ def main():
             player.draw_sprite(screen)
 
 
-
             player_2.poll_movement(events)
             player_2.new_check_collision(collidables)
             player_2.draw_sprite(screen)
