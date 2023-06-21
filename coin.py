@@ -30,7 +30,6 @@ class Coin:
                                            self.coin_image.get_height())
         self.coin_rect.scale_by_ip(self.scale_factor, self.scale_factor)
         self.coin_image = pygame.transform.scale(self.coin_image, (self.__width, self.__height))
-        print(self.coin_image.get_height())
         #
         screen.blit(self.coin_image, (self.__int_x, self.__int_y))
         pygame.display.flip()

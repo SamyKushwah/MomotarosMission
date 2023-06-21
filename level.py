@@ -15,8 +15,8 @@ def main():
     level1.add_platform(700, 500, 300, 30)
     level1.add_platform(300, 300, 300, 30)
     level1.add_platform(30, 450, 200, 30)
-    level1.add_demon(600,501,100,50)
-    level1.add_demon(400,201,100,30)
+    level1.add_demon(600,501,1000,50)
+    level1.add_demon(400,201,1000,30)
     level1.add_coin(400, 501)
     level1.run()
 
@@ -76,7 +76,7 @@ class Level:
         for coin in self.__coin_list:
             if not coin.is_collected():
                 coin.draw_coin(self.__screen)
-            #pygame.draw.rect(self.__screen, (0,200,0), rectangle.get_rect())
+            # pygame.draw.rect(self.__screen, (0,200,0), rectangle.get_rect())
 
         #draw rest of characters and objects
 

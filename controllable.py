@@ -27,29 +27,23 @@ class Controllable:
         self.frame_index = 0  # index used to loop through a list of animation sprites
 
     def poll_movement(self,event):
-        #events = pygame.event.get()
-
-        '''
-        if len(events) == 0 and self.vel_x != 0:
-            if self.vel_x > 0:
-                self.vel_x += -1
-            else:
-                self.vel_x += 1'''
-        #for event in events:
         if event.type == pygame.KEYDOWN:
             # print('keydown')
-            self.keys_down += 1
+
             if event.key == pygame.K_LEFT:
+                self.keys_down += 1
                 self.vel_x = -20
                 # print('left')
                 # self.friction = 0
             elif event.key == pygame.K_RIGHT:
+                self.keys_down += 1
                 self.vel_x = 20
                 # print('right')
                 # self.friction = 0
 
             if event.key == pygame.K_UP:
                 if not self.is_jumping:
+                    self.keys_down += 1
                     self.vel_y = -20
                     # print('up')
                     self.grav_on = True
@@ -61,6 +55,9 @@ class Controllable:
                 # self.friction = 5
 
                 if self.keys_down == 0:
+                    self.vel_x = 0
+                elif self.keys_down < 0:
+                    self.keys_down = 0
                     self.vel_x = 0
 
             '''
@@ -234,8 +231,21 @@ class Momotaro(Controllable):
 
     def check_collision_demon(self, list_of_demons):
         damage = 100
+        pixel_margin = 30
+
+
         for demon in list_of_demons:
             if self.rect.colliderect(demon.get_rect()):
+                wall = demon.get_rect()
+                if abs(self.rect.left - wall.right) < pixel_margin and not (
+                        abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.attacking_left = True
+                    self.attacking_right = False
+                elif abs(self.rect.right - wall.left) < pixel_margin and not (
+                        abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.attacking_right = True
+                    self.attacking_left = False
+
                 if self.is_attacking:
                     demon.take_damage(damage)
 
@@ -249,13 +259,13 @@ class Momotaro(Controllable):
 
     def poll_attack(self,event):
         #events = pygame.event.get()
-        ##for event in events:
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
-                    print("h")
-                    self.is_attacking = True
+        #for event in events:
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+                print("h")
+                self.is_attacking = True
 
 
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_p:
-                    self.is_attacking = False
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_p:
+                self.is_attacking = False
