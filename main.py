@@ -355,7 +355,7 @@ class Bird(Controllable):
                 if event.key == pygame.K_w:
                     #if not self.is_jumping:
                         self.keys_down += 1
-                        self.vel_y = -20
+                        self.vel_y = -15
                         # print('up')
                         self.grav_on = True
 
