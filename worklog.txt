@@ -11,3 +11,7 @@ Fixed a bug that would half horizontal movement on key release
 Known issues: holding down one direction and tapping in another locks
 		the movement towards the newly tapped direction for
 		as long as the first direction is held.
+
+Implemented Momotaro class, image scaling, and movement animations
+
+6/21/23
