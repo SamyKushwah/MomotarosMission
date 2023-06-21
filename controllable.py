@@ -161,6 +161,8 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
+        self.attacking_left = False
+        self.attacking_right = False
         self.health = 100
         self.idle_image = pygame.image.load("./MomotaroSprites/MomoStandingIdle.png")
 
@@ -173,8 +175,8 @@ class Momotaro(Controllable):
         self.left_attack_frames = [pygame.image.load("./MomotaroSprites/MomoLiftKat(Left).png"),
                               pygame.image.load("./MomotaroSprites/MomoStrike(Left).png")]
 
-        #self.right_attack_frames = [pygame.image.load("./MomotaroSprites/MomoLiftKat(Right).png"),
-                            #       pygame.image.load("./MomotaroSprites/MomoStrike(Right).png")]
+        self.right_attack_frames = [pygame.image.load("./MomotaroSprites/MomoLiftKat(Right).png"),
+                                 pygame.image.load("./MomotaroSprites/MomoStrike(Right).png")]
 
         self.x = 10  # Beginning X and Y where the character spawns (spawn in air)
         self.y = 768 - 600
@@ -197,6 +199,16 @@ class Momotaro(Controllable):
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
                 int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
 
+        for index in range(len(self.left_attack_frames)):
+            frame = self.left_attack_frames[index]
+            self.left_attack_frames[index] = pygame.transform.scale(frame, (
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
+
+        for index in range(len(self.right_attack_frames)):
+            frame = self.right_attack_frames[index]
+            self.right_attack_frames[index] = pygame.transform.scale(frame, (
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
+
     def draw_sprite(self, screen):
         # print(self.vel_x)
         # print(self.rect.x)
@@ -205,7 +217,27 @@ class Momotaro(Controllable):
 
         animation_delay = 4  # increase this number to change how fast the animation plays
 
-        if self.vel_x == 0:
+        if self.attacking_left and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.attacking_right and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.vel_x == 0:
             screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         elif self.vel_x > 0:
             if self.frame_index < animation_delay * 2:
@@ -234,17 +266,30 @@ class Momotaro(Controllable):
 
     def check_collision_demon(self, list_of_demons):
         damage = 100
+        pixel_margin = 30
+
+
         for demon in list_of_demons:
             if self.rect.colliderect(demon.get_rect()):
+                wall = demon.get_rect()
+                if abs(self.rect.left - wall.right) < pixel_margin and not (
+                        abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.attacking_left = True
+                    self.attacking_right = False
+                elif abs(self.rect.right - wall.left) < pixel_margin and not (
+                        abs(self.rect.top - wall.bottom) < pixel_margin):
+                    self.attacking_right = True
+                    self.attacking_left = False
+
                 if self.is_attacking:
                     demon.take_damage(damage)
 
                 else:
                     self.take_damage(damage)
 
-    def poll_attack(self,event):
+    def poll_attack(self,events):
         #events = pygame.event.get()
-        ##for event in events:
+        for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_p:
                     print("h")

@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from controllable import *
 
 
 # Accompanying script imports
@@ -104,7 +105,7 @@ def load_wall(screen):
 
 
 
-
+'''
 class Controllable:
     gravity = 1         # Adjust number to change how fast he falls
 
@@ -133,12 +134,7 @@ class Controllable:
 
     def poll_movement(self, events):
         #events = pygame.event.get()
-        '''
-        if len(events) == 0 and self.vel_x != 0:
-            if self.vel_x > 0:
-                self.vel_x += -1
-            else:
-                self.vel_x += 1'''
+        
         for event in events:
 
             if event.type == pygame.KEYDOWN:
@@ -174,21 +170,7 @@ class Controllable:
                         self.keys_down = 0
                         self.vel_x = 0
 
-            '''
-            elif event.type == pygame.KEYUP:
-                if self.vel_x != 0 and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
-                    if self.vel_x > 0:
-                        self.vel_x += -20
-                    else:
-                        self.vel_x += 20
-                    
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    self.vel_x = 0
-        if self.friction:
-            if self.vel_x > 0:
-                self.vel_x += -1 * self.friction
-            else:
-                self.vel_x += self.friction'''
+            
 
         if self.grav_on:
             self.vel_y += Controllable.gravity
@@ -231,37 +213,7 @@ class Controllable:
                 self.grav_on = True
 
 
-    ''' Old code - not used anymore
-    def check_collision(self, list_of_walls):
-        for pair in list_of_walls:
-            wall = pair[0]
-            wall_type = pair[1]
-            print(self.rect.bottom)
-
-            if self.rect.colliderect(wall):
-                if wall_type == "Wall":
-                    if self.vel_x > 0:
-                        self.rect.right = wall.left
-                    elif self.vel_x < 0:
-                        self.rect.left = wall.right
-                    else:
-                        if self.vel_y > 0:
-                            print('bruh')
-                            self.rect.bottom = wall.top
-                            self.vel_y = 0
-                            self.is_jumping = False
-                        elif self.vel_y < 0:
-                            self.rect.top = wall.bottom
-                            self.vel_y = 0
-                elif wall_type == "Floor":
-                    if self.vel_y > 0:
-                        print('bruh')
-                        self.rect.bottom = wall.top
-                        self.vel_y = 0
-                        self.is_jumping = False
-                    elif self.vel_y < 0:
-                        self.rect.top = wall.bottom
-                        self.vel_y = 0'''
+    
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
@@ -332,12 +284,7 @@ class Bird(Controllable):
     def poll_movement(self, events):
         #events = pygame.event.get()
 
-        '''
-        if len(events) == 0 and self.vel_x != 0:
-            if self.vel_x > 0:
-                self.vel_x += -1
-            else:
-                self.vel_x += 1'''
+        
         for event in events:
             if event.type == pygame.KEYDOWN:
                 # print('keydown')
@@ -368,21 +315,7 @@ class Bird(Controllable):
                     if self.keys_down == 0:
                         self.vel_x = 0
 
-            '''
-            elif event.type == pygame.KEYUP:
-                if self.vel_x != 0 and (event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT):
-                    if self.vel_x > 0:
-                        self.vel_x += -20
-                    else:
-                        self.vel_x += 20
-
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                    self.vel_x = 0
-        if self.friction:
-            if self.vel_x > 0:
-                self.vel_x += -1 * self.friction
-            else:
-                self.vel_x += self.friction'''
+            
 
         if self.grav_on:
             self.vel_y += Controllable.gravity
@@ -397,6 +330,8 @@ class Bird(Controllable):
             self.is_jumping = True
         else:
             self.is_jumping = False
+            
+'''
 
 if __name__ == "__main__":
     main()
