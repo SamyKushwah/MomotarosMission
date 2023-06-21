@@ -121,37 +121,7 @@ class Controllable:
             else:
                 self.grav_on = True
 
-    ''' Old code - not used anymore
-    def check_collision(self, list_of_walls):
-        for pair in list_of_walls:
-            wall = pair[0]
-            wall_type = pair[1]
-            print(self.rect.bottom)
 
-            if self.rect.colliderect(wall):
-                if wall_type == "Wall":
-                    if self.vel_x > 0:
-                        self.rect.right = wall.left
-                    elif self.vel_x < 0:
-                        self.rect.left = wall.right
-                    else:
-                        if self.vel_y > 0:
-                            print('bruh')
-                            self.rect.bottom = wall.top
-                            self.vel_y = 0
-                            self.is_jumping = False
-                        elif self.vel_y < 0:
-                            self.rect.top = wall.bottom
-                            self.vel_y = 0
-                elif wall_type == "Floor":
-                    if self.vel_y > 0:
-                        print('bruh')
-                        self.rect.bottom = wall.top
-                        self.vel_y = 0
-                        self.is_jumping = False
-                    elif self.vel_y < 0:
-                        self.rect.top = wall.bottom
-                        self.vel_y = 0'''
 
     def draw_sprite(self, screen):
         screen.blit(self.image, (self.rect.x, self.rect.y))
