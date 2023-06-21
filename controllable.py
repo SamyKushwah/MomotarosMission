@@ -11,7 +11,6 @@ class Controllable:
         self.vel_y = 0
         self.is_jumping = True
         self.grav_on = True
-
         # self.friction = 0
         self.keys_down = 0
 
@@ -27,8 +26,8 @@ class Controllable:
         self.left_mvmnt_frames = None
         self.frame_index = 0  # index used to loop through a list of animation sprites
 
-    def poll_movement(self):
-        events = pygame.event.get()
+    def poll_movement(self,event):
+        #events = pygame.event.get()
 
         '''
         if len(events) == 0 and self.vel_x != 0:
@@ -36,33 +35,33 @@ class Controllable:
                 self.vel_x += -1
             else:
                 self.vel_x += 1'''
-        for event in events:
-            if event.type == pygame.KEYDOWN:
-                # print('keydown')
-                self.keys_down += 1
-                if event.key == pygame.K_LEFT:
-                    self.vel_x = -20
-                    # print('left')
-                    # self.friction = 0
-                elif event.key == pygame.K_RIGHT:
-                    self.vel_x = 20
-                    # print('right')
-                    # self.friction = 0
+        #for event in events:
+        if event.type == pygame.KEYDOWN:
+            # print('keydown')
+            self.keys_down += 1
+            if event.key == pygame.K_LEFT:
+                self.vel_x = -20
+                # print('left')
+                # self.friction = 0
+            elif event.key == pygame.K_RIGHT:
+                self.vel_x = 20
+                # print('right')
+                # self.friction = 0
 
-                if event.key == pygame.K_UP:
-                    if not self.is_jumping:
-                        self.vel_y = -20
-                        # print('up')
-                        self.grav_on = True
+            if event.key == pygame.K_UP:
+                if not self.is_jumping:
+                    self.vel_y = -20
+                    # print('up')
+                    self.grav_on = True
 
-            elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
-                    # print('keyup')
-                    self.keys_down -= 1
-                    # self.friction = 5
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP:
+                # print('keyup')
+                self.keys_down -= 1
+                # self.friction = 5
 
-                    if self.keys_down == 0:
-                        self.vel_x = 0
+                if self.keys_down == 0:
+                    self.vel_x = 0
 
             '''
             elif event.type == pygame.KEYUP:
@@ -161,6 +160,8 @@ class Controllable:
 
 class Momotaro(Controllable):
     def sprites_init(self):
+        self.is_attacking = False
+        self.health = 100
         self.idle_image = pygame.image.load("./MomotaroSprites/MomoStandingIdle.png")
 
         self.right_mvmnt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Right).png"),
@@ -221,3 +222,28 @@ class Momotaro(Controllable):
                 index = self.frame_index // animation_delay
                 screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
+
+    def take_damage(self,damage):
+        self.health -= damage
+
+    def check_collision_demon(self, list_of_demons):
+        damage = 100
+        for demon in list_of_demons:
+            if self.rect.colliderect(demon.get_rect()):
+                if self.is_attacking:
+                    demon.take_damage(damage)
+
+                else:
+                    self.take_damage(damage)
+
+    def poll_attack(self,event):
+        #events = pygame.event.get()
+        ##for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    print("h")
+                    self.is_attacking = True
+
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_p:
+                    self.is_attacking = False
