@@ -78,7 +78,7 @@ class Controllable:
                 self.vel_x += -1 * self.friction
             else:
                 self.vel_x += self.friction'''
-
+    def poll_movement_2(self):
         if self.grav_on:
             self.vel_y += Controllable.gravity
 
@@ -170,6 +170,12 @@ class Momotaro(Controllable):
         self.left_mvmnt_frames = [pygame.image.load("./MomotaroSprites/MomoWalkingbl(Left).png"),
                                   pygame.image.load("./MomotaroSprites/MomoWalkingfl(Left).png")]
 
+        self.left_attack_frames = [pygame.image.load("./MomotaroSprites/MomoLiftKat(Left).png"),
+                              pygame.image.load("./MomotaroSprites/MomoStrike(Left).png")]
+
+        #self.right_attack_frames = [pygame.image.load("./MomotaroSprites/MomoLiftKat(Right).png"),
+                            #       pygame.image.load("./MomotaroSprites/MomoStrike(Right).png")]
+
         self.x = 10  # Beginning X and Y where the character spawns (spawn in air)
         self.y = 768 - 600
         self.width = 411
@@ -243,6 +249,7 @@ class Momotaro(Controllable):
                 if event.key == pygame.K_p:
                     print("h")
                     self.is_attacking = True
+
 
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_p:

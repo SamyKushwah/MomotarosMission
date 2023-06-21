@@ -15,6 +15,7 @@ def main():
     level1.add_platform(300, 300, 300, 30)
     level1.add_platform(30, 450, 200, 30)
     level1.add_demon(600,501,100,50)
+    level1.add_demon(400,201,100,30)
     level1.run()
 
     pygame.quit()
@@ -48,9 +49,9 @@ class Level:
             for event in events:
                 self.__momotaro.poll_movement(event)
                 self.__momotaro.poll_attack(event)
-                self.__momotaro.new_check_collision(self.__rectangle_list)
-                self.__momotaro.check_collision_demon(self.__demon_list)
-            
+            self.__momotaro.poll_movement_2()
+            self.__momotaro.check_collision_demon(self.__demon_list)
+            self.__momotaro.new_check_collision(self.__rectangle_list)
             self.draw()
             pygame.display.update()
             clock.tick(60)
@@ -66,6 +67,9 @@ class Level:
         for rectangle in self.__demon_list:
             if rectangle.is_alive():
                 rectangle.movement(self.__screen,2)
+            else:
+                self.__rectangle_list.remove(rectangle.get_rect())
+                self.__demon_list.remove(rectangle)
         for rectangle in self.__coin_list:
             #placeholder color
             pygame.draw.rect(self.__screen, (0,200,0), rectangle.get_rect())
@@ -86,7 +90,7 @@ class Level:
     def add_demon(self,x,y,health,movement):
         temp_demon = Demon(x,y,health,movement)
         self.__demon_list.append(temp_demon)
-        #self.__rectangle_list.append(temp_demon.get_rect())
+        self.__rectangle_list.append(temp_demon.get_rect())
     #def add_demon(self,x,y)
     #def add_obstacle(self,x,y)
     #def add_coin(self,x,y)
