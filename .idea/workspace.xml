@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="attacking based on ur direction">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="attacking now plays while idle, fixed demon collision rectangle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_templates/controllable.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/controllable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/demon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scenes/levels/level_1A.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/levels/level_1A.py" afterDir="false" />
     </list>
@@ -50,7 +49,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687412548163</updated>
       <workItem from="1687412548396" duration="688000" />
-      <workItem from="1687413827729" duration="1750000" />
+      <workItem from="1687413827729" duration="2402000" />
     </task>
     <task id="LOCAL-00001" summary="added attacking animation based on whichever side the demon is on">
       <created>1687414843843</created>
@@ -66,7 +65,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687415083490</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="attacking now plays while idle, fixed demon collision rectangle">
+      <created>1687415740777</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687415740777</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -75,11 +81,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added attacking animation based on whichever side the demon is on" />
     <MESSAGE value="attacking based on ur direction" />
-    <option name="LAST_COMMIT_MESSAGE" value="attacking based on ur direction" />
+    <MESSAGE value="attacking now plays while idle, fixed demon collision rectangle" />
+    <option name="LAST_COMMIT_MESSAGE" value="attacking now plays while idle, fixed demon collision rectangle" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687415405950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687416249311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
-    <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687415353137" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687416034353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
   </component>
 </project>

@@ -32,9 +32,9 @@ class Demon:
 
     def movement(self, screen, movement):
         if self.__health > 0 and self.__alive:
-            if self.__demon_rect.x == self.__int_x - self.__max_move:
+            if self.__demon_rect.x < self.__int_x - self.__max_move:
                 self.__moving_right = True
-            elif self.__demon_rect.x == self.__int_x + self.__max_move:
+            elif self.__demon_rect.x > self.__int_x + self.__max_move:
                 self.__moving_right = False
             if self.__moving_right:
                 self.__demon_rect.x += 1
