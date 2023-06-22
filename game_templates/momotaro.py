@@ -5,8 +5,8 @@ class Momotaro:
         self.position = spawn_position
         self.velocity = [0, 0]
         self.standing = False
-        self.hitbox = (100, 140)
-        self.gravity = 1
+        self.hitbox = (60, 70)
+        self.gravity = 1.3
         self.health = 100
         self.attacking = False
 
@@ -17,16 +17,16 @@ class Momotaro:
 
         self.frame_index = 0
 
-        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png"), (100, 150))
+        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png"), (60, 70))
 
-        self.right_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"), (100, 150)),
-                                   pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png"), (100, 150))]
+        self.right_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"), (60, 70)),
+                                   pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png"), (60, 70))]
 
-        self.left_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png"), (100, 150)),
-                                  pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png"), (100, 150))]
+        self.left_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png"), (60, 70)),
+                                  pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png"), (60, 70))]
 
-        self.left_attack_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png"), (100, 150)),
-                                   pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (100, 150))]
+        self.left_attack_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png"), (60, 70)),
+                                   pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (60, 70))]
 
     def update_movement(self):
 
@@ -42,7 +42,7 @@ class Momotaro:
             self.velocity[0] = 0
         if keys[pygame.K_w]:
             if self.standing:
-                self.velocity[1] = -20
+                self.velocity[1] = -23
                 self.standing = False
 
         self.position[0] += self.velocity[0]
@@ -51,6 +51,7 @@ class Momotaro:
     def check_collisions(self, collidables):
         pixel_margin = 30
         momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
+        self.standing = False
         for collidable in collidables:
             collidable_rect = collidable.get_rect()
             if momotaro_rect.colliderect(collidable_rect):
@@ -65,7 +66,11 @@ class Momotaro:
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
-
+                elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
+                    print("teleporting up!")
+                    momotaro_rect.bottom = collidable_rect.top
+                    self.velocity[1] = 0
+                    self.standing = True
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
 
