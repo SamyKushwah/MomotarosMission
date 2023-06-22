@@ -44,7 +44,7 @@ class GameManager:
             self.my_toolbox.clock.tick(60)
 
             if self.level.interactible_list["torigate"][0].is_pushed():
-                self.level_complete = True
+                return "level_complete"
 
     def draw(self):
         self.image.fill((70, 70, 180))
