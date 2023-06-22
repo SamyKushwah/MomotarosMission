@@ -40,7 +40,9 @@ class GameManager:
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN: #if clicking
                     if self.pause_btn.is_clicked(self.my_toolbox.adjusted_mouse_pos(event.pos)): #if clicked pause button
-                        pause_screen.run(self.my_toolbox)
+                        return_st = pause_screen.run(self.my_toolbox)
+                        if return_st is "level_selector" or return_st is "level_1": #break out of running level
+                            return return_st
                         #in the fututre, should return someething like
             self.momotaro.poll_movement_2()
             self.momotaro.check_collision_demon(self.level.demon_list)

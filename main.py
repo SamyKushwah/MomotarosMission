@@ -32,7 +32,7 @@ while running:
             # selection = ruhi_level1.run_level(screen)
             # selection = level_1_screen.run_level_1_screen(screen)
             my_game = game_manager.GameManager(my_toolbox, "level_1A")
-            my_game.run()
+            next_state = my_game.run()
             pass  # todo
         case "level_2":
             # bring the user to level 2

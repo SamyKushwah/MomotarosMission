@@ -41,7 +41,7 @@ def run(my_toolbox: toolbox.Toolbox):
                 elif button_resume.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "resume"
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "restart"
+                    return "level_1"
 
         # draw the background and buttons with scaled position
         scene_screen = pygame.surface.Surface((w, h))
