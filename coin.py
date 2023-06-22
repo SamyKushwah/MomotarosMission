@@ -3,7 +3,7 @@ import pygame
 
 class Coin:
     def __init__(self, x, y):
-        self.coin_image = pygame.image.load("gold_coin.png")
+        self.coin_image = pygame.image.load("images/level_select_scene_UI/gold_coin.png")
         self.scale_factor = 1 / 5
         self.__width = int(self.coin_image.get_width() * self.scale_factor)
         self.__height = int(self.coin_image.get_height() * self.scale_factor)

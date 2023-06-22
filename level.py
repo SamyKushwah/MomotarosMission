@@ -1,144 +1,160 @@
-import time
-
 import pygame
 import sys
-from demon import Demon
-import controllable
-from controllable import Controllable
-from coin import Coin
+import math
+from game_templates.coin import Coin
+import os
 
-def main():
-    pygame.init()
-    level1 = Level(1,1000,700)
-    level1.add_platform(0,600,1000,100)
-    level1.add_platform(0,100,300,30)
-    level1.add_platform(700, 500, 300, 30)
-    level1.add_platform(300, 300, 300, 30)
-    level1.add_platform(30, 450, 200, 30)
-    level1.add_demon(600,501,1000,50)
-    level1.add_demon(400,201,1000,30)
-    level1.add_coin(400, 501)
-    level1.run()
-
-    pygame.quit()
-    sys.exit()
-
-    # Set up the game window
+from game_templates import demon, button_obstacle, controllable
 
 class Level:
-    def __init__(self, lvl_num, lvl_width, lvl_height):
-        self.__width = lvl_width
-        self.__height = lvl_height
-        self.__lvl_num = lvl_num
-        self.__screen = pygame.display.set_mode((lvl_width, lvl_height))
-        self.__momotaro = controllable.Momotaro()
-        self.__momotaro.sprites_init()
-        #self.__animals = Animals()
-        self.__platform_list = []
-        self.__rectangle_list = []
-        self.__wall_list = []
-        self.__obstacle_list = []
-        self.__coin_list = []
-        self.__demon_list = []
-        self.__coins_collected = 0
-        self.__lvl_complete = False
+    def __init__(self, my_toolbox, level_num, level_width, level_height):
+        self.width = level_width
+        self.height = level_height
+        self.level_num = level_num
+        self.platform_list = []
+        self.rectangle_list = []
+        self.wall_list = []
+        self.obstacle_list = []
+        self.coin_list = []
+        self.demon_list = []
 
-    def run(self):
-        clock = pygame.time.Clock()
-        # run event handling for the level until lvl_complete == True
-        while not self.__lvl_complete:
-            events = pygame.event.get()
-            for event in events:
-                self.__momotaro.poll_movement(event)
-                self.__momotaro.poll_attack(event)
-            self.__momotaro.poll_movement_2()
-            self.__momotaro.check_collision_demon(self.__demon_list)
-            self.__momotaro.new_check_collision(self.__rectangle_list)
-            self.__momotaro.check_collision_coin(self.__coin_list)
-            self.draw()
-            pygame.display.update()
-            clock.tick(60)
+    def add_platform(self, platform_type, position, dimensions, facing_direction="all", corners=False):
+        temp_platform = Platform(platform_type, position, dimensions, facing_direction, corners)
+        print("Adding platform", temp_platform.get_rect())
+        self.platform_list.append(temp_platform)
+        self.rectangle_list.append(temp_platform.get_rect())
 
-    def draw(self):
-        self.__screen.fill((0, 0, 0))
-        self.__momotaro.draw_sprite(self.__screen)
-        for rectangle in self.__platform_list:
-            rectangle.draw_platform(self.__screen)
-        for rectangle in self.__obstacle_list:
-            #placeholder color
-            pygame.draw.rect(self.__screen, (0,200,0), rectangle.get_rect())
-        for rectangle in self.__demon_list:
-            if rectangle.is_alive():
-                rectangle.movement(self.__screen,2)
-            else:
-                self.__rectangle_list.remove(rectangle.get_rect())
-                self.__demon_list.remove(rectangle)
-        for coin in self.__coin_list:
-            if not coin.is_collected():
-                coin.draw_coin(self.__screen)
-            # pygame.draw.rect(self.__screen, (0,200,0), rectangle.get_rect())
+    def add_demon(self, x, y, health, movement):
+        temp_demon = demon.Demon(x, y, health, movement)
+        self.demon_list.append(temp_demon)
+        self.rectangle_list.append(temp_demon.get_rect())
 
-        #draw rest of characters and objects
+    def add_obstacle(self, x, y, type):
+        match type:
+            case "button":
+                temp_obstacle = button_obstacle.ButtonObstacle(x, y)
+                self.obstacle_list.append(temp_obstacle)
 
-    def get_screen(self):
-        return self.__screen
-
-    def get_lvl_num(self):
-        return self.__lvl_num
-
-    def add_platform(self,x,y,height,width):
-        temp_platform = Platform(x,y,height,width)
-        self.__platform_list.append(temp_platform)
-        self.__rectangle_list.append(temp_platform.get_rect())
-
-    def add_demon(self,x,y,health,movement):
-        temp_demon = Demon(x,y,health,movement)
-        self.__demon_list.append(temp_demon)
-        self.__rectangle_list.append(temp_demon.get_rect())
-
+    #
     def add_coin(self, x, y):
         temp_coin = Coin(x, y)
-        self.__coin_list.append(temp_coin)
+        self.coin_list.append(temp_coin)
         print(temp_coin.get_coin_rect().topleft)
-    #def add_demon(self,x,y)
-    #def add_obstacle(self,x,y)
-    #def add_coin(self,x,y)
+    #
+
 
 class Platform:
-    def __init__(self, x, y, width, height):
-        self.__height = height
-        self.__width = width
-        self.__x = x
-        self.__y = y
-        self.__rect = pygame.Rect(x,y,width,height)
+    def __init__(self, platform_type, position, dimensions, facing_direction="all", corners=False):
+        self.width = dimensions[0]
+        self.height = dimensions[1]
+        self.x = position[0]
+        self.y = position[1]
+        self.image = pygame.surface.Surface(dimensions)
+        match platform_type:
+            case "stone":
+                BL = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                BM = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                BR = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                ML = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                MM = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                MR = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                TL = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                TM = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                TR = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                match facing_direction:
+                    case "all":
+                        BL = pygame.image.load("images/tiles/stone/Stone(BL).png")
+                        BM = pygame.image.load("images/tiles/stone/Stone(BM).png")
+                        BR = pygame.image.load("images/tiles/stone/Stone(BR).png")
+                        ML = pygame.image.load("images/tiles/stone/Stone(ML).png")
+                        MM = pygame.image.load("images/tiles/stone/Stone(MM).png")
+                        MR = pygame.image.load("images/tiles/stone/Stone(MR).png")
+                        TL = pygame.image.load("images/tiles/stone/Stone(TL).png")
+                        TM = pygame.image.load("images/tiles/stone/Stone(TM).png")
+                        TR = pygame.image.load("images/tiles/stone/Stone(TR).png")
+                    case "up":
+                        TM = pygame.image.load("images/tiles/stone/Stone(TM).png")
+                        if corners:
+                            TL = pygame.image.load("images/tiles/stone/Stone(TL).png")
+                            TR = pygame.image.load("images/tiles/stone/Stone(TR).png")
+                        else:
+                            TL = pygame.image.load("images/tiles/stone/Stone(TM).png")
+                            TR = pygame.image.load("images/tiles/stone/Stone(TM).png")
+                    case "down":
+                        BM = pygame.image.load("images/tiles/stone/Stone(BM).png")
+                        if corners:
+                            BL = pygame.image.load("images/tiles/stone/Stone(BL).png")
+                            BR = pygame.image.load("images/tiles/stone/Stone(BR).png")
+                        else:
+                            BL = pygame.image.load("images/tiles/stone/Stone(BM).png")
+                            BR = pygame.image.load("images/tiles/stone/Stone(BM).png")
+                    case "left":
+                        ML = pygame.image.load("images/tiles/stone/Stone(ML).png")
+                        if corners:
+                            BL = pygame.image.load("images/tiles/stone/Stone(BL).png")
+                            TL = pygame.image.load("images/tiles/stone/Stone(TL).png")
+                        else:
+                            BL = pygame.image.load("images/tiles/stone/Stone(ML).png")
+                            TL = pygame.image.load("images/tiles/stone/Stone(ML).png")
+                    case "right":
+                        MR = pygame.image.load("images/tiles/stone/Stone(MR).png")
+                        if corners:
+                            BR = pygame.image.load("images/tiles/stone/Stone(BR).png")
+                            TR = pygame.image.load("images/tiles/stone/Stone(TR).png")
+                        else:
+                            BR = pygame.image.load("images/tiles/stone/Stone(MR).png")
+                            TR = pygame.image.load("images/tiles/stone/Stone(MR).png")
+
+        BL = pygame.transform.scale(BL, (70, 70))
+        BM = pygame.transform.scale(BM, (70, 70))
+        BR = pygame.transform.scale(BR, (70, 70))
+        ML = pygame.transform.scale(ML, (70, 70))
+        MM = pygame.transform.scale(MM, (70, 70))
+        MR = pygame.transform.scale(MR, (70, 70))
+        TL = pygame.transform.scale(TL, (70, 70))
+        TM = pygame.transform.scale(TM, (70, 70))
+        TR = pygame.transform.scale(TR, (70, 70))
+
+        tile_width = int(MM.get_size()[0])
+        tile_height = int(MM.get_size()[1])
+        tiles_wide = int(math.ceil(self.width / (tile_width - 0)))
+        tiles_high = int(math.ceil(self.height / (tile_height - 0)))
+
+        print("TW", tiles_wide)
+        print("TH", tiles_high)
+
+        for column in range(0, tiles_wide):
+            print("A] Column", column)
+            if column == 0:
+                self.image.blit(TL, (tile_width * column, 0))
+            elif column == tiles_wide - 1:
+                self.image.blit(TR, (self.width - tile_width, 0))
+            else:
+                self.image.blit(TM, (tile_width * column, 0))
+
+        for row in range(1, tiles_high - 1):
+            print("B] row", row)
+            for column in range(0, tiles_wide):
+                print("B] Column", column)
+                if column == 0:
+                    self.image.blit(ML, (tile_width * column, tile_height * row))
+                elif column == tiles_wide - 1:
+                    self.image.blit(MR, (self.width - tile_width, tile_height * row))
+                else:
+                    self.image.blit(MM, (tile_width * column, tile_height * row))
+
+        for column in range(0, tiles_wide):
+            print("C] Column", column)
+            if column == 0:
+                self.image.blit(BL, (tile_width * column, self.height - tile_height))
+            elif column == tiles_wide - 1:
+                self.image.blit(BR, (self.width - tile_width, self.height - tile_height))
+            else:
+                self.image.blit(BM, (tile_width * column, self.height - tile_height))
 
     def get_rect(self):
-        return self.__rect
+        return pygame.rect.Rect((self.x, self.y), (self.width, self.height))
 
-    def draw_platform(self,screen):
-        platform_image = pygame.image.load("platform.png")
-        platform_image = pygame.transform.scale(platform_image, (self.__width,self.__height))
-        screen.blit(platform_image, (self.__x, self.__y))
-
-'''class Wall:
-    def __init__(self, x, y, width, height):
-        self.__height = height
-        self.__width = width
-        self.__x = x
-        self.__y = y
-        self.__rect = pygame.Rect(x,y,width,height)
-        self.__wall_image = pygame.image.load("wall.png")
-
-    def get_rect(self):
-        return self.__rect
-
-    def draw_wall(self,screen):
-        wall_image = pygame.image.load("wall.png")
-        wall_x = 1024 - 50
-        wall_y = 0
-        screen.blit(wall_image, (wall_x, wall_y))'''
-
-
-
-if __name__ == "__main__":
-    main()
+    def draw_platform(self, surface):
+        #platform_image = pygame.transform.scale(self.image, (self.width, self.height))
+        surface.blit(self.image, (self.x, self.y))
