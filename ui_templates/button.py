@@ -14,18 +14,18 @@ class Button(pygame.sprite.Sprite):
         self.image = image
         self.rect = self.image.get_rect()
 
-    def draw(self, screen, location):
+    def draw(self, surface, location):
         rect = self.image.get_rect()
         rect.center = location
         self.rect = rect
-        screen.blit(self.image, rect)
+        surface.blit(self.image, rect)
 
         if self.font is not None and self.text is not None:
             my_font = pygame.font.SysFont(self.font, self.lwd)
             text_surface = my_font.render(self.text, False, (0, 0, 0))
             text_rect = text_surface.get_rect()
             text_rect.center = location
-            screen.blit(text_surface, text_rect)
+            surface.blit(text_surface, text_rect)
 
     def is_clicked(self, mouse_pos):
         return self.rect.collidepoint(mouse_pos)
