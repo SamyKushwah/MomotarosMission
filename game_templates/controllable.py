@@ -272,10 +272,14 @@ class Momotaro(Controllable):
 
 
     def poll_attack(self,event):
+        # events = pygame.event.get()
+        # for event in events:
+        timer = pygame.USEREVENT + 1
+        pygame.time.set_timer(timer, 500)
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
-                #print("h")
                 self.is_attacking = True
-        elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_p:
-                self.is_attacking = False
+
+        elif event.type == timer:
+            self.is_attacking = False
