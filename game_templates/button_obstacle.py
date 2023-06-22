@@ -1,5 +1,6 @@
 import pygame
 
+
 class ButtonObstacle:
     def __init__(self, x, y):
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png")

@@ -1,6 +1,6 @@
 from scenes.levels import level_1A
 import pygame
-from game_templates import controllable
+from game_templates import momotaro
 import sys
 
 
@@ -8,8 +8,7 @@ class GameManager:
     def __init__(self, my_toolbox, level):
         self.my_toolbox = my_toolbox
         self.level_complete = False
-        self.momotaro = controllable.Momotaro()
-        self.momotaro.sprites_init()
+        self.momotaro = momotaro.Momotaro([300, 300])
         self.coins_collected = 0
         match level:
             case "level_1A":
@@ -22,23 +21,20 @@ class GameManager:
         while not self.level_complete:
             events = pygame.event.get()
             for event in events:
-                self.momotaro.poll_movement(event)
-                self.momotaro.poll_attack(event)
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            self.momotaro.poll_movement_2()
-            self.momotaro.check_collision_demon(self.level.demon_list)
-            self.momotaro.new_check_collision(self.level.collidable_list)
-            self.momotaro.check_collision_interactible(self.level.interactible_list)
+
+            self.momotaro.update_movement()
+            self.momotaro.check_collisions(self.level.collidable_list)
             self.draw()
             view_surface = pygame.surface.Surface((1920, 1080))
-            if self.momotaro.rect.centerx <= 960:
+            if self.momotaro.get_rect().centerx <= 960:
                 view_surface.blit(self.image, (0, 0))
-            elif self.momotaro.rect.centerx >= self.level.width - 960:
+            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
                 view_surface.blit(self.image, (-(self.level.width - 1920), 0))
             else:
-                view_surface.blit(self.image, ((-self.momotaro.rect.centerx) + (1920 / 2), 0))
+                view_surface.blit(self.image, ((-self.momotaro.get_rect().centerx) + (1920 / 2), 0))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
             self.my_toolbox.clock.tick(60)
@@ -57,4 +53,4 @@ class GameManager:
         for coin in self.level.coin_list:
             pygame.draw.rect(self.image, (0,200,0), coin.get_rect())
 
-        self.momotaro.draw_sprite(self.image)
+        self.momotaro.draw(self.image)

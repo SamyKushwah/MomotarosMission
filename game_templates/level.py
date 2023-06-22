@@ -1,9 +1,7 @@
 import pygame
-import sys
 import math
-import os
 
-from game_templates import demon, button_obstacle, controllable
+from game_templates import demon, button_obstacle
 
 
 class Level:
@@ -20,14 +18,12 @@ class Level:
 
     def add_platform(self, platform_type, position, dimensions, facing_direction="all", corners=False):
         temp_platform = Platform(platform_type, position, dimensions, facing_direction, corners)
-        print("Adding platform", temp_platform.get_rect())
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
     def add_demon(self, x, y, health, movement):
         temp_demon = demon.Demon(x, y, health, movement)
         self.demon_list.append(temp_demon)
-        print("adding rect:", temp_demon.get_rect())
 
     def add_obstacle(self, x, y, type):
         match type:
