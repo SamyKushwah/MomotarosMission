@@ -5,3 +5,5 @@ Personal Log:
 6/20 -> Finished demon sprites. Started working on platform sprites and finished ground and stone sprites.
         Cropping and sizing the ground and stone sprites into squares and pushing to github.
 6/21 -> Made obstacle and button sprites. Working on making coin functionality. Finished coin functionality.
+6/22 -> Implemented coin funcitonality in merged code. Added pause screen functionality and button. Made sprites
+        for boat, water, health. 
