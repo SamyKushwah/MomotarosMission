@@ -4,7 +4,7 @@ from scenes.levels import level_1A
 import pygame
 from game_templates import controllable
 from ui_templates import button
-from scenes import pause_screen
+from scenes import pause_screen, win_screen, lose_screen
 import sys
 
 
@@ -22,10 +22,8 @@ class GameManager:
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
         # Creating pause button
         w, h = self.level.width, self.level.height
-        #scene_screen = pygame.surface.Surface((w, h))
         pause_img = pygame.image.load("images/pause_btn.png")
         pause_img = pygame.transform.scale(pause_img, (w * (1 / 40), h * (1 / 40)))
-        #pause_btn = button.Button(pause_img)
         self.pause_btn = button.Button(pause_img)
 
     def run(self):
@@ -39,6 +37,16 @@ class GameManager:
                     pygame.quit()
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN: #if clicking
+                    # need to put this code in whatever kevin did for how to win
+                    # if win state reached then do this stuff
+                    # for testing it just works with keys
+                    win_ret = win_screen.run(self.my_toolbox)
+                    if win_ret is "level_selector" or win_ret is "level_1":
+                        return win_ret
+                    if event.type == pygame.MOUSEBUTTONDOWN: #change this to however the lose state is reached
+                        lose_rt = lose_screen.run(self.my_toolbox)
+                        if lose_rt == "level_selector" or lose_rt == "level_1":
+                            return lose_rt
                     if self.pause_btn.is_clicked(self.my_toolbox.adjusted_mouse_pos(event.pos)): #if clicked pause button
                         return_st = pause_screen.run(self.my_toolbox)
                         if return_st is "level_selector" or return_st is "level_1": #break out of running level
