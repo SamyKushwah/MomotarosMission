@@ -80,13 +80,13 @@ def run(my_toolbox: toolbox.Toolbox):
             # Check if the mouse was clicked
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Check which button was clicked
-                if button_1.is_clicked(event.pos):
+                if button_1.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_1"
-                elif button_2.is_clicked(event.pos):
+                elif button_2.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_2"
-                elif button_3.is_clicked(event.pos):
+                elif button_3.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_3"
-                elif credits_btn.is_clicked(event.pos):
+                elif credits_btn.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "credits"
 
         # draw the background and buttons with scaled position

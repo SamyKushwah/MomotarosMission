@@ -9,6 +9,8 @@ my_toolbox = toolbox.Toolbox()
 
 next_state = "title_menu"
 
+os.chdir("C:/Users/skip/PycharmProjects/remade")
+
 # driver loop
 running = True
 while running:
@@ -28,10 +30,10 @@ while running:
 
         case "level_1":
             # selection = ruhi_level1.run_level(screen)
-            #selection = level_1_screen.run_level_1_screen(screen)
+            # selection = level_1_screen.run_level_1_screen(screen)
             my_game = game_manager.GameManager(my_toolbox, "level_1A")
             my_game.run()
-            pass # todo
+            pass  # todo
         case "level_2":
             # bring the user to level 2
             pass  # TODO
@@ -43,8 +45,8 @@ while running:
             pass  # TODO
         case "pause":
             # bring the user to the pause page
-            #selection = pause_screen.run_pause_screen(screen)
-            pass # TODO
+            # selection = pause_screen.run_pause_screen(screen)
+            pass  # TODO
         case "resume":
             # resume current level
             pass  # TODO

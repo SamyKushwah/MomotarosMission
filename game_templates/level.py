@@ -1,9 +1,9 @@
 import pygame
 import sys
 import math
+import os
 
 from game_templates import demon, button_obstacle, controllable
-
 
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height):
