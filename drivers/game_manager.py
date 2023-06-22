@@ -47,6 +47,9 @@ class GameManager:
         self.image.fill((70, 70, 180))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
+        for platform in self.level.moving_platform_list:
+            platform.movement()
+            platform.draw_platform(self.image)
         for interactible in self.level.interactible_list:
             interactible.draw(self.image)
         for demon in self.level.demon_list:
