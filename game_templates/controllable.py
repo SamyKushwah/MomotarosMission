@@ -26,6 +26,9 @@ class Controllable:
         self.left_mvmnt_frames = None
         self.frame_index = 0  # index used to loop through a list of animation sprites
 
+        self.attacking_left = False
+        self.attacking_right = False
+
     def poll_movement(self,event):
         if event.type == pygame.KEYDOWN:
             # print('keydown')
@@ -35,11 +38,16 @@ class Controllable:
                 self.vel_x = -10
                 # print('left')
                 # self.friction = 0
+                self.attacking_left = True
+                self.attacking_right = False
+
             elif event.key == pygame.K_RIGHT:
                 self.keys_down += 1
                 self.vel_x = 10
                 # print('right')
                 # self.friction = 0
+                self.attacking_left = False
+                self.attacking_right = True
 
             if event.key == pygame.K_UP:
                 if not self.is_jumping:
@@ -112,6 +120,8 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
+        self.attacking_left = False
+        self.attacking_right = False
         self.health = 100
         self.idle_image = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
 
@@ -172,20 +182,30 @@ class Momotaro(Controllable):
 
         animation_delay = 8  # increase this number to change how fast the animation plays
 
-        if self.vel_x == 0:
+        if self.attacking_left and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.attacking_right and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.vel_x == 0:
             screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         elif self.vel_x > 0:
-            if self.is_attacking:
-                if self.frame_index < animation_delay * 2:
-                    index = self.frame_index // animation_delay
-                    screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
-                    self.frame_index += 1
-                else:
-                    self.frame_index = 0
-                    index = self.frame_index // animation_delay
-                    screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
-                    self.frame_index += 1
-            elif self.frame_index < animation_delay * 2:
+            if self.frame_index < animation_delay * 2:
                 index = self.frame_index // animation_delay
                 screen.blit(self.right_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
@@ -196,17 +216,7 @@ class Momotaro(Controllable):
                 self.frame_index += 1
 
         elif self.vel_x < 0:
-            if self.is_attacking:
-                if self.frame_index < animation_delay * 2:
-                    index = self.frame_index // animation_delay
-                    screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
-                    self.frame_index += 1
-                else:
-                    self.frame_index = 0
-                    index = self.frame_index // animation_delay
-                    screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
-                    self.frame_index += 1
-            elif self.frame_index < animation_delay * 2:
+            if self.frame_index < animation_delay * 2:
                 index = self.frame_index // animation_delay
                 screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
@@ -245,7 +255,7 @@ class Momotaro(Controllable):
     def poll_attack(self,event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
-                print("h")
+                #print("h")
                 self.is_attacking = True
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_p:

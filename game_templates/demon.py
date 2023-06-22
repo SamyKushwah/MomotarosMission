@@ -85,9 +85,9 @@ class Demon:
                                    pygame.image.load(
                                        "images/DemonSprites/Demonlift(Right).png")]
 
-        self.rect = pygame.Rect(self.__int_x, self.__int_y, self.right_mvmnt_frames[0].get_width(),
+        self.__demon_rect = pygame.Rect(self.__int_x, self.__int_y, self.right_mvmnt_frames[0].get_width(),
                                 self.right_mvmnt_frames[0].get_height())
-        self.rect.scale_by_ip(self.scale_factor, self.scale_factor)
+        self.__demon_rect.scale_by_ip(self.scale_factor, self.scale_factor)
 
         # Scale the images
 
