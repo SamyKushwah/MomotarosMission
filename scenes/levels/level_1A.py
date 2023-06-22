@@ -1,0 +1,30 @@
+from game_templates import level
+
+
+def create_level(my_toolbox):
+    level1 = level.Level(my_toolbox, 1, 5100, 5000)
+
+
+    # add four walls
+    level1.add_platform((0, 0), (71, 1080), facing_direction="right")               # left wall
+    level1.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")        # right wall
+    level1.add_platform((0, 1080 - 70), (1200, 70))                                  # bottom wall
+    level1.add_platform((1200, 1080 - 70), (1000, 70), platform_type="water")        # water section 1
+    level1.add_platform((2200, 1080 - 70), (700, 70))                               # bottom wall cont.
+    level1.add_platform((2900, 1080 - 70), (700, 70), platform_type="water")        # water section 2
+    level1.add_platform((3600, 1080 - 70), (1900, 70))                              # bottom wall cont.
+    level1.add_platform((0, 0), (5100, 140), facing_direction="down")               # top wall
+
+    # add platforms throughout
+    level1.add_platform((500, 800), (300, 50), facing_direction="up")
+    level1.add_platform((250, 600), (300, 50), facing_direction="up")
+    level1.add_platform((600, 400), (150, 50), facing_direction="up")
+
+    level1.add_platform((2700, 800), (300, 50), facing_direction="up")
+    level1.add_platform((3000, 650), (250, 50), facing_direction="up")
+    level1.add_platform((3250, 500), (200, 50), facing_direction="up")
+    level1.add_platform((3450, 350), (150, 50), facing_direction="up")
+
+    level1.add_demon(400, 201, 1000, 30)
+    #level1.add_obstacle(500, 600, "button")
+    return level1
