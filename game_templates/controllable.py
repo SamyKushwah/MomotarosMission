@@ -111,6 +111,8 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
+        self.attacking_left = False
+        self.attacking_right = False
         self.health = 100
         self.idle_image = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
 
@@ -118,7 +120,7 @@ class Momotaro(Controllable):
                                    pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png")]
 
         self.right_mvmnt_frames[0] = pygame.transform.scale(self.right_mvmnt_frames[0], (500, 550))
-        self.right_mvmnt_frames[1   ] = pygame.transform.scale(self.right_mvmnt_frames[1], (500, 550))
+        self.right_mvmnt_frames[1] = pygame.transform.scale(self.right_mvmnt_frames[1], (500, 550))
 
         self.left_mvmnt_frames = [pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png"),
                                   pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png")]
@@ -129,8 +131,8 @@ class Momotaro(Controllable):
         self.left_attack_frames = [pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png"),
                               pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png")]
 
-        #self.right_attack_frames = [pygame.image.load("images/MomotaroSprites/MomoLiftKat(Right).png"),
-                            #       pygame.image.load("images/MomotaroSprites/MomoStrike(Right).png")]
+        self.right_attack_frames = [pygame.image.load("images/MomotaroSprites/MomoLiftKat(Right).png"),
+                                   pygame.image.load("images/MomotaroSprites/MomoStrike(Right).png")]
 
         self.x = 10  # Beginning X and Y where the character spawns (spawn in air)
         self.y = 768 - 600
@@ -153,6 +155,16 @@ class Momotaro(Controllable):
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
                 int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
 
+        for index in range(len(self.left_attack_frames)):
+            frame = self.left_attack_frames[index]
+            self.left_attack_frames[index] = pygame.transform.scale(frame, (
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
+
+        for index in range(len(self.right_attack_frames)):
+            frame = self.right_attack_frames[index]
+            self.right_attack_frames[index] = pygame.transform.scale(frame, (
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
+
     def draw_sprite(self, screen):
         # print(self.vel_x)
         # print(self.rect.x)
@@ -161,7 +173,27 @@ class Momotaro(Controllable):
 
         animation_delay = 8  # increase this number to change how fast the animation plays
 
-        if self.vel_x == 0:
+        if self.attacking_left and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.attacking_right and self.is_attacking:
+            if self.frame_index < animation_delay * 2:
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+            else:
+                self.frame_index = 0
+                index = self.frame_index // animation_delay
+                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                self.frame_index += 1
+        elif self.vel_x == 0:
             screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         elif self.vel_x > 0:
             if self.frame_index < animation_delay * 2:
