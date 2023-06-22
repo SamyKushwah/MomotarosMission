@@ -29,8 +29,8 @@ class GameManager:
                     sys.exit()
             self.momotaro.poll_movement_2()
             self.momotaro.check_collision_demon(self.level.demon_list)
-            self.momotaro.new_check_collision(self.level.rectangle_list)
-            self.momotaro.check_collision_obstacle(self.level.obstacle_list)
+            self.momotaro.new_check_collision(self.level.collidable_list)
+            self.momotaro.check_collision_interactible(self.level.interactible_list)
             self.draw()
             view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.rect.centerx <= 960:
@@ -45,22 +45,16 @@ class GameManager:
 
     def draw(self):
         self.image.fill((70, 70, 180))
-        for rectangle in self.level.platform_list:
-            rectangle.draw_platform(self.image)
-        for rectangle in self.level.obstacle_list:
-            #placeholder color
-            #pygame.draw.rect(self.image, (0,200,0), rectangle.get_rect())
-            rectangle.draw(self.image)
-        for rectangle in self.level.demon_list:
-            if rectangle.is_alive():
-                rectangle.movement(self.image,2)
+        for platform in self.level.platform_list:
+            platform.draw_platform(self.image)
+        for interactible in self.level.interactible_list:
+            interactible.draw(self.image)
+        for demon in self.level.demon_list:
+            if demon.is_alive():
+                demon.movement(self.image, 2)
             else:
-                self.level.rectangle_list.remove(rectangle.get_rect())
-                self.level.demon_list.remove(rectangle)
-        for rectangle in self.level.coin_list:
-            #placeholder color
-            pygame.draw.rect(self.image, (0,200,0), rectangle.get_rect())
+                self.level.demon_list.remove(demon)
+        for coin in self.level.coin_list:
+            pygame.draw.rect(self.image, (0,200,0), coin.get_rect())
 
         self.momotaro.draw_sprite(self.image)
-
-        #draw rest of characters and objects

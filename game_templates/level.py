@@ -5,15 +5,16 @@ import os
 
 from game_templates import demon, button_obstacle, controllable
 
+
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height):
         self.width = level_width
         self.height = level_height
         self.level_num = level_num
+
+        self.collidable_list = []
         self.platform_list = []
-        self.rectangle_list = []
-        self.wall_list = []
-        self.obstacle_list = []
+        self.interactible_list = []
         self.coin_list = []
         self.demon_list = []
 
@@ -21,18 +22,18 @@ class Level:
         temp_platform = Platform(platform_type, position, dimensions, facing_direction, corners)
         print("Adding platform", temp_platform.get_rect())
         self.platform_list.append(temp_platform)
-        self.rectangle_list.append(temp_platform.get_rect())
+        self.collidable_list.append(temp_platform)
 
     def add_demon(self, x, y, health, movement):
         temp_demon = demon.Demon(x, y, health, movement)
         self.demon_list.append(temp_demon)
-        self.rectangle_list.append(temp_demon.get_rect())
+        print("adding rect:", temp_demon.get_rect())
 
     def add_obstacle(self, x, y, type):
         match type:
             case "button":
                 temp_obstacle = button_obstacle.ButtonObstacle(x, y)
-                self.obstacle_list.append(temp_obstacle)
+                self.interactible_list.append(temp_obstacle)
 
 
 class Platform:
@@ -112,11 +113,7 @@ class Platform:
         tiles_wide = int(math.ceil(self.width / (tile_width - 0)))
         tiles_high = int(math.ceil(self.height / (tile_height - 0)))
 
-        print("TW", tiles_wide)
-        print("TH", tiles_high)
-
         for column in range(0, tiles_wide):
-            print("A] Column", column)
             if column == 0:
                 self.image.blit(TL, (tile_width * column, 0))
             elif column == tiles_wide - 1:
@@ -125,9 +122,7 @@ class Platform:
                 self.image.blit(TM, (tile_width * column, 0))
 
         for row in range(1, tiles_high - 1):
-            print("B] row", row)
             for column in range(0, tiles_wide):
-                print("B] Column", column)
                 if column == 0:
                     self.image.blit(ML, (tile_width * column, tile_height * row))
                 elif column == tiles_wide - 1:
@@ -136,7 +131,6 @@ class Platform:
                     self.image.blit(MM, (tile_width * column, tile_height * row))
 
         for column in range(0, tiles_wide):
-            print("C] Column", column)
             if column == 0:
                 self.image.blit(BL, (tile_width * column, self.height - tile_height))
             elif column == tiles_wide - 1:
@@ -148,5 +142,4 @@ class Platform:
         return pygame.rect.Rect((self.x, self.y), (self.width, self.height))
 
     def draw_platform(self, surface):
-        #platform_image = pygame.transform.scale(self.image, (self.width, self.height))
         surface.blit(self.image, (self.x, self.y))

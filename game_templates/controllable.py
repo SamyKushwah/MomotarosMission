@@ -83,6 +83,7 @@ class Controllable:
             # print(wall.bottom)
             # print(self.rect.bottom)
             # print(self.is_jumping)
+            wall = wall.get_rect()
             if self.rect.colliderect(wall):
                 # Check which two sides of the rectangles are touching
 
@@ -192,7 +193,6 @@ class Momotaro(Controllable):
         damage = 100
         pixel_margin = 30
 
-
         for demon in list_of_demons:
             if self.rect.colliderect(demon.get_rect()):
                 wall = demon.get_rect()
@@ -216,7 +216,7 @@ class Momotaro(Controllable):
             if self.rect.colliderect(coin.get_coin_rect()): #if collide w coin
                 coin.set_collected(True) #make the coin be collected
 
-    def check_collision_obstacle(self, list_of_obstacles):
+    def check_collision_interactible(self, list_of_obstacles):
         for obstacle in list_of_obstacles:
             if self.rect.colliderect(obstacle.get_rect()):
                 match obstacle.type:
@@ -224,14 +224,10 @@ class Momotaro(Controllable):
                         obstacle.set_pushed(True)
 
     def poll_attack(self,event):
-        #events = pygame.event.get()
-        #for event in events:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
                 print("h")
                 self.is_attacking = True
-
-
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_p:
                 self.is_attacking = False
