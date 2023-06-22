@@ -9,7 +9,7 @@ my_toolbox = toolbox.Toolbox()
 
 next_state = "title_menu"
 
-os.chdir("C:/Users/skip/PycharmProjects/remade")
+os.chdir("C:/Users/ckevi/Desktop/performant programming/big project/MomotarosMission")
 
 # driver loop
 running = True
