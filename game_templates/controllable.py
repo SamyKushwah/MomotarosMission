@@ -112,8 +112,6 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
-        self.attacking_left = False
-        self.attacking_right = False
         self.health = 100
         self.idle_image = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
 
@@ -174,30 +172,20 @@ class Momotaro(Controllable):
 
         animation_delay = 8  # increase this number to change how fast the animation plays
 
-        if self.attacking_left and self.is_attacking:
-            if self.frame_index < animation_delay * 2:
-                index = self.frame_index // animation_delay
-                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
-                self.frame_index += 1
-            else:
-                self.frame_index = 0
-                index = self.frame_index // animation_delay
-                screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
-                self.frame_index += 1
-        elif self.attacking_right and self.is_attacking:
-            if self.frame_index < animation_delay * 2:
-                index = self.frame_index // animation_delay
-                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
-                self.frame_index += 1
-            else:
-                self.frame_index = 0
-                index = self.frame_index // animation_delay
-                screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
-                self.frame_index += 1
-        elif self.vel_x == 0:
+        if self.vel_x == 0:
             screen.blit(self.idle_image, (self.rect.x, self.rect.y))
         elif self.vel_x > 0:
-            if self.frame_index < animation_delay * 2:
+            if self.is_attacking:
+                if self.frame_index < animation_delay * 2:
+                    index = self.frame_index // animation_delay
+                    screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                    self.frame_index += 1
+                else:
+                    self.frame_index = 0
+                    index = self.frame_index // animation_delay
+                    screen.blit(self.right_attack_frames[index], (self.rect.x, self.rect.y))
+                    self.frame_index += 1
+            elif self.frame_index < animation_delay * 2:
                 index = self.frame_index // animation_delay
                 screen.blit(self.right_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
@@ -208,7 +196,17 @@ class Momotaro(Controllable):
                 self.frame_index += 1
 
         elif self.vel_x < 0:
-            if self.frame_index < animation_delay * 2:
+            if self.is_attacking:
+                if self.frame_index < animation_delay * 2:
+                    index = self.frame_index // animation_delay
+                    screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                    self.frame_index += 1
+                else:
+                    self.frame_index = 0
+                    index = self.frame_index // animation_delay
+                    screen.blit(self.left_attack_frames[index], (self.rect.x, self.rect.y))
+                    self.frame_index += 1
+            elif self.frame_index < animation_delay * 2:
                 index = self.frame_index // animation_delay
                 screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
@@ -223,22 +221,9 @@ class Momotaro(Controllable):
 
     def check_collision_demon(self, list_of_demons):
         damage = 100
-        pixel_margin = 15
 
         for demon in list_of_demons:
             if self.rect.colliderect(demon.get_rect()):
-                wall = demon.get_rect()
-                if abs(self.rect.left - wall.right) < pixel_margin and not (
-                        abs(self.rect.top - wall.bottom) < pixel_margin):
-                    self.attacking_left = True
-                    self.attacking_right = False
-                    print('attackcing left')
-                elif abs(self.rect.right - wall.left) < pixel_margin and not (
-                        abs(self.rect.top - wall.bottom) < pixel_margin):
-                    self.attacking_right = True
-                    self.attacking_left = False
-                    print('attacking right')
-
                 if self.is_attacking:
                     demon.take_damage(damage)
 
