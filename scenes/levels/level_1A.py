@@ -35,6 +35,7 @@ def create_level(my_toolbox):
     # add demons
     level1.add_demon(400, 500, 1000, 135)           # demon 1
     level1.add_demon(3325, 400, 1000, 75)           # demon 2
+    # level1.add_demon()
 
 
 
