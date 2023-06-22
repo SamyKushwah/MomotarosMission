@@ -55,6 +55,8 @@ while running:
             pass  # TODO
         case "level_complete":
             next_state = "level_selector"
+        case "game_over":
+            next_state = "level_selector"
 
     my_toolbox.clock.tick(60)
 

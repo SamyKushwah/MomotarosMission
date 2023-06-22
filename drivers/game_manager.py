@@ -45,6 +45,8 @@ class GameManager:
 
             if self.level.interactible_list["torigate"][0].is_pushed():
                 return "level_complete"
+            elif self.momotaro.health <= 0:
+                return "game_over"
 
     def draw(self):
         self.image.fill((70, 70, 180))

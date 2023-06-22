@@ -230,15 +230,17 @@ class Momotaro(Controllable):
         self.health -= damage
 
     def check_collision_demon(self, list_of_demons):
-        damage = 100
+        momo_attack_damage = 100
+
+        demon_attack_damage = 10
 
         for demon in list_of_demons:
             if self.rect.colliderect(demon.get_rect()):
                 if self.is_attacking:
-                    demon.take_damage(damage)
+                    demon.take_damage(momo_attack_damage)
 
                 else:
-                    self.take_damage(damage)
+                    self.take_damage(demon_attack_damage)
 
     def check_collision_coin(self, list_of_coins):
         for coin in list_of_coins:
