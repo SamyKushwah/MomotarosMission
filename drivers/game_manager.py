@@ -43,12 +43,16 @@ class GameManager:
             pygame.display.update()
             self.my_toolbox.clock.tick(60)
 
+            if self.level.interactible_list["torigate"][0].is_pushed():
+                self.level_complete = True
+
     def draw(self):
         self.image.fill((70, 70, 180))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
-        for interactible in self.level.interactible_list:
-            interactible.draw(self.image)
+        for interactible_key in self.level.interactible_list.keys():
+            for interactible in self.level.interactible_list[interactible_key]:
+                interactible.draw(self.image)
         for demon in self.level.demon_list:
             if demon.is_alive():
                 demon.movement(self.image, 2)

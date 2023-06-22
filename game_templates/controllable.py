@@ -246,11 +246,28 @@ class Momotaro(Controllable):
                 coin.set_collected(True) #make the coin be collected
 
     def check_collision_interactible(self, list_of_obstacles):
-        for obstacle in list_of_obstacles:
-            if self.rect.colliderect(obstacle.get_rect()):
-                match obstacle.type:
+        for obstacle_type in list_of_obstacles.keys():
+                match obstacle_type:
                     case "button":
-                        obstacle.set_pushed(True)
+                        pass
+                        for obstacle in list_of_obstacles[obstacle_type]:
+                            if self.rect.colliderect(obstacle.get_rect()):
+                                pass
+                    #obstacle.set_pushed(True)
+                    case "torigate":
+                        momo_center_x = self.rect.centerx
+                        momo_center_y = self.rect.centery
+
+                        obstacle = list_of_obstacles[obstacle_type][0]
+
+                        gate_center_x = obstacle.get_rect().centerx
+                        gate_center_y = obstacle.get_rect().centery
+
+                        margin = 20
+                        if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
+                            obstacle.set_pushed(True)
+
+
 
     def poll_attack(self,event):
         if event.type == pygame.KEYDOWN:

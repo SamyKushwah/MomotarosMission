@@ -11,4 +11,5 @@ def create_level(my_toolbox):
     #level1.add_demon(600, 501, 1000, 50)
     level1.add_demon(400, 100, 1000, 30)
     #level1.add_obstacle(500, 600, "button")
+    level1.add_obstacle(600, 500, "torigate")
     return level1
