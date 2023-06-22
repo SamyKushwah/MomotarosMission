@@ -229,3 +229,10 @@ class Momotaro(Controllable):
 
         elif event.type == timer:
             self.is_attacking = False
+
+    def check_if_over_platform(self,list_of_moving_platforms):
+        pixel_margin = 5
+        for platform in list_of_moving_platforms:
+            if abs(platform.get_rect().top - self.rect.bottom) < pixel_margin:
+                self.rect.x += platform.vel
+        self.rect.update(self.rect)

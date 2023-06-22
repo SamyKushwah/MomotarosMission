@@ -21,6 +21,7 @@ class GameManager:
         # run event handling for the level until lvl_complete == True
         while not self.level_complete:
             events = pygame.event.get()
+
             for event in events:
                 self.momotaro.poll_movement(event)
                 self.momotaro.poll_attack(event)
@@ -28,10 +29,12 @@ class GameManager:
                     pygame.quit()
                     sys.exit()
             self.momotaro.poll_movement_2()
+            self.momotaro.check_if_over_platform(self.level.moving_platform_list)
             self.momotaro.check_collision_demon(self.level.demon_list)
             self.momotaro.new_check_collision(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
             self.draw()
+
             view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.rect.centerx <= 960:
                 view_surface.blit(self.image, (0, 0))
@@ -48,7 +51,7 @@ class GameManager:
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
-            platform.movement()
+            platform.movement(self.momotaro)
             platform.draw_platform(self.image)
         for interactible in self.level.interactible_list:
             interactible.draw(self.image)

@@ -152,24 +152,28 @@ class Platform:
         surface.blit(self.image, (self.x, self.y))
 
 class MovingPlatform(Platform):
-    def __init__(self, platform_type, position, dimensions, velocity, facing_direction="all", corners=False):
+    def __init__(self, platform_type, position, dimensions, max_distance, facing_direction="all", corners=False):
         super().__init__(platform_type, position, dimensions, facing_direction, corners)
         self.__int_x = position[0]
         self.__int_y = position[1]
         self.__moving_right = True
-        self.vel = velocity
+        self.max_distance = max_distance
+        self.vel = 1
 
-    def movement(self):
-        if self.x == self.__int_x - self.vel:
+    def movement(self,list_of_controllables):
+        if self.x == self.__int_x - self.max_distance:
+            self.vel *= -1
             self.__moving_right = True
-        elif self.x == self.__int_y + self.vel:
+        elif self.x == self.__int_x + self.max_distance:
+            self.vel *= -1
             self.__moving_right = False
         if self.__moving_right:
-            self.x += 1
+            #self.check_if_controllable_on_top(list_of_controllables)
+            self.x += self.vel
         else:
-            self.x -= 1
+            #self.check_if_controllable_on_top(list_of_controllables,-1)
+            self.x += self.vel
         self.get_rect().update(self.get_rect())
 
-    '''def check_if_controllable_on_top(self,list_of_controllables):
-        for controllable in list_of_controllables:'''
+
 
