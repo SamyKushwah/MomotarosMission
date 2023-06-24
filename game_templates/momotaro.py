@@ -8,7 +8,10 @@ class Momotaro:
         self.hitbox = (50, 70)
         self.gravity = 1.3
         self.health = 100
-        self.attacking = False
+        self.charging = False
+        self.attacking = False      # True if attack button is released
+        self.attack_power = 0       # 0 - 1 decimal
+        self.attack_damage = 100
         self.external_forces = [0, 0]
         self.standing_on = None
         self.moving_direction = "idle"
@@ -31,6 +34,19 @@ class Momotaro:
 
         self.left_attack_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png"), (60, 70)),
                                    pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (60, 70))]
+
+        self.attacking_left_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (60, 70))
+        self.attacking_right_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Right).png"), (60, 70))
+
+
+        self.charging_left_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStandingSide(Left).png"), (60, 70))
+        self.charging_right_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStandSide(Right).png"), (60, 70))
+
+        self.swing_size = (400, 50)
+
+        self.attack_swing_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing.png"), (400, 50))
+        self.active_sweep_image = None
+
 
     def update_movement(self):
 
@@ -66,10 +82,20 @@ class Momotaro:
                 self.velocity[1] = -23
                 self.standing = False
 
+        if keys[pygame.K_p]:
+            self.charging = True
+            self.attacking = False
+        elif not keys[pygame.K_p] and self.charging:
+            self.attacking = True
+            self.charging = False
+        else:
+            self.charging = False
+            self.attacking = False
+
         if self.momentum > 7:
             self.momentum = 7
 
-        print("momentum:", self.momentum)
+        #print("momentum:", self.momentum)
 
         self.position[0] += self.velocity[0]
         self.position[1] += self.velocity[1]
@@ -117,15 +143,35 @@ class Momotaro:
 
         match self.moving_direction:
             case "idle":
-                self.active_image = self.idle_image
+                if self.charging:
+                    self.active_image = self.charging_right_image
+                elif self.attacking:
+                    self.active_image = self.attacking_right_image
+                    surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 30))
+                else:
+                    self.active_image = self.idle_image
             case "right":
-                self.active_image = self.right_mvmnt_frames[index]
-                if self.standing:
-                    self.frame_index += 1
+                if self.charging:
+                    self.active_image = self.charging_right_image
+                elif self.attacking:
+                    self.active_image = self.attacking_right_image
+                    surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 30))
+                else:
+                    self.active_image = self.right_mvmnt_frames[index]
+                    if self.standing:
+                        self.frame_index += 1
             case "left":
-                self.active_image = self.left_mvmnt_frames[index]
-                if self.standing:
-                    self.frame_index += 1
+                if self.charging:
+                    self.active_image = self.charging_left_image
+                elif self.attacking:
+                    self.active_image = self.attacking_left_image
+                    surface.blit(self.active_sweep_image, (self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30))
+                else:
+                    self.active_image = self.left_mvmnt_frames[index]
+                    if self.standing:
+                        self.frame_index += 1
+
+
 
         if self.frame_index == animation_delay:
             self.frame_index = 0
@@ -156,6 +202,44 @@ class Momotaro:
                     margin = 20
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
+
+    def check_attacking(self, demon_list):
+        #print("attack power:", self.attack_power)
+        if self.charging:
+            if self.attack_power >= 1:
+                self.attack_power = 1
+            else:
+                self.attack_power += 0.01
+
+        if self.attacking:
+            sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))
+            self.active_sweep_image = pygame.transform.scale(self.attack_swing_image, sweep_size)
+            #print("sweep size: ", self.active_sweep_image.get_size())
+            print("attack power/damage: ", self.attack_damage * self.attack_power)
+
+            #surface.blit(sweep_image, self.position)
+            #surface.blit(sweep_image, ((self.position[0] + sweep_size[0] / 2), self.position[1]))
+
+
+            attack_rect_right = pygame.rect.Rect((self.get_rect().right, self.get_rect().top + 30), sweep_size)
+            attack_rect_left = pygame.rect.Rect((self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30), sweep_size)
+
+            #print("sweep pos: ", attack_rect.center)
+            #print("attack size: ", attack_rect.size)
+            for demon in demon_list:
+                match self.moving_direction:
+                    case "right":
+                        if attack_rect_right.colliderect(demon.get_rect()):
+                            demon.health -= (self.attack_damage * self.attack_power)
+                    case "left":
+                        if attack_rect_left.colliderect(demon.get_rect()):
+                            demon.health -= (self.attack_damage * self.attack_power)
+                    case "idle":
+                        if attack_rect_right.colliderect(demon.get_rect()):
+                            demon.health -= (self.attack_damage * self.attack_power)
+
+
+            self.attack_power = 0
 
 
 

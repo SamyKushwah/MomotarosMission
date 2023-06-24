@@ -60,14 +60,15 @@ class GameManager:
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
+            self.momotaro.check_attacking(self.level.demon_list)
 
             for demon in self.level.demon_list:
                 demon.update_movement(self.momotaro)
                 demon.check_collisions(self.level.collidable_list)
 
             self.draw()
-
             view_surface = pygame.surface.Surface((1920, 1080))
+
             if self.momotaro.get_rect().centerx <= 960:
                 view_surface.blit(self.image, (0, 0))
             elif self.momotaro.get_rect().centerx >= self.level.width - 960:
