@@ -56,6 +56,7 @@ class GameManager:
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
 
+
             for demon in self.level.demon_list:
                 demon.update_movement(self.momotaro)
                 demon.check_collisions(self.level.collidable_list)
@@ -90,7 +91,7 @@ class GameManager:
             for interactible in self.level.interactible_list[interactible_key]:
                 interactible.draw(self.image)
         for demon in self.level.demon_list:
-            if demon.is_alive():
+            if demon.health > 0:
                 demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
