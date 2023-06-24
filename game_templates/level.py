@@ -13,7 +13,7 @@ class Level:
         self.collidable_list = []
         self.platform_list = []
         self.moving_platform_list = []
-        self.interactible_list = []
+        self.interactible_list = {}
         self.coin_list = []
         self.demon_list = []
         self.background = background
@@ -32,15 +32,25 @@ class Level:
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
-    def add_demon(self, x, y, health, movement):
-        temp_demon = demon.Demon(x, y, health, movement)
+    def add_demon(self, spawn_position, detection_range):
+        temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
     def add_obstacle(self, x, y, type):
         match type:
             case "button":
                 temp_obstacle = button_obstacle.ButtonObstacle(x, y)
-                self.interactible_list.append(temp_obstacle)
+                try:
+                    self.interactible_list["button"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["button"] = [temp_obstacle]
+
+            case "torigate":
+                temp_obs = button_obstacle.ToriObstacle(x, y)
+                try:
+                    self.interactible_list["torigate"] += [temp_obs]
+                except KeyError:
+                    self.interactible_list["torigate"] = [temp_obs]
 
 
 class Platform:

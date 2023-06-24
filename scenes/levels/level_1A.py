@@ -27,23 +27,17 @@ def create_level(my_toolbox):
 
 
     # add moving platforms
-    level1.add_moving_platform((3900, 600), (275, 50), 50, 4200)
-    level1.add_moving_platform((4200, 400), (275, 50), 70, 4500)
-    level1.add_moving_platform((4200, 800), (275, 50), 30, 5000)
-    level1.add_moving_platform((4500, 600), (275, 50), 40, 6000)
+    level1.add_moving_platform((3900, 600), (275, 50), 20, 4200)
+    level1.add_moving_platform((4200, 400), (275, 50), 20, 4500)
+    level1.add_moving_platform((4200, 800), (275, 50), 20, 5000)
+    level1.add_moving_platform((4500, 600), (275, 50), 20, 6000)
 
     # add demons
-<<<<<<< Updated upstream
-    level1.add_demon(400, 500, 1000, 135)           # demon 1
-    level1.add_demon(3325, 400, 1000, 75)           # demon 2
-    # level1.add_demon()
-=======
     level1.add_demon([400, 500], 300)
     level1.add_demon([3325, 400], 300)
 
     # add tori gate obstacle
     level1.add_obstacle(600, 500, "torigate")
->>>>>>> Stashed changes
 
     # de
     #level1.add_obstacle(500, 600, "button")

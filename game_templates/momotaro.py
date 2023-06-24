@@ -12,6 +12,7 @@ class Momotaro:
         self.external_forces = [0, 0]
         self.standing_on = None
         self.moving_direction = "idle"
+        self.momentum = 0.1
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -45,10 +46,18 @@ class Momotaro:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
-            self.velocity[0] += 10
+            self.velocity[0] += (5 + self.momentum)
+            if not self.moving_direction == "right":
+                self.momentum = 0.1
+            else:
+                self.momentum = self.momentum * 2
             self.moving_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
-            self.velocity[0] += -10
+            self.velocity[0] -= (5 + self.momentum)
+            if not self.moving_direction == "left":
+                self.momentum = 0.1
+            else:
+                self.momentum = self.momentum * 2
             self.moving_direction = "left"
         else:
             self.moving_direction = "idle"
@@ -56,6 +65,11 @@ class Momotaro:
             if self.standing:
                 self.velocity[1] = -23
                 self.standing = False
+
+        if self.momentum > 7:
+            self.momentum = 7
+
+        print("momentum:", self.momentum)
 
         self.position[0] += self.velocity[0]
         self.position[1] += self.velocity[1]
@@ -95,7 +109,9 @@ class Momotaro:
         self.position[1] = momotaro_rect.y
 
     def draw(self, surface):
-        animation_delay = 6
+        animation_delay = 6 - round(self.momentum / 4)
+        if animation_delay < 4:
+            animation_delay = 4
 
         index = round(float(self.frame_index) / float(animation_delay))
 
@@ -119,8 +135,6 @@ class Momotaro:
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
 
-<<<<<<< Updated upstream
-=======
     def check_collision_interactible(self, list_of_obstacles):
         for obstacle_type in list_of_obstacles.keys():
             match obstacle_type:
@@ -143,7 +157,6 @@ class Momotaro:
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
 
->>>>>>> Stashed changes
 
 
 
