@@ -109,7 +109,7 @@ class Momotaro:
         self.position[1] = momotaro_rect.y
 
     def draw(self, surface):
-        animation_delay = 6 - round(self.momentum / 4)
+        animation_delay = 6
         if animation_delay < 4:
             animation_delay = 4
 
