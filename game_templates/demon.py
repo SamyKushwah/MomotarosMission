@@ -1,7 +1,104 @@
 import pygame
+from math import dist
 
 
 class Demon:
+    def __init__(self, spawn_position, detection_range):
+        self.position = spawn_position
+        self.velocity = [0,0]
+        self.standing = False
+        self.hitbox = (70, 80)
+        self.gravity = 1.3
+        self.health = 100
+        self.detection_range = detection_range
+
+        self.idle_image = pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStanding.png"), self.hitbox)
+
+        self.right_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStand(Right).png"), self.hitbox),
+                                   pygame.transform.scale(pygame.image.load("images/DemonSprites/Demonlift(Right).png"), self.hitbox)]
+
+        self.left_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStand(Left).png"), self.hitbox),
+                                   pygame.transform.scale(pygame.image.load("images/DemonSprites/Demonlift(Left).png"), self.hitbox)]
+
+        self.frame_index = 0
+
+        self.active_image = 0
+
+    def update_movement(self, momo):
+        momo_pos = momo.position        # [300, 300]
+
+        if not self.standing:
+            self.velocity[1] += self.gravity
+
+        if dist(self.position, momo_pos) <= self.detection_range:
+            if (momo_pos[0] - self.position[0]) < 0:        # momo to the left of oni
+                self.velocity[0] = -6
+            else:       # momo to the right of the oni
+                self.velocity[0] = 6
+        else:
+            self.velocity[0] = 0
+
+        self.position[0] += self.velocity[0]
+        self.position[1] += self.velocity[1]
+
+    def check_collisions(self, collidables):
+        pixel_margin = 30
+        momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
+        self.standing = False
+        for collidable in collidables:
+            collidable_rect = collidable.get_rect()
+            if momotaro_rect.colliderect(collidable_rect):
+                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
+                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                        momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
+                    momotaro_rect.left = collidable_rect.right
+                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
+                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                        momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
+                    momotaro_rect.right = collidable_rect.left
+                elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
+                    momotaro_rect.top = collidable_rect.bottom
+                    self.velocity[1] = 0
+                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing:
+                    momotaro_rect.bottom = collidable_rect.top
+                    self.velocity[1] = 0
+                    self.standing = True
+                elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
+                    print("teleporting up!")
+                    momotaro_rect.bottom = collidable_rect.top
+                    self.velocity[1] = 0
+                    self.standing = True
+        self.position[0] = momotaro_rect.x
+        self.position[1] = momotaro_rect.y
+
+    def draw(self, surface):
+        animation_delay = 16
+
+        index = round(float(self.frame_index) / float(animation_delay))
+
+        if self.velocity[0] == 0:
+            self.active_image = self.idle_image
+        elif self.velocity[0] > 0:
+            self.active_image = self.right_mvmnt_frames[index]
+            self.frame_index += 1
+        elif self.velocity[0] < 0:
+            self.active_image = self.left_mvmnt_frames[index]
+            self.frame_index += 1
+
+        if self.frame_index == animation_delay:
+            self.frame_index = 0
+
+        surface.blit(self.active_image, self.position)
+
+    def get_rect(self):
+        return pygame.rect.Rect(self.position, self.hitbox)
+
+
+
+
+
+
+    '''
     def __init__(self, x, y, health, max_move):
         self.demon_image = pygame.image.load("images/DemonSprites/DemonStand(Left).png")
         self.__height = 100
@@ -99,5 +196,4 @@ class Demon:
         for index in range(len(self.left_mvmnt_frames)):
             frame = self.left_mvmnt_frames[index]
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
-                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
-
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))'''

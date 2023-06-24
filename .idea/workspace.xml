@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="logged today's work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_templates/controllable.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/controllable.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/game_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/demon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/level.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,8 @@
       <option name="presentableId" value="Default" />
       <updated>1687412548163</updated>
       <workItem from="1687412548396" duration="688000" />
-      <workItem from="1687413827729" duration="8449000" />
+      <workItem from="1687413827729" duration="8713000" />
+      <workItem from="1687591840728" duration="3361000" />
     </task>
     <task id="LOCAL-00001" summary="added attacking animation based on whichever side the demon is on">
       <created>1687414843843</created>
@@ -99,7 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687422649099</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added ruhi's poll_attack changes">
+      <created>1687423161674</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1687423161674</updated>
+    </task>
+    <task id="LOCAL-00009" summary="logged today's work">
+      <created>1687423399897</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687423399897</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,10 +128,12 @@
     <MESSAGE value="attacking now plays while idle, fixed demon collision rectangle" />
     <MESSAGE value="updated demon back and forth mvmnt" />
     <MESSAGE value="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen" />
+    <MESSAGE value="added ruhi's poll_attack changes" />
+    <MESSAGE value="logged today's work" />
+    <option name="LAST_COMMIT_MESSAGE" value="logged today's work" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687423112775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687593051724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
   </component>

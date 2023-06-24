@@ -41,6 +41,7 @@ class GameManager:
                 view_surface.blit(self.image, ((-self.momotaro.rect.centerx) + (1920 / 2), 0))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
+
             self.my_toolbox.clock.tick(60)
 
             if self.level.interactible_list["torigate"][0].is_pushed():
