@@ -55,6 +55,11 @@ class GameManager:
                             return return_st
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
+
+            for demon in self.level.demon_list:
+                demon.update_movement(self.momotaro)
+                demon.check_collisions(self.level.collidable_list)
+
             self.draw()
             view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.get_rect().centerx <= 960:
@@ -83,7 +88,7 @@ class GameManager:
             interactible.draw(self.image)
         for demon in self.level.demon_list:
             if demon.is_alive():
-                demon.movement(self.image, 2)
+                demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
         for coin in self.level.coin_list:
