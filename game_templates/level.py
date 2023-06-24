@@ -24,8 +24,8 @@ class Level:
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
-    def add_demon(self, x, y, health, movement):
-        temp_demon = demon.Demon(x, y, health, movement)
+    def add_demon(self, spawn_position, detection_range):
+        temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
         #print("adding rect:", temp_demon.get_rect())
 

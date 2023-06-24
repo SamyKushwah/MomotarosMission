@@ -1,6 +1,6 @@
 from scenes.levels import level_1A
 import pygame
-from game_templates import controllable
+from game_templates import controllable, momotaro
 import sys
 
 
@@ -31,6 +31,10 @@ class GameManager:
             self.momotaro.check_collision_demon(self.level.demon_list)
             self.momotaro.new_check_collision(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
+
+            for demon in self.level.demon_list:
+                demon.update_movement(self.momotaro)
+                demon.check_collisions(self.level.collidable_list)
             self.draw()
             view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.rect.centerx <= 960:
@@ -58,7 +62,7 @@ class GameManager:
                 interactible.draw(self.image)
         for demon in self.level.demon_list:
             if demon.is_alive():
-                demon.movement(self.image, 2)
+                demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
         for coin in self.level.coin_list:
