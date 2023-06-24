@@ -119,8 +119,7 @@ class Momotaro:
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
 
-<<<<<<< Updated upstream
-=======
+
     def check_collision_interactible(self, list_of_obstacles):
         for obstacle_type in list_of_obstacles.keys():
             match obstacle_type:
@@ -143,7 +142,7 @@ class Momotaro:
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
 
->>>>>>> Stashed changes
+
 
 
 
