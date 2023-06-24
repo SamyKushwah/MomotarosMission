@@ -53,9 +53,23 @@ class GameManager:
                         return_st = pause_screen_scene.run(self.my_toolbox)
                         if return_st == "level_selector" or return_st == "level_1":  # break out of running level
                             return return_st
+
+            for moving_platform in self.level.moving_platform_list:
+                moving_platform.movement()
+
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
+<<<<<<< Updated upstream
+=======
+            self.momotaro.check_collision_interactible(self.level.interactible_list)
+
+            for demon in self.level.demon_list:
+                demon.update_movement(self.momotaro)
+                demon.check_collisions(self.level.collidable_list)
+
+>>>>>>> Stashed changes
             self.draw()
+
             view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.get_rect().centerx <= 960:
                 view_surface.blit(self.image, (0, 0))
@@ -67,8 +81,17 @@ class GameManager:
             self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
+
+<<<<<<< Updated upstream
+=======
+            if self.level.interactible_list["torigate"][0].is_pushed():
+                return "level_complete"
+            elif self.momotaro.health <= 0:
+                return "game_over"
+
             self.my_toolbox.clock.tick(60)
 
+>>>>>>> Stashed changes
     def draw(self):
         self.image.fill((70, 70, 180))
         match self.level.background:
@@ -77,6 +100,7 @@ class GameManager:
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
+<<<<<<< Updated upstream
             platform.movement()
             platform.draw_platform(self.image)
         for interactible in self.level.interactible_list:
@@ -84,6 +108,15 @@ class GameManager:
         for demon in self.level.demon_list:
             if demon.is_alive():
                 demon.movement(self.image, 2)
+=======
+            platform.draw_platform(self.image)
+        for interactible_key in self.level.interactible_list.keys():
+            for interactible in self.level.interactible_list[interactible_key]:
+                interactible.draw(self.image)
+        for demon in self.level.demon_list:
+            if demon.health > 0:
+                demon.draw(self.image)
+>>>>>>> Stashed changes
             else:
                 self.level.demon_list.remove(demon)
         for coin in self.level.coin_list:

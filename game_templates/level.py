@@ -23,10 +23,10 @@ class Level:
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
-    def add_moving_platform(self, position, dimensions, movement_amount, platform_type="stone",
+    def add_moving_platform(self, position, dimensions, max_speed, target, platform_type="stone",
                             facing_direction="all",
                             corners=False):
-        temp_platform = MovingPlatform(position, dimensions, movement_amount, platform_type, facing_direction,
+        temp_platform = MovingPlatform(position, dimensions, max_speed, target, platform_type, facing_direction,
                                        corners)
         print("Adding platform", temp_platform.get_rect())
         self.moving_platform_list.append(temp_platform)
@@ -172,18 +172,29 @@ class MovingPlatform(Platform):
         self.__int_y = position[1]
         self.__moving_right = True
         self.max_speed = max_speed
+        self.initial = position[0]
         self.target = target
-        self.middle = int(float(target - position[0]) / 2.0)
+        self.middle = int(self.initial + ((target - self.initial) / 2.0))
+        print("middle:",self.middle)
 
     def movement(self):
-        if self.__moving_right:
-            speed = self.x
-        if self.x == self.__int_x - self.velocity[0]:
-            self.__moving_right = True
-        elif self.x == self.__int_x + self.velocity[0]:
-            self.__moving_right = False
-        if self.__moving_right:
-            self.x += 1
+        moved = (self.x - self.initial) + 1
+        moved_middle = self.middle - self.initial
+        moved_target = self.target - self.initial
+        if self.x < self.middle:
+            speed = ((moved / moved_middle) * self.max_speed) + 1
         else:
-            self.x -= 1
-        self.get_rect().update(self.get_rect())
+            speed = (1 - ((moved - moved_middle) / (moved_target - moved_middle))) * self.max_speed + 1
+        speed = round(speed)
+        if speed > self.max_speed:
+            speed = self.max_speed
+        if self.__moving_right:
+            self.x = self.x + speed
+            self.velocity[0] = speed
+        else:
+            self.x = self.x - speed
+            self.velocity[0] = -speed
+        if self.x > self.target:
+            self.__moving_right = False
+        elif self.x < self.initial:
+            self.__moving_right = True

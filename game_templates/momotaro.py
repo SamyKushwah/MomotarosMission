@@ -10,6 +10,8 @@ class Momotaro:
         self.health = 100
         self.attacking = False
         self.external_forces = [0, 0]
+        self.standing_on = None
+        self.moving_direction = "idle"
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -34,16 +36,22 @@ class Momotaro:
         if not self.standing:
             self.velocity[1] += self.gravity
 
+        if self.standing_on is not None:
+            self.external_forces[0] += round(self.standing_on.velocity[0])
+            self.external_forces[1] += round(self.standing_on.velocity[1])
+
         self.velocity[0] = 0
         self.velocity[0] += self.external_forces[0]
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             self.velocity[0] += 10
+            self.moving_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             self.velocity[0] += -10
+            self.moving_direction = "left"
         else:
-            self.velocity[0] += 0
+            self.moving_direction = "idle"
         if keys[pygame.K_w]:
             if self.standing:
                 self.velocity[1] = -23
@@ -71,31 +79,37 @@ class Momotaro:
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
-                    if collidable.velocity[0] > 0 or collidable.velocity[0] < 0:
-                        self.external_forces[0] = collidable.velocity[0]
+                    self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     print("teleporting up!")
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
+
+        if self.standing_on is not None:
+            test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1), (self.hitbox[0] + 10, self.hitbox[1] + 10))
+            if not test_rect.colliderect(self.standing_on.get_rect()):
+                self.standing_on = None
+
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
 
     def draw(self, surface):
-        animation_delay = 16
+        animation_delay = 6
 
         index = round(float(self.frame_index) / float(animation_delay))
 
-        if self.velocity[0] == 0:
-            self.active_image = self.idle_image
-        elif self.velocity[0] > 0:
-            self.active_image = self.right_mvmnt_frames[index]
-            if self.standing:
-                self.frame_index += 1
-        elif self.velocity[0] < 0:
-            self.active_image = self.left_mvmnt_frames[index]
-            if self.standing:
-                self.frame_index += 1
+        match self.moving_direction:
+            case "idle":
+                self.active_image = self.idle_image
+            case "right":
+                self.active_image = self.right_mvmnt_frames[index]
+                if self.standing:
+                    self.frame_index += 1
+            case "left":
+                self.active_image = self.left_mvmnt_frames[index]
+                if self.standing:
+                    self.frame_index += 1
 
         if self.frame_index == animation_delay:
             self.frame_index = 0
@@ -105,6 +119,31 @@ class Momotaro:
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
 
+<<<<<<< Updated upstream
+=======
+    def check_collision_interactible(self, list_of_obstacles):
+        for obstacle_type in list_of_obstacles.keys():
+            match obstacle_type:
+                case "button":
+                    pass
+                    for obstacle in list_of_obstacles[obstacle_type]:
+                        if self.get_rect().colliderect(obstacle.get_rect()):
+                            pass
+                # obstacle.set_pushed(True)
+                case "torigate":
+                    momo_center_x = self.get_rect().centerx
+                    momo_center_y = self.get_rect().centery
+
+                    obstacle = list_of_obstacles[obstacle_type][0]
+
+                    gate_center_x = obstacle.get_rect().centerx
+                    gate_center_y = obstacle.get_rect().centery
+
+                    margin = 20
+                    if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
+                        obstacle.set_pushed(True)
+
+>>>>>>> Stashed changes
 
 
 
