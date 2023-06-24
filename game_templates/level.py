@@ -181,30 +181,66 @@ class MovingPlatform(Platform):
         self.__int_x = position[0]
         self.__int_y = position[1]
         self.__moving_right = True
+        self.__moving_down = True
         self.max_speed = max_speed
-        self.initial = position[0]
+        self.initial = position
         self.target = target
-        self.middle = int(self.initial + ((target - self.initial) / 2.0))
-        print("middle:",self.middle)
+        self.middle = [0, 0]
+        self.middle[0] = int(self.initial[0] + ((target[0] - self.initial[0]) / 2.0))
+        self.middle[1] = int(self.initial[1] + ((target[1] - self.initial[1]) / 2.0))
+        print("middle:",self.middle[0])
 
     def movement(self):
-        moved = (self.x - self.initial) + 1
-        moved_middle = self.middle - self.initial
-        moved_target = self.target - self.initial
-        if self.x < self.middle:
-            speed = ((moved / moved_middle) * self.max_speed) + 1
-        else:
-            speed = (1 - ((moved - moved_middle) / (moved_target - moved_middle))) * self.max_speed + 1
-        speed = round(speed)
-        if speed > self.max_speed:
-            speed = self.max_speed
-        if self.__moving_right:
-            self.x = self.x + speed
-            self.velocity[0] = speed
-        else:
-            self.x = self.x - speed
-            self.velocity[0] = -speed
-        if self.x > self.target:
-            self.__moving_right = False
-        elif self.x < self.initial:
-            self.__moving_right = True
+        moved = [0, 0]
+        moved_middle = [0, 0]
+        moved_target = [0, 0]
+        speed = [0, 0]
+        moved[0] = (self.x - self.initial[0]) + 1
+        moved[1] = (self.y - self.initial[1]) + 1
+        moved_middle[0] = self.middle[0] - self.initial[0]
+        moved_middle[1] = self.middle[1] - self.initial[1]
+        moved_target[0] = self.target[0] - self.initial[0]
+        moved_target[1] = self.target[1] - self.initial[1]
+
+        if self.target[0] != self.initial[0]:
+            if self.x < self.middle[0]:
+                speed[0] = ((moved[0] / moved_middle[0]) * self.max_speed) + 1
+            else:
+                speed[0] = (1 - ((moved[0] - moved_middle[0]) / (moved_target[0] - moved_middle[0]))) * self.max_speed + 1
+            speed[0] = round(speed[0])
+            if speed[0] > self.max_speed:
+                speed[0] = self.max_speed
+            if self.__moving_right:
+                self.x = self.x + speed[0]
+                self.velocity[0] = speed[0]
+            else:
+                self.x = self.x - speed[0]
+                self.velocity[0] = -speed[0]
+            if self.x > self.target[0]:
+                self.__moving_right = False
+            elif self.x < self.initial[0]:
+                self.__moving_right = True
+            last = self.y
+            x_progress = moved[0] / moved_target[0]
+            self.y = self.initial[1] + (moved_target[1] * x_progress)
+            self.velocity[1] = self.y - last
+        elif self.target[1] != self.initial[1]:
+            if self.y < self.middle[1]:
+                speed[1] = ((moved[1] / moved_middle[1]) * self.max_speed) + 1
+            else:
+                speed[1] = (1 - ((moved[1] - moved_middle[1]) / (moved_target[1] - moved_middle[1]))) * self.max_speed + 1
+            speed[1] = round(speed[1])
+            if speed[1] > self.max_speed:
+                speed[1] = self.max_speed
+            if self.__moving_down:
+                self.y = self.y + speed[1]
+                self.velocity[1] = speed[1]
+            else:
+                self.y = self.y - speed[1]
+                self.velocity[1] = -speed[1]
+            if self.y > self.target[1]:
+                self.__moving_down = False
+            elif self.y < self.initial[1]:
+                self.__moving_down = True
+
+        #print("moved[1]:", moved[1], "moved_middle[1]", moved_middle[1], "moved_target[1}", moved_target[1], "speed[1]", speed[1], "self.y:", self.y)

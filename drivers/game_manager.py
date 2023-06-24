@@ -24,6 +24,10 @@ class GameManager:
         pause_img = pygame.transform.scale(pause_img, (90, 70))
         self.pause_btn = button.Button(pause_img)
 
+        self.mountain_background = pygame.transform.scale(
+            pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg.png"), (1920, 1080))
+        self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains.png")
+
     def run(self):
         # run event handling for the level until lvl_complete == True
         while not self.level_complete:
@@ -61,13 +65,16 @@ class GameManager:
             self.momotaro.check_collisions(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
 
+            self.momotaro.check_attacking(self.level.demon_list)
+
             for demon in self.level.demon_list:
                 demon.update_movement(self.momotaro)
                 demon.check_collisions(self.level.collidable_list)
 
+            view_surface = pygame.surface.Surface((1920, 1080))
+
             self.draw()
 
-            view_surface = pygame.surface.Surface((1920, 1080))
             if self.momotaro.get_rect().centerx <= 960:
                 view_surface.blit(self.image, (0, 0))
             elif self.momotaro.get_rect().centerx >= self.level.width - 960:
@@ -80,9 +87,13 @@ class GameManager:
             pygame.display.update()
 
             if self.level.interactible_list["torigate"][0].is_pushed():
-                return "level_complete"
+                win_return = win_screen_scene.run(self.my_toolbox)
+                if win_return == "level_selector" or win_return == "level_1":
+                    return win_return
             elif self.momotaro.health <= 0:
-                return "game_over"
+                lose_rt = lose_screen_scene.run(self.my_toolbox)
+                if lose_rt == "level_selector" or lose_rt == "level_1":
+                    return lose_rt
 
             self.my_toolbox.clock.tick(60)
 
@@ -91,6 +102,18 @@ class GameManager:
         match self.level.background:
             case "cave":
                 self.image.fill((20,20,30))
+            case "mountains":
+                positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200)
+                positional2 = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 30)
+                # Main Background
+                self.image.blit(self.mountain_background, (-1920 + positional, 0))
+                self.image.blit(self.mountain_background, (positional, 0))
+                #self.image.blit(self.mountain_background, (1920 + positional, 0))
+
+                # Far Mountains
+                self.image.blit(self.far_mountains, (-1920 + positional2, 500))
+                self.image.blit(self.far_mountains, (positional2, 500))
+                self.image.blit(self.far_mountains, (1920 + positional2, 500))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
