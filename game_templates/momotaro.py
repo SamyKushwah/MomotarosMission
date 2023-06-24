@@ -105,6 +105,41 @@ class Momotaro:
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
 
+    def check_collision_interactible(self, list_of_obstacles):
+        for obstacle_type in list_of_obstacles.keys():
+            match obstacle_type:
+                case "button":
+                    pass
+                    for obstacle in list_of_obstacles[obstacle_type]:
+                        if self.get_rect().colliderect(obstacle.get_rect()):
+                            pass
+                # obstacle.set_pushed(True)
+                case "torigate":
+                    momo_center_x = self.get_rect().centerx
+                    momo_center_y = self.get_rect().centery
+
+                    obstacle = list_of_obstacles[obstacle_type][0]
+
+                    gate_center_x = obstacle.get_rect().centerx
+                    gate_center_y = obstacle.get_rect().centery
+
+                    margin = 20
+                    if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
+                        obstacle.set_pushed(True)
+
+    def check_collision_demon(self, list_of_demons):
+        momo_attack_damage = 100
+
+        demon_attack_damage = 10
+
+        for demon in list_of_demons:
+            if self.get_rect().colliderect(demon.get_rect()):
+                if self.attacking:
+                    demon.health -= momo_attack_damage
+
+                else:
+                    self.health -= demon_attack_damage
+
 
 
 

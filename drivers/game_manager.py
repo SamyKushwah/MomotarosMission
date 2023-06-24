@@ -11,7 +11,6 @@ class GameManager:
         self.my_toolbox = my_toolbox
         self.level_complete = False
         self.momotaro = momotaro.Momotaro([300,300])
-        self.momotaro.sprites_init()
         self.coins_collected = 0
         match level:
             case "level_1A":
@@ -74,6 +73,11 @@ class GameManager:
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
             self.my_toolbox.clock.tick(60)
+
+            if self.level.interactible_list["torigate"][0].is_pushed():
+                return "level_complete"
+            elif self.momotaro.health <= 0:
+                return "game_over"
 
     def draw(self):
         self.image.fill((70, 70, 180))
