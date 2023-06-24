@@ -10,7 +10,8 @@ class GameManager:
     def __init__(self, my_toolbox, level):
         self.my_toolbox = my_toolbox
         self.level_complete = False
-        self.momotaro = momotaro.Momotaro([300, 300])
+        self.momotaro = momotaro.Momotaro([300,300])
+        self.momotaro.sprites_init()
         self.coins_collected = 0
         match level:
             case "level_1A":
@@ -81,11 +82,9 @@ class GameManager:
                 self.image.fill((20,20,30))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
-        for platform in self.level.moving_platform_list:
-            platform.movement()
-            platform.draw_platform(self.image)
-        for interactible in self.level.interactible_list:
-            interactible.draw(self.image)
+        for interactible_key in self.level.interactible_list.keys():
+            for interactible in self.level.interactible_list[interactible_key]:
+                interactible.draw(self.image)
         for demon in self.level.demon_list:
             if demon.is_alive():
                 demon.draw(self.image)
