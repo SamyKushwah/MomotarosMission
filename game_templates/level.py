@@ -3,7 +3,7 @@ import sys
 import math
 import os
 
-from game_templates import demon, button_obstacle, controllable
+from game_templates import demon, button_obstacle, momotaro
 
 
 class Level:

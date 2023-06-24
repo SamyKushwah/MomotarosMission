@@ -1,6 +1,6 @@
 from scenes.levels import level_1A
 import pygame
-from game_templates import controllable, momotaro
+from game_templates import momotaro
 import sys
 
 
@@ -8,7 +8,7 @@ class GameManager:
     def __init__(self, my_toolbox, level):
         self.my_toolbox = my_toolbox
         self.level_complete = False
-        self.momotaro = controllable.Momotaro()
+        self.momotaro = momotaro.Momotaro()
         self.momotaro.sprites_init()
         self.coins_collected = 0
         match level:
