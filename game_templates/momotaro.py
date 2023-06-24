@@ -5,10 +5,11 @@ class Momotaro:
         self.position = spawn_position
         self.velocity = [0, 0]
         self.standing = False
-        self.hitbox = (60, 70)
+        self.hitbox = (50, 70)
         self.gravity = 1.3
         self.health = 100
         self.attacking = False
+        self.external_forces = [0, 0]
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -17,7 +18,7 @@ class Momotaro:
 
         self.frame_index = 0
 
-        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png"), (60, 70))
+        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png"), (40, 70))
 
         self.right_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"), (60, 70)),
                                    pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png"), (60, 70))]
@@ -33,13 +34,16 @@ class Momotaro:
         if not self.standing:
             self.velocity[1] += self.gravity
 
+        self.velocity[0] = 0
+        self.velocity[0] += self.external_forces[0]
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
-            self.velocity[0] = 10
+            self.velocity[0] += 10
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
-            self.velocity[0] = -10
+            self.velocity[0] += -10
         else:
-            self.velocity[0] = 0
+            self.velocity[0] += 0
         if keys[pygame.K_w]:
             if self.standing:
                 self.velocity[1] = -23
@@ -52,20 +56,23 @@ class Momotaro:
         pixel_margin = 30
         momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
         self.standing = False
+        self.external_forces = [0, 0]
         for collidable in collidables:
             collidable_rect = collidable.get_rect()
             if momotaro_rect.colliderect(collidable_rect):
-                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not (abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin):
+                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
                     momotaro_rect.left = collidable_rect.right
-                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
+                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin   :
                     momotaro_rect.right = collidable_rect.left
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
                     momotaro_rect.top = collidable_rect.bottom
                     self.velocity[1] = 0
-                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing:
+                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and self.velocity[1] >= 0:
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
+                    if collidable.velocity[0] > 0 or collidable.velocity[0] < 0:
+                        self.external_forces[0] = collidable.velocity[0]
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     print("teleporting up!")
                     momotaro_rect.bottom = collidable_rect.top
@@ -83,10 +90,12 @@ class Momotaro:
             self.active_image = self.idle_image
         elif self.velocity[0] > 0:
             self.active_image = self.right_mvmnt_frames[index]
-            self.frame_index += 1
+            if self.standing:
+                self.frame_index += 1
         elif self.velocity[0] < 0:
             self.active_image = self.left_mvmnt_frames[index]
-            self.frame_index += 1
+            if self.standing:
+                self.frame_index += 1
 
         if self.frame_index == animation_delay:
             self.frame_index = 0
