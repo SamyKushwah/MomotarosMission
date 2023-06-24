@@ -59,13 +59,11 @@ class GameManager:
 
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
-
             self.momotaro.check_collision_interactible(self.level.interactible_list)
 
             for demon in self.level.demon_list:
                 demon.update_movement(self.momotaro)
                 demon.check_collisions(self.level.collidable_list)
-
 
             self.draw()
 
@@ -96,7 +94,6 @@ class GameManager:
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
-            platform.movement()
             platform.draw_platform(self.image)
         for interactible_key in self.level.interactible_list.keys():
             for interactible in self.level.interactible_list[interactible_key]:
@@ -104,7 +101,6 @@ class GameManager:
         for demon in self.level.demon_list:
             if demon.health > 0:
                 demon.draw(self.image)
-
             else:
                 self.level.demon_list.remove(demon)
         for coin in self.level.coin_list:

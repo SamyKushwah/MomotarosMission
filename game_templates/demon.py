@@ -1,8 +1,8 @@
 import pygame
 from math import dist
 
-class Demon:
 
+class Demon:
     def __init__(self, spawn_position, detection_range):
         self.position = spawn_position
         self.velocity = [0,0]
@@ -99,7 +99,6 @@ class Demon:
 
 
     '''
->>>>>>> Stashed changes
     def __init__(self, x, y, health, max_move):
         self.demon_image = pygame.image.load("images/DemonSprites/DemonStand(Left).png")
         self.__height = 100
@@ -130,9 +129,9 @@ class Demon:
 
     def movement(self, screen, movement):
         if self.__health > 0 and self.__alive:
-            if self.__demon_rect.x == self.__int_x - self.__max_move:
+            if self.__demon_rect.x < self.__int_x - self.__max_move:
                 self.__moving_right = True
-            elif self.__demon_rect.x == self.__int_x + self.__max_move:
+            elif self.__demon_rect.x > self.__int_x + self.__max_move:
                 self.__moving_right = False
             if self.__moving_right:
                 self.__demon_rect.x += 1
@@ -183,9 +182,9 @@ class Demon:
                                    pygame.image.load(
                                        "images/DemonSprites/Demonlift(Right).png")]
 
-        self.rect = pygame.Rect(self.__int_x, self.__int_y, self.right_mvmnt_frames[0].get_width(),
+        self.__demon_rect = pygame.Rect(self.__int_x, self.__int_y, self.right_mvmnt_frames[0].get_width(),
                                 self.right_mvmnt_frames[0].get_height())
-        self.rect.scale_by_ip(self.scale_factor, self.scale_factor)
+        self.__demon_rect.scale_by_ip(self.scale_factor, self.scale_factor)
 
         # Scale the images
 
@@ -198,4 +197,3 @@ class Demon:
             frame = self.left_mvmnt_frames[index]
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
                 int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))'''
-
