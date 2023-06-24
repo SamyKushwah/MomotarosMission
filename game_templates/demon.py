@@ -1,9 +1,8 @@
 import pygame
-
+from math import dist
 
 class Demon:
-<<<<<<< Updated upstream
-=======
+
     def __init__(self, spawn_position, detection_range):
         self.position = spawn_position
         self.velocity = [0,0]
@@ -198,5 +197,5 @@ class Demon:
         for index in range(len(self.left_mvmnt_frames)):
             frame = self.left_mvmnt_frames[index]
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
-                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
+                int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))'''
 
