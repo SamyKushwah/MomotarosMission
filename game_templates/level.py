@@ -18,6 +18,7 @@ class Level:
         self.interactible_list = []
         self.coin_list = []
         self.demon_list = []
+        self.header = Header()
 
     def add_platform(self, position, dimensions, platform_type="stone", facing_direction="all", corners=False):
         temp_platform = Platform(position, dimensions, platform_type, facing_direction, corners)
@@ -42,7 +43,6 @@ class Level:
             case "button":
                 temp_obstacle = button_obstacle.ButtonObstacle(x, y)
                 self.interactible_list.append(temp_obstacle)
-
 
 class Platform:
     def __init__(self, position, dimensions, platform_type="stone", facing_direction="all", corners=False):
@@ -181,3 +181,24 @@ class MovingPlatform(Platform):
         else:
             self.x -= 1
         self.get_rect().update(self.get_rect())
+
+class Header:
+    def __init__(self):
+        # load the images
+        self.health_front = pygame.image.load("images/HealthBarFront.png")
+        self.health_back = pygame.image.load("images/HealthBarBack.png")
+        self.header = pygame.image.load("images/header.png")
+    def draw_header(self, surface):
+        # scale images
+        self.health_front = pygame.transform.scale(self.health_front, (225, 30))
+        self.health_back = pygame.transform.scale(self.health_back, (300, 65))
+        self.header = pygame.transform.scale(self.header, (1600, 100))
+
+        surface.blit(self.header, (150, 0))
+        surface.blit(self.health_back, (300, 10))
+        surface.blit(self.health_front, (358.5, 27))
+
+
+
+
+

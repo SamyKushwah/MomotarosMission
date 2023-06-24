@@ -39,6 +39,7 @@ class GameManager:
                 view_surface.blit(self.image, (-(self.level.width - 1920), 0))
             else:
                 view_surface.blit(self.image, ((-self.momotaro.rect.centerx) + (1920 / 2), 0))
+            self.level.header.draw_header(view_surface)
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
             self.my_toolbox.clock.tick(60)
@@ -58,6 +59,6 @@ class GameManager:
             else:
                 self.level.demon_list.remove(demon)
         for coin in self.level.coin_list:
-            pygame.draw.rect(self.image, (0,200,0), coin.get_rect())
+            pygame.draw.rect(self.image, (0, 200 ,0), coin.get_rect())
 
         self.momotaro.draw_sprite(self.image)
