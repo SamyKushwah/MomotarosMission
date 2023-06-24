@@ -1,59 +1,56 @@
 import pygame
-import sys
 import math
-import os
 
-from game_templates import demon, button_obstacle, momotaro
+from game_templates import demon, button_obstacle
 
 
 class Level:
-    def __init__(self, my_toolbox, level_num, level_width, level_height):
+    def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
         self.width = level_width
         self.height = level_height
         self.level_num = level_num
 
         self.collidable_list = []
         self.platform_list = []
-        self.interactible_list = {}
+        self.moving_platform_list = []
+        self.interactible_list = []
         self.coin_list = []
         self.demon_list = []
+        self.background = background
 
-    def add_platform(self, platform_type, position, dimensions, facing_direction="all", corners=False):
-        temp_platform = Platform(platform_type, position, dimensions, facing_direction, corners)
-        #print("Adding platform", temp_platform.get_rect())
+    def add_platform(self, position, dimensions, platform_type = "stone", facing_direction="all", corners=False):
+        temp_platform = Platform(platform_type = platform_type, position = position, dimensions = dimensions, facing_direction = facing_direction, corners = corners)
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
-    def add_demon(self, spawn_position, detection_range):
-        temp_demon = demon.Demon(spawn_position, detection_range)
+    def add_moving_platform(self, position, dimensions, movement_amount, platform_type="stone",
+                            facing_direction="all",
+                            corners=False):
+        temp_platform = MovingPlatform(position, dimensions, movement_amount, platform_type, facing_direction,
+                                       corners)
+        print("Adding platform", temp_platform.get_rect())
+        self.moving_platform_list.append(temp_platform)
+        self.collidable_list.append(temp_platform)
+
+    def add_demon(self, x, y, health, movement):
+        temp_demon = demon.Demon(x, y, health, movement)
         self.demon_list.append(temp_demon)
-        #print("adding rect:", temp_demon.get_rect())
 
     def add_obstacle(self, x, y, type):
         match type:
             case "button":
                 temp_obstacle = button_obstacle.ButtonObstacle(x, y)
-                try:
-                    self.interactible_list["button"]+=[temp_obstacle]
-                except KeyError:
-                    self.interactible_list["button"] =[temp_obstacle]
-
-            case "torigate":
-                temp_obs = button_obstacle.ToriObstacle(x,y)
-                try:
-                    self.interactible_list["torigate"]+=[temp_obs]
-                except KeyError:
-                    self.interactible_list["torigate"] =[temp_obs]
-
+                self.interactible_list.append(temp_obstacle)
 
 
 class Platform:
-    def __init__(self, platform_type, position, dimensions, facing_direction="all", corners=False):
+    def __init__(self, position, dimensions, platform_type, facing_direction, corners=False):
         self.width = dimensions[0]
         self.height = dimensions[1]
         self.x = position[0]
         self.y = position[1]
         self.image = pygame.surface.Surface(dimensions)
+        self.velocity = [0, 0]
         match platform_type:
             case "stone":
                 BL = pygame.image.load("images/tiles/stone/Stone(MM).png")
@@ -109,6 +106,17 @@ class Platform:
                             BR = pygame.image.load("images/tiles/stone/Stone(MR).png")
                             TR = pygame.image.load("images/tiles/stone/Stone(MR).png")
 
+            case "water":
+                BL = pygame.image.load("images/tiles/watertile.png")
+                BM = pygame.image.load("images/tiles/watertile.png")
+                BR = pygame.image.load("images/tiles/watertile.png")
+                ML = pygame.image.load("images/tiles/watertile.png")
+                MM = pygame.image.load("images/tiles/watertile.png")
+                MR = pygame.image.load("images/tiles/watertile.png")
+                TL = pygame.image.load("images/tiles/watertile.png")
+                TM = pygame.image.load("images/tiles/watertile.png")
+                TR = pygame.image.load("images/tiles/watertile.png")
+
         BL = pygame.transform.scale(BL, (70, 70))
         BM = pygame.transform.scale(BM, (70, 70))
         BR = pygame.transform.scale(BR, (70, 70))
@@ -141,16 +149,41 @@ class Platform:
                 else:
                     self.image.blit(MM, (tile_width * column, tile_height * row))
 
-        for column in range(0, tiles_wide):
-            if column == 0:
-                self.image.blit(BL, (tile_width * column, self.height - tile_height))
-            elif column == tiles_wide - 1:
-                self.image.blit(BR, (self.width - tile_width, self.height - tile_height))
-            else:
-                self.image.blit(BM, (tile_width * column, self.height - tile_height))
+        if tiles_high > 1:
+            for column in range(0, tiles_wide):
+                if column == 0:
+                    self.image.blit(BL, (tile_width * column, self.height - tile_height))
+                elif column == tiles_wide - 1:
+                    self.image.blit(BR, (self.width - tile_width, self.height - tile_height))
+                else:
+                    self.image.blit(BM, (tile_width * column, self.height - tile_height))
 
     def get_rect(self):
         return pygame.rect.Rect((self.x, self.y), (self.width, self.height))
 
     def draw_platform(self, surface):
         surface.blit(self.image, (self.x, self.y))
+
+
+class MovingPlatform(Platform):
+    def __init__(self, position, dimensions, max_speed, target, platform_type, facing_direction="all", corners=False):
+        super().__init__(position, dimensions, platform_type, facing_direction, corners)
+        self.__int_x = position[0]
+        self.__int_y = position[1]
+        self.__moving_right = True
+        self.max_speed = max_speed
+        self.target = target
+        self.middle = int(float(target - position[0]) / 2.0)
+
+    def movement(self):
+        if self.__moving_right:
+            speed = self.x
+        if self.x == self.__int_x - self.velocity[0]:
+            self.__moving_right = True
+        elif self.x == self.__int_x + self.velocity[0]:
+            self.__moving_right = False
+        if self.__moving_right:
+            self.x += 1
+        else:
+            self.x -= 1
+        self.get_rect().update(self.get_rect())

@@ -5,10 +5,11 @@ class Momotaro:
         self.position = spawn_position
         self.velocity = [0, 0]
         self.standing = False
-        self.hitbox = (60, 70)
+        self.hitbox = (50, 70)
         self.gravity = 1.3
         self.health = 100
         self.attacking = False
+        self.external_forces = [0, 0]
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -33,13 +34,16 @@ class Momotaro:
         if not self.standing:
             self.velocity[1] += self.gravity
 
+        self.velocity[0] = 0
+        self.velocity[0] += self.external_forces[0]
+
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
-            self.velocity[0] = 10
+            self.velocity[0] += 10
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
-            self.velocity[0] = -10
+            self.velocity[0] += -10
         else:
-            self.velocity[0] = 0
+            self.velocity[0] += 0
         if keys[pygame.K_w]:
             if self.standing:
                 self.velocity[1] = -23
@@ -52,6 +56,7 @@ class Momotaro:
         pixel_margin = 30
         momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
         self.standing = False
+        self.external_forces = [0, 0]
         for collidable in collidables:
             collidable_rect = collidable.get_rect()
             if momotaro_rect.colliderect(collidable_rect):
@@ -62,10 +67,12 @@ class Momotaro:
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
                     momotaro_rect.top = collidable_rect.bottom
                     self.velocity[1] = 0
-                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing:
+                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and self.velocity[1] >= 0:
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
+                    if collidable.velocity[0] > 0 or collidable.velocity[0] < 0:
+                        self.external_forces[0] = collidable.velocity[0]
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     print("teleporting up!")
                     momotaro_rect.bottom = collidable_rect.top
