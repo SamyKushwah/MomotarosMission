@@ -95,12 +95,12 @@ class Demon:
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     if self.velocity[1] > 0:
-                        print("Clipping Warning! Teleporting up!")
+                        #print("Clipping Warning! Teleporting up!")
                         momotaro_rect.bottom = collidable_rect.top
                         self.velocity[1] = 0
                         self.standing = True
                     else:
-                        print("Clipping Warning! Teleporting down!")
+                        #print("Clipping Warning! Teleporting down!")
                         momotaro_rect.top = collidable_rect.bottom
                         self.velocity[1] = 5
 

@@ -27,7 +27,7 @@ class Level:
                             corners=False):
         temp_platform = MovingPlatform(position, dimensions, max_speed, target, platform_type, facing_direction,
                                        corners)
-        print("Adding platform", temp_platform.get_rect())
+        #print("Adding platform", temp_platform.get_rect())
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -204,7 +204,7 @@ class MovingPlatform(Platform):
         self.initial = position
         self.target = target
         self.middle = [(self.initial[0] + self.target[0]) // 2, (self.initial[1] + self.target[1]) // 2]
-        print("middle:", self.middle[0])
+        #print("middle:", self.middle[0])
 
     def movement(self):
         moved = [self.x - self.initial[0] + 1, self.y - self.initial[1] + 1]

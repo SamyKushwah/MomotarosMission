@@ -151,12 +151,12 @@ class Momotaro:
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     if self.velocity[1] > 0:
-                        print("Clipping Warning! Teleporting up!")
+                        #print("Clipping Warning! Teleporting up!")
                         momotaro_rect.bottom = collidable_rect.top
                         self.velocity[1] = 0
                         self.standing = True
                     else:
-                        print("Clipping Warning! Teleporting down!")
+                        #print("Clipping Warning! Teleporting down!")
                         momotaro_rect.top = collidable_rect.bottom
                         self.velocity[1] = 5
 
@@ -255,7 +255,7 @@ class Momotaro:
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
                             coin.collected = True
-                            print('coin collected')
+                            #print('coin collected')
                             obj.coins_collected += 1
 
                 #case "fence":

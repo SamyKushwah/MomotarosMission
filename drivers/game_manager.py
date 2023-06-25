@@ -45,14 +45,14 @@ class GameManager:
                             self.my_toolbox.adjusted_mouse_pos(event.pos)):  # if clicked pause button
                         return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            print('restarting')
+                            #print('restarting')
                             return return_st
                         # in the fututre, should return someething like
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            print('restarting')
+                            #print('restarting')
                             return return_st
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name)
@@ -76,7 +76,7 @@ class GameManager:
         self.momotaro.check_collision_interactible(self.level.interactible_list, self)
         self.momotaro.check_damage(self.level.demon_list)
         self.momotaro.check_attacking(self.level.demon_list)
-        print(self.momotaro.position)
+        #print(self.momotaro.position)
         for demon in self.level.demon_list:
             demon.update_movement(self.momotaro)
             demon.check_collisions(self.level.collidable_list)
