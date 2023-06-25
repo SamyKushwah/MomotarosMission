@@ -212,10 +212,15 @@ class Momotaro(Controllable):
 
     def check_collision_interactible(self, list_of_obstacles):
         for obstacle in list_of_obstacles:
-            if self.rect.colliderect(obstacle.get_rect()):
-                match obstacle.type:
-                    case "button":
+            match obstacle.type:
+                case "button":
+                    if self.rect.colliderect(obstacle.get_rect()):
+                        print("hello")
                         obstacle.set_pushed(True)
+                    else:
+                        print("bye")
+                        obstacle.set_pushed(False)
+
 
     def poll_attack(self, event):
         timer = pygame.USEREVENT + 1

@@ -42,10 +42,10 @@ class Level:
         self.moving_platform_list.append(temp_boat)
         self.collidable_list.append(temp_boat)
 
-    def add_obstacle(self, x, y, type):
+    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None):
         match type:
             case "button":
-                temp_obstacle = button_obstacle.ButtonObstacle(x, y)
+                temp_obstacle = button_obstacle.ButtonObstacle((x,y), fence_initial, fence_final)
                 self.interactible_list.append(temp_obstacle)
 
 
