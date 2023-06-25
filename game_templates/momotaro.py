@@ -264,5 +264,4 @@ class Momotaro:
                     else:
                         self.velocity[0] += -5
                         self.velocity[1] += -10
-            #self.damage_timer = 0
             self.damage_timer = time.time()
