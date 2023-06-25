@@ -7,7 +7,7 @@ class Demon:
         self.position = spawn_position
         self.velocity = [0,0]
         self.standing = False
-        self.hitbox = (70, 80)
+        self.hitbox = (60, 80)
         self.gravity = 1.3
         self.health = 100
         self.detection_range = detection_range
@@ -19,9 +19,7 @@ class Demon:
 
         self.left_mvmnt_frames = [pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStand(Left).png"), (45, 100)),
                                    pygame.transform.scale(pygame.image.load("images/DemonSprites/Demonlift(Left).png"), (70, 100))]
-
         self.frame_index = 0
-
         self.active_image = 0
 
     def update_movement(self, momo):
@@ -92,9 +90,6 @@ class Demon:
 
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
-
-
-
 
 
 

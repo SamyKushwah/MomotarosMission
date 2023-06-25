@@ -19,6 +19,8 @@ class Momotaro:
         self.attacking = False  # True if attack button is released
         self.attack_power = 0  # 0 - 1 decimal
         self.attack_damage = 100
+        self.iframes = 10
+
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -50,6 +52,9 @@ class Momotaro:
             pygame.image.load("images/MomotaroSprites/MomoStandingSide(Left).png"), (60, 70))
         self.charging_right_image = pygame.transform.scale(
             pygame.image.load("images/MomotaroSprites/MomoStandSide(Right).png"), (60, 70))
+
+        self.hurt_left_image = pygame.transform.rotate(self.right_mvmnt_frames[0], 45)
+        self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
         self.swing_size = (400, 50)
 
@@ -220,6 +225,11 @@ class Momotaro:
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
 
+                case "coin":
+                    for coin in list_of_obstacles[obstacle_type]:
+                        if self.get_rect().colliderect(coin.get_rect()):
+                            coin.collected = True
+
     def check_attacking(self, demon_list):
         if self.charging:
             if self.attack_power >= 1:
@@ -230,8 +240,6 @@ class Momotaro:
         if self.attacking:
             sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))
             self.active_sweep_image = pygame.transform.scale(self.attack_swing_image, sweep_size)
-            # print("sweep size: ", self.active_sweep_image.get_size())
-            print("attack power/damage: ", self.attack_damage * self.attack_power)
 
             attack_rect_right = pygame.rect.Rect((self.get_rect().right, self.get_rect().top + 30), sweep_size)
             attack_rect_left = pygame.rect.Rect(
@@ -249,15 +257,18 @@ class Momotaro:
             self.attack_power = 0
 
     def check_damage(self, demon_list):
-        for demon in demon_list:
-            if self.get_rect().colliderect(demon.get_rect()):
-                print('ouch')
-                self.health -= 5
-                momotaro_rect = self.get_rect()
-                collidable_rect = demon.get_rect()
-                if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
-                    self.velocity[0] += 5
-                    self.velocity[1] += -10
-                else:
-                    self.velocity[0] += -5
-                    self.velocity[1] += -10
+        if self.iframes <= 0:
+            for demon in demon_list:
+                if self.get_rect().colliderect(demon.get_rect()):
+                    self.health -= 5
+                    momotaro_rect = self.get_rect()
+                    collidable_rect = demon.get_rect()
+                    self.iframes = 20
+                    if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
+                        self.velocity[0] += 6
+                        self.velocity[1] += -12
+                    else:
+                        self.velocity[0] += -6
+                        self.velocity[1] += -12
+        else:
+            self.iframes -= 1

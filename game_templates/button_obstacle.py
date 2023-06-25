@@ -3,7 +3,7 @@ import pygame
 class Obstacle:
     def __init__(self, x, y):
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png")
-        self.scale_factor = 0.5
+        self.scale_factor = 1
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)
         self.__int_x = x
@@ -33,7 +33,7 @@ class ToriObstacle(Obstacle):
     def __init__(self, x, y):
         super().__init__(x, y)
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate.png")
-        self.scale_factor = 0.5
+        self.scale_factor = 1
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)
         self.__button_rect = self.button_image.get_rect(x=x, y=y)
@@ -41,3 +41,16 @@ class ToriObstacle(Obstacle):
         # 'Pushed' for gate means activated -> ending level
         self.pushed = False
         self.type = "torigate"
+
+class CoinObstacle(Obstacle):
+    def __init__(self, x, y):
+        super().__init__(x, y)
+        self.button_image = pygame.image.load("images/level_select_scene_UI/gold_coin.png")
+        self.scale_factor = 1
+        self.__width = int(self.button_image.get_width() * self.scale_factor)
+        self.__height = int(self.button_image.get_height() * self.scale_factor)
+        self.__button_rect = self.button_image.get_rect(x=x, y=y)
+
+        # 'collected' for coin means activated -> collected
+        self.collected = False
+        self.type = "coin"
