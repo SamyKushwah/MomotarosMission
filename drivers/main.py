@@ -4,12 +4,10 @@ import os
 import toolbox
 import game_manager
 from scenes import level_select_scene, title_menu_scene
-
+os.chdir("../")
 my_toolbox = toolbox.Toolbox()
 
 next_state = "title_menu"
-
-os.chdir("/mnt/c/Users/karen/OneDrive/Documents/GitHub/MomotarosMission")
 
 # driver loop
 running = True

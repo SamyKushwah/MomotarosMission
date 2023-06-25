@@ -112,7 +112,7 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
-        self.health = 100
+        self.health = 1000
         self.idle_image = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
 
         self.right_mvmnt_frames = [pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"),
@@ -186,11 +186,13 @@ class Momotaro(Controllable):
                 screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
 
-    def take_damage(self,damage):
+    def take_damage(self, damage):
         self.health -= damage
+        if self.health < 0:
+            self.health = 0
 
     def check_collision_demon(self, list_of_demons):
-        damage = 100
+        damage = 5
         pixel_margin = 30
 
         for demon in list_of_demons:
@@ -231,3 +233,6 @@ class Momotaro(Controllable):
         elif event.type == pygame.KEYUP:
             if event.key == pygame.K_p:
                 self.is_attacking = False
+
+    def get_health(self):
+        return self.health

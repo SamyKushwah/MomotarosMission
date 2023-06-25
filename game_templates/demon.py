@@ -100,4 +100,3 @@ class Demon:
             frame = self.left_mvmnt_frames[index]
             self.left_mvmnt_frames[index] = pygame.transform.scale(frame, (
                 int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
-
