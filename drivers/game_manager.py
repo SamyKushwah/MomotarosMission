@@ -58,7 +58,7 @@ class GameManager:
                 win_return = win_screen_scene.run(self.my_toolbox, self.level_name)
                 if win_return == "level_selector" or win_return == self.level_name:
                     return win_return
-            elif self.momotaro.health <= 0 or self.momotaro.position[1] > 10000:
+            elif self.momotaro.health <= 0 or self.momotaro.position[1] > 5000:
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt

@@ -6,7 +6,7 @@ def create_level(my_toolbox):
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")  # left wall
     level1.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")  # right wall
-    level1.add_platform((0, 1080 - 70), (1600, 70))  # bottom wall part 1
+    level1.add_platform((0, 1080 - 70), (1700, 70))  # bottom wall part 1
     level1.add_platform((0, 0), (5100, 140), facing_direction="down")               # top wall
 
     level1.add_platform((400, 800), (300, 50), facing_direction="up") #platform 1 for coin 1
@@ -20,6 +20,14 @@ def create_level(my_toolbox):
 
 
     # platforming water section
+    level1.add_platform((1700, 1040), (500, 70), platform_type="water")
+    level1.add_platform((2200, 1010), (200, 70), facing_direction="up")
+    level1.add_platform((2400, 1040), (500, 70), platform_type="water")
+    level1.add_platform((2900, 810), (200, 270), facing_direction="up")
+
+    level1.add_moving_platform((1750, 850), (250, 70), 5, (2000, 850))
+    level1.add_moving_platform((2450, 850), (250, 70), 5, (2600, 850))
+
 
 
 
