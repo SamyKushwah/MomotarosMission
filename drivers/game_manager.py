@@ -64,7 +64,7 @@ class GameManager:
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
-
+            self.momotaro.check_damage(self.level.demon_list)
             self.momotaro.check_attacking(self.level.demon_list)
 
             for demon in self.level.demon_list:
@@ -92,7 +92,7 @@ class GameManager:
                     return win_return
             elif self.momotaro.health <= 0:
                 lose_rt = lose_screen_scene.run(self.my_toolbox)
-                if lose_rt == "level_selector" or lose_rt == "level_1":
+                if lose_rt == "level_selector" or lose_rt == "level_1" or lose_rt == "quit":
                     return lose_rt
 
             self.my_toolbox.clock.tick(60)

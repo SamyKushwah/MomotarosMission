@@ -13,6 +13,7 @@ class Momotaro:
         self.external_forces = [0, 0]
         self.standing_on = None
         self.moving_direction = "idle"
+        self.last_direction = "left"
 
         self.charging = False
         self.attacking = False  # True if attack button is released
@@ -69,9 +70,11 @@ class Momotaro:
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             self.velocity[0] += 0.3
             self.moving_direction = "right"
+            self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             self.velocity[0] -= 0.3
             self.moving_direction = "left"
+            self.last_direction = "left"
         else:
             self.moving_direction = "idle"
             self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
@@ -163,23 +166,23 @@ class Momotaro:
 
         match self.moving_direction:
             case "idle":
-                if self.charging:
-                    self.active_image = self.charging_right_image
-                elif self.attacking:
-                    self.active_image = self.attacking_right_image
-                    surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 30))
-                else:
                     self.active_image = self.idle_image
+            case "right":
+                self.active_image = self.right_mvmnt_frames[index]
+                if self.standing:
+                    self.frame_index += 1
+            case "left":
+                self.active_image = self.left_mvmnt_frames[index]
+                if self.standing:
+                    self.frame_index += 1
+
+        match self.last_direction:
             case "right":
                 if self.charging:
                     self.active_image = self.charging_right_image
                 elif self.attacking:
                     self.active_image = self.attacking_right_image
                     surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 30))
-                else:
-                    self.active_image = self.right_mvmnt_frames[index]
-                    if self.standing:
-                        self.frame_index += 1
             case "left":
                 if self.charging:
                     self.active_image = self.charging_left_image
@@ -187,10 +190,6 @@ class Momotaro:
                     self.active_image = self.attacking_left_image
                     surface.blit(self.active_sweep_image, (
                         self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30))
-                else:
-                    self.active_image = self.left_mvmnt_frames[index]
-                    if self.standing:
-                        self.frame_index += 1
 
         if self.frame_index >= animation_delay:
             self.frame_index = 0
@@ -222,7 +221,6 @@ class Momotaro:
                         obstacle.set_pushed(True)
 
     def check_attacking(self, demon_list):
-        # print("attack power:", self.attack_power)
         if self.charging:
             if self.attack_power >= 1:
                 self.attack_power = 1
@@ -240,15 +238,26 @@ class Momotaro:
                 (self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30), sweep_size)
 
             for demon in demon_list:
-                match self.moving_direction:
+                match self.last_direction:
                     case "right":
                         if attack_rect_right.colliderect(demon.get_rect()):
                             demon.health -= (self.attack_damage * self.attack_power)
                     case "left":
                         if attack_rect_left.colliderect(demon.get_rect()):
                             demon.health -= (self.attack_damage * self.attack_power)
-                    case "idle":
-                        if attack_rect_right.colliderect(demon.get_rect()):
-                            demon.health -= (self.attack_damage * self.attack_power)
 
             self.attack_power = 0
+
+    def check_damage(self, demon_list):
+        for demon in demon_list:
+            if self.get_rect().colliderect(demon.get_rect()):
+                print('ouch')
+                self.health -= 5
+                momotaro_rect = self.get_rect()
+                collidable_rect = demon.get_rect()
+                if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
+                    self.velocity[0] += 5
+                    self.velocity[1] += -10
+                else:
+                    self.velocity[0] += -5
+                    self.velocity[1] += -10

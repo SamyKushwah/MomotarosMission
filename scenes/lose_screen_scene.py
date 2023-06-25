@@ -24,7 +24,7 @@ def run(my_toolbox: toolbox.Toolbox):
     # driver loop setup
     running = True
     while running:
-        for event in pygame.event.get():
+        for event in [pygame.event.wait()]+pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
 
