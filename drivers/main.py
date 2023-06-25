@@ -8,8 +8,8 @@ from scenes import level_select_scene, title_menu_scene
 my_toolbox = toolbox.Toolbox()
 
 next_state = "title_menu"
-os.chdir("/mnt/c/Users/ruhib/OneDrive/Documents/GitHub/MomotarosMission")
 
+os.chdir("../")
 
 # driver loop
 running = True
@@ -32,7 +32,7 @@ while running:
             # selection = ruhi_level1.run_level(screen)
             # selection = level_1_screen.run_level_1_screen(screen)
             my_game = game_manager.GameManager(my_toolbox, "level_1A")
-            my_game.run()
+            next_state = my_game.run()
             pass  # todo
         case "level_2":
             # bring the user to level 2
@@ -53,6 +53,10 @@ while running:
         case "restart":
             # restart current level
             pass  # TODO
+        case "level_complete":
+            next_state = "level_selector"
+        case "game_over":
+            next_state = "level_selector"
 
     my_toolbox.clock.tick(60)
 
