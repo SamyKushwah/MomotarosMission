@@ -113,7 +113,7 @@ class Momotaro:
             if momotaro_rect.colliderect(collidable_rect):
                 if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
                     momotaro_rect.left = collidable_rect.right
-                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin   :
+                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
                     momotaro_rect.right = collidable_rect.left
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
                     momotaro_rect.top = collidable_rect.bottom
@@ -251,7 +251,30 @@ class Momotaro:
                         if attack_rect_right.colliderect(demon.get_rect()):
                             demon.health -= (self.attack_damage * self.attack_power)
 
+
+
             self.attack_power = 0
+
+
+    def check_damage(self, demon_list):
+        for demon in demon_list:
+            if self.get_rect().colliderect(demon.get_rect()):
+                print('ouch')
+                self.health -= 5
+                pixel_margin = 30
+                momotaro_rect = self.get_rect()
+                collidable_rect = demon.get_rect()
+                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
+                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                    momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
+                    self.velocity[0] += 5
+                    self.velocity[1] += -10
+                    print('bounce')
+                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
+                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                    momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
+                    self.velocity[0] += -5
+                    self.velocity[1] += -10
 
 
 

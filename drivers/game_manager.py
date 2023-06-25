@@ -64,8 +64,8 @@ class GameManager:
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
-
             self.momotaro.check_attacking(self.level.demon_list)
+            self.momotaro.check_damage(self.level.demon_list)
 
             for demon in self.level.demon_list:
                 demon.update_movement(self.momotaro)
