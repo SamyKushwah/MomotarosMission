@@ -15,7 +15,7 @@ class Level:
         self.moving_platform_list = []
         self.interactible_list = {}
         #self.coin_list = []
-        self.coins_collected = 0
+        #self.coins_collected = 0
         self.demon_list = []
         self.background = background
 

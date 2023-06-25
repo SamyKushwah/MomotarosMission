@@ -201,7 +201,7 @@ class Momotaro:
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
 
-    def check_collision_interactible(self, list_of_obstacles):
+    def check_collision_interactible(self, list_of_obstacles, obj):
         for obstacle_type in list_of_obstacles.keys():
             match obstacle_type:
                 case "button":
@@ -223,9 +223,10 @@ class Momotaro:
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
-                        if self.get_rect().colliderect(coin.get_rect()):
+                        if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
                             coin.collected = True
-                            #print('coin collected')
+                            print('coin collected')
+                            obj.coins_collected += 1
 
     def check_attacking(self, demon_list):
         if self.charging:
@@ -249,9 +250,15 @@ class Momotaro:
                     case "right":
                         if attack_rect_right.colliderect(demon.get_rect()):
                             demon.health -= (self.attack_damage * self.attack_power)
+                            demon.velocity[0] += 100
+                            demon.velocity[1] += -15
+                            demon.attacked = True
                     case "left":
                         if attack_rect_left.colliderect(demon.get_rect()):
                             demon.health -= (self.attack_damage * self.attack_power)
+                            demon.velocity[0] += -100
+                            demon.velocity[1] += -15
+                            demon.attacked = True
 
             self.attack_power = 0
 

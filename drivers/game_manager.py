@@ -63,7 +63,7 @@ class GameManager:
 
             self.momotaro.update_movement()
             self.momotaro.check_collisions(self.level.collidable_list)
-            self.momotaro.check_collision_interactible(self.level.interactible_list)
+            self.momotaro.check_collision_interactible(self.level.interactible_list, self)
             self.momotaro.check_damage(self.level.demon_list)
             self.momotaro.check_attacking(self.level.demon_list)
 
@@ -96,6 +96,7 @@ class GameManager:
                     return lose_rt
 
             self.my_toolbox.clock.tick(60)
+            print(self.coins_collected)
 
     def draw(self):
         self.image.fill((70, 70, 180))
@@ -134,12 +135,11 @@ class GameManager:
                     for obstacle in self.level.interactible_list[interactible_key]:
                         obstacle.draw(self.image)
                 case "coin":
-                    self.level.coins_collected = 0
+                    #self.level.coins_collected = 0
                     for coin in self.level.interactible_list[interactible_key]:
                         if not coin.collected:
                             coin.draw(self.image)
-                        else:
-                            self.level.coins_collected += 1
+
 
 
         for demon in self.level.demon_list:

@@ -9,7 +9,7 @@ my_toolbox = toolbox.Toolbox()
 
 next_state = "title_menu"
 
-os.chdir("C:/Users/ckevi/Desktop/performant programming/big project/MomotarosMission")
+os.chdir("../")
 
 # driver loop
 running = True

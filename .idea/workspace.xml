@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added invincibility timer">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added coin obstacle">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game_templates/button_obstacle.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/button_obstacle.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/demon.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game_templates/momotaro.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/momotaro.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scenes/levels/level_1A.py" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/levels/level_1A.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687672479576</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added coin obstacle">
+      <created>1687674755760</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1687674755760</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added coin obstacle">
+      <created>1687675179253</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1687675179253</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -222,11 +236,12 @@
     <MESSAGE value="new momotaro attacking form, charge p for longer and stronger attack" />
     <MESSAGE value="merged new momotaro attacking code with shawns movement code" />
     <MESSAGE value="added invincibility timer" />
-    <option name="LAST_COMMIT_MESSAGE" value="added invincibility timer" />
+    <MESSAGE value="added coin obstacle" />
+    <option name="LAST_COMMIT_MESSAGE" value="added coin obstacle" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687674735672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
-    <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687606304409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687679271144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
   </component>

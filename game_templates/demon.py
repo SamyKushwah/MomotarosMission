@@ -7,6 +7,7 @@ class Demon:
         self.position = spawn_position
         self.velocity = [0,0]
         self.standing = False
+        self.attacked = False
         self.hitbox = (70, 80)
         self.gravity = 1.3
         self.health = 100
@@ -26,6 +27,10 @@ class Demon:
 
     def update_movement(self, momo):
         momo_pos = momo.position        # [300, 300]
+
+        if self.attacked:
+            self.position[0] += self.velocity[0]
+            self.attacked = False
 
         if not self.standing:
             self.velocity[1] += self.gravity
