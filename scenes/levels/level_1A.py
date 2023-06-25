@@ -29,8 +29,8 @@ def create_level(my_toolbox):
     level1.add_moving_platform((4200, 400), (275, 50), 20, (4500, 800))
 
     # add demons
-    level1.add_demon([4000, 300], 300)
-    level1.add_demon([3325, 400], 300)
+    level1.add_demon([1100, 900], (700, 400))
+    #level1.add_demon([3325, 400], 300)
 
     # add tori gate obstacle
     level1.add_obstacle(600, 500, "torigate")
