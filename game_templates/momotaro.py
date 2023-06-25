@@ -18,7 +18,7 @@ class Momotaro:
 
         self.charging = False
         self.attacking = False  # True if attack button is released
-        self.attack_power = 0  # 0 - 1 decimal
+        self.attack_power = 0.1  # 0 - 1 decimal
         self.attack_damage = 100
         self.iframes = 10
 
@@ -73,10 +73,14 @@ class Momotaro:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
+            if self.velocity[0] < 0:
+                self.velocity[0] += 0.3
             self.velocity[0] += 0.3
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
+            if self.velocity[0] > 0:
+                self.velocity[0] -= 0.3
             self.velocity[0] -= 0.3
             self.moving_direction = "left"
             self.last_direction = "left"
@@ -91,20 +95,23 @@ class Momotaro:
                 self.velocity[1] = -23 + (self.external_forces[1] / 2)
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
-        if keys[pygame.K_p]:
-            self.charging = True
-            self.attacking = False
-        elif not keys[pygame.K_p] and self.charging:
-            self.attacking = True
-            self.charging = False
-            self.attacking_duration = 10
-        elif self.attacking_duration > 0:
-            self.attacking_duration -= 1
+        if self.attacking_duration <= 0:
+            if keys[pygame.K_p]:
+                if not self.charging:
+                    self.attack_power = 0.1
+                self.charging = True
+                self.attacking = False
+            elif not keys[pygame.K_p] and self.charging:
+                self.attacking = True
+                self.charging = False
+                self.attacking_duration = 10
+            else:
+                self.charging = False
+                self.attacking = False
+                self.attacking_duration = 0
+                self.attack_power = 0.1
         else:
-            self.charging = False
-            self.attacking = False
-            self.attacking_duration = 0
-            self.attack_power = 0
+            self.attacking_duration -= 1
 
         if self.velocity[0] > 15:
             self.velocity[0] = 15
@@ -133,8 +140,8 @@ class Momotaro:
                     momotaro_rect.right = collidable_rect.left
                     self.velocity[0] += -3
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
-                    momotaro_rect.top = collidable_rect.bottom
-                    self.velocity[1] = 3
+                    #momotaro_rect.top = collidable_rect.bottom
+                    self.velocity[1] = 3 + collidable.velocity[1]
                 elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
                         self.velocity[1] >= 0:
                     momotaro_rect.bottom = collidable_rect.top
@@ -252,21 +259,22 @@ class Momotaro:
                 (self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30), sweep_size)
 
             for demon in demon_list:
-                match self.last_direction:
-                    case "right":
-                        if attack_rect_right.colliderect(demon.get_rect()):
-                            demon.health -= (self.attack_damage * self.attack_power)
-                            demon.velocity[0] += 100
-                            demon.velocity[1] += -15
-                            demon.attacked = True
-                    case "left":
-                        if attack_rect_left.colliderect(demon.get_rect()):
-                            demon.health -= (self.attack_damage * self.attack_power)
-                            demon.velocity[0] += -100
-                            demon.velocity[1] += -15
-                            demon.attacked = True
-
-            #self.attack_power = 0
+                if demon.iframes <= 0:
+                    match self.last_direction:
+                        case "right":
+                            if attack_rect_right.colliderect(demon.get_rect()):
+                                demon.health -= (self.attack_damage * self.attack_power)
+                                demon.velocity[0] += 100
+                                demon.velocity[1] += -15
+                                demon.attacked = True
+                                demon.iframes = 20
+                        case "left":
+                            if attack_rect_left.colliderect(demon.get_rect()):
+                                demon.health -= (self.attack_damage * self.attack_power)
+                                demon.velocity[0] += -100
+                                demon.velocity[1] += -15
+                                demon.attacked = True
+                                demon.iframes = 20
 
     def check_damage(self, demon_list):
         if self.iframes <= 0:

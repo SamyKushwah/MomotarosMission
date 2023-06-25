@@ -26,7 +26,6 @@ class GameManager:
 
         self.mountain_background = pygame.transform.scale(
             pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
-        self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
 
     def run(self):
         # run event handling for the level until lvl_complete == True
@@ -92,10 +91,6 @@ class GameManager:
                 self.image.blit(self.mountain_background, (positional, 0))
                 self.image.blit(self.mountain_background, (1920 + positional, 0))
 
-                # Far Mountains
-                self.image.blit(self.far_mountains, (-544 + positional, 850))
-                self.image.blit(self.far_mountains, (positional, 850))
-                self.image.blit(self.far_mountains, (544 + positional, 850))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
