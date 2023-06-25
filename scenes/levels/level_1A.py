@@ -37,6 +37,9 @@ def create_level(my_toolbox):
     # add tori gate obstacle
     level1.add_obstacle(600, 500, "torigate")
 
+    # add coin obstacle
+    level1.add_obstacle(600, 900, "coin")
+
     # de
     #level1.add_obstacle(500, 600, "button")
     return level1

@@ -14,7 +14,8 @@ class Level:
         self.platform_list = []
         self.moving_platform_list = []
         self.interactible_list = {}
-        self.coin_list = []
+        #self.coin_list = []
+        self.coins_collected = 0
         self.demon_list = []
         self.background = background
 
@@ -52,6 +53,13 @@ class Level:
                     self.interactible_list["torigate"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["torigate"] = [temp_obs]
+
+            case "coin":
+                temp_obs = button_obstacle.CoinObstacle(x, y)
+                try:
+                    self.interactible_list["coin"] += [temp_obs]
+                except KeyError:
+                    self.interactible_list["coin"] = [temp_obs]
 
 
 class Platform:

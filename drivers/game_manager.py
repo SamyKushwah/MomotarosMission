@@ -122,15 +122,31 @@ class GameManager:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+
+
+
         for interactible_key in self.level.interactible_list.keys():
-            for interactible in self.level.interactible_list[interactible_key]:
-                interactible.draw(self.image)
+            match interactible_key:
+                case "button":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "torigate":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "coin":
+                    self.level.coins_collected = 0
+                    for coin in self.level.interactible_list[interactible_key]:
+                        if not coin.collected:
+                            coin.draw(self.image)
+                        else:
+                            self.level.coins_collected += 1
+
+
         for demon in self.level.demon_list:
             if demon.health > 0:
                 demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
-        for coin in self.level.coin_list:
-            pygame.draw.rect(self.image, (0,200,0), coin.get_rect())
+
 
         self.momotaro.draw(self.image)

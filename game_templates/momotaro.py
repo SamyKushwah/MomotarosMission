@@ -205,7 +205,6 @@ class Momotaro:
         for obstacle_type in list_of_obstacles.keys():
             match obstacle_type:
                 case "button":
-                    pass
                     for obstacle in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(obstacle.get_rect()):
                             pass
@@ -221,6 +220,12 @@ class Momotaro:
                     margin = 20
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
+
+                case "coin":
+                    for coin in list_of_obstacles[obstacle_type]:
+                        if self.get_rect().colliderect(coin.get_rect()):
+                            coin.collected = True
+                            print('coin collected')
 
     def check_attacking(self, demon_list):
         if self.charging:
