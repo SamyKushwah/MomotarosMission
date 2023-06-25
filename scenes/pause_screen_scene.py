@@ -4,7 +4,7 @@ from ui_templates import button
 from drivers import toolbox
 
 
-def run(my_toolbox: toolbox.Toolbox):
+def run(my_toolbox: toolbox.Toolbox, current_level):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
@@ -54,10 +54,12 @@ def run(my_toolbox: toolbox.Toolbox):
 
                 if button_home.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_selector"
+                elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
+                    print('returning current level')
+                    print(current_level)
+                    return current_level
                 elif button_resume.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "resume"
-                elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_1"
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return "resume"
