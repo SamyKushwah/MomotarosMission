@@ -166,6 +166,12 @@ class Momotaro:
             if not test_rect.colliderect(self.standing_on.get_rect()):
                 self.standing_on = None
 
+            try:
+                if self.standing_on.type == "water":
+                    self.health = 0
+            except AttributeError:
+                pass
+
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
 

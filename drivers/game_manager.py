@@ -48,14 +48,14 @@ class GameManager:
                         return_st = pause_screen_scene.run(self.my_toolbox)
                         if return_st == "level_selector" or return_st == "level_1":  # break out of running level
                             return return_st
-                if self.level.interactible_list["torigate"][0].is_pushed():
-                    win_return = win_screen_scene.run(self.my_toolbox)
-                    if win_return == "level_selector" or win_return == "level_1":
-                        return win_return
-                elif self.momotaro.health <= 0:
-                    lose_rt = lose_screen_scene.run(self.my_toolbox)
-                    if lose_rt == "level_selector" or lose_rt == "level_1" or lose_rt == "quit":
-                        return lose_rt
+            if self.level.interactible_list["torigate"][0].is_pushed():
+                win_return = win_screen_scene.run(self.my_toolbox)
+                if win_return == "level_selector" or win_return == "level_1":
+                    return win_return
+            elif self.momotaro.health <= 0:
+                lose_rt = lose_screen_scene.run(self.my_toolbox)
+                if lose_rt == "level_selector" or lose_rt == "level_1" or lose_rt == "quit":
+                    return lose_rt
 
             self.tick_physics()
             self.draw()

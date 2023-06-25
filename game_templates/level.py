@@ -78,6 +78,7 @@ class Platform:
         self.y = position[1]
         self.image = pygame.surface.Surface(dimensions)
         self.velocity = [0, 0]
+        self.type = platform_type
         match platform_type:
             case "stone":
                 BL = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
