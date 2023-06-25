@@ -2,7 +2,7 @@ import pygame
 
 class Obstacle:
     def __init__(self, x, y):
-        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png")
+        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
         self.scale_factor = 1
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)
@@ -27,10 +27,10 @@ class Obstacle:
         screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
 
 class ButtonObstacle(Obstacle):
-    def __init__(self, button_position, fence_int_position, fence_final_position, x, y):
+    def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions):
         super().__init__(x, y)
-        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png")
-        self.fence = Fence(fence_int_position, fence_final_position)
+        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
+        self.fence = Fence(fence_int_position, fence_final_position, fence_dimensions)
         self.scale_factor = 0.5
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)
@@ -78,8 +78,9 @@ class ButtonObstacle(Obstacle):
                     self.fence.y += self.fence_velocity
 
 class Fence:
-    def __init__(self, fence_position, fence_ending_position):
-        self.fence_image = pygame.image.load("images/ObstacleButtonSprites/WoodFence.png")
+    def __init__(self, fence_position, fence_ending_position, fence_dimensions):
+        self.fence_image = pygame.image.load("images/ObstacleButtonSprites/WoodFence.png").convert_alpha()
+        self.fence_image = pygame.transform.scale(self.fence_image, fence_dimensions)
         self.scale_factor = 1
         self.__width = int(self.fence_image.get_width() * self.scale_factor)
         self.__height = int(self.fence_image.get_height() * self.scale_factor)
