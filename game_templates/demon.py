@@ -13,6 +13,7 @@ class Demon:
         self.external_forces = [0, 0]
         self.standing_on = None
         self.moving_direction = "idle"
+        self.iframes = 10
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStanding.png").convert_alpha(), (70, 100))
 
@@ -61,6 +62,9 @@ class Demon:
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
+
+        if self.iframes > 0:
+            self.iframes -= 1
 
     def check_collisions(self, collidables):
         pixel_margin = 30
