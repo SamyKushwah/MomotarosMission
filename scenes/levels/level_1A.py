@@ -11,13 +11,7 @@ def create_level(my_toolbox):
     level1.add_platform((2200, 1080 - 70), (700, 70))                               # bottom wall cont.
     level1.add_platform((2900, 1080 - 70), (700, 70), platform_type="water")        # water section 2
     level1.add_platform((3600, 1080 - 70), (1900, 70))                              # bottom wall cont.
-    level1.add_platform((0, 0), (5100, 100), facing_direction="down")               # top wall
-
-    # fix corners of the walls
-    level1.add_platform((-10, 70), (70, 70), facing_direction=None)
-    level1.add_platform((5040, 70), (70, 70), facing_direction=None)
-    level1.add_platform((-10, 1080 - 70), (70, 70), facing_direction=None)
-    level1.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
+    level1.add_platform((0, 0), (5100, 140), facing_direction="down")               # top wall
 
     # add platforms throughout
     level1.add_moving_platform((500, 900), (300, 50), 5, (1200, 700), facing_direction="up")               # set 1
@@ -31,19 +25,17 @@ def create_level(my_toolbox):
 
 
     # add moving platforms
-    level1.add_moving_platform((3900, 400), (275, 50), 30, (3900, 700))
+    level1.add_moving_platform((4000, 400), (100, 80), 30, (4000, 800))
     level1.add_moving_platform((4200, 400), (275, 50), 20, (4500, 800))
-    #level1.add_moving_platform((4200, 800), (275, 50), 20, (7000, 200))
-    #level1.add_moving_platform((4500, 600), (275, 50), 20, (1000, 40))
 
     # add demons
-    level1.add_demon([400, 500], 300)
-    level1.add_demon([3325, 400], 300)
+    level1.add_demon([1100, 900], (700, 400))
+    #level1.add_demon([3325, 400], 300)
 
     # add tori gate obstacle
     level1.add_obstacle(600, 500, "torigate")
 
-    # add coin obstacle
+    #c oins
     level1.add_obstacle(600, 900, "coin")
 
     # de
