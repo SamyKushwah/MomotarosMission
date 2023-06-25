@@ -82,6 +82,8 @@ class GameManager:
             else:
                 view_surface.blit(self.image, ((-self.momotaro.get_rect().centerx) + (1920 / 2), 0))
 
+            self.level.header.draw_header(view_surface, self.momotaro.health, self.coins_collected)
+
             self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
