@@ -282,7 +282,7 @@ class Header:
         surface.blit(self.momo, (745, 10))
 
         surface.blit(self.health_back, (850, 15))
-        health_len = 225 * (health / 1000)
+        health_len = 225 * (health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (908.5, 32))
 
