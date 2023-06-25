@@ -1,4 +1,5 @@
 import pygame
+import time
 
 
 class Momotaro:
@@ -19,6 +20,7 @@ class Momotaro:
         self.attacking = False  # True if attack button is released
         self.attack_power = 0  # 0 - 1 decimal
         self.attack_damage = 100
+        self.damage_timer = 0
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -249,15 +251,18 @@ class Momotaro:
             self.attack_power = 0
 
     def check_damage(self, demon_list):
-        for demon in demon_list:
-            if self.get_rect().colliderect(demon.get_rect()):
-                print('ouch')
-                self.health -= 5
-                momotaro_rect = self.get_rect()
-                collidable_rect = demon.get_rect()
-                if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
-                    self.velocity[0] += 5
-                    self.velocity[1] += -10
-                else:
-                    self.velocity[0] += -5
-                    self.velocity[1] += -10
+        if time.time() - self.damage_timer > 1:
+            for demon in demon_list:
+                if self.get_rect().colliderect(demon.get_rect()):
+                    print('ouch')
+                    self.health -= 5
+                    momotaro_rect = self.get_rect()
+                    collidable_rect = demon.get_rect()
+                    if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
+                        self.velocity[0] += 5
+                        self.velocity[1] += -10
+                    else:
+                        self.velocity[0] += -5
+                        self.velocity[1] += -10
+            #self.damage_timer = 0
+            self.damage_timer = time.time()
