@@ -21,17 +21,6 @@ def run(my_toolbox: toolbox.Toolbox):
     restart_img = pygame.transform.scale(restart_img, (w * (1 / 3), h * (1 / 13)))
     button_restart = button.Button(restart_img)
 
-    # draw the background and buttons with scaled position
-    scene_screen = pygame.surface.Surface((w, h))
-    scene_screen.blit(background, (0, 0))
-
-    button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)))
-    button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)))
-
-    my_toolbox.draw_to_screen(scene_screen)
-
-    pygame.display.flip()
-
     # driver loop setup
     running = True
     while running:
@@ -47,6 +36,15 @@ def run(my_toolbox: toolbox.Toolbox):
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_1"
 
+        # draw the background and buttons with scaled position
+        scene_screen = pygame.surface.Surface((w, h))
+        scene_screen.blit(background, (0, 0))
 
+        button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)))
+        button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)))
+
+        my_toolbox.draw_to_screen(scene_screen)
+
+        pygame.display.flip()
 
         my_toolbox.clock.tick(60)
