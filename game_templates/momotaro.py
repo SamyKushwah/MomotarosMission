@@ -1,5 +1,4 @@
 import pygame
-import time
 
 
 class Momotaro:
@@ -15,13 +14,13 @@ class Momotaro:
         self.standing_on = None
         self.moving_direction = "idle"
         self.last_direction = "left"
+        self.attacking_duration = 0
 
         self.charging = False
         self.attacking = False  # True if attack button is released
         self.attack_power = 0  # 0 - 1 decimal
         self.attack_damage = 100
-        self.damage_timer = 0
-        self.attacking_duration = 0
+        self.iframes = 10
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -30,33 +29,36 @@ class Momotaro:
 
         self.frame_index = 0
 
-        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png"), (40, 70))
+        self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha(), (40, 70))
 
         self.right_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"), (60, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png"), (60, 70))]
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png").convert_alpha(), (60, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkrightB.png").convert_alpha(), (60, 70))]
 
         self.left_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png"), (60, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png"), (60, 70))]
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png").convert_alpha(), (60, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png").convert_alpha(), (60, 70))]
 
         self.left_attack_frames = [
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png"), (60, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (60, 70))]
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png").convert_alpha(), (60, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))]
 
         self.attacking_left_image = pygame.transform.scale(
-            pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png"), (60, 70))
+            pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))
         self.attacking_right_image = pygame.transform.scale(
-            pygame.image.load("images/MomotaroSprites/MomoStrike(Right).png"), (60, 70))
+            pygame.image.load("images/MomotaroSprites/MomoStrike(Right).png").convert_alpha(), (60, 70))
 
         self.charging_left_image = pygame.transform.scale(
-            pygame.image.load("images/MomotaroSprites/MomoStandingSide(Left).png"), (60, 70))
+            pygame.image.load("images/MomotaroSprites/MomoStandingSide(Left).png").convert_alpha(), (60, 70))
         self.charging_right_image = pygame.transform.scale(
-            pygame.image.load("images/MomotaroSprites/MomoStandSide(Right).png"), (60, 70))
+            pygame.image.load("images/MomotaroSprites/MomoStandSide(Right).png").convert_alpha(), (60, 70))
+
+        self.hurt_left_image = pygame.transform.rotate(self.right_mvmnt_frames[0], 45)
+        self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
         self.swing_size = (400, 50)
 
-        self.attack_swing_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing.png"),
+        self.attack_swing_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing.png").convert_alpha(),
                                                          (400, 50))
         self.active_sweep_image = None
 
@@ -244,8 +246,6 @@ class Momotaro:
         if self.attacking:
             sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))
             self.active_sweep_image = pygame.transform.scale(self.attack_swing_image, sweep_size)
-            # print("sweep size: ", self.active_sweep_image.get_size())
-            print("attack power/damage: ", self.attack_damage * self.attack_power)
 
             attack_rect_right = pygame.rect.Rect((self.get_rect().right, self.get_rect().top + 30), sweep_size)
             attack_rect_left = pygame.rect.Rect(
@@ -269,17 +269,18 @@ class Momotaro:
             #self.attack_power = 0
 
     def check_damage(self, demon_list):
-        if time.time() - self.damage_timer > 1:
+        if self.iframes <= 0:
             for demon in demon_list:
                 if self.get_rect().colliderect(demon.get_rect()):
-                    print('ouch')
                     self.health -= 5
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
+                    self.iframes = 20
                     if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
-                        self.velocity[0] += 5
-                        self.velocity[1] += -10
+                        self.velocity[0] += 6
+                        self.velocity[1] += -12
                     else:
-                        self.velocity[0] += -5
-                        self.velocity[1] += -10
-            self.damage_timer = time.time()
+                        self.velocity[0] += -6
+                        self.velocity[1] += -12
+        else:
+            self.iframes -= 1
