@@ -55,8 +55,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
                 if button_home.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_selector"
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    print('returning current level')
-                    print(current_level)
+                    #print('returning current level')
+                    #print(current_level)
                     return current_level
                 elif button_resume.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "resume"

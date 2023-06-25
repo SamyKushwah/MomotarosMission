@@ -212,6 +212,7 @@ class MovingPlatform(Platform):
         moved_target = [self.target[0] - self.initial[0], self.target[1] - self.initial[1]]
 
         if self.target[0] != self.initial[0]:
+            #print('move x')
             x_progress = moved[0] / moved_target[0]
 
             if self.x < self.middle[0]:

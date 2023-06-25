@@ -14,7 +14,7 @@ def create_level(my_toolbox):
     level1.add_platform((0, 0), (5100, 140), facing_direction="down")               # top wall
 
     # add platforms throughout
-    level1.add_moving_platform((500, 900), (300, 50), 5, (1200, 700), facing_direction="up")               # set 1
+    level1.add_moving_platform((500, 900), (300, 50), 5, (2200, 700), facing_direction="up")               # set 1
     level1.add_platform((250, 600), (300, 50), facing_direction="up")
     level1.add_platform((600, 400), (150, 50), facing_direction="up")
 
@@ -38,7 +38,7 @@ def create_level(my_toolbox):
     #c oins
     level1.add_obstacle(600, 900, "coin")
 
-    level1.add_obstacle( 700, 1010, "button", (800, 910),  (800,700) )
+    level1.add_obstacle( 700, 1010, "button", (800, 910),  (800,700), (200,500) )
 
     # de
     #level1.add_obstacle(500, 600, "button")

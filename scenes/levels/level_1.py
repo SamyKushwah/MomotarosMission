@@ -14,7 +14,7 @@ def create_level(my_toolbox):
     level1.add_obstacle(1080, 600, "coin")   # coin 1
 
     # gate leading to after the first coin
-    level1.add_obstacle(1265, 1000, 'button', (1450, 760), (1450, 540), (200, 500))
+    level1.add_obstacle(1265, 1000, 'button', fence_initial=(1450, 780), fence_final=(1450, 540), fence_dimensions=(200, 500))
     # block to cover off the gate top
     level1.add_platform((1350, 140), (215, 500), facing_direction="all")
 
@@ -23,11 +23,25 @@ def create_level(my_toolbox):
     level1.add_platform((1700, 1040), (500, 70), platform_type="water")
     level1.add_platform((2200, 1010), (200, 70), facing_direction="up")
     level1.add_platform((2400, 1040), (500, 70), platform_type="water")
-    level1.add_platform((2900, 810), (200, 270), facing_direction="up")
+    level1.add_platform((2900, 810), (2200, 270), facing_direction="up")
 
     level1.add_moving_platform((1750, 850), (250, 70), 5, (2000, 850))
     level1.add_moving_platform((2450, 850), (250, 70), 5, (2600, 850))
 
+    # gate ending water platforming
+    level1.add_obstacle(3060, 800, "button", fence_initial=(3300, 620), fence_final=(3300, 400), fence_dimensions=(150, 400))
+
+
+    # Demon fight pit section
+    level1.add_demon([4120, 780], (800,500))
+    level1.add_moving_platform((3400, 400), (275, 50), 10, (4000, 700))
+    level1.add_moving_platform((4200, 700), (175, 50), 10, (4600, 300))
+
+    level1.add_platform((4800, 300), (200, 50), facing_direction="up")
+    level1.add_obstacle(4900, 250, 'coin')
+
+
+    # over water platforming - 3rd coin segment
 
 
 
