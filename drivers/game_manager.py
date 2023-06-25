@@ -30,6 +30,7 @@ class GameManager:
                     sys.exit()
             self.momotaro.poll_movement_2()
             self.momotaro.check_if_over_platform(self.level.moving_platform_list)
+            self.momotaro.check_collision_water(self.level.platform_list)
             self.momotaro.check_collision_demon(self.level.demon_list)
             self.momotaro.new_check_collision(self.level.collidable_list)
             self.momotaro.check_collision_interactible(self.level.interactible_list)
@@ -51,7 +52,7 @@ class GameManager:
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
-            platform.movement(self.momotaro)
+            platform.movement()
             platform.draw_platform(self.image)
         for interactible in self.level.interactible_list:
             interactible.draw(self.image)

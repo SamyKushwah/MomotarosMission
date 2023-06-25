@@ -18,6 +18,7 @@ class Level:
         self.interactible_list = []
         self.coin_list = []
         self.demon_list = []
+        self.boat_list = []
 
     def add_platform(self, platform_type, position, dimensions, facing_direction="all", corners=False):
         temp_platform = Platform(platform_type, position, dimensions, facing_direction, corners)
@@ -36,6 +37,11 @@ class Level:
         self.demon_list.append(temp_demon)
         print("adding rect:", temp_demon.get_rect())
 
+    def add_boat(self, position, length_of_water,velocity):
+        temp_boat = Boat(position,length_of_water,velocity)
+        self.moving_platform_list.append(temp_boat)
+        self.collidable_list.append(temp_boat)
+
     def add_obstacle(self, x, y, type):
         match type:
             case "button":
@@ -50,6 +56,7 @@ class Platform:
         self.x = position[0]
         self.y = position[1]
         self.image = pygame.surface.Surface(dimensions)
+        self.platform_type = platform_type
         match platform_type:
             case "stone":
                 BL = pygame.image.load("images/tiles/stone/Stone(MM).png")
@@ -104,7 +111,16 @@ class Platform:
                         else:
                             BR = pygame.image.load("images/tiles/stone/Stone(MR).png")
                             TR = pygame.image.load("images/tiles/stone/Stone(MR).png")
-
+            case "water":
+                BL = pygame.image.load("images/tiles/watertile.png")
+                BM = pygame.image.load("images/tiles/watertile.png")
+                BR = pygame.image.load("images/tiles/watertile.png")
+                ML = pygame.image.load("images/tiles/watertile.png")
+                MM = pygame.image.load("images/tiles/watertile.png")
+                MR = pygame.image.load("images/tiles/watertile.png")
+                TL = pygame.image.load("images/tiles/watertile.png")
+                TM = pygame.image.load("images/tiles/watertile.png")
+                TR = pygame.image.load("images/tiles/watertile.png")
         BL = pygame.transform.scale(BL, (70, 70))
         BM = pygame.transform.scale(BM, (70, 70))
         BR = pygame.transform.scale(BR, (70, 70))
@@ -160,7 +176,7 @@ class MovingPlatform(Platform):
         self.max_distance = max_distance
         self.vel = 1
 
-    def movement(self,list_of_controllables):
+    def movement(self):
         if self.x == self.__int_x - self.max_distance:
             self.vel *= -1
             self.__moving_right = True
@@ -175,5 +191,36 @@ class MovingPlatform(Platform):
             self.x += self.vel
         self.get_rect().update(self.get_rect())
 
-
-
+class Boat():
+    def __init__(self,position,length_of_water, velocity):
+        self.x = position[0]
+        self.y = position[1]
+        self.__int_x = position[0]
+        self.__int_y = position[1]
+        self.boat_image = pygame.image.load("images/ObstacleButtonSprites/Boat.png")
+        self.rect = self.boat_image.get_rect(x=position[0], y=position[1])
+        self.scale_factor = 0.3
+        self.width = int(self.boat_image.get_width() * self.scale_factor)
+        self.height = int(self.boat_image.get_height() * self.scale_factor)
+        self.max_distance = length_of_water // 2
+        self.vel = velocity
+        self.__moving_right = True
+        self.boat_image = pygame.transform.scale(self.boat_image, (self.width, self.height))
+    def draw_platform(self,screen):
+        self.rect = self.boat_image.get_rect()
+        self.rect.center = (self.x, self.y)
+        screen.blit(self.boat_image, (self.x - (self.width / 2), self.y - (self.height / 2)))
+    def get_rect(self):
+        return self.rect
+    def movement(self):
+        if self.x == self.__int_x - self.max_distance:
+            self.vel *= -1
+            self.__moving_right = True
+        elif self.x == self.__int_x + self.max_distance:
+            self.vel *= -1
+            self.__moving_right = False
+        if self.__moving_right:
+            self.x += self.vel
+        else:
+            self.x += self.vel
+        self.get_rect().update(self.get_rect())

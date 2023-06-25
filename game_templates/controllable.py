@@ -218,8 +218,6 @@ class Momotaro(Controllable):
                         obstacle.set_pushed(True)
 
     def poll_attack(self, event):
-        # events = pygame.event.get()
-        # for event in events:
         timer = pygame.USEREVENT + 1
         pygame.time.set_timer(timer, 1000)
 
@@ -231,8 +229,14 @@ class Momotaro(Controllable):
             self.is_attacking = False
 
     def check_if_over_platform(self,list_of_moving_platforms):
-        pixel_margin = 5
+        pixel_margin = 2
         for platform in list_of_moving_platforms:
             if abs(platform.get_rect().top - self.rect.bottom) < pixel_margin:
                 self.rect.x += platform.vel
         self.rect.update(self.rect)
+
+    def check_collision_water(self, list_of_platforms):
+        for platform in list_of_platforms:
+            if self.rect.colliderect(platform.get_rect()):
+                if platform.platform_type == "water":
+                    self.health = 0

@@ -3,6 +3,7 @@ import pygame
 class ButtonObstacle:
     def __init__(self, x, y):
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png")
+        #self.fence = pygame.image
         self.scale_factor = 0.5
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)
