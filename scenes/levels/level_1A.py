@@ -25,7 +25,7 @@ def create_level(my_toolbox):
 
 
     # add moving platforms
-    level1.add_moving_platform((3900, 400), (275, 50), 20, (3900, 700))
+    level1.add_moving_platform((3900, 400), (275, 50), 30, (3900, 700))
     level1.add_moving_platform((4200, 400), (275, 50), 20, (4500, 800))
     #level1.add_moving_platform((4200, 800), (275, 50), 20, (7000, 200))
     #level1.add_moving_platform((4500, 600), (275, 50), 20, (1000, 40))
