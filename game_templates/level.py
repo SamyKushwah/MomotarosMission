@@ -35,14 +35,24 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type):
+    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle(x, y)
+                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
                     self.interactible_list["button"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+
+                temp_obstacle = temp_obstacle.fence
+                try:
+                    self.interactible_list["fence"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["fence"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
 
             case "torigate":
                 temp_obs = obstacles.ToriObstacle(x, y)
@@ -57,6 +67,7 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
+
 
 
 class Platform:

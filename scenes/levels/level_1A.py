@@ -38,6 +38,8 @@ def create_level(my_toolbox):
     #c oins
     level1.add_obstacle(600, 900, "coin")
 
+    level1.add_obstacle( 700, 1010, "button", (800, 910),  (800,700) )
+
     # de
     #level1.add_obstacle(500, 600, "button")
     return level1

@@ -214,8 +214,16 @@ class Momotaro:
             match obstacle_type:
                 case "button":
                     for obstacle in list_of_obstacles[obstacle_type]:
-                        if self.get_rect().colliderect(obstacle.get_rect()):
-                            pass
+                        #print(self.standing_on)
+                        try:
+                            if self.standing_on.type == "button":
+                                #print("hello")
+                                obstacle.set_pushed(True)
+                            else:
+                                #print("bye")
+                                obstacle.set_pushed(False)
+                        except AttributeError:
+                            obstacle.set_pushed(False)
                 case "torigate":
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery
@@ -235,6 +243,15 @@ class Momotaro:
                             coin.collected = True
                             print('coin collected')
                             obj.coins_collected += 1
+
+                #case "fence":
+                #    for fence in list_of_obstacles[obstacle_type]:
+                #        if self.get_rect().colliderect(fence.get_rect()):
+
+
+
+
+
 
     def check_attacking(self, demon_list):
         if self.charging:
