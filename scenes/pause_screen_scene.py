@@ -8,7 +8,7 @@ def run(my_toolbox: toolbox.Toolbox):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/pause_screen/pause_screen_bkgnd.png")
+    background = pygame.image.load("images/pause_screen/clouds.png")
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image
@@ -32,13 +32,15 @@ def run(my_toolbox: toolbox.Toolbox):
     scene_screen = pygame.surface.Surface((w, h))
     scene_screen.blit(background, (0, 0))
 
-    button_resume.draw(scene_screen, (w / 2, h * (6 / 13)))
-    button_restart.draw(scene_screen, (w / 2, h * (8 / 13)))
-    button_home.draw(scene_screen, (w / 2, h * (10 / 13)))
+    buttons_screen = pygame.surface.Surface((w, h))
+    #button_resume.draw(buttons_screen, (w / 2, h * (6 / 13)))
+    #button_restart.draw(buttons_screen, (w / 2, h * (8 / 13)))
+    #button_home.draw(buttons_screen, (w / 2, h * (10 / 13)))
 
     scene_screen.set_alpha(170)
 
     my_toolbox.draw_to_screen(scene_screen)
+    my_toolbox.draw_to_screen(buttons_screen)
     pygame.display.flip()
 
     # driver loop setup

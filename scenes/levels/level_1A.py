@@ -11,7 +11,13 @@ def create_level(my_toolbox):
     level1.add_platform((2200, 1080 - 70), (700, 70))                               # bottom wall cont.
     level1.add_platform((2900, 1080 - 70), (700, 70), platform_type="water")        # water section 2
     level1.add_platform((3600, 1080 - 70), (1900, 70))                              # bottom wall cont.
-    level1.add_platform((0, 0), (5100, 140), facing_direction="down")               # top wall
+    level1.add_platform((0, 0), (5100, 100), facing_direction="down")               # top wall
+
+    # fix corners of the walls
+    level1.add_platform((-10, 70), (70, 70), facing_direction=None)
+    level1.add_platform((5040, 70), (70, 70), facing_direction=None)
+    level1.add_platform((-10, 1080 - 70), (70, 70), facing_direction=None)
+    level1.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add platforms throughout
     level1.add_moving_platform((500, 900), (300, 50), 5, (1200, 700), facing_direction="up")               # set 1

@@ -261,40 +261,48 @@ class Header:
         self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png")
         self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png")
         self.momo = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
+        self.bird = pygame.image.load("images/player2/bird.png")
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
         self.health_back = pygame.transform.scale(self.health_back, (300, 65))
-        self.header = pygame.transform.scale(self.header, (1000, 100))
+        self.header = pygame.transform.scale(self.header, (1600, 100))
         self.coin_back = pygame.transform.scale(self.coin_back, (140, 65))
         self.zero = pygame.transform.scale(self.zero, (125, 65))
         self.one = pygame.transform.scale(self.one, (125, 65))
         self.two = pygame.transform.scale(self.two, (125, 65))
         self.three = pygame.transform.scale(self.three, (125, 65))
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (145, 50))
-        # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
+        self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (50, 80))
 
     def draw_header(self, surface, health, coins):
         # draw images to the screen
-        surface.blit(self.header, (460, 0))
-        surface.blit(self.player_1_txt, (570, 30))
-        surface.blit(self.momo, (745, 10))
+        surface.blit(self.header, (150, 0))
+        surface.blit(self.player_1_txt, (260, 30))
+        surface.blit(self.momo, (435, 10))
 
-        surface.blit(self.health_back, (850, 15))
+        surface.blit(self.health_back, (540, 15))
         health_len = 225 * (health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
-        surface.blit(self.health_front, (908.5, 32))
+        surface.blit(self.health_front, (598.5, 32))
 
-        surface.blit(self.coin_back, (1200, 15))
+        surface.blit(self.coin_back, (890, 15))
 
         if coins == 0:
-            surface.blit(self.zero, (1200, 15))
+            surface.blit(self.zero, (900, 15))
         elif coins == 1:
-            surface.blit(self.one, (1200, 15))
+            surface.blit(self.one, (900, 15))
         elif coins == 2:
-            surface.blit(self.two, (1200, 15))
+            surface.blit(self.two, (900, 15))
         else:
-            surface.blit(self.three, (1200, 15))
+            surface.blit(self.three, (900, 15))
 
-        # surface.blit(self.player_2_txt, (1230, 30))
+        surface.blit(self.player_2_txt, (1060, 30))
+        surface.blit(self.bird, (1235, 10))
+
+        surface.blit(self.health_back, (1340, 15))
+        health_len = 225 * (health / 100)
+        self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
+        surface.blit(self.health_front, (1398.5, 32))

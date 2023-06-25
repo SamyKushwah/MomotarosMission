@@ -84,7 +84,7 @@ class GameManager:
 
             self.level.header.draw_header(view_surface, self.momotaro.health, self.coins_collected)
 
-            self.pause_btn.draw(view_surface, (80, 65))
+            # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
 
