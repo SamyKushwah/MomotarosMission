@@ -34,17 +34,21 @@ def create_level(my_toolbox):
 
     # Demon fight pit section
     level1.add_demon([4120, 780], (800,500))
-    level1.add_moving_platform((3400, 400), (275, 50), 10, (4000, 700))
-    level1.add_moving_platform((4200, 700), (175, 50), 10, (4600, 300))
+    level1.add_moving_platform((3400, 400), (275, 50), 10, (4000, 650))
+    level1.add_moving_platform((4200, 650), (175, 50), 10, (4600, 300))
 
     level1.add_platform((4800, 300), (200, 50), facing_direction="up")
     level1.add_obstacle(4900, 250, 'coin')
 
 
     # over water platforming - 3rd coin segment
+    level1.add_platform((2800, 400), (600, 50), facing_direction="up")
+    level1.add_platform((2200, 400), (400, 50), facing_direction='up')
 
+    level1.add_demon([2400, 380], (100,100))
+    level1.add_obstacle(2400, 200, 'coin')
 
-
-    level1.add_obstacle(600, 980, "torigate") # end of the level marker
+    level1.add_platform((1560, 400), (350,50), facing_direction="up")
+    level1.add_obstacle(1650, 380, "torigate") # end of the level marker
 
     return level1
