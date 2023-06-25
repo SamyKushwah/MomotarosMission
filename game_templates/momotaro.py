@@ -225,7 +225,7 @@ class Momotaro:
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()):
                             coin.collected = True
-                            print('coin collected')
+                            #print('coin collected')
 
     def check_attacking(self, demon_list):
         if self.charging:
