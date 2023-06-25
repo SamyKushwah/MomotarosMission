@@ -21,6 +21,7 @@ class Momotaro:
         self.attack_power = 0  # 0 - 1 decimal
         self.attack_damage = 100
         self.damage_timer = 0
+        self.attacking_duration = 0
 
         self.idle_image = None
         self.right_mvmnt_frames = None
@@ -94,9 +95,14 @@ class Momotaro:
         elif not keys[pygame.K_p] and self.charging:
             self.attacking = True
             self.charging = False
+            self.attacking_duration = 10
+        elif self.attacking_duration > 0:
+            self.attacking_duration -= 1
         else:
             self.charging = False
             self.attacking = False
+            self.attacking_duration = 0
+            self.attack_power = 0
 
         if self.velocity[0] > 15:
             self.velocity[0] = 15
@@ -260,7 +266,7 @@ class Momotaro:
                             demon.velocity[1] += -15
                             demon.attacked = True
 
-            self.attack_power = 0
+            #self.attack_power = 0
 
     def check_damage(self, demon_list):
         if time.time() - self.damage_timer > 1:

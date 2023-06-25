@@ -98,7 +98,7 @@ class GameManager:
                     return lose_rt
 
             self.my_toolbox.clock.tick(60)
-            print(self.coins_collected)
+            #print(self.coins_collected)
 
     def draw(self):
         self.image.fill((70, 70, 180))
