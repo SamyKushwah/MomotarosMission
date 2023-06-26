@@ -1,9 +1,13 @@
+WEEK 1
 Created Level class, created Platform class
-
 Added controllable to Level
-
 Added Momotaro to Level
-
 Created Demon class
-
 Added interaction between demon and controllable
+
+WEEK 2
+Created moving platforms
+created boats
+Made water lethal
+Created button and fence obstacle
+Created level wireframe
