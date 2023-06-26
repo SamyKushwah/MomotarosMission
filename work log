@@ -6,8 +6,8 @@ Created Demon class
 Added interaction between demon and controllable
 
 WEEK 2
-Created moving platform class
-created boat class 
+Created moving platforms
+created boats
 Made water lethal
 Created button and fence obstacle
 Created level wireframe
