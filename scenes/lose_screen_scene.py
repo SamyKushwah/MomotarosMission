@@ -12,25 +12,19 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image
-    home_img = pygame.image.load("images/lose_screen/home_btn.png")
-    home_img = pygame.transform.scale(home_img, (w * (1 / 5), h * (1 / 14)))
-    button_home = button.Button(home_img)
+    home_img = pygame.Surface((400, 110), pygame.SRCALPHA)
+    home_img.fill((255, 255, 255, 0))
+    button_home = button.Button(home_img, text="Home")
 
     # load restart button image
-    restart_img = pygame.image.load("images/lose_screen/restart_btn.png")
-    restart_img = pygame.transform.scale(restart_img, (w * (1 / 3), h * (1 / 13)))
-    button_restart = button.Button(restart_img)
+    restart_img = pygame.Surface((610, 115), pygame.SRCALPHA)
+    restart_img.fill((255, 255, 255, 0))
+    button_restart = button.Button(restart_img, text="Restart")
 
-    # draw the background and buttons with scaled position
+    # draw the background
     scene_screen = pygame.surface.Surface((w, h))
     scene_screen.blit(background, (0, 0))
 
-    button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)))
-    button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)))
-
-    my_toolbox.draw_to_screen(scene_screen)
-
-    pygame.display.flip()
 
     # driver loop setup
     running = True
@@ -47,6 +41,11 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return current_level
 
+        # draw buttons with scaled position
+        button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)), True)
+        button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)), True)
 
+        my_toolbox.draw_to_screen(scene_screen)
+        pygame.display.flip()
 
         my_toolbox.clock.tick(60)
