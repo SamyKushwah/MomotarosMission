@@ -3,6 +3,8 @@ from game_templates import level
 
 def create_level(my_toolbox):
     level1 = level.Level(my_toolbox, 1, 5100, 5000, background="cave")
+    level1.load_water_img()
+    level1.load_stone_imgs()
 
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")               # left wall

@@ -41,7 +41,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
                     return current_level
 
         # draw buttons with scaled position
-        button_home.draw(scene_screen, (980, h * (12 / 13)), True)
+        button_home.draw(scene_screen, (1030, h * (12 / 13)), True)
         button_restart.draw(scene_screen, (1570, h * (12 / 13)), True)
 
         my_toolbox.draw_to_screen(scene_screen)

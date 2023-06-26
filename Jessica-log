@@ -10,3 +10,10 @@
           background and added links to resume, restart and home page. Attempted to start the design of level 1- still trying to
           get a good design going. Brainstorming/trial and error for good design for win/lose screens
 6/21/23 - completed the platforms for level 1. Made temporary win/lose screens with button functionality to go to different screens.
+6/22/23 - platform implementation was changed so I used the new system to begin designing a level for the game. created a stationary header for level one
+          and added temporary health bars
+6/25/23 - continued to work on the header and added funtionality to the health and coin displays. Added fake information for player 2 on the header. Created
+          a background for the level, redid the design of the stone and water tiles. Incorporated the new designs into the level
+6/26/23 - created new win and lose screens. Updated the original start and level select screens to match the new vibe of the level. Added functioonality
+          to update the save file and show that data on the win screen and when you go back to the level screen. Updated images on the header and
+          obstacles.
