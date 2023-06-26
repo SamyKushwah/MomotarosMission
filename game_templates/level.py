@@ -82,7 +82,8 @@ class Level:
         self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png").convert_alpha())
 
     def load_water_img(self):
-        self.water_img = pygame.image.load("images/tiles/watertile.png")
+        self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
+
 
 class Platform:
     def __init__(self, position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners=False):
@@ -190,6 +191,7 @@ class Platform:
                     self.image.blit(MR, (self.width - tile_width, tile_height * row))
                 else:
                     self.image.blit(MM, (tile_width * column, tile_height * row))
+
         if tiles_high > 1:
             for column in range(0, tiles_wide):
                 if column == 0:
