@@ -1,0 +1,11 @@
+Personal Log:
+6/12 - 6/18 -> Making character class and Momotaro class. Made all of Momotaro sprites. 
+               Started working on demon sprite.
+6/19 -> Working on making all demon sprites.
+6/20 -> Finished demon sprites. Started working on platform sprites and finished ground and stone sprites.
+        Cropping and sizing the ground and stone sprites into squares and pushing to github.
+6/21 -> Made obstacle and button sprites. Working on making coin functionality. Finished coin functionality.
+6/22 -> Implemented coin funcitonality in merged code. Added pause screen functionality and button. Made sprites
+        for boat, water, health. 
+6/25 -> Figuring out how to highlight buttons. Redid button class and finished highlights for pause screen buttons.
+6/26 -> Implementing highlight into all other screens. Working on fixing bugs and merging stuff.

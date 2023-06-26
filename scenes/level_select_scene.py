@@ -104,8 +104,8 @@ def run(my_toolbox: toolbox.Toolbox):
 
         credits_btn.draw(scene_screen, (w * (91 / 100), h * (96 / 100)), True)
 
+        # draw the background and buttons with scaled position
         scene_screen.blit(select_txt, (w * (1 / 100), h * (1 / 100)))
-
         scene_screen.blit(circle1_img, (w * (1 / 7), h * (4 / 6)))
         scene_screen.blit(circle2_img, (w * (3 / 7), h * (6 / 10.5)))
         scene_screen.blit(circle3_img, (w * (5 / 7), h * (6 / 9.25)))
@@ -122,3 +122,4 @@ def run(my_toolbox: toolbox.Toolbox):
         pygame.display.flip()
 
         my_toolbox.clock.tick(60)
+

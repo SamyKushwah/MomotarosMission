@@ -5,7 +5,10 @@ from scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
 from ui_templates import button
 import sys
 
-
+'''
+Purpose: The GameManager object contains level and player information and regularly updates and polls player 
+            interactions with the environment provided by the level.
+'''
 # "Persistent State" Game Manager:
 class GameManager:
     def __init__(self, my_toolbox, level):
@@ -27,42 +30,58 @@ class GameManager:
         pause_img = pygame.transform.scale(pause_img, (90, 70))
         self.pause_btn = button.Button(pause_img)
 
+        # Loading background image
         self.mountain_background = pygame.transform.scale(
         #    pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
             pygame.image.load("images/backgrounds/level_1_bkgnd_lightest.png").convert_alpha(), (1920, 915))
         #self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
 
+    '''
+    Purpose: While the GameManager object is running, the main gameplay loop for the corresponding level occurs
+    '''
     def run(self):
-        # run event handling for the level until lvl_complete == True
+        # run event handling for the level until lvl_complete == True or broken out of
         while not self.level_complete:
             events = pygame.event.get()
             for event in events:
+                # Exiting the Game
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:  # if clicking
+                elif event.type == pygame.MOUSEBUTTONDOWN:  # if clicking, can click on pause button
                     if self.pause_btn.is_clicked(
                             self.my_toolbox.adjusted_mouse_pos(event.pos)):  # if clicked pause button
                         return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             #print('restarting')
                             return return_st
-                        # in the fututre, should return someething like
+
+                # if key pressing, can either be pausing or ending the game
                 elif event.type == pygame.KEYDOWN:
+                    # pause button pressed
                     if event.key == pygame.K_ESCAPE:
                         return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
+
+                        # Poll pause scene next scene
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             #print('restarting')
                             return return_st
+                    # up button pressed (W) at the tori gate, ending the level
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
                         self.update_save_file(self.level_name, self.coins_collected)
-                        if win_return == "level_selector" or win_return == self.level_name:
+                        # Poll the win game scene next scene
+                        if win_return == "level_selector" or win_return == self.level_name or win_return ==  "quit":
                             return win_return
-            if self.momotaro.health <= 0:
+
+            # Checking for if the game is over/failed (Momo dead or out of bounds)
+            if self.momotaro.health <= 0 or self.momotaro.position[1] > 5000:
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
+
+                # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt
+
             if self.momotaro.standing_on:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
@@ -75,6 +94,12 @@ class GameManager:
 
             self.my_toolbox.clock.tick(60)
 
+
+    '''
+    Purpose: Main physics checker and updater for gameplay cycle. Updates character and enemy collision, movement, and
+                interaction with obstacles and with each other. Specific details on what's being updated belong within 
+                the character methods.
+    '''
     def tick_physics(self):
         for moving_platform in self.level.moving_platform_list:
             moving_platform.movement()
@@ -88,6 +113,10 @@ class GameManager:
             demon.update_movement(self.momotaro)
             demon.check_collisions(self.level.collidable_list)
 
+
+    '''
+    Purpose:
+    '''
     def draw(self):
         view_surface = pygame.surface.Surface((1920, 1080))
 
@@ -155,9 +184,9 @@ class GameManager:
             level_coins = [line.rstrip() for line in file]
 
         # depending on which level you are currently on, update the information
-        if level_name is "level_1":
+        if level_name == "level_1":
             level_coins[0] = coins_collected
-        elif level_name is "level_1A":
+        elif level_name == "level_1A":
             level_coins[1] = coins_collected
         else:
             level_coins[2] = coins_collected

@@ -26,19 +26,21 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     scene_screen.blit(background, (0, 0))
 
 
-    button_home.draw(scene_screen, (980, h * (12 / 13)), True)
-    button_restart.draw(scene_screen, (1570, h * (12 / 13)), True)
-    my_toolbox.draw_to_screen(scene_screen)
-    pygame.display.flip()
-
 
     # driver loop setup
     running = True
     while running:
+
+        # draw buttons with scaled position
+        button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)), True)
+        button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)), True)
+
+        my_toolbox.draw_to_screen(scene_screen)
+        pygame.display.flip()
+
         for event in [pygame.event.wait()]+pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
-
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
@@ -47,11 +49,5 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return current_level
 
-        # draw buttons with scaled position
-        button_home.draw(scene_screen, (980, h * (12 / 13)), True)
-        button_restart.draw(scene_screen, (1570, h * (12 / 13)), True)
-
-        my_toolbox.draw_to_screen(scene_screen)
-        pygame.display.flip()
-
         my_toolbox.clock.tick(60)
+
