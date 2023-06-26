@@ -4,11 +4,19 @@ from ui_templates import button
 from drivers import toolbox
 
 
-def run(my_toolbox: toolbox.Toolbox, current_level):
+def run(my_toolbox: toolbox.Toolbox, current_level, coins):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/win_screen/win_screen.png")
+    if coins == 0:
+        background = pygame.image.load("images/win_screen/win_screen_0.png").convert_alpha()
+    elif coins == 1:
+        background = pygame.image.load("images/win_screen/win_screen_1.png").convert_alpha()
+    elif coins == 2:
+        background = pygame.image.load("images/win_screen/win_screen_2.png").convert_alpha()
+    else:
+        background = pygame.image.load("images/win_screen/win_screen_3.png").convert_alpha()
+
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image
@@ -29,6 +37,12 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     # draw the background and buttons with scaled position
     scene_screen = pygame.surface.Surface((w, h))
     scene_screen.blit(background, (0, 0))
+
+    button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
+    button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
+    button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
+    my_toolbox.draw_to_screen(scene_screen)
+    pygame.display.flip()
 
     # driver loop setup
     running = True
