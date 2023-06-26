@@ -6,3 +6,5 @@ Build command:
 
 Link to repository:
   https://github.com/SamyKushwah/MomotarosMission/
+
+Run Executable Command:
