@@ -42,6 +42,7 @@ class GameManager:
     def run(self):
         # run event handling for the level until lvl_complete == True or broken out of
         while not self.level_complete:
+            # Poll events/user inputs
             events = pygame.event.get()
             for event in events:
                 # Exiting the Game
@@ -82,6 +83,7 @@ class GameManager:
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt
 
+            # If momotaro is pushed below a block, he dies
             if self.momotaro.standing_on:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
@@ -115,11 +117,12 @@ class GameManager:
 
 
     '''
-    Purpose:
+    Purpose: Calls the draw function of each object and draws backgrounds
     '''
     def draw(self):
         view_surface = pygame.surface.Surface((1920, 1080))
 
+        # Draw Background
         self.image.fill((70, 70, 180))
         match self.level.background:
             case "cave":
@@ -140,15 +143,21 @@ class GameManager:
                 #self.image.blit(self.far_mountains, (-544 + positional, 850))
                 #self.image.blit(self.far_mountains, (positional, 850))
                 #self.image.blit(self.far_mountains, (544 + positional, 850))
+
+        # Draw platforms
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+
+        # Draw demons
         for demon in self.level.demon_list:
             if demon.health > 0:
                 demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
+
+        # Draw obstacles
         for interactible_key in self.level.interactible_list.keys():
             match interactible_key:
                 case "button":
@@ -163,6 +172,7 @@ class GameManager:
                         if not coin.collected:
                             coin.draw(self.image)
 
+        # Draw momotaro
         self.momotaro.draw(self.image)
 
         if self.momotaro.get_rect().centerx <= 960:
@@ -172,12 +182,16 @@ class GameManager:
         else:
             view_surface.blit(self.image, ((-self.momotaro.get_rect().centerx) + (1920 / 2), 0))
 
+        # Draw Header
         self.level.header.draw_header(view_surface, self.momotaro.health, self.coins_collected)
 
         #self.pause_btn.draw(view_surface, (80, 65))
         self.my_toolbox.draw_to_screen(view_surface)
         pygame.display.update()
 
+    """
+    Purpose: Saves the number of coins collected upon level clear to update on the select screen
+    """
     def update_save_file(self, level_name, coins_collected):
         # get current info from the save file
         with open("save_data/game_data", 'r') as file:
