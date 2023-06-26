@@ -16,6 +16,9 @@ def main():
 
     os.chdir("../")
 
+    pygame.display.set_caption('Momotaro\'s Mission')
+    pygame.display.set_icon(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha())
+
     # driver loop
     running = True
     while running:

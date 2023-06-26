@@ -86,7 +86,7 @@ class Momotaro:
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 

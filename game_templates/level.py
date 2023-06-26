@@ -302,6 +302,8 @@ class Header:
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 
+
+
     def draw_header(self, surface, health, coins):
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
