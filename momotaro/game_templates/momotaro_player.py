@@ -58,7 +58,9 @@ class Momotaro:
 
         self.swing_size = (400, 50)
 
-        self.attack_swing_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing.png").convert_alpha(),
+        self.attack_swing_right_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing.png").convert_alpha(),
+                                                         (400, 50))
+        self.attack_swing_left_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing_left.png").convert_alpha(),
                                                          (400, 50))
         self.active_sweep_image = None
 
@@ -86,7 +88,7 @@ class Momotaro:
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -206,14 +208,14 @@ class Momotaro:
                     self.active_image = self.charging_right_image
                 elif self.attacking:
                     self.active_image = self.attacking_right_image
-                    surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 30))
+                    surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 6))
             case "left":
                 if self.charging:
                     self.active_image = self.charging_left_image
                 elif self.attacking:
                     self.active_image = self.attacking_left_image
                     surface.blit(self.active_sweep_image, (
-                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30))
+                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))
 
         if self.frame_index >= animation_delay:
             self.frame_index = 0
@@ -276,7 +278,11 @@ class Momotaro:
 
         if self.attacking:
             sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))
-            self.active_sweep_image = pygame.transform.scale(self.attack_swing_image, sweep_size)
+            match self.last_direction:
+                case "left":
+                    self.active_sweep_image = pygame.transform.scale(self.attack_swing_left_image, sweep_size)
+                case "right":
+                    self.active_sweep_image = pygame.transform.scale(self.attack_swing_right_image, sweep_size)
 
             attack_rect_right = pygame.rect.Rect((self.get_rect().right, self.get_rect().top + 30), sweep_size)
             attack_rect_left = pygame.rect.Rect(
