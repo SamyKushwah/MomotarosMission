@@ -2,8 +2,8 @@ import pygame
 
 '''
 Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
-            (2-Dimensional). The Demons are subject to velocity and motion changes but do not die on water.
-            
+            (2-Dimensional). The Demons are subject to velocity changes and die on water. Demons take damage when hit
+            by the sweep image from Momotaro's sword.
 '''
 class Demon:
     def __init__(self, spawn_position, detection_range):
@@ -30,11 +30,17 @@ class Demon:
         self.frame_index = 0
         self.active_image = 0
 
+    '''
+    Purpose: If Momotaro is within the demon's detection range, then it will start moving towards him. The movement
+                also takes into account external velocity changes such as from getting hit by Momotaro or from
+                being on a moving platform.
+    '''
     def update_movement(self, momotaro):
-
+        # Demon subject to gravity
         if not self.standing:
             self.velocity[1] += self.gravity
 
+        # Update moving platform velocities and die if on water
         if self.standing_on is not None:
             self.external_forces[0] += round(self.standing_on.velocity[0])
             self.external_forces[1] += round(self.standing_on.velocity[1])
@@ -45,6 +51,7 @@ class Demon:
             except AttributeError:
                 pass
 
+        # Check if Momotaro is within detection range
         detection_rect = pygame.rect.Rect((0, 0), self.detection_hitbox)
         detection_rect.center = self.get_rect().center
         momotaro_rect = momotaro.get_rect()
@@ -66,18 +73,25 @@ class Demon:
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
+        # Limit max horizontal movement speed
         if self.velocity[0] > 12:
             self.velocity[0] = 12
         elif self.velocity[0] < -12:
             self.velocity[0] = -12
 
+        # Update position with calculated velocity
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
 
+        # Invincibility frames -- cannot be attacked too recently by Momotaro
         if self.iframes > 0:
             self.iframes -= 1
 
+    '''
+    Purpose: Allows the demon to stand on platforms and collide with walls
+    '''
     def check_collisions(self, collidables):
+        # Pixel margin is used as the amount of error between two sides of a rectangle colliding/overlapping
         pixel_margin = 30
         momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
         self.standing = False
@@ -85,25 +99,30 @@ class Demon:
         for collidable in collidables:
             collidable_rect = collidable.get_rect()
             if momotaro_rect.colliderect(collidable_rect):
+                # Colliding on the right side of the wall
                 if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
                         momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
                     momotaro_rect.left = collidable_rect.right
                     self.velocity[0] += 3
+                # Colliding on the left side of the wall
                 elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
                         momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
                     momotaro_rect.right = collidable_rect.left
                     self.velocity[0] += -3
+                # Colliding on the bottom of a wall/ceiling
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
                     momotaro_rect.top = collidable_rect.bottom
                     self.velocity[1] = 3
+                # Standing on a platform
                 elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
                         self.velocity[1] >= 0:
                     momotaro_rect.bottom = collidable_rect.top
                     self.velocity[1] = 0
                     self.standing = True
                     self.standing_on = collidable
+                # Try to resolve getting pushed into a platform by teleporting up and out the platform
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     if self.velocity[1] > 0:
                         #print("Clipping Warning! Teleporting up!")
@@ -115,6 +134,7 @@ class Demon:
                         momotaro_rect.top = collidable_rect.bottom
                         self.velocity[1] = 5
 
+        # Make standing_on = None if in the air
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
                                          (self.hitbox[0] + 10, self.hitbox[1] + 10))
@@ -124,6 +144,9 @@ class Demon:
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
 
+    '''
+    Purpose: Draws the appropriate sprites and plays the corresponding animation with a set delay between frames. 
+    '''
     def draw(self, surface):
         if abs(self.velocity[0]) < 3:
             animation_delay = 8

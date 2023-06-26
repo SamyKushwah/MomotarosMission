@@ -121,11 +121,20 @@ class CoinObstacle(Obstacle):
         self.scale_factor = 1
         #self.__width = int(self.button_image.get_width() * self.scale_factor)
         #self.__height = int(self.button_image.get_height() * self.scale_factor)
-        self.__width = 40
+        self.__width = 80
         self.__height = 80
+        self.__int_x = x
+        self.__int_y = y
+        #self.button_image = pygame.transform.scale(self.button_image, (800,800))
 
         self.__button_rect = self.button_image.get_rect(x=x, y=y)
 
         # 'collected' for coin means activated -> collected
         self.collected = False
         self.type = "coin"
+
+    def draw(self, screen):
+        self.button_image = pygame.transform.scale(self.button_image, (self.__width, self.__height))
+        self.__button_rect = self.button_image.get_rect()
+        self.__button_rect.center = (self.__int_x, self.__int_y)
+        screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
