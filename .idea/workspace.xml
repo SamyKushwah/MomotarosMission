@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added all of jessicas changes sheesh">
-      <change beforePath="$PROJECT_DIR$/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/drivers/game_manager.py" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1">
+      <change beforePath="$PROJECT_DIR$/.idea/MomotarosMission.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MomotarosMission.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/momotaro.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_templates/momotaro.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_data/game_data" beforeDir="false" afterPath="$PROJECT_DIR$/save_data/game_data" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,18 +30,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -49,6 +54,7 @@
       <workItem from="1687412548396" duration="688000" />
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
+      <workItem from="1687763902613" duration="514000" />
     </task>
     <task id="LOCAL-00001" summary="added attacking animation based on whichever side the demon is on">
       <created>1687414843843</created>
@@ -239,118 +245,32 @@
       <option name="project" value="LOCAL" />
       <updated>1687684984123</updated>
     </task>
-    <task id="LOCAL-00028" summary="updated all of ruhi's button and gate code to work with the new code.&#10;&#10;added test button and gate in level 1A">
-      <created>1687701318831</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1687701318831</updated>
-    </task>
-    <task id="LOCAL-00029" summary="includes sami's new button highlighting">
-      <created>1687707315033</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1687707315033</updated>
-    </task>
-    <task id="LOCAL-00030" summary="forgot to include the used font file">
-      <created>1687707332434</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1687707332434</updated>
-    </task>
-    <task id="LOCAL-00031" summary="included shawns new combat changes">
-      <created>1687708572698</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1687708572698</updated>
-    </task>
-    <task id="LOCAL-00032" summary="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant">
-      <created>1687709860830</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1687709860830</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration">
-      <created>1687712610524</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1687712610524</updated>
-    </task>
-    <task id="LOCAL-00034" summary="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)">
-      <created>1687713565758</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1687713565758</updated>
-    </task>
-    <task id="LOCAL-00035" summary="updated fence and button class to allow for custom sized fences">
-      <created>1687714604176</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1687714604176</updated>
-    </task>
-    <task id="LOCAL-00036" summary="included second part of level 1: platforming with moving platforms and water underneath">
-      <created>1687715411035</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1687715411035</updated>
-    </task>
-    <task id="LOCAL-00037" summary="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1">
-      <created>1687718798468</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1687718798468</updated>
-    </task>
-    <task id="LOCAL-00038" summary="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected">
-      <created>1687719712200</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1687719712200</updated>
-    </task>
-    <task id="LOCAL-00039" summary="commented out print statements">
-      <created>1687719999723</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1687719999723</updated>
-    </task>
-    <task id="LOCAL-00040" summary="added ruhi's changes, fixed some menu bugs">
-      <created>1687758772626</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1687758772626</updated>
-    </task>
-    <task id="LOCAL-00041" summary="started commenting everything">
-      <created>1687760242016</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1687760242016</updated>
-    </task>
-    <task id="LOCAL-00042" summary="added all of jessicas changes sheesh">
-      <created>1687762267006</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1687762267006</updated>
-    </task>
-    <option name="localTasksCounter" value="43" />
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="added attacking animation based on whichever side the demon is on" />
+    <MESSAGE value="attacking based on ur direction" />
+    <MESSAGE value="attacking now plays while idle, fixed demon collision rectangle" />
+    <MESSAGE value="updated demon back and forth mvmnt" />
+    <MESSAGE value="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen" />
+    <MESSAGE value="added ruhi's poll_attack changes" />
+    <MESSAGE value="logged today's work" />
+    <MESSAGE value="updated demon class to reflect shawn's momotaro class" />
     <MESSAGE value="getting close to merging again" />
     <MESSAGE value="updated to shawns version" />
     <MESSAGE value="new momotaro attacking form, charge p for longer and stronger attack" />
@@ -361,30 +281,15 @@
     <MESSAGE value="implemented jessica's ui header bar" />
     <MESSAGE value="added jessica's images" />
     <MESSAGE value="momotaro attack duration can be controlled" />
-    <MESSAGE value="updated all of ruhi's button and gate code to work with the new code.&#10;&#10;added test button and gate in level 1A" />
-    <MESSAGE value="includes sami's new button highlighting" />
-    <MESSAGE value="forgot to include the used font file" />
-    <MESSAGE value="included shawns new combat changes" />
-    <MESSAGE value="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant" />
-    <MESSAGE value="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration" />
-    <MESSAGE value="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)" />
-    <MESSAGE value="updated fence and button class to allow for custom sized fences" />
-    <MESSAGE value="included second part of level 1: platforming with moving platforms and water underneath" />
-    <MESSAGE value="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1" />
-    <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
-    <MESSAGE value="commented out print statements" />
-    <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
-    <MESSAGE value="started commenting everything" />
-    <MESSAGE value="added all of jessicas changes sheesh" />
-    <option name="LAST_COMMIT_MESSAGE" value="added all of jessicas changes sheesh" />
+    <option name="LAST_COMMIT_MESSAGE" value="momotaro attack duration can be controlled" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687761791163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1687764430019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
+    <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687716950377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
-    <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$game_manager.coverage" NAME="game_manager Coverage Results" MODIFIED="1687717831583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
   </component>
 </project>
