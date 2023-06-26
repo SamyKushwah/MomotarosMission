@@ -55,10 +55,11 @@ class GameManager:
                             #print('restarting')
                             return return_st
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
-                        win_return = win_screen_scene.run(self.my_toolbox, self.level_name)
-                        #if win_return == "level_selector" or win_return == self.level_name:
-                        return win_return
-            if self.momotaro.health <= 0 or self.momotaro.position[1] > 975:
+                        win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
+                        self.update_save_file(self.level_name, self.coins_collected)
+                        if win_return == "level_selector" or win_return == self.level_name:
+                            return win_return
+            if self.momotaro.health <= 0 or self.momotaro.position[1] > 5000:
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt
@@ -141,3 +142,19 @@ class GameManager:
         #self.pause_btn.draw(view_surface, (80, 65))
         self.my_toolbox.draw_to_screen(view_surface)
         pygame.display.update()
+
+    def update_save_file(self, level_name, coins_collected):
+        # get current info from the save file
+        with open("save_data/game_data", 'r') as file:
+            level_coins = [line.rstrip() for line in file]
+
+        # depending on which level you are currently on, update the information
+        if level_name is "level_1":
+            level_coins[0] = coins_collected
+        elif level_name is "level_1A":
+            level_coins[1] = coins_collected
+        else:
+            level_coins[2] = coins_collected
+
+        with open("save_data/game_data", 'w') as file:
+            [file.write(str(coin) + "\n") for coin in level_coins]
