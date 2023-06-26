@@ -8,4 +8,4 @@ Personal Log:
 6/22 -> Implemented coin funcitonality in merged code. Added pause screen functionality and button. Made sprites
         for boat, water, health. 
 6/25 -> Figuring out how to highlight buttons. Redid button class and finished highlights for pause screen buttons.
-6/26 -> Implementing highlight into all other screens.
+6/26 -> Implementing highlight into all other screens. Working on fixing bugs and merging stuff.
