@@ -14,17 +14,16 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     # load home button image
     home_img = pygame.Surface((400, 110), pygame.SRCALPHA)
     home_img.fill((255, 255, 255, 0))
-    button_home = button.Button(home_img, text="Home")
+    button_home = button.Button(home_img, text="Home", font_size=100)
 
     # load restart button image
     restart_img = pygame.Surface((610, 115), pygame.SRCALPHA)
     restart_img.fill((255, 255, 255, 0))
-    button_restart = button.Button(restart_img, text="Restart")
+    button_restart = button.Button(restart_img, text="Restart", font_size=100)
 
     # draw the background
     scene_screen = pygame.surface.Surface((w, h))
     scene_screen.blit(background, (0, 0))
-
 
     # driver loop setup
     running = True
