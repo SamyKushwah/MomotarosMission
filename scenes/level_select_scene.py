@@ -32,14 +32,14 @@ def run(my_toolbox: toolbox.Toolbox):
     button_1_img.fill((255, 255, 255, 0))
     button_1 = button.Button(button_1_img, text="1")
 
-    circle2_img = pygame.image.load("images/level_select_scene_UI/circle.png").convert_alpha()
+    circle2_img = circle1_img
     circle2_img = pygame.transform.scale(circle2_img, (h / 4, h / 4))
 
     button_2_img = pygame.Surface((100, 100), pygame.SRCALPHA)
     button_2_img.fill((255, 255, 255, 0))
     button_2 = button.Button(button_2_img, text="2")
 
-    circle3_img = pygame.image.load("images/level_select_scene_UI/circle.png").convert_alpha()
+    circle3_img = circle1_img
     circle3_img = pygame.transform.scale(circle3_img, (h / 4, h / 4))
 
     button_3_img = pygame.Surface((100, 100), pygame.SRCALPHA)
@@ -102,7 +102,7 @@ def run(my_toolbox: toolbox.Toolbox):
                 elif credits_btn.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "credits"
 
-        credits_btn.draw(scene_screen, (w * (91 / 100), h * (97 / 100)), True)
+        credits_btn.draw(scene_screen, (w * (91 / 100), h * (96 / 100)), True)
 
         # draw the background and buttons with scaled position
         scene_screen.blit(select_txt, (w * (1 / 100), h * (1 / 100)))

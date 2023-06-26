@@ -119,8 +119,11 @@ class CoinObstacle(Obstacle):
         super().__init__(x, y)
         self.button_image = pygame.image.load("images/level_select_scene_UI/gold_coin.png").convert_alpha()
         self.scale_factor = 1
-        self.__width = int(self.button_image.get_width() * self.scale_factor)
-        self.__height = int(self.button_image.get_height() * self.scale_factor)
+        #self.__width = int(self.button_image.get_width() * self.scale_factor)
+        #self.__height = int(self.button_image.get_height() * self.scale_factor)
+        self.__width = 40
+        self.__height = 80
+
         self.__button_rect = self.button_image.get_rect(x=x, y=y)
 
         # 'collected' for coin means activated -> collected
