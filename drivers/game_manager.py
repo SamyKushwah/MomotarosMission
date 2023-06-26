@@ -56,12 +56,18 @@ class GameManager:
                             return return_st
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name)
-                        if win_return == "level_selector" or win_return == self.level_name:
-                            return win_return
-            if self.momotaro.health <= 0 or self.momotaro.position[1] > 5000:
+                        #if win_return == "level_selector" or win_return == self.level_name:
+                        return win_return
+            if self.momotaro.health <= 0:
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt
+            if self.momotaro.standing_on:
+                if self.momotaro.position[1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
+                    lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
+                    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                        return lose_rt
+
 
             self.tick_physics()
             self.draw()
