@@ -27,7 +27,7 @@ class Level:
                             corners=False):
         temp_platform = MovingPlatform(position, dimensions, max_speed, target, platform_type, facing_direction,
                                        corners)
-        print("Adding platform", temp_platform.get_rect())
+        #print("Adding platform", temp_platform.get_rect())
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -35,14 +35,24 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type):
+    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle(x, y)
+                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
                     self.interactible_list["button"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+
+                temp_obstacle = temp_obstacle.fence
+                try:
+                    self.interactible_list["fence"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["fence"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
 
             case "torigate":
                 temp_obs = obstacles.ToriObstacle(x, y)
@@ -59,6 +69,7 @@ class Level:
                     self.interactible_list["coin"] = [temp_obs]
 
 
+
 class Platform:
     def __init__(self, position, dimensions, platform_type, facing_direction, corners=False):
         self.width = dimensions[0]
@@ -67,6 +78,7 @@ class Platform:
         self.y = position[1]
         self.image = pygame.surface.Surface(dimensions)
         self.velocity = [0, 0]
+        self.type = platform_type
         match platform_type:
             case "stone":
                 BL = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
@@ -192,7 +204,7 @@ class MovingPlatform(Platform):
         self.initial = position
         self.target = target
         self.middle = [(self.initial[0] + self.target[0]) // 2, (self.initial[1] + self.target[1]) // 2]
-        print("middle:", self.middle[0])
+        #print("middle:", self.middle[0])
 
     def movement(self):
         moved = [self.x - self.initial[0] + 1, self.y - self.initial[1] + 1]
@@ -200,6 +212,7 @@ class MovingPlatform(Platform):
         moved_target = [self.target[0] - self.initial[0], self.target[1] - self.initial[1]]
 
         if self.target[0] != self.initial[0]:
+            #print('move x')
             x_progress = moved[0] / moved_target[0]
 
             if self.x < self.middle[0]:
@@ -246,23 +259,23 @@ class MovingPlatform(Platform):
 class Header:
     def __init__(self):
         # load the images
-        self.health_front = pygame.image.load("images/level_1/HealthBarFront.png")
-        self.health_back = pygame.image.load("images/level_1/HealthBarBack.png")
-        self.header = pygame.image.load("images/level_1/header.png")
-        self.coin_back = pygame.image.load("images/level_1/CoinBarBack.png")
-        self.zero = pygame.image.load("images/level_1/zero.png")
-        self.one = pygame.image.load("images/level_1/one.png")
-        self.two = pygame.image.load("images/level_1/two.png")
-        self.three = pygame.image.load("images/level_1/three.png")
-        self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png")
-        self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png")
-        self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png")
+        self.health_front = pygame.image.load("images/level_1/HealthBarFront.png").convert_alpha()
+        self.health_back = pygame.image.load("images/level_1/HealthBarBack.png").convert_alpha()
+        self.header = pygame.image.load("images/level_1/header.png").convert_alpha()
+        self.coin_back = pygame.image.load("images/level_1/CoinBarBack.png").convert_alpha()
+        self.zero = pygame.image.load("images/level_1/zero.png").convert_alpha()
+        self.one = pygame.image.load("images/level_1/one.png").convert_alpha()
+        self.two = pygame.image.load("images/level_1/two.png").convert_alpha()
+        self.three = pygame.image.load("images/level_1/three.png").convert_alpha()
+        self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png").convert_alpha()
+        self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png").convert_alpha()
+        self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png")
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
         self.health_back = pygame.transform.scale(self.health_back, (300, 65))
-        self.header = pygame.transform.scale(self.header, (2200, 100)) # 1600
+        self.header = pygame.transform.scale(self.header, (2200, 100))
         self.coin_back = pygame.transform.scale(self.coin_back, (140, 65))
         self.zero = pygame.transform.scale(self.zero, (125, 65))
         self.one = pygame.transform.scale(self.one, (125, 65))
@@ -270,6 +283,7 @@ class Header:
         self.three = pygame.transform.scale(self.three, (125, 65))
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
+        # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 

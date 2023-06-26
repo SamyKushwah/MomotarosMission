@@ -4,7 +4,7 @@ from ui_templates import button
 from drivers import toolbox
 
 
-def run(my_toolbox: toolbox.Toolbox):
+def run(my_toolbox: toolbox.Toolbox, current_level):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
@@ -45,7 +45,7 @@ def run(my_toolbox: toolbox.Toolbox):
                 if button_home.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_selector"
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_1"
+                    return current_level
 
 
 

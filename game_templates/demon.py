@@ -13,6 +13,7 @@ class Demon:
         self.external_forces = [0, 0]
         self.standing_on = None
         self.moving_direction = "idle"
+        self.iframes = 10
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStanding.png").convert_alpha(), (70, 100))
 
@@ -62,6 +63,9 @@ class Demon:
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
 
+        if self.iframes > 0:
+            self.iframes -= 1
+
     def check_collisions(self, collidables):
         pixel_margin = 30
         momotaro_rect = pygame.rect.Rect(self.position, self.hitbox)
@@ -91,12 +95,12 @@ class Demon:
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     if self.velocity[1] > 0:
-                        print("Clipping Warning! Teleporting up!")
+                        #print("Clipping Warning! Teleporting up!")
                         momotaro_rect.bottom = collidable_rect.top
                         self.velocity[1] = 0
                         self.standing = True
                     else:
-                        print("Clipping Warning! Teleporting down!")
+                        #print("Clipping Warning! Teleporting down!")
                         momotaro_rect.top = collidable_rect.bottom
                         self.velocity[1] = 5
 

@@ -2,7 +2,7 @@ from game_templates import level
 
 
 def create_level(my_toolbox):
-    level1 = level.Level(my_toolbox, 1, 5100, 5000, background="mountains")
+    level1 = level.Level(my_toolbox, 1, 5100, 5000, background="cave")
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")               # left wall
     level1.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")        # right wall
@@ -19,7 +19,7 @@ def create_level(my_toolbox):
     level1.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add platforms throughout
-    level1.add_moving_platform((500, 900), (300, 50), 5, (1200, 700), facing_direction="up")               # set 1
+    level1.add_moving_platform((500, 900), (300, 50), 5, (2200, 700), facing_direction="up")               # set 1
     level1.add_platform((250, 600), (300, 50), facing_direction="up")
     level1.add_platform((600, 400), (150, 50), facing_direction="up")
 
@@ -42,6 +42,8 @@ def create_level(my_toolbox):
 
     #c oins
     level1.add_obstacle(600, 900, "coin")
+
+    level1.add_obstacle( 700, 1010, "button", (800, 910),  (800,700), (200,500) )
 
     # de
     #level1.add_obstacle(500, 600, "button")

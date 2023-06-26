@@ -18,7 +18,7 @@ class Momotaro:
 
         self.charging = False
         self.attacking = False  # True if attack button is released
-        self.attack_power = 0  # 0 - 1 decimal
+        self.attack_power = 0.1  # 0 - 1 decimal
         self.attack_damage = 100
         self.iframes = 10
 
@@ -73,10 +73,14 @@ class Momotaro:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
+            if self.velocity[0] < 0:
+                self.velocity[0] += 0.3
             self.velocity[0] += 0.3
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
+            if self.velocity[0] > 0:
+                self.velocity[0] -= 0.3
             self.velocity[0] -= 0.3
             self.moving_direction = "left"
             self.last_direction = "left"
@@ -91,20 +95,24 @@ class Momotaro:
                 self.velocity[1] = -23 + (self.external_forces[1] / 2)
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
-        if keys[pygame.K_p]:
-            self.charging = True
-            self.attacking = False
-        elif not keys[pygame.K_p] and self.charging:
-            self.attacking = True
-            self.charging = False
-            self.attacking_duration = 10
-        elif self.attacking_duration > 0:
-            self.attacking_duration -= 1
+
+        if self.attacking_duration <= 0:
+            if keys[pygame.K_p]:
+                if not self.charging:
+                    self.attack_power = 0.1
+                self.charging = True
+                self.attacking = False
+            elif not keys[pygame.K_p] and self.charging:
+                self.attacking = True
+                self.charging = False
+                self.attacking_duration = 10
+            else:
+                self.charging = False
+                self.attacking = False
+                self.attacking_duration = 0
+                self.attack_power = 0.1
         else:
-            self.charging = False
-            self.attacking = False
-            self.attacking_duration = 0
-            self.attack_power = 0
+            self.attacking_duration -= 1
 
         if self.velocity[0] > 15:
             self.velocity[0] = 15
@@ -133,8 +141,8 @@ class Momotaro:
                     momotaro_rect.right = collidable_rect.left
                     self.velocity[0] += -3
                 elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
-                    momotaro_rect.top = collidable_rect.bottom
-                    self.velocity[1] = 3
+                    #momotaro_rect.top = collidable_rect.bottom
+                    self.velocity[1] = 3 + collidable.velocity[1]
                 elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
                         self.velocity[1] >= 0:
                     momotaro_rect.bottom = collidable_rect.top
@@ -143,12 +151,12 @@ class Momotaro:
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     if self.velocity[1] > 0:
-                        print("Clipping Warning! Teleporting up!")
+                        #print("Clipping Warning! Teleporting up!")
                         momotaro_rect.bottom = collidable_rect.top
                         self.velocity[1] = 0
                         self.standing = True
                     else:
-                        print("Clipping Warning! Teleporting down!")
+                        #print("Clipping Warning! Teleporting down!")
                         momotaro_rect.top = collidable_rect.bottom
                         self.velocity[1] = 5
 
@@ -157,6 +165,12 @@ class Momotaro:
                                          (self.hitbox[0] + 10, self.hitbox[1] + 10))
             if not test_rect.colliderect(self.standing_on.get_rect()):
                 self.standing_on = None
+
+            try:
+                if self.standing_on.type == "water":
+                    self.health = 0
+            except AttributeError:
+                pass
 
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
@@ -214,8 +228,16 @@ class Momotaro:
             match obstacle_type:
                 case "button":
                     for obstacle in list_of_obstacles[obstacle_type]:
-                        if self.get_rect().colliderect(obstacle.get_rect()):
-                            pass
+                        #print(self.standing_on)
+                        try:
+                            if self.standing_on.type == "button":
+                                #print("hello")
+                                obstacle.set_pushed(True)
+                            else:
+                                #print("bye")
+                                obstacle.set_pushed(False)
+                        except AttributeError:
+                            obstacle.set_pushed(False)
                 case "torigate":
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery
@@ -233,8 +255,17 @@ class Momotaro:
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
                             coin.collected = True
-                            print('coin collected')
+                            #print('coin collected')
                             obj.coins_collected += 1
+
+                #case "fence":
+                #    for fence in list_of_obstacles[obstacle_type]:
+                #        if self.get_rect().colliderect(fence.get_rect()):
+
+
+
+
+
 
     def check_attacking(self, demon_list):
         if self.charging:
@@ -252,19 +283,22 @@ class Momotaro:
                 (self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 30), sweep_size)
 
             for demon in demon_list:
-                match self.last_direction:
-                    case "right":
-                        if attack_rect_right.colliderect(demon.get_rect()):
-                            demon.health -= (self.attack_damage * self.attack_power)
-                            demon.velocity[0] += 100
-                            demon.velocity[1] += -15
-                            demon.attacked = True
-                    case "left":
-                        if attack_rect_left.colliderect(demon.get_rect()):
-                            demon.health -= (self.attack_damage * self.attack_power)
-                            demon.velocity[0] += -100
-                            demon.velocity[1] += -15
-                            demon.attacked = True
+                if demon.iframes <= 0:
+                    match self.last_direction:
+                        case "right":
+                            if attack_rect_right.colliderect(demon.get_rect()):
+                                demon.health -= (self.attack_damage * self.attack_power)
+                                demon.velocity[0] += 100
+                                demon.velocity[1] += -15
+                                demon.attacked = True
+                                demon.iframes = 20
+                        case "left":
+                            if attack_rect_left.colliderect(demon.get_rect()):
+                                demon.health -= (self.attack_damage * self.attack_power)
+                                demon.velocity[0] += -100
+                                demon.velocity[1] += -15
+                                demon.attacked = True
+                                demon.iframes = 20
 
             #self.attack_power = 0
 
