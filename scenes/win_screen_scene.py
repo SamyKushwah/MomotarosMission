@@ -9,13 +9,13 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
 
     # load background image and scale it to fit in the screen window
     if coins == 0:
-        background = pygame.image.load("images/win_screen/win_screen_0.png")
+        background = pygame.image.load("images/win_screen/win_screen_0.png").convert_alpha()
     elif coins == 1:
-        background = pygame.image.load("images/win_screen/win_screen_1.png")
+        background = pygame.image.load("images/win_screen/win_screen_1.png").convert_alpha()
     elif coins == 2:
-        background = pygame.image.load("images/win_screen/win_screen_2.png")
+        background = pygame.image.load("images/win_screen/win_screen_2.png").convert_alpha()
     else:
-        background = pygame.image.load("images/win_screen/win_screen_3.png")
+        background = pygame.image.load("images/win_screen/win_screen_3.png").convert_alpha()
 
     background = pygame.transform.scale(background, (w, h))
 

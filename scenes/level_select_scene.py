@@ -17,29 +17,29 @@ def run(my_toolbox: toolbox.Toolbox):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/level_select_scene_UI/level_select_background.png")
+    background = pygame.image.load("images/level_select_scene_UI/level_select_background.png").convert_alpha()
     background = pygame.transform.scale(background, (w, h))
 
     # load selection text and scale for screen size
-    select_txt = pygame.image.load("images/level_select_scene_UI/level-title.png")
+    select_txt = pygame.image.load("images/level_select_scene_UI/level-title.png").convert_alpha()
     select_txt = pygame.transform.scale(select_txt, (w / 2, h / 12))
 
     # load the level buttons for level 1-3 and scale to fit on current screen size
-    circle1_img = pygame.image.load("images/level_select_scene_UI/circle.png")
+    circle1_img = pygame.image.load("images/level_select_scene_UI/circle.png").convert_alpha()
     circle1_img = pygame.transform.scale(circle1_img, (h / 4, h / 4))
 
     button_1_img = pygame.Surface((75, 100), pygame.SRCALPHA)
     button_1_img.fill((255, 255, 255, 0))
     button_1 = button.Button(button_1_img, text="1")
 
-    circle2_img = pygame.image.load("images/level_select_scene_UI/circle.png")
+    circle2_img = circle1_img
     circle2_img = pygame.transform.scale(circle2_img, (h / 4, h / 4))
 
     button_2_img = pygame.Surface((100, 100), pygame.SRCALPHA)
     button_2_img.fill((255, 255, 255, 0))
     button_2 = button.Button(button_2_img, text="2")
 
-    circle3_img = pygame.image.load("images/level_select_scene_UI/circle.png")
+    circle3_img = circle1_img
     circle3_img = pygame.transform.scale(circle3_img, (h / 4, h / 4))
 
     button_3_img = pygame.Surface((100, 100), pygame.SRCALPHA)
@@ -102,7 +102,7 @@ def run(my_toolbox: toolbox.Toolbox):
                 elif credits_btn.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "credits"
 
-        credits_btn.draw(scene_screen, (w * (91 / 100), h * (97 / 100)), True)
+        credits_btn.draw(scene_screen, (w * (91 / 100), h * (96 / 100)), True)
 
         scene_screen.blit(select_txt, (w * (1 / 100), h * (1 / 100)))
 

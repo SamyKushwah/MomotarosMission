@@ -71,15 +71,15 @@ class Level:
                     self.interactible_list["coin"] = [temp_obs]
 
     def load_stone_imgs(self):
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BM).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BR).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(ML).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MM).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MR).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TL).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TM).png"))
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BM).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BR).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(ML).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MM).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MR).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TL).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TM).png").convert_alpha())
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png").convert_alpha())
 
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png")
@@ -283,7 +283,7 @@ class Header:
         self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png").convert_alpha()
         self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png").convert_alpha()
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
-        self.bird = pygame.image.load("images/player2/bird.png")
+        self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))

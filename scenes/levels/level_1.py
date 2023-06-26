@@ -60,5 +60,5 @@ def create_level(my_toolbox):
     level1.add_obstacle(2400, 200, 'coin')
 
     level1.add_platform((1560, 400), (350,50), facing_direction="up")
-    level1.add_obstacle(200, 900, "torigate") # end of the level marker # 1650, 380
+    level1.add_obstacle(1650, 380, 900, "torigate")
     return level1
