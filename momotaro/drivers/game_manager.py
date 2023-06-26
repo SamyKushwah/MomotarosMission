@@ -33,8 +33,10 @@ class GameManager:
         # Loading background image
         self.mountain_background = pygame.transform.scale(
         #    pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
-            pygame.image.load("images/backgrounds/level_1_bkgnd_lightest.png").convert_alpha(), (1920, 915))
+            pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
         #self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
+
+        self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
 
     '''
     Purpose: While the GameManager object is running, the main gameplay loop for the corresponding level occurs
@@ -138,6 +140,8 @@ class GameManager:
                 # Main Background
                 self.image.blit(self.mountain_background, (positional, 100))
                 self.image.blit(self.mountain_background, (1920 + positional, 100))
+
+                self.image.blit(self.controls, (170, 200))
 
                 # Far Mountains
                 #self.image.blit(self.far_mountains, (-544 + positional, 850))
