@@ -1,11 +1,11 @@
-WEEK 1
+WEEK 1 (6/12-6/19)
 Created Level class, created Platform class
 Added controllable to Level
 Added Momotaro to Level
 Created Demon class
 Added interaction between demon and controllable
 
-WEEK 2
+WEEK 2 (6/19-6/26)
 Created moving platforms
 created boats
 Made water lethal
