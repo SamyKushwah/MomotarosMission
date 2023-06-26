@@ -32,8 +32,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     while running:
 
         # draw buttons with scaled position
-        button_home.draw(scene_screen, (w * (1 / 4), h * (12 / 13)), True)
-        button_restart.draw(scene_screen, (w * (3 / 4), h * (12 / 13)), True)
+        button_home.draw(scene_screen, (1030, h * (12 / 13)), True)
+        button_restart.draw(scene_screen, (1570, h * (12 / 13)), True)
 
         my_toolbox.draw_to_screen(scene_screen)
         pygame.display.flip()
