@@ -1,5 +1,10 @@
 import pygame
 
+'''
+Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
+            (2-Dimensional). The Demons are subject to velocity and motion changes but do not die on water.
+            
+'''
 class Demon:
     def __init__(self, spawn_position, detection_range):
         self.position = spawn_position
@@ -33,6 +38,12 @@ class Demon:
         if self.standing_on is not None:
             self.external_forces[0] += round(self.standing_on.velocity[0])
             self.external_forces[1] += round(self.standing_on.velocity[1])
+
+            try:
+                if self.standing_on.type == "water":
+                    self.health = 0
+            except AttributeError:
+                pass
 
         detection_rect = pygame.rect.Rect((0, 0), self.detection_hitbox)
         detection_rect.center = self.get_rect().center

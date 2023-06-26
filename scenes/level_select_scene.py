@@ -59,6 +59,7 @@ def run(my_toolbox: toolbox.Toolbox):
     level_coin_imgs = []
     for i in range(0, 3):
         temp = int(level_coins[i])
+        print(temp)
         if temp == 3:
             level_coin_imgs.append("3-gold-coins.png")
         elif temp == 2:

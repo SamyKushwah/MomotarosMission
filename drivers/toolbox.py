@@ -2,7 +2,9 @@ import pygame
 import sys
 import os
 
-
+'''
+Purpose:  Graphics toolbox helper class to help with game image resizing when resizing the window.
+'''
 class Toolbox:
     def __init__(self):
         pygame.init()
