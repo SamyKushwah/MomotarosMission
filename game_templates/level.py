@@ -3,7 +3,6 @@ import math
 
 from game_templates import demon, obstacles
 
-
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
         self.width = level_width
@@ -16,18 +15,20 @@ class Level:
         self.demon_list = []
         self.background = background
         self.header = Header()
+        self.stone_imgs = []
+        self.water_img = None
 
     def add_platform(self, position, dimensions, platform_type = "stone", facing_direction="all", corners=False):
-        temp_platform = Platform(platform_type = platform_type, position = position, dimensions = dimensions, facing_direction = facing_direction, corners = corners)
+        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, platform_type, facing_direction, corners)
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
     def add_moving_platform(self, position, dimensions, max_speed, target, platform_type="stone",
                             facing_direction="all",
                             corners=False):
-        temp_platform = MovingPlatform(position, dimensions, max_speed, target, platform_type, facing_direction,
+        temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img, platform_type, facing_direction,
                                        corners)
-        print("Adding platform", temp_platform.get_rect())
+        #print("Adding platform", temp_platform.get_rect())
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -35,14 +36,24 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type):
+    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle(x, y)
+                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
                     self.interactible_list["button"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+
+                temp_obstacle = temp_obstacle.fence
+                try:
+                    self.interactible_list["fence"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["fence"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
 
             case "torigate":
                 temp_obs = obstacles.ToriObstacle(x, y)
@@ -58,80 +69,94 @@ class Level:
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
 
+    def load_stone_imgs(self):
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BM).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BR).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(ML).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MM).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MR).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TL).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TM).png"))
+        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png"))
+
+    def load_water_img(self):
+        self.water_img = pygame.image.load("images/tiles/watertile.png")
 
 class Platform:
-    def __init__(self, position, dimensions, platform_type, facing_direction, corners=False):
+    def __init__(self, position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners=False):
         self.width = dimensions[0]
         self.height = dimensions[1]
         self.x = position[0]
         self.y = position[1]
         self.image = pygame.surface.Surface(dimensions)
         self.velocity = [0, 0]
+        self.type = platform_type
         match platform_type:
             case "stone":
-                BL = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                BM = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                BR = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                ML = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                MM = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                MR = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                TL = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                TM = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                TR = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
+                BL = stone_imgs[4]
+                BM = stone_imgs[4]
+                BR = stone_imgs[4]
+                ML = stone_imgs[4]
+                MM = stone_imgs[4]
+                MR = stone_imgs[4]
+                TL = stone_imgs[4]
+                TM = stone_imgs[4]
+                TR = stone_imgs[4]
                 match facing_direction:
                     case "all":
-                        BL = pygame.image.load("images/tiles/stone/Stone(BL).png").convert()
-                        BM = pygame.image.load("images/tiles/stone/Stone(BM).png").convert()
-                        BR = pygame.image.load("images/tiles/stone/Stone(BR).png").convert()
-                        ML = pygame.image.load("images/tiles/stone/Stone(ML).png").convert()
-                        MM = pygame.image.load("images/tiles/stone/Stone(MM).png").convert()
-                        MR = pygame.image.load("images/tiles/stone/Stone(MR).png").convert()
-                        TL = pygame.image.load("images/tiles/stone/Stone(TL).png").convert()
-                        TM = pygame.image.load("images/tiles/stone/Stone(TM).png").convert()
-                        TR = pygame.image.load("images/tiles/stone/Stone(TR).png").convert()
+                        BL = stone_imgs[0]
+                        BM = stone_imgs[1]
+                        BR = stone_imgs[2]
+                        ML = stone_imgs[3]
+                        MM = stone_imgs[4]
+                        MR = stone_imgs[5]
+                        TL = stone_imgs[6]
+                        TM = stone_imgs[7]
+                        TR = stone_imgs[8]
                     case "up":
-                        TM = pygame.image.load("images/tiles/stone/Stone(TM).png").convert()
+                        TM = stone_imgs[7]
                         if corners:
-                            TL = pygame.image.load("images/tiles/stone/Stone(TL).png").convert()
-                            TR = pygame.image.load("images/tiles/stone/Stone(TR).png").convert()
+                            TL = stone_imgs[6]
+                            TR = stone_imgs[8]
                         else:
-                            TL = pygame.image.load("images/tiles/stone/Stone(TM).png").convert()
-                            TR = pygame.image.load("images/tiles/stone/Stone(TM).png").convert()
+                            TL = TM
+                            TR = TM
                     case "down":
-                        BM = pygame.image.load("images/tiles/stone/Stone(BM).png").convert()
+                        BM = stone_imgs[1]
                         if corners:
-                            BL = pygame.image.load("images/tiles/stone/Stone(BL).png").convert()
-                            BR = pygame.image.load("images/tiles/stone/Stone(BR).png").convert()
+                            BL = stone_imgs[0]
+                            BR = stone_imgs[2]
                         else:
-                            BL = pygame.image.load("images/tiles/stone/Stone(BM).png").convert()
-                            BR = pygame.image.load("images/tiles/stone/Stone(BM).png").convert()
+                            BL = BM
+                            BR = BM
                     case "left":
-                        ML = pygame.image.load("images/tiles/stone/Stone(ML).png").convert()
+                        ML = stone_imgs[3]
                         if corners:
-                            BL = pygame.image.load("images/tiles/stone/Stone(BL).png").convert()
-                            TL = pygame.image.load("images/tiles/stone/Stone(TL).png").convert()
+                            BL = stone_imgs[0]
+                            TL = stone_imgs[6]
                         else:
-                            BL = pygame.image.load("images/tiles/stone/Stone(ML).png").convert()
-                            TL = pygame.image.load("images/tiles/stone/Stone(ML).png").convert()
+                            BL = ML
+                            TL = ML
                     case "right":
-                        MR = pygame.image.load("images/tiles/stone/Stone(MR).png").convert()
+                        MR = stone_imgs[5]
                         if corners:
-                            BR = pygame.image.load("images/tiles/stone/Stone(BR).png").convert()
-                            TR = pygame.image.load("images/tiles/stone/Stone(TR).png").convert()
+                            BR = stone_imgs[2]
+                            TR = stone_imgs[4]
                         else:
-                            BR = pygame.image.load("images/tiles/stone/Stone(MR).png").convert()
-                            TR = pygame.image.load("images/tiles/stone/Stone(MR).png").convert()
+                            BR = MR
+                            TR = MR
 
             case "water":
-                BL = pygame.image.load("images/tiles/watertile.png").convert()
-                BM = pygame.image.load("images/tiles/watertile.png").convert()
-                BR = pygame.image.load("images/tiles/watertile.png").convert()
-                ML = pygame.image.load("images/tiles/watertile.png").convert()
-                MM = pygame.image.load("images/tiles/watertile.png").convert()
-                MR = pygame.image.load("images/tiles/watertile.png").convert()
-                TL = pygame.image.load("images/tiles/watertile.png").convert()
-                TM = pygame.image.load("images/tiles/watertile.png").convert()
-                TR = pygame.image.load("images/tiles/watertile.png").convert()
+                BL = water_img
+                BM = water_img
+                BR = water_img
+                ML = water_img
+                MM = water_img
+                MR = water_img
+                TL = water_img
+                TM = water_img
+                TR = water_img
 
         BL = pygame.transform.scale(BL, (70, 70))
         BM = pygame.transform.scale(BM, (70, 70))
@@ -164,7 +189,6 @@ class Platform:
                     self.image.blit(MR, (self.width - tile_width, tile_height * row))
                 else:
                     self.image.blit(MM, (tile_width * column, tile_height * row))
-
         if tiles_high > 1:
             for column in range(0, tiles_wide):
                 if column == 0:
@@ -182,8 +206,8 @@ class Platform:
 
 
 class MovingPlatform(Platform):
-    def __init__(self, position, dimensions, max_speed, target, platform_type, facing_direction="all", corners=False):
-        super().__init__(position, dimensions, platform_type, facing_direction, corners)
+    def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, platform_type, facing_direction="all", corners=False):
+        super().__init__(position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners)
         self.__int_x = position[0]
         self.__int_y = position[1]
         self.__moving_right = True
@@ -192,7 +216,7 @@ class MovingPlatform(Platform):
         self.initial = position
         self.target = target
         self.middle = [(self.initial[0] + self.target[0]) // 2, (self.initial[1] + self.target[1]) // 2]
-        print("middle:", self.middle[0])
+        #print("middle:", self.middle[0])
 
     def movement(self):
         moved = [self.x - self.initial[0] + 1, self.y - self.initial[1] + 1]
@@ -200,6 +224,7 @@ class MovingPlatform(Platform):
         moved_target = [self.target[0] - self.initial[0], self.target[1] - self.initial[1]]
 
         if self.target[0] != self.initial[0]:
+            #print('move x')
             x_progress = moved[0] / moved_target[0]
 
             if self.x < self.middle[0]:
@@ -246,23 +271,23 @@ class MovingPlatform(Platform):
 class Header:
     def __init__(self):
         # load the images
-        self.health_front = pygame.image.load("images/level_1/HealthBarFront.png")
-        self.health_back = pygame.image.load("images/level_1/HealthBarBack.png")
-        self.header = pygame.image.load("images/level_1/header.png")
-        self.coin_back = pygame.image.load("images/level_1/CoinBarBack.png")
-        self.zero = pygame.image.load("images/level_1/zero.png")
-        self.one = pygame.image.load("images/level_1/one.png")
-        self.two = pygame.image.load("images/level_1/two.png")
-        self.three = pygame.image.load("images/level_1/three.png")
-        self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png")
-        self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png")
-        self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png")
+        self.health_front = pygame.image.load("images/level_1/HealthBarFront.png").convert_alpha()
+        self.health_back = pygame.image.load("images/level_1/HealthBarBack.png").convert_alpha()
+        self.header = pygame.image.load("images/level_1/header.png").convert_alpha()
+        self.coin_back = pygame.image.load("images/level_1/CoinBarBack.png").convert_alpha()
+        self.zero = pygame.image.load("images/level_1/zero.png").convert_alpha()
+        self.one = pygame.image.load("images/level_1/one.png").convert_alpha()
+        self.two = pygame.image.load("images/level_1/two.png").convert_alpha()
+        self.three = pygame.image.load("images/level_1/three.png").convert_alpha()
+        self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png").convert_alpha()
+        self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png").convert_alpha()
+        self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png")
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
         self.health_back = pygame.transform.scale(self.health_back, (300, 65))
-        self.header = pygame.transform.scale(self.header, (2200, 100)) # 1600
+        self.header = pygame.transform.scale(self.header, (2200, 100))
         self.coin_back = pygame.transform.scale(self.coin_back, (140, 65))
         self.zero = pygame.transform.scale(self.zero, (125, 65))
         self.one = pygame.transform.scale(self.one, (125, 65))
@@ -270,6 +295,7 @@ class Header:
         self.three = pygame.transform.scale(self.three, (125, 65))
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
+        # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 
