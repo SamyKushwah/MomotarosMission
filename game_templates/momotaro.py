@@ -230,7 +230,7 @@ class Momotaro:
                     for obstacle in list_of_obstacles[obstacle_type]:
                         #print(self.standing_on)
                         try:
-                            if self.standing_on.type == "button":
+                            if self.standing_on.type == "button" and self.standing_on == obstacle:
                                 #print("hello")
                                 obstacle.set_pushed(True)
                             else:
