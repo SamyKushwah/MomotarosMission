@@ -23,7 +23,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
 
     # load next button image
     next_img = pygame.Surface((400, 105), pygame.SRCALPHA)
-    next_img.fill((255, 255, 255, 128))
+    next_img.fill((255, 255, 255, 0))
     button_next = button.Button(next_img, text="Next")
 
     # draw the background and buttons with scaled position
