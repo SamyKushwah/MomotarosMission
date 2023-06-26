@@ -38,15 +38,22 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
     scene_screen = pygame.surface.Surface((w, h))
     scene_screen.blit(background, (0, 0))
 
-    button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
-    button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
-    button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
-    my_toolbox.draw_to_screen(scene_screen)
-    pygame.display.flip()
+
 
     # driver loop setup
     running = True
     while running:
+
+        button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
+        button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
+        button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
+
+        my_toolbox.draw_to_screen(scene_screen)
+
+        pygame.display.flip()
+
+        my_toolbox.clock.tick(60)
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
@@ -58,13 +65,5 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
                     return "level_selector"
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return current_level
-
-        button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
-        button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
-        button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
-
-        my_toolbox.draw_to_screen(scene_screen)
-
-        pygame.display.flip()
 
         my_toolbox.clock.tick(60)
