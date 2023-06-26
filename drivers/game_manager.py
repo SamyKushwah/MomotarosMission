@@ -25,8 +25,8 @@ class GameManager:
         self.pause_btn = button.Button(pause_img)
 
         self.mountain_background = pygame.transform.scale(
-            pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
-        self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
+            pygame.image.load("images/backgrounds/level_1_bkgnd_lightest.png").convert_alpha(), (1920, 915))
+        # self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
 
     def run(self):
         # run event handling for the level until lvl_complete == True
@@ -89,13 +89,13 @@ class GameManager:
                 else:
                     positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
                 # Main Background
-                self.image.blit(self.mountain_background, (positional, 0))
-                self.image.blit(self.mountain_background, (1920 + positional, 0))
+                self.image.blit(self.mountain_background, (positional, 100))
+                self.image.blit(self.mountain_background, (1920 + positional, 100))
 
                 # Far Mountains
-                self.image.blit(self.far_mountains, (-544 + positional, 850))
-                self.image.blit(self.far_mountains, (positional, 850))
-                self.image.blit(self.far_mountains, (544 + positional, 850))
+                # self.image.blit(self.far_mountains, (-544 + positional, 850))
+                # self.image.blit(self.far_mountains, (positional, 850))
+                # self.image.blit(self.far_mountains, (544 + positional, 850))
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
@@ -130,6 +130,6 @@ class GameManager:
 
         self.level.header.draw_header(view_surface, self.momotaro.health, self.coins_collected)
 
-        self.pause_btn.draw(view_surface, (80, 65))
+        # self.pause_btn.draw(view_surface, (80, 65))
         self.my_toolbox.draw_to_screen(view_surface)
         pygame.display.update()

@@ -35,24 +35,14 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None):
+    def add_obstacle(self, x, y, type):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y)
+                temp_obstacle = obstacles.ButtonObstacle(x, y)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
                     self.interactible_list["button"] = [temp_obstacle]
-
-                self.collidable_list.append(temp_obstacle)
-
-                temp_obstacle = temp_obstacle.fence
-                try:
-                    self.interactible_list["fence"] += [temp_obstacle]
-                except KeyError:
-                    self.interactible_list["fence"] = [temp_obstacle]
-
-                self.collidable_list.append(temp_obstacle)
 
             case "torigate":
                 temp_obs = obstacles.ToriObstacle(x, y)
@@ -67,7 +57,6 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
-
 
 
 class Platform:
@@ -267,41 +256,49 @@ class Header:
         self.three = pygame.image.load("images/level_1/three.png")
         self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png")
         self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png")
-        self.momo = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
+        self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png")
+        self.bird = pygame.image.load("images/player2/bird.png")
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
         self.health_back = pygame.transform.scale(self.health_back, (300, 65))
-        self.header = pygame.transform.scale(self.header, (1000, 100))
+        self.header = pygame.transform.scale(self.header, (2200, 100)) # 1600
         self.coin_back = pygame.transform.scale(self.coin_back, (140, 65))
         self.zero = pygame.transform.scale(self.zero, (125, 65))
         self.one = pygame.transform.scale(self.one, (125, 65))
         self.two = pygame.transform.scale(self.two, (125, 65))
         self.three = pygame.transform.scale(self.three, (125, 65))
-        self.player_1_txt = pygame.transform.scale(self.player_1_txt, (145, 50))
-        # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
+        self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
+        self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (50, 80))
 
     def draw_header(self, surface, health, coins):
         # draw images to the screen
-        surface.blit(self.header, (460, 0))
-        surface.blit(self.player_1_txt, (570, 30))
-        surface.blit(self.momo, (745, 10))
+        surface.blit(self.header, (-200, 0))
+        surface.blit(self.player_1_txt, (210, 30))
+        surface.blit(self.momo, (435, 10))
 
-        surface.blit(self.health_back, (850, 15))
+        surface.blit(self.health_back, (540, 15))
         health_len = 225 * (health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
-        surface.blit(self.health_front, (908.5, 32))
+        surface.blit(self.health_front, (598.5, 32))
 
-        surface.blit(self.coin_back, (1200, 15))
+        surface.blit(self.coin_back, (890, 15))
 
         if coins == 0:
-            surface.blit(self.zero, (1200, 15))
+            surface.blit(self.zero, (900, 15))
         elif coins == 1:
-            surface.blit(self.one, (1200, 15))
+            surface.blit(self.one, (900, 15))
         elif coins == 2:
-            surface.blit(self.two, (1200, 15))
+            surface.blit(self.two, (900, 15))
         else:
-            surface.blit(self.three, (1200, 15))
+            surface.blit(self.three, (900, 15))
 
-        # surface.blit(self.player_2_txt, (1230, 30))
+        surface.blit(self.player_2_txt, (1080, 30))
+        surface.blit(self.bird, (1305, 10))
+
+        surface.blit(self.health_back, (1410, 15))
+        health_len = 225 * (health / 100)
+        self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
+        surface.blit(self.health_front, (1468.5, 32))

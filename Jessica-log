@@ -1,0 +1,12 @@
+6/12/23 - talked as a group to decide the final plan for our game. Decided on roles for the project, mine focusing on UI elements 
+6/13/23 - began working on finding backgrounds, sprites and deciding on an overal color scheme and vibe for the game. Began the editing of the start screen. 
+6/14/23 - finished the start screen and level selection screen design. Added some functionality for clicking to advance to the next screen. 
+6/15/23 - worked on allowing the screen to be resized to any dimensions. This involved figuring out what percentages each sprite should be in comparison 
+          to the rest of the screen. Also began brainstorming the best approach for displaying coins for each level. 
+6/19/23 - continued to work on resizing the screen fluidly and finding the correct proportions for every element. Implemented a way to read data from a save 
+          file to assign the correct coin images for each level, decided to make the pause screen a blurred/lightened image of the current level with text 
+          on top to display options to resume, restart, or go home. Began the design of level 1. 
+6/20/23 - worked on enchancing image and text quality by recreating images with more pixels- did this for every screen. Changed pause screen to be a cloud 
+          background and added links to resume, restart and home page. Attempted to start the design of level 1- still trying to
+          get a good design going. Brainstorming/trial and error for good design for win/lose screens
+6/21/23 - completed the platforms for level 1. Made temporary win/lose screens with button functionality to go to different screens.

@@ -1,5 +1,6 @@
 import pygame
 
+
 class Controllable:
     gravity = 1  # Adjust number to change how fast he falls
 
@@ -43,7 +44,7 @@ class Controllable:
             if event.key == pygame.K_UP:
                 if not self.is_jumping:
                     self.keys_down += 1
-                    self.vel_y = -15
+                    self.vel_y = -23
                     # print('up')
                     self.grav_on = True
 
@@ -111,7 +112,7 @@ class Controllable:
 class Momotaro(Controllable):
     def sprites_init(self):
         self.is_attacking = False
-        self.health = 100
+        self.health = 1000
         self.idle_image = pygame.image.load("images/MomotaroSprites/MomoStandingIdle.png")
 
         self.right_mvmnt_frames = [pygame.image.load("images/MomotaroSprites/momotarowalkrightA.png"),
@@ -154,6 +155,11 @@ class Momotaro(Controllable):
                 int(frame.get_width() * self.scale_factor), int(frame.get_height() * self.scale_factor)))
 
     def draw_sprite(self, screen):
+        # print(self.vel_x)
+        # print(self.rect.x)
+        # print(self.idle_image.get_height())
+        # screen.blit(self.idle_image, (self.rect.x, self.rect.y))
+
         animation_delay = 8  # increase this number to change how fast the animation plays
 
         if self.vel_x == 0:
@@ -180,11 +186,13 @@ class Momotaro(Controllable):
                 screen.blit(self.left_mvmnt_frames[index], (self.rect.x, self.rect.y))
                 self.frame_index += 1
 
-    def take_damage(self,damage):
+    def take_damage(self, damage):
         self.health -= damage
+        if self.health < 0:
+            self.health = 0
 
     def check_collision_demon(self, list_of_demons):
-        damage = 100
+        damage = 5
         pixel_margin = 30
 
         for demon in list_of_demons:
@@ -212,36 +220,19 @@ class Momotaro(Controllable):
 
     def check_collision_interactible(self, list_of_obstacles):
         for obstacle in list_of_obstacles:
-            match obstacle.type:
-                case "button":
-                    if self.rect.colliderect(obstacle.get_rect()):
-                        print("hello")
+            if self.rect.colliderect(obstacle.get_rect()):
+                match obstacle.type:
+                    case "button":
                         obstacle.set_pushed(True)
-                    else:
-                        print("bye")
-                        obstacle.set_pushed(False)
 
-
-    def poll_attack(self, event):
-        timer = pygame.USEREVENT + 1
-        pygame.time.set_timer(timer, 1000)
-
+    def poll_attack(self,event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_p:
+                print("h")
                 self.is_attacking = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_p:
+                self.is_attacking = False
 
-        elif event.type == timer:
-            self.is_attacking = False
-
-    def check_if_over_platform(self,list_of_moving_platforms):
-        pixel_margin = 2
-        for platform in list_of_moving_platforms:
-            if abs(platform.get_rect().top - self.rect.bottom) < pixel_margin:
-                self.rect.x += platform.vel
-        self.rect.update(self.rect)
-
-    def check_collision_water(self, list_of_platforms):
-        for platform in list_of_platforms:
-            if self.rect.colliderect(platform.get_rect()):
-                if platform.platform_type == "water":
-                    self.health = 0
+    def get_health(self):
+        return self.health
