@@ -4,16 +4,16 @@ from ui_templates import button
 from drivers import toolbox
 
 
-def run(my_toolbox: toolbox.Toolbox):
+def run(my_toolbox: toolbox.Toolbox, current_level):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/pause_screen/pause_screen_bkgnd.png")
+    background = pygame.image.load("images/pause_screen/pause_screen_bkgnd.png").convert_alpha()
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image
     home_img = pygame.Surface((400, 110), pygame.SRCALPHA)
-    home_img.fill((255, 255, 255, 128))
+    home_img.fill((255, 255, 255, 0))
     #home_img = pygame.image.load("images/pause_screen/home_btn.png")
     #home_img = pygame.transform.scale(home_img, (w * (1 / 4), h * (1 / 13)))
     button_home = button.Button(home_img, lwd=2, text="Home")
@@ -26,14 +26,14 @@ def run(my_toolbox: toolbox.Toolbox):
     #restart_img = pygame.image.load("images/pause_screen/restart_btn.png")
     #restart_img = pygame.transform.scale(restart_img, (w * (1 / 3), h * (1 / 12)))
     restart_img = pygame.Surface((610, 115), pygame.SRCALPHA)
-    restart_img.fill((255, 255, 255, 128))
+    restart_img.fill((255, 255, 255, 0))
     button_restart = button.Button(restart_img, lwd=2, text="Restart")
 
     #load resume button image
     #resume_img = pygame.image.load("images/pause_screen/resume_btn.png")
     #resume_img = pygame.transform.scale(resume_img, (w * (1 / 3), h * (1 / 12)))
     resume_img = pygame.Surface((575, 115), pygame.SRCALPHA)
-    resume_img.fill((255, 255, 255, 128))
+    resume_img.fill((255, 255, 255, 0))
     button_resume = button.Button(resume_img, lwd=2, text="Resume")
 
     scene_screen = pygame.surface.Surface((w, h))
@@ -54,10 +54,12 @@ def run(my_toolbox: toolbox.Toolbox):
 
                 if button_home.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_selector"
+                elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
+                    #print('returning current level')
+                    #print(current_level)
+                    return current_level
                 elif button_resume.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "resume"
-                elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_1"
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return "resume"
