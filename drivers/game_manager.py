@@ -82,6 +82,13 @@ class GameManager:
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     return lose_rt
 
+            if self.momotaro.standing_on:
+                if self.momotaro.position[
+                    1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
+                    lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
+                    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                        return lose_rt
+
             self.tick_physics()
             self.draw()
 
