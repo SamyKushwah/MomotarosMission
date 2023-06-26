@@ -84,7 +84,6 @@ class Level:
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
 
-
 class Platform:
     def __init__(self, position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners=False):
         self.width = dimensions[0]
