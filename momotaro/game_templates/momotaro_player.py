@@ -249,7 +249,7 @@ class Momotaro:
                     gate_center_x = obstacle.get_rect().centerx
                     gate_center_y = obstacle.get_rect().centery
 
-                    margin = 20
+                    margin = 40
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
 
