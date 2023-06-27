@@ -48,8 +48,8 @@ fixed minor bugs with momotaro death
 made level 1 based on ruhi's wireframe
 pressing up (W key) on the torigate ends the level
 
-6/26/23
-2pm - ?
+6/26/23			6.5 hours
+2pm - 8:30pm
 Added everyone's changes
 - Jessica's new header
 - Jessica's scene changes and accurate coins collected on level select and win screen
@@ -58,5 +58,10 @@ Added everyone's changes
 Adding comments and sphinx documentation comments to functions and classes
 Demons now die when falling on water
 
+6/27/23
+5pm - 7pm
+Fixed a torigate bug where the level was not ending
+Prepared for presentation and practiced live demo
+Fixed insta death bug when falling off side of platform
 
 
