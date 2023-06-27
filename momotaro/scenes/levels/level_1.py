@@ -62,6 +62,6 @@ def create_level(my_toolbox):
 
     # add end goal torigate
     level1.add_platform((1560, 400), (350,50), facing_direction="up")
-    level1.add_obstacle(1650, 380, "torigate") # end of the level marker
+    level1.add_obstacle(1650, 340, "torigate") # end of the level marker
 
     return level1

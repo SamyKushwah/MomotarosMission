@@ -1,6 +1,7 @@
 import pygame
 import sys
 import os
+import pathlib
 from momotaro.drivers import toolbox
 from momotaro.drivers import game_manager
 from momotaro.scenes import level_select_scene, title_menu_scene
@@ -14,7 +15,7 @@ def main():
 
     next_state = "title_menu"
 
-    os.chdir("../")
+    os.chdir(pathlib.Path(__file__).parent.resolve().parent.resolve())
 
     pygame.display.set_caption('Momotaro\'s Mission')
     pygame.display.set_icon(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha())
