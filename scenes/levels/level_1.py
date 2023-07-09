@@ -41,7 +41,9 @@ def create_level(my_toolbox):
 
     # gate ending water platforming
     level1.add_obstacle(3060, 800, "button", fence_initial=(3300, 620), fence_final=(3300, 400), fence_dimensions=(150, 400))
-
+    level1.add_tutorial_text(650,500,0,1000,(100,100),"Use W, A, and D to move around and jump.")
+    level1.add_tutorial_text(2100, 600, 1500, 2100, (100, 100), "Momotaro will drown if he touches water.")
+    level1.add_tutorial_text(2100, 700, 1500, 2100, (100, 100), "Avoid it using the platforms.")
 
     # Demon fight pit section
     level1.add_demon([4120, 780], (800,500))

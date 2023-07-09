@@ -4,8 +4,6 @@ from drivers import toolbox
 import drivers
 
 pygame.font.init()
-
-
 class Button(pygame.sprite.Sprite):
     my_toolbox = toolbox.Toolbox()
 

@@ -2,7 +2,7 @@ import pygame
 import math
 
 from game_templates import demon, obstacles
-
+from ui_templates import tutorial
 
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
@@ -12,6 +12,7 @@ class Level:
         self.collidable_list = []
         self.platform_list = []
         self.moving_platform_list = []
+        self.tutorial_text_list = []
         self.interactible_list = {}
         self.demon_list = []
         self.background = background
@@ -69,6 +70,10 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
+
+    def add_tutorial_text(self,x,y,x_min,x_max,dimensions,text):
+        temp_text = tutorial.TutorialText((x,y), x_min, x_max, dimensions=dimensions, text= text)
+        self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
         self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png").convert_alpha())
