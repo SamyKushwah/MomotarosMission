@@ -45,13 +45,13 @@ class Button(pygame.sprite.Sprite):
                 if self.hover:
                     # create a different color for cursor text
                     shadow_offset = 0
-                    shadow_color = (0, 0, 0)  # Text color (yellow)
+                    shadow_color = (0, 0, 0)  # Text color (black)
                     shadow_pos = (location[0] + shadow_offset, location[1] + shadow_offset)
-                    # creating yellow text
+                    # creating black text
                     my_font = pygame.font.Font("drivers/" + self.font_path, self.font_size)
                     text_surface = my_font.render(self.text, True, shadow_color)
-                    text_rect = text_surface.get_rect()  # Set text_rect center
-                    text_rect.center = shadow_pos
+                    text_rect = text_surface.get_rect()
+                    text_rect.center = shadow_pos  # Set text_rect center
                     surface.blit(text_surface, text_rect)
 
     def is_clicked(self, mouse_pos):
