@@ -1,6 +1,6 @@
 import pygame
-from pygame import mixer
-mixer.init()
+#from pygame import mixer
+#mixer.init()
 
 
 class Momotaro:

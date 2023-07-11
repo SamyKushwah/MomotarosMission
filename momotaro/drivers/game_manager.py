@@ -4,6 +4,8 @@ from momotaro.game_templates import momotaro_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
 from momotaro.ui_templates import button
 import sys
+#from pygame import mixer
+#mixer.init()
 
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
@@ -44,6 +46,7 @@ class GameManager:
     def run(self):
         # run event handling for the level until lvl_complete == True or broken out of
         while not self.level_complete:
+            # add bakcground music here
             # Poll events/user inputs
             events = pygame.event.get()
             for event in events:
