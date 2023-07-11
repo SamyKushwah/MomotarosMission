@@ -7,6 +7,11 @@ def create_level(my_toolbox):
     level1.load_water_img()
     level1.load_stone_imgs()
 
+    #add tutorial text
+    level1.add_tutorial_text(650,500,0,1000,(100,100),"Use W, A, and D to move around and jump.")
+    level1.add_tutorial_text(2100, 600, 1500, 2100, (100, 100), "Momotaro will drown if he touches water.")
+    level1.add_tutorial_text(2100, 700, 1500, 2100, (100, 100), "Avoid it using the platforms.")
+
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")  # left wall
     level1.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")  # right wall

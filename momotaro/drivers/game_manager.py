@@ -78,7 +78,7 @@ class GameManager:
                             return win_return
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
-            if self.momotaro.health <= 0 or self.momotaro.position[1] > 5000:
+            if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000:
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
 
                 # Poll next scene from lose screen
@@ -86,6 +86,7 @@ class GameManager:
                     return lose_rt
 
             # If momotaro is pushed below a block, he dies
+            
             if self.momotaro.standing_on:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
@@ -153,6 +154,8 @@ class GameManager:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+        for text in self.level.tutorial_text_list:
+            text.draw(self.image, self.momotaro.position[0])
 
         # Draw demons
         for demon in self.level.demon_list:
