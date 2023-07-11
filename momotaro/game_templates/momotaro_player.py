@@ -1,4 +1,6 @@
 import pygame
+from pygame import mixer
+mixer.init()
 
 
 class Momotaro:
@@ -75,12 +77,14 @@ class Momotaro:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
+            # add walking sound
             if self.velocity[0] < 0:
                 self.velocity[0] += 0.3
             self.velocity[0] += 0.3
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
+            # add walking sound
             if self.velocity[0] > 0:
                 self.velocity[0] -= 0.3
             self.velocity[0] -= 0.3
@@ -93,6 +97,7 @@ class Momotaro:
                 self.velocity[0] = 0
 
         if keys[pygame.K_w]:
+            # add sound of jumping here
             if self.standing:
                 self.velocity[1] = -23 + (self.external_forces[1] / 2)
                 self.velocity[0] += self.external_forces[0]
@@ -249,9 +254,11 @@ class Momotaro:
                     gate_center_x = obstacle.get_rect().centerx
                     gate_center_y = obstacle.get_rect().centery
 
-                    margin = 20
+                    margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
+                    else:  # fixed bug so now only when you are in gate range anf up you win
+                        obstacle.set_pushed(False)
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
