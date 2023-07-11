@@ -64,4 +64,9 @@ Fixed a torigate bug where the level was not ending
 Prepared for presentation and practiced live demo
 Fixed insta death bug when falling off side of platform
 
+7/11/23 
+5pm-7pm
+Merged Ruhi's new tutorial text
+Merged Samy's tori bug fix for the bug that literally just showed up during the live demo
+Planned out and looked over updated level 1 and level 2 wireframes
 
