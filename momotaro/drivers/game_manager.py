@@ -31,10 +31,9 @@ class GameManager:
         self.pause_btn = button.Button(pause_img)
 
         # Loading background image
-        self.mountain_background = pygame.transform.scale(
-        #    pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
-            pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
-        #self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
+        self.background = self.level.background
+        # self.mountain_background = pygame.transform.scale(
+            # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
 
         self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
 
@@ -125,28 +124,18 @@ class GameManager:
         view_surface = pygame.surface.Surface((1920, 1080))
 
         # Draw Background
-        self.image.fill((70, 70, 180))
-        match self.level.background:
-            case "cave":
-                self.image.fill((20, 20, 30))
-            case "mountains":
-                if self.momotaro.get_rect().centerx <= 960:
-                    positional = 0 - (960 / 200)
-                elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-                    positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
-                else:
-                    positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+        # self.image.fill((70, 70, 180))
+        if self.momotaro.get_rect().centerx <= 960:
+            positional = 0 - (960 / 200)
+        elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+            positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+        else:
+            positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
 
-                # Main Background
-                self.image.blit(self.mountain_background, (positional, 100))
-                self.image.blit(self.mountain_background, (1920 + positional, 100))
-
-                self.image.blit(self.controls, (170, 200))
-
-                # Far Mountains
-                #self.image.blit(self.far_mountains, (-544 + positional, 850))
-                #self.image.blit(self.far_mountains, (positional, 850))
-                #self.image.blit(self.far_mountains, (544 + positional, 850))
+        # Main Background
+        self.image.blit(self.background, (positional, 100))
+        self.image.blit(self.background, (1920 + positional, 100))
+        self.image.blit(self.controls, (170, 200))
 
         # Draw platforms
         for platform in self.level.platform_list:

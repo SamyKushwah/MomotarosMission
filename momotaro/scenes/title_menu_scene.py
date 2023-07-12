@@ -32,7 +32,7 @@ def run(my_toolbox: toolbox.Toolbox):
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 # Screen was clicked somewhere
-                return "level_selector"
+                return "level_selector", scene_screen
 
         # draw the background and title
         my_toolbox.clock.tick(60)

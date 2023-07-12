@@ -6,14 +6,18 @@
 6/19/23 - continued to work on resizing the screen fluidly and finding the correct proportions for every element. Implemented a way to read data from a save 
           file to assign the correct coin images for each level, decided to make the pause screen a blurred/lightened image of the current level with text 
           on top to display options to resume, restart, or go home. Began the design of level 1. 
-6/20/23 - worked on enchancing image and text quality by recreating images with more pixels- did this for every screen. Changed pause screen to be a cloud 
+6/20/23 - worked on enhancing image and text quality by recreating images with more pixels- did this for every screen. Changed pause screen to be a cloud
           background and added links to resume, restart and home page. Attempted to start the design of level 1- still trying to
           get a good design going. Brainstorming/trial and error for good design for win/lose screens
 6/21/23 - completed the platforms for level 1. Made temporary win/lose screens with button functionality to go to different screens.
 6/22/23 - platform implementation was changed so I used the new system to begin designing a level for the game. created a stationary header for level one
           and added temporary health bars
-6/25/23 - continued to work on the header and added funtionality to the health and coin displays. Added fake information for player 2 on the header. Created
+6/25/23 - continued to work on the header and added functionality to the health and coin displays. Added fake information for player 2 on the header. Created
           a background for the level, redid the design of the stone and water tiles. Incorporated the new designs into the level
-6/26/23 - created new win and lose screens. Updated the original start and level select screens to match the new vibe of the level. Added functioonality
+6/26/23 - created new win and lose screens. Updated the original start and level select screens to match the new vibe of the level. Added functionality
           to update the save file and show that data on the win screen and when you go back to the level screen. Updated images on the header and
           obstacles.  Added an image to show the controls for the game.
+7/10/23 - began working on screen change animations, specifically the crossfade. Began brainstorming design ideas for levels 2 and 3.
+7/11/23 - decided on cave as the level 2 theme and bamboo jungle for the level 3 theme. Created the cave background and began working on the level 2
+          tiles. Continued some work on screen change animations
+7/12/23 -
