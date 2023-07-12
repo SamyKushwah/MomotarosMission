@@ -11,3 +11,5 @@ Personal Log:
 6/26 -> Implementing highlight into all other screens. Working on fixing bugs and merging stuff.
 7/10-7/11 -> Researching royalty free audio tht fits the theme of the game. Trying to use pygame.mixer to incorporate
              but "audio device not found" error shows up. Spent hours researching and trying to troubleshoot error.
+7/12 -> Fixed error with audio device. Added sounds for background and level 1. Researched sounds for win and lose and
+        added them as well.
