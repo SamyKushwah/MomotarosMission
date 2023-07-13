@@ -1,4 +1,4 @@
-from momotaro.scenes.levels import level_1A, level_1
+from momotaro.scenes.levels import level_1A, level_1, level_3
 import pygame
 from momotaro.game_templates import momotaro_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
@@ -20,8 +20,13 @@ class GameManager:
         match level:
             case "level_1A":
                 self.level = level_1A.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
             case "level_1":
                 self.level = level_1.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
+            case "level_3":
+                self.level = level_3.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -35,7 +40,7 @@ class GameManager:
         # self.mountain_background = pygame.transform.scale(
             # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
 
-        self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
+
 
     '''
     Purpose: While the GameManager object is running, the main gameplay loop for the corresponding level occurs

@@ -23,6 +23,10 @@ class Level:
             self.background = pygame.transform.scale(
                 pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 915))
             self.header = Header("cave")
+        elif background == "bamboo":
+            self.background = pygame.transform.scale(
+                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 915))
+            self.header = Header("bamboo")
 
         self.stone_imgs = []
         self.water_img = None
@@ -99,6 +103,16 @@ class Level:
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TL.png").convert_alpha())
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TM.png").convert_alpha())
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TR.png").convert_alpha())
+        elif self.type == "bamboo":
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_ML.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_MM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_MR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TR.png").convert_alpha())
 
 
     def load_water_img(self):
@@ -303,6 +317,10 @@ class Header:
             self.health_back = pygame.image.load("images/game_ui/HealthBarBack2.png").convert_alpha()
             self.header = pygame.image.load("images/game_ui/header2.png").convert_alpha()
             self.coin_back = pygame.image.load("images/game_ui/CoinBarBack2.png").convert_alpha()
+        elif level_type == "bamboo":
+            self.health_back = pygame.image.load("images/game_ui/HealthBarBack3.png").convert_alpha()
+            self.header = pygame.image.load("images/game_ui/header3.png").convert_alpha()
+            self.coin_back = pygame.image.load("images/game_ui/CoinBarBack3.png").convert_alpha()
 
         self.zero = pygame.image.load("images/game_ui/zero.png").convert_alpha()
         self.one = pygame.image.load("images/game_ui/one.png").convert_alpha()

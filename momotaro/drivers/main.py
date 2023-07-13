@@ -62,6 +62,8 @@ def main():
                 next_state = my_game.run()
             case "level_3":
                 # bring the user to level 3
+                my_game = game_manager.GameManager(my_toolbox, "level_3")
+                next_state = my_game.run()
                 pass  # TODO
             case "credits":
                 # bring the user to the credits page
