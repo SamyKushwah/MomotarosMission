@@ -35,7 +35,7 @@ class Demon:
                 also takes into account external velocity changes such as from getting hit by Momotaro or from
                 being on a moving platform.
     '''
-    def update_movement(self, momotaro):
+    def update_movement(self, momotaro, pet):
         # Demon subject to gravity
         if not self.standing:
             self.velocity[1] += self.gravity
@@ -54,24 +54,28 @@ class Demon:
         # Check if Momotaro is within detection range
         detection_rect = pygame.rect.Rect((0, 0), self.detection_hitbox)
         detection_rect.center = self.get_rect().center
-        momotaro_rect = momotaro.get_rect()
-        if detection_rect.colliderect(momotaro_rect):
-            if detection_rect.centerx < momotaro_rect.centerx:
-                self.moving_direction = "right"
-                self.velocity[0] += 0.2
+
+        targets = [momotaro, pet]
+
+        for target in targets:
+            momotaro_rect = target.get_rect()
+            if detection_rect.colliderect(momotaro_rect):
+                if detection_rect.centerx < momotaro_rect.centerx:
+                    self.moving_direction = "right"
+                    self.velocity[0] += 0.2
+                else:
+                    self.moving_direction = "left"
+                    self.velocity[0] -= 0.2
+                if detection_rect.centery - momotaro_rect.centery > 100:
+                    if self.standing:
+                        self.velocity[1] = -23 + (self.external_forces[1] / 2)
+                        self.velocity[0] += self.external_forces[0]
+                        self.standing = False
             else:
-                self.moving_direction = "left"
-                self.velocity[0] -= 0.2
-            if detection_rect.centery - momotaro_rect.centery > 100:
-                if self.standing:
-                    self.velocity[1] = -23 + (self.external_forces[1] / 2)
-                    self.velocity[0] += self.external_forces[0]
-                    self.standing = False
-        else:
-            self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
-            if abs(self.velocity[0]) < 1:
-                self.velocity[0] = 0
+                self.moving_direction = "idle"
+                self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
+                if abs(self.velocity[0]) < 1:
+                    self.velocity[0] = 0
 
         # Limit max horizontal movement speed
         if self.velocity[0] > 12:

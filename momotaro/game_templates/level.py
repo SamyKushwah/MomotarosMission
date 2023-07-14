@@ -291,7 +291,7 @@ class Header:
         self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png").convert_alpha()
         self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png").convert_alpha()
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
-        self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
+        self.bird = pygame.image.load("images/player2/flying_left.png").convert_alpha()
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
@@ -308,14 +308,14 @@ class Header:
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 
-    def draw_header(self, surface, health, coins):
+    def draw_header(self, surface, momo_health, pet_health, coins):
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
         surface.blit(self.momo, (435, 10))
 
         surface.blit(self.health_back, (540, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (momo_health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -334,6 +334,6 @@ class Header:
         surface.blit(self.bird, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (pet_health / 50)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))

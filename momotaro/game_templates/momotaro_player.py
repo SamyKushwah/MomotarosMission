@@ -240,9 +240,6 @@ class Momotaro:
                             if self.standing_on.type == "button" and self.standing_on == obstacle:
                                 #print("hello")
                                 obstacle.set_pushed(True)
-                            else:
-                                #print("bye")
-                                obstacle.set_pushed(False)
                         except AttributeError:
                             obstacle.set_pushed(False)
                 case "torigate":
