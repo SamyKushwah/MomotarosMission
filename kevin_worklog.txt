@@ -70,3 +70,12 @@ Merged Ruhi's new tutorial text
 Merged Samy's tori bug fix for the bug that literally just showed up during the live demo
 Planned out and looked over updated level 1 and level 2 wireframes
 
+7/14/23
+12pm - 5:30pm
+Merged Shawn's player 2 code
+Playtested player 2 flying and movement
+Merged Jessica's level 2 designs, and later her level 3 designs
+Verified all merged code works through playtesting
+Log known demon update_movement() bug that only tracks player 2
+Plan level screen transition animations.
+

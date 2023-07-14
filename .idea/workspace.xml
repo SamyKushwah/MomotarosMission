@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added shawn's player 2 updates">
-      <change afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/momotaro/ui_templates/screen_transition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/level.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/save_data/game_data" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/save_data/game_data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/level_select_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/level_select_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/title_menu_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/title_menu_scene.py" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,14 +58,7 @@
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
       <workItem from="1689067444194" duration="3092000" />
-      <workItem from="1689316618344" duration="5546000" />
-    </task>
-    <task id="LOCAL-00003" summary="attacking now plays while idle, fixed demon collision rectangle">
-      <created>1687415740777</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1687415740777</updated>
+      <workItem from="1689316618344" duration="5923000" />
     </task>
     <task id="LOCAL-00004" summary="updated demon back and forth mvmnt">
       <created>1687416328000</created>
@@ -411,14 +396,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689318534470</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
+      <created>1689322262578</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322262578</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated all of ruhi's button and gate code to work with the new code.&#10;&#10;added test button and gate in level 1A" />
     <MESSAGE value="includes sami's new button highlighting" />
     <MESSAGE value="forgot to include the used font file" />
     <MESSAGE value="included shawns new combat changes" />
@@ -443,10 +434,11 @@
     <MESSAGE value="added the dist stuff, added ruhi's tutorial" />
     <MESSAGE value="added sami's tori gate bug fix" />
     <MESSAGE value="added shawn's player 2 updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="added shawn's player 2 updates" />
+    <MESSAGE value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689321928572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689322396182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
