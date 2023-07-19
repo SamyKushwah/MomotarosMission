@@ -79,3 +79,17 @@ Verified all merged code works through playtesting
 Log known demon update_movement() bug that only tracks player 2
 Plan level screen transition animations.
 
+7/18/23
+2pm - 4pm
+Playtesting
+Logging bugs and listing work to do for the week
+
+7/19/23
+1pm-5pm
+Team meeting
+Described plans for level 3
+Shared currently known bugs
+Player movement number tweaking for a better feeling
+Shared our work done so far
+Fixed the bug where falling off a platform registered as getting crushed
+Fixed demon tracking bug so that it now attacks the closest player
