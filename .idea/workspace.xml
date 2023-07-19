@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="updated kevin_worklog">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,14 +59,7 @@
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
       <workItem from="1689067444194" duration="3092000" />
-      <workItem from="1689316618344" duration="5923000" />
-    </task>
-    <task id="LOCAL-00004" summary="updated demon back and forth mvmnt">
-      <created>1687416328000</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1687416328000</updated>
+      <workItem from="1689316618344" duration="8325000" />
     </task>
     <task id="LOCAL-00005" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
       <created>1687421640599</created>
@@ -403,14 +397,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689322262578</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="updated kevin_worklog">
+      <created>1689322789763</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322789763</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="includes sami's new button highlighting" />
     <MESSAGE value="forgot to include the used font file" />
     <MESSAGE value="included shawns new combat changes" />
     <MESSAGE value="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant" />
@@ -435,10 +435,11 @@
     <MESSAGE value="added sami's tori gate bug fix" />
     <MESSAGE value="added shawn's player 2 updates" />
     <MESSAGE value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
+    <MESSAGE value="updated kevin_worklog" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated kevin_worklog" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689322396182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689743001909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
