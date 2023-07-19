@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="gq6zvvze" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2RY29dhd9mpQaRYLxzGBLZFG1pW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ckevi/Desktop/performant programming/projects/Ex3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="" />
+      <created>1687412548163</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687412548163</updated>
+      <workItem from="1687412548396" duration="688000" />
+      <workItem from="1687413827729" duration="8713000" />
+      <workItem from="1687591840728" duration="4149000" />
+      <workItem from="1689067444194" duration="3092000" />
+      <workItem from="1689316618344" duration="5923000" />
+    </task>
+    <task id="LOCAL-00004" summary="updated demon back and forth mvmnt">
+      <created>1687416328000</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1687416328000</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
+      <created>1687421640599</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687421640599</updated>
+    </task>
+    <task id="LOCAL-00006" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
+      <created>1687422138739</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687422138739</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
+      <created>1687422649099</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687422649099</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added ruhi's poll_attack changes">
+      <created>1687423161674</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1687423161674</updated>
+    </task>
+    <task id="LOCAL-00009" summary="logged today's work">
+      <created>1687423399897</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687423399897</updated>
+    </task>
+    <task id="LOCAL-00010" summary="updated demon class to reflect shawn's momotaro class">
+      <created>1687596143426</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687596143426</updated>
+    </task>
+    <task id="LOCAL-00011" summary="updated demon class to reflect shawn's momotaro class">
+      <created>1687599174248</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687599174248</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updated demon class to reflect shawn's momotaro class">
+      <created>1687600727959</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1687600727959</updated>
+    </task>
+    <task id="LOCAL-00013" summary="getting close to merging again">
+      <created>1687601744781</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1687601744781</updated>
+    </task>
+    <task id="LOCAL-00014" summary="updated to shawns version">
+      <created>1687602980898</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1687602980898</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated to shawns version">
+      <created>1687603001466</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687603001466</updated>
+    </task>
+    <task id="LOCAL-00016" summary="updated to shawns version">
+      <created>1687603603634</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1687603603634</updated>
+    </task>
+    <task id="LOCAL-00017" summary="updated to shawns version">
+      <created>1687603767768</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1687603767768</updated>
+    </task>
+    <task id="LOCAL-00018" summary="new momotaro attacking form, charge p for longer and stronger attack">
+      <created>1687670681638</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1687670681638</updated>
+    </task>
+    <task id="LOCAL-00019" summary="new momotaro attacking form, charge p for longer and stronger attack">
+      <created>1687671591409</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1687671591409</updated>
+    </task>
+    <task id="LOCAL-00020" summary="merged new momotaro attacking code with shawns movement code">
+      <created>1687672455152</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1687672455152</updated>
+    </task>
+    <task id="LOCAL-00021" summary="added invincibility timer">
+      <created>1687672479576</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1687672479576</updated>
+    </task>
+    <task id="LOCAL-00022" summary="added coin obstacle">
+      <created>1687674755760</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1687674755760</updated>
+    </task>
+    <task id="LOCAL-00023" summary="added coin obstacle">
+      <created>1687675179253</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1687675179253</updated>
+    </task>
+    <task id="LOCAL-00024" summary="demons get knocked back upon getting hit, game manager coins collected now updates">
+      <created>1687679409016</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1687679409016</updated>
+    </task>
+    <task id="LOCAL-00025" summary="implemented jessica's ui header bar">
+      <created>1687680194656</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1687680194656</updated>
+    </task>
+    <task id="LOCAL-00026" summary="added jessica's images">
+      <created>1687680329661</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1687680329661</updated>
+    </task>
+    <task id="LOCAL-00027" summary="momotaro attack duration can be controlled">
+      <created>1687684984123</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1687684984123</updated>
+    </task>
+    <task id="LOCAL-00028" summary="updated all of ruhi's button and gate code to work with the new code.&#10;&#10;added test button and gate in level 1A">
+      <created>1687701318831</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1687701318831</updated>
+    </task>
+    <task id="LOCAL-00029" summary="includes sami's new button highlighting">
+      <created>1687707315033</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1687707315033</updated>
+    </task>
+    <task id="LOCAL-00030" summary="forgot to include the used font file">
+      <created>1687707332434</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1687707332434</updated>
+    </task>
+    <task id="LOCAL-00031" summary="included shawns new combat changes">
+      <created>1687708572698</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1687708572698</updated>
+    </task>
+    <task id="LOCAL-00032" summary="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant">
+      <created>1687709860830</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1687709860830</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration">
+      <created>1687712610524</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1687712610524</updated>
+    </task>
+    <task id="LOCAL-00034" summary="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)">
+      <created>1687713565758</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1687713565758</updated>
+    </task>
+    <task id="LOCAL-00035" summary="updated fence and button class to allow for custom sized fences">
+      <created>1687714604176</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1687714604176</updated>
+    </task>
+    <task id="LOCAL-00036" summary="included second part of level 1: platforming with moving platforms and water underneath">
+      <created>1687715411035</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1687715411035</updated>
+    </task>
+    <task id="LOCAL-00037" summary="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1">
+      <created>1687718798468</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1687718798468</updated>
+    </task>
+    <task id="LOCAL-00038" summary="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected">
+      <created>1687719712200</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1687719712200</updated>
+    </task>
+    <task id="LOCAL-00039" summary="commented out print statements">
+      <created>1687719999723</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1687719999723</updated>
+    </task>
+    <task id="LOCAL-00040" summary="added ruhi's changes, fixed some menu bugs">
+      <created>1687758772626</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1687758772626</updated>
+    </task>
+    <task id="LOCAL-00041" summary="started commenting everything">
+      <created>1687760242016</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1687760242016</updated>
+    </task>
+    <task id="LOCAL-00042" summary="added all of jessicas changes sheesh">
+      <created>1687762267006</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1687762267006</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added new comments to code, demons now die when landing on water">
+      <created>1687764022881</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1687764022881</updated>
+    </task>
+    <task id="LOCAL-00044" summary="added more comments to code">
+      <created>1687764737103</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1687764737103</updated>
+    </task>
+    <task id="LOCAL-00045" summary="standing on a button now only opens its corresponding gate (Ruhi's changes)">
+      <created>1687765049030</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1687765049030</updated>
+    </task>
+    <task id="LOCAL-00046" summary="fixed oval coins">
+      <created>1687765598052</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1687765598052</updated>
+    </task>
+    <task id="LOCAL-00047" summary="added ruhi's coin fixes and jessica's new header changes">
+      <created>1687766022896</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1687766022896</updated>
+    </task>
+    <task id="LOCAL-00048" summary="updated worklog with hour estimates">
+      <created>1687767289294</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1687767289294</updated>
+    </task>
+    <task id="LOCAL-00049" summary="merged with shawn's dev release file organization&#10;&#10;added jessica's ui changes">
+      <created>1687774729599</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1687774729599</updated>
+    </task>
+    <task id="LOCAL-00050" summary="added sami's tori gate bug fix">
+      <created>1689068234504</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1689068234504</updated>
+    </task>
+    <task id="LOCAL-00051" summary="added shawn's player 2 updates">
+      <created>1689318534470</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1689318534470</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
+      <created>1689322262578</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322262578</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="includes sami's new button highlighting" />
+    <MESSAGE value="forgot to include the used font file" />
+    <MESSAGE value="included shawns new combat changes" />
+    <MESSAGE value="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant" />
+    <MESSAGE value="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration" />
+    <MESSAGE value="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)" />
+    <MESSAGE value="updated fence and button class to allow for custom sized fences" />
+    <MESSAGE value="included second part of level 1: platforming with moving platforms and water underneath" />
+    <MESSAGE value="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1" />
+    <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
+    <MESSAGE value="commented out print statements" />
+    <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
+    <MESSAGE value="started commenting everything" />
+    <MESSAGE value="added all of jessicas changes sheesh" />
+    <MESSAGE value="added new comments to code, demons now die when landing on water" />
+    <MESSAGE value="added more comments to code" />
+    <MESSAGE value="standing on a button now only opens its corresponding gate (Ruhi's changes)" />
+    <MESSAGE value="fixed oval coins" />
+    <MESSAGE value="added ruhi's coin fixes and jessica's new header changes" />
+    <MESSAGE value="updated worklog with hour estimates" />
+    <MESSAGE value="merged with shawn's dev release file organization&#10;&#10;added jessica's ui changes" />
+    <MESSAGE value="added the dist stuff, added ruhi's tutorial" />
+    <MESSAGE value="added sami's tori gate bug fix" />
+    <MESSAGE value="added shawn's player 2 updates" />
+    <MESSAGE value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689322396182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
+    <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
+    <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
+    <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$game_manager.coverage" NAME="game_manager Coverage Results" MODIFIED="1687717831583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+  </component>
+</project>
