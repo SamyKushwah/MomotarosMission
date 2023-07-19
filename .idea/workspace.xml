@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying.">
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="pet now dies when crushed">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,14 +59,7 @@
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
       <workItem from="1689067444194" duration="3092000" />
-      <workItem from="1689316618344" duration="10448000" />
-    </task>
-    <task id="LOCAL-00007" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
-      <created>1687422649099</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1687422649099</updated>
+      <workItem from="1689316618344" duration="11786000" />
     </task>
     <task id="LOCAL-00008" summary="added ruhi's poll_attack changes">
       <created>1687423161674</created>
@@ -403,14 +397,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689752792031</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="pet now dies when crushed">
+      <created>1689752934645</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1689752934645</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant" />
     <MESSAGE value="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration" />
     <MESSAGE value="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)" />
     <MESSAGE value="updated fence and button class to allow for custom sized fences" />
@@ -435,10 +435,11 @@
     <MESSAGE value="updated kevin_worklog" />
     <MESSAGE value="decreased momotaro friction" />
     <MESSAGE value="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying." />
-    <option name="LAST_COMMIT_MESSAGE" value="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying." />
+    <MESSAGE value="pet now dies when crushed" />
+    <option name="LAST_COMMIT_MESSAGE" value="pet now dies when crushed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689752812046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689754262388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
