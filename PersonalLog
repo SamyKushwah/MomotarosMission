@@ -13,3 +13,5 @@ Personal Log:
              but "audio device not found" error shows up. Spent hours researching and trying to troubleshoot error.
 7/12 -> Fixed error with audio device. Added sounds for background and level 1. Researched sounds for win and lose and
         added them as well.
+7/19 -> Gathered sounds for attacking, being hit, gate movement, coin collection, and demon. Had bugs with looping sound
+        for gate and demon. Fixed bug in gate sound.
