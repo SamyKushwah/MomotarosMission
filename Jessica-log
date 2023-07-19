@@ -20,4 +20,8 @@
 7/10/23 - began working on screen change animations, specifically the crossfade. Began brainstorming design ideas for levels 2 and 3.
 7/11/23 - decided on cave as the level 2 theme and bamboo jungle for the level 3 theme. Created the cave background and began working on the level 2
           tiles. Continued some work on screen change animations
-7/12/23 -
+7/12/23 - finished level 2 tiles and changed header to fit level 2 theme.
+7/13/23 - created level 3 background image, tiles, and header. Background is a work in progress and more details will be added. Created level 3 connections
+          in the code to allow navigation to level 3.
+7/19/23 - changed the 1A file to be level 2 and fixed any code to make that work. Added all level 2 components based off the wireframe Ruhi made.
+
