@@ -94,7 +94,7 @@ class GameManager:
 
             # If momotaro is pushed below a block, he dies
             
-            if self.momotaro.standing_on:
+            if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
                     lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)

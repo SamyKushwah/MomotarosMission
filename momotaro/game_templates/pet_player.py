@@ -9,7 +9,7 @@ class Pet:
         self.velocity = [0.0, 0.0]
         self.standing = False
         self.hitbox = (35, 60)
-        self.gravity = 1.2
+        self.gravity = 0.8
         self.health = 50
         self.external_forces = [0, 0]
         self.standing_on = None
@@ -68,7 +68,7 @@ class Pet:
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -88,10 +88,10 @@ class Pet:
             elif self.velocity[0] < -6:
                 self.velocity[0] = -6
         else:
-            if self.velocity[0] > 25:
-                self.velocity[0] = 25
-            elif self.velocity[0] < -25:
-                self.velocity[0] = -25
+            if self.velocity[0] > 15:
+                self.velocity[0] = 15
+            elif self.velocity[0] < -15:
+                self.velocity[0] = -15
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
