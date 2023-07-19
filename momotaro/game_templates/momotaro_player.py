@@ -1,6 +1,6 @@
 import pygame
 #from pygame import mixer
-#mixer.init()
+#pygame.mixer.init()
 
 
 class Momotaro:
@@ -17,6 +17,7 @@ class Momotaro:
         self.moving_direction = "idle"
         self.last_direction = "left"
         self.attacking_duration = 0
+        self.demon = None
 
         self.charging = False
         self.attacking = False  # True if attack button is released
@@ -66,6 +67,26 @@ class Momotaro:
                                                          (400, 50))
         self.active_sweep_image = None
 
+        # loading in coin collection audio from royalty free webpage mixkit
+        coin_path = "audio/coin.mp3"
+        self.coin_sound = pygame.mixer.Sound(coin_path)
+        self.coin_sound.set_volume(0.35)
+
+        # loading in strike audio from royalty free webpage mixkit
+        strike_path = "audio/strike.mp3"
+        self.strike_sound = pygame.mixer.Sound(strike_path)
+        self.strike_sound.set_volume(0.35)
+
+        # loading ouch sound from royalty free webpage mixkit
+        ow_path = "audio/ow.mp3"
+        self.ow_sound = pygame.mixer.Sound(ow_path)
+        self.ow_sound.set_volume(0.35)
+
+        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
+        roar_path = "audio/roar.mp3"
+        self.roar_sound = pygame.mixer.Sound(roar_path)
+        self.roar_sound.set_volume(0.3)
+
     def update_movement(self):
 
         if not self.standing:
@@ -104,7 +125,7 @@ class Momotaro:
                 self.standing = False
 
         if self.attacking_duration <= 0:
-            if keys[pygame.K_p]:
+            if keys[pygame.K_p]: # Momotaro is attacking
                 if not self.charging:
                     self.attack_power = 0.1
                 self.charging = True
@@ -113,6 +134,7 @@ class Momotaro:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
+                self.strike_sound.play()
             else:
                 self.charging = False
                 self.attacking = False
@@ -264,9 +286,10 @@ class Momotaro:
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
                             coin.collected = True
+                            # play coin collected audio
+                            self.coin_sound.play()
                             #print('coin collected')
                             obj.coins_collected += 1
-
                 #case "fence":
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
@@ -318,8 +341,14 @@ class Momotaro:
     def check_damage(self, demon_list):
         if self.iframes <= 0:
             for demon in demon_list:
+                self.demon = demon
                 if self.get_rect().colliderect(demon.get_rect()):
+                    # add demon noise
+                    self.roar_sound.play()
                     self.health -= 5
+                    # make ow noise
+                    self.ow_sound.play()
+                    print("ow")
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
                     self.iframes = 20

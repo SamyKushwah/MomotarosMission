@@ -28,9 +28,14 @@ def main():
     background_music.play(loops=-1)
 
     # level 1 music setup using royalty free Shamisen Dance - By Steve Oxen
-    level1_path = "audio/level_music.mp3"
+    level1_path = "audio/level1_music.mp3"
     level1_music = pygame.mixer.Sound(level1_path)
-    level1_music.set_volume(0.3)
+    level1_music.set_volume(0.2)
+
+    # level 2 music setup using royalty free Misora (Traditional Japanese Music_03) from pixabay
+    level2_path = "audio/level2_music.mp3"
+    level2_music = pygame.mixer.Sound(level2_path)
+    level2_music.set_volume(0.3)
 
     last_state = ""
 
@@ -51,9 +56,9 @@ def main():
             case "level_selector":
                 #pygame.mixer.unpause()
                 # bring user to the level selection page
-                print(last_state)
+                #print(last_state)
                 if last_state != "title_menu":
-                    print("hi")
+                    #print("hi")
                     background_music.play()
                 next_state = level_select_scene.run(my_toolbox)
             case "quit":
@@ -71,8 +76,12 @@ def main():
             case "level_2":
                 # bring the user to level 2
                 # brings user to our debug level for now
+                pygame.mixer.pause()
+                level2_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_1A")
                 next_state = my_game.run()
+                level2_music.stop()
+                last_state = "level2"
                 pass  # TODO
             case "level_1A":
                 # brings user to our debug level for now

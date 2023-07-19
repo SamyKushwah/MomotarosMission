@@ -19,6 +19,7 @@ class Demon:
         self.standing_on = None
         self.moving_direction = "idle"
         self.iframes = 10
+        #self.in_detect_range = False
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStanding.png").convert_alpha(), (70, 100))
 
@@ -56,6 +57,7 @@ class Demon:
         detection_rect.center = self.get_rect().center
         momotaro_rect = momotaro.get_rect()
         if detection_rect.colliderect(momotaro_rect):
+            #self.in_detect_range = True
             if detection_rect.centerx < momotaro_rect.centerx:
                 self.moving_direction = "right"
                 self.velocity[0] += 0.2
@@ -68,6 +70,7 @@ class Demon:
                     self.velocity[0] += self.external_forces[0]
                     self.standing = False
         else:
+            #self.in_detect_range = False
             self.moving_direction = "idle"
             self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
             if abs(self.velocity[0]) < 1:

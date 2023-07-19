@@ -33,7 +33,7 @@ class GameManager:
         # win music setup using Shamisen Dance - By Steve Oxen Stinger 2
         win_path = "audio/win.mp3"
         self.win_sound = pygame.mixer.Sound(win_path)
-        self.win_sound.set_volume(0.5)
+        self.win_sound.set_volume(0.6)
 
         # lose music setup using Ninja Ambush - By Steve Oxen Stringer 2
         lose_path = "audio/lose.mp3"
