@@ -41,7 +41,7 @@ def main():
     level2_music = pygame.mixer.Sound(level2_path)
     level2_music.set_volume(0.1)
 
-    # level 2 music setup using royalty free Misora (Traditional Japanese Music_03) from pixabay
+    # level 3 music setup using royalty free Koto (Traditional Japanese Music_01) from pixabay
     level3_path = "audio/level3_music.mp3"
     level3_music = pygame.mixer.Sound(level3_path)
     level3_music.set_volume(0.1)
