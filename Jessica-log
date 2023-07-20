@@ -24,4 +24,5 @@
 7/13/23 - created level 3 background image, tiles, and header. Background is a work in progress and more details will be added. Created level 3 connections
           in the code to allow navigation to level 3.
 7/19/23 - changed the 1A file to be level 2 and fixed any code to make that work. Added all level 2 components based off the wireframe Ruhi made.
-7/20/23 - changed the bird sprites to be a yellow color, added player 2 control UI and changed player 1 controls,
+7/20/23 - changed the bird sprites to be a yellow color, added player 2 control UI and changed player 1 controls, began working on momotaro death animations,
+          made the level 2 buttons red.
