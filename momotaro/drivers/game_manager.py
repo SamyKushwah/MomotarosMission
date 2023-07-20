@@ -99,6 +99,8 @@ class GameManager:
                         self.update_save_file(self.level_name, self.coins_collected)
                         # Poll the win game scene next scene
                         if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
+                            # stopping win sound when new screen is selected
+                            self.win_sound.stop()
                             return win_return
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
@@ -109,6 +111,8 @@ class GameManager:
 
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                    # stopping lose sound when new state
+                    self.lose_sound.stop()
                     return lose_rt
 
             # If momotaro is pushed below a block, he dies
@@ -120,6 +124,8 @@ class GameManager:
                     self.lose_sound.play()
                     lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                        # stopping lose sound when new state
+                        self.lose_sound.stop()
                         return lose_rt
 
             if self.pet.standing and self.pet.standing_on != None:

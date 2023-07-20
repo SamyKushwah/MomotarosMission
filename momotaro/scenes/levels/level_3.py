@@ -1,4 +1,5 @@
 from momotaro.game_templates import level
+from momotaro.game_templates import momotaro_player, pet_player
 
 
 def create_level(my_toolbox):
@@ -42,6 +43,9 @@ def create_level(my_toolbox):
 
     level1.add_obstacle( 700, 1010, "button", (800, 910),  (800,700), (200,500) )
 
+    momotaro = momotaro_player.Momotaro([300, 300])
+    pet = pet_player.Pet([200, 500])
+
     # de
     #level1.add_obstacle(500, 600, "button")
-    return level1
+    return level1, momotaro, pet
