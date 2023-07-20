@@ -1,4 +1,6 @@
 import pygame
+from pygame import mixer
+mixer.init()
 
 
 class Momotaro:
@@ -7,7 +9,7 @@ class Momotaro:
         self.velocity = [0.0, 0.0]
         self.standing = False
         self.hitbox = (50, 70)
-        self.gravity = 1.3
+        self.gravity = 1.0
         self.health = 100
         self.attacking = False
         self.external_forces = [0, 0]
@@ -64,6 +66,26 @@ class Momotaro:
                                                          (400, 50))
         self.active_sweep_image = None
 
+        # loading in coin collection audio from royalty free webpage mixkit
+        coin_path = "audio/coin.mp3"
+        self.coin_sound = pygame.mixer.Sound(coin_path)
+        self.coin_sound.set_volume(0.35)
+
+        # loading in strike audio from royalty free webpage mixkit
+        strike_path = "audio/strike.mp3"
+        self.strike_sound = pygame.mixer.Sound(strike_path)
+        self.strike_sound.set_volume(0.35)
+
+        # loading ouch sound from royalty free webpage mixkit
+        ow_path = "audio/ow.mp3"
+        self.ow_sound = pygame.mixer.Sound(ow_path)
+        self.ow_sound.set_volume(0.35)
+
+        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
+        roar_path = "audio/roar.mp3"
+        self.roar_sound = pygame.mixer.Sound(roar_path)
+        self.roar_sound.set_volume(0.3)
+
     def update_movement(self):
 
         if not self.standing:
@@ -75,31 +97,34 @@ class Momotaro:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
+            # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.3
-            self.velocity[0] += 0.3
+                self.velocity[0] += 0.2
+            self.velocity[0] += 0.2
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
+            # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.3
-            self.velocity[0] -= 0.3
+                self.velocity[0] -= 0.2
+            self.velocity[0] -= 0.2
             self.moving_direction = "left"
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
         if keys[pygame.K_w]:
+            # add sound of jumping here
             if self.standing:
                 self.velocity[1] = -23 + (self.external_forces[1] / 2)
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
 
         if self.attacking_duration <= 0:
-            if keys[pygame.K_p]:
+            if keys[pygame.K_p]: # Momotaro is attacking
                 if not self.charging:
                     self.attack_power = 0.1
                 self.charging = True
@@ -108,6 +133,7 @@ class Momotaro:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
+                self.strike_sound.play()
             else:
                 self.charging = False
                 self.attacking = False
@@ -116,10 +142,10 @@ class Momotaro:
         else:
             self.attacking_duration -= 1
 
-        if self.velocity[0] > 15:
-            self.velocity[0] = 15
-        elif self.velocity[0] < -15:
-            self.velocity[0] = -15
+        if self.velocity[0] > 12:
+            self.velocity[0] = 12
+        elif self.velocity[0] < -12:
+            self.velocity[0] = -12
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
@@ -235,9 +261,6 @@ class Momotaro:
                             if self.standing_on.type == "button" and self.standing_on == obstacle:
                                 #print("hello")
                                 obstacle.set_pushed(True)
-                            else:
-                                #print("bye")
-                                obstacle.set_pushed(False)
                         except AttributeError:
                             obstacle.set_pushed(False)
                 case "torigate":
@@ -249,17 +272,20 @@ class Momotaro:
                     gate_center_x = obstacle.get_rect().centerx
                     gate_center_y = obstacle.get_rect().centery
 
-                    margin = 40
+                    margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
+                    else:  # fixed bug so now only when you are in gate range anf up you win
+                        obstacle.set_pushed(False)
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
                             coin.collected = True
+                            # play coin collected audio
+                            self.coin_sound.play()
                             #print('coin collected')
                             obj.coins_collected += 1
-
                 #case "fence":
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
@@ -298,6 +324,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -305,6 +332,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
 
             #self.attack_power = 0
 
@@ -312,7 +340,15 @@ class Momotaro:
         if self.iframes <= 0:
             for demon in demon_list:
                 if self.get_rect().colliderect(demon.get_rect()):
+                    # add demon noise
+                    self.roar_sound.play()
+
                     self.health -= 5
+
+                    # make ow noise
+                    self.ow_sound.play()
+                    #print("ow")
+
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
                     self.iframes = 20

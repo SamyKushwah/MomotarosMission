@@ -1,5 +1,6 @@
 import pygame
 
+
 class Obstacle:
     def __init__(self, x, y):
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
@@ -11,8 +12,15 @@ class Obstacle:
         self.__button_rect = self.button_image.get_rect(x=x, y=y)
         self.pushed = False
         self.type = "button"
+
+        # loading fence sound royalty free from evanto elements
+        fence_path = "audio/fence.mp3"
+        self.fence_sound = pygame.mixer.Sound(fence_path)
+        self.fence_sound.set_volume(0.3)
+
     def is_pushed(self):
         return self.pushed
+
     def get_rect(self):
         return self.__button_rect
 
@@ -27,12 +35,9 @@ class Obstacle:
         screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
 
 class ButtonObstacle(Obstacle):
-    def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions, level_num):
+    def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions):
         super().__init__(x, y)
-        if level_num == 1:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
-        elif level_num == 2:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button2.png").convert_alpha()
+        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
         self.fence = Fence(fence_int_position, fence_final_position, fence_dimensions)
         self.scale_factor = 0.5
         self.__width = int(self.button_image.get_width() * self.scale_factor)
@@ -45,6 +50,8 @@ class ButtonObstacle(Obstacle):
             self.fence.initial[1] - self.fence.target[1])
         self.type = "button"
         self.velocity = (0,0)
+        self.fence_moving = False
+        self.sound_playing = False
 
 
     def is_pushed(self):
@@ -69,16 +76,30 @@ class ButtonObstacle(Obstacle):
             if self.fence_velocity > 0:
                 if self.fence.target[1] < self.fence.y:
                     self.fence.y -= self.fence_velocity
+                    self.fence_moving = True
             else:
                 if self.fence.target[1] > self.fence.y:
                     self.fence.y -= self.fence_velocity
+                    self.fence_moving = True
         else:
             if self.fence_velocity > 0:
                 if self.fence.initial[1] > self.fence.y:
                     self.fence.y += self.fence_velocity
+                    self.fence_moving = True
             else:
                 if self.fence.initial[1] < self.fence.y:
                     self.fence.y += self.fence_velocity
+                    self.fence_moving = True
+
+        # play the sound only once while the fence is moving
+        # check whether sound is playing and only play if it is not
+        if self.fence_moving and not self.sound_playing:
+            self.fence_sound.play(loops=-1)
+            self.sound_playing = True
+        # stop playing sound when the gate reaches the top or bottom
+        if self.fence.target[1] == self.fence.y or self.fence.initial[1] == self.fence.y:
+            self.fence_sound.stop()
+            self.sound_playing = False
 
 class Fence:
     def __init__(self, fence_position, fence_ending_position, fence_dimensions):

@@ -3,6 +3,7 @@ import math
 
 from momotaro.game_templates import demon, obstacles
 
+from momotaro.ui_templates import tutorial
 
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
@@ -12,12 +13,13 @@ class Level:
         self.collidable_list = []
         self.platform_list = []
         self.moving_platform_list = []
+        self.tutorial_text_list = []
         self.interactible_list = {}
         self.demon_list = []
         self.type = background
         if background == "mountains":
             self.background = pygame.transform.scale(
-            pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
             self.header = Header("mountains")
         elif background == "cave":
             self.background = pygame.transform.scale(
@@ -52,7 +54,7 @@ class Level:
     def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions, self.level_num)
+                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
@@ -81,6 +83,10 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
+
+    def add_tutorial_text(self,x,y,x_min,x_max,dimensions,text):
+        temp_text = tutorial.TutorialText((x,y), x_min, x_max, dimensions=dimensions, text= text)
+        self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
         if self.type == "mountains":
@@ -113,7 +119,6 @@ class Level:
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TL.png").convert_alpha())
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TM.png").convert_alpha())
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TR.png").convert_alpha())
-
 
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
@@ -346,14 +351,14 @@ class Header:
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 
-    def draw_header(self, surface, health, coins):
+    def draw_header(self, surface, momo_health, pet_health, coins):
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
         surface.blit(self.momo, (435, 10))
 
         surface.blit(self.health_back, (540, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (momo_health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -372,6 +377,6 @@ class Header:
         surface.blit(self.bird, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (pet_health / 50)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))
