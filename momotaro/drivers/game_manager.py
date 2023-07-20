@@ -4,6 +4,8 @@ from momotaro.game_templates import momotaro_player, pet_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
 from momotaro.ui_templates import button
 import sys
+#from pygame import mixer
+#pygame.mixer.init()
 
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
@@ -12,7 +14,10 @@ Purpose: The GameManager object contains level and player information and regula
 
 
 # "Persistent State" Game Manager:
+
+
 class GameManager:
+
     def __init__(self, my_toolbox, level):
         self.my_toolbox = my_toolbox
         self.level_complete = False
@@ -31,8 +36,17 @@ class GameManager:
                 self.level = level_3.create_level(my_toolbox)
                 self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
-
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
+
+        # win music setup using Shamisen Dance - By Steve Oxen Stinger 2
+        win_path = "audio/win.mp3"
+        self.win_sound = pygame.mixer.Sound(win_path)
+        self.win_sound.set_volume(0.6)
+
+        # lose music setup using Ninja Ambush - By Steve Oxen Stringer 2
+        lose_path = "audio/lose.mp3"
+        self.lose_sound = pygame.mixer.Sound(lose_path)
+        self.lose_sound.set_volume(0.5)
 
         # Creating pause button
         pause_img = pygame.image.load("images/game_ui/pause_btn.png").convert_alpha()
@@ -78,6 +92,9 @@ class GameManager:
                             return return_st
                     # up button pressed (W) at the tori gate, ending the level
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
+                        # add win sound
+                        pygame.mixer.pause()
+                        self.win_sound.play()
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
                         self.update_save_file(self.level_name, self.coins_collected)
                         # Poll the win game scene next scene
@@ -86,6 +103,8 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
+                pygame.mixer.pause()
+                self.lose_sound.play()
                 lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
 
                 # Poll next scene from lose screen
@@ -97,6 +116,8 @@ class GameManager:
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
+                    pygame.mixer.pause()
+                    self.lose_sound.play()
                     lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         return lose_rt
