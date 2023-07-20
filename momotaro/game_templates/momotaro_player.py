@@ -84,7 +84,7 @@ class Momotaro:
         # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
         roar_path = "audio/roar.mp3"
         self.roar_sound = pygame.mixer.Sound(roar_path)
-        self.roar_sound.set_volume(0.3)
+        self.roar_sound.set_volume(0.15)
 
     def update_movement(self):
 
@@ -324,7 +324,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -332,7 +332,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
 
             #self.attack_power = 0
 

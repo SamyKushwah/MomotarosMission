@@ -48,6 +48,11 @@ class Pet:
         self.hurt_left_image = pygame.transform.rotate(self.right_mvmnt_frames[0], 45)
         self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
+        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
+        roar_path = "audio/roar.mp3"
+        self.roar_sound = pygame.mixer.Sound(roar_path)
+        self.roar_sound.set_volume(0.15)
+
 
     def update_bird_movement(self):
         if not self.standing:
@@ -228,6 +233,8 @@ class Pet:
         if self.iframes <= 0:
             for demon in demon_list:
                 if self.get_rect().colliderect(demon.get_rect()):
+                    # add demon noise
+                    self.roar_sound.play()
                     self.health -= 5
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()

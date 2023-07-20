@@ -34,7 +34,7 @@ def main():
     # level 1 music setup using royalty free Shamisen Dance - By Steve Oxen
     level1_path = "audio/level1_music.mp3"
     level1_music = pygame.mixer.Sound(level1_path)
-    level1_music.set_volume(0.2)
+    level1_music.set_volume(0.1)
 
     # level 2 music setup using royalty free Misora (Traditional Japanese Music_03) from pixabay
     level2_path = "audio/level2_music.mp3"
