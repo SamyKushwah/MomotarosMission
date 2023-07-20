@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="small fix cause i pasted it in  wrong">
-      <change afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's level 2, changed it so that character spawn location is determined in each level file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,14 +59,7 @@
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
       <workItem from="1689067444194" duration="3092000" />
-      <workItem from="1689316618344" duration="16227000" />
-    </task>
-    <task id="LOCAL-00012" summary="updated demon class to reflect shawn's momotaro class">
-      <created>1687600727959</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1687600727959</updated>
+      <workItem from="1689316618344" duration="17810000" />
     </task>
     <task id="LOCAL-00013" summary="getting close to merging again">
       <created>1687601744781</created>
@@ -408,14 +397,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689814318416</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="added jessica's level 2, changed it so that character spawn location is determined in each level file.">
+      <created>1689816700749</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1689816700749</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1" />
     <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
     <MESSAGE value="commented out print statements" />
     <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
@@ -440,10 +435,11 @@
     <MESSAGE value="updated worklog" />
     <MESSAGE value="added sami's sound effects" />
     <MESSAGE value="small fix cause i pasted it in  wrong" />
-    <option name="LAST_COMMIT_MESSAGE" value="small fix cause i pasted it in  wrong" />
+    <MESSAGE value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
+    <option name="LAST_COMMIT_MESSAGE" value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689816527275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689817806895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
