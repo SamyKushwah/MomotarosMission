@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="updated worklog">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
-    </list>
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added sami's sound effects" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,14 +56,7 @@
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
       <workItem from="1689067444194" duration="3092000" />
-      <workItem from="1689316618344" duration="13330000" />
-    </task>
-    <task id="LOCAL-00010" summary="updated demon class to reflect shawn's momotaro class">
-      <created>1687596143426</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1687596143426</updated>
+      <workItem from="1689316618344" duration="13740000" />
     </task>
     <task id="LOCAL-00011" summary="updated demon class to reflect shawn's momotaro class">
       <created>1687599174248</created>
@@ -406,14 +394,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689754945376</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="added sami's sound effects">
+      <created>1689812844029</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1689812844029</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated fence and button class to allow for custom sized fences" />
     <MESSAGE value="included second part of level 1: platforming with moving platforms and water underneath" />
     <MESSAGE value="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1" />
     <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
@@ -438,7 +432,8 @@
     <MESSAGE value="pet now dies when crushed" />
     <MESSAGE value="demon now targets the closest one between momotaro and the pet" />
     <MESSAGE value="updated worklog" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated worklog" />
+    <MESSAGE value="added sami's sound effects" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sami's sound effects" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689754557409" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />

@@ -90,15 +90,16 @@ class ButtonObstacle(Obstacle):
                 if self.fence.initial[1] < self.fence.y:
                     self.fence.y += self.fence_velocity
                     self.fence_moving = True
-                    # play the sound only once while the fence is moving
-                    # check whether sound is playing and only play if it is not
-                    if self.fence_moving and not self.sound_playing:
-                        self.fence_sound.play(loops=-1)
-                        self.sound_playing = True
-                    # stop playing sound when the gate reaches the top or bottom
-                    if self.fence.target[1] == self.fence.y or self.fence.initial[1] == self.fence.y:
-                        self.fence_sound.stop()
-                        self.sound_playing = False
+
+        # play the sound only once while the fence is moving
+        # check whether sound is playing and only play if it is not
+        if self.fence_moving and not self.sound_playing:
+            self.fence_sound.play(loops=-1)
+            self.sound_playing = True
+        # stop playing sound when the gate reaches the top or bottom
+        if self.fence.target[1] == self.fence.y or self.fence.initial[1] == self.fence.y:
+            self.fence_sound.stop()
+            self.sound_playing = False
 
 class Fence:
     def __init__(self, fence_position, fence_ending_position, fence_dimensions):
