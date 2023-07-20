@@ -124,12 +124,12 @@ class Momotaro:
                 self.standing = False
 
         if self.attacking_duration <= 0:
-            if keys[pygame.K_t]: # Momotaro is attacking
+            if keys[pygame.K_r]: # Momotaro is attacking
                 if not self.charging:
                     self.attack_power = 0.1
                 self.charging = True
                 self.attacking = False
-            elif not keys[pygame.K_t] and self.charging:
+            elif not keys[pygame.K_r] and self.charging:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
