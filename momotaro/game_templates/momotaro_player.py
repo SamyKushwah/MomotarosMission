@@ -1,6 +1,7 @@
 import pygame
 from pygame import mixer
 mixer.init()
+from pygame import time
 
 
 class Momotaro:
@@ -30,6 +31,7 @@ class Momotaro:
         self.active_image = None
 
         self.frame_index = 0
+        #self.dead = False
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha(), (40, 70))
 
@@ -65,6 +67,9 @@ class Momotaro:
         self.attack_swing_left_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/swing_left.png").convert_alpha(),
                                                          (400, 50))
         self.active_sweep_image = None
+
+        #self.squish_image = pygame.transform.scale(
+        #    pygame.image.load("images/MomotaroSprites/splat.png").convert_alpha(), (60, 70))
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
@@ -235,6 +240,11 @@ class Momotaro:
                 elif self.attacking:
                     self.active_image = self.attacking_right_image
                     surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 6))
+                """elif self.dead:
+                    print("dead right")
+                    self.active_image = self.squish_image
+                    surface.blit(self.active_sweep_image, (
+                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))"""
             case "left":
                 if self.charging:
                     self.active_image = self.charging_left_image
@@ -242,6 +252,11 @@ class Momotaro:
                     self.active_image = self.attacking_left_image
                     surface.blit(self.active_sweep_image, (
                         self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))
+                """elif self.dead:
+                    print("dead left")
+                    self.active_image = self.squish_image
+                    surface.blit(self.active_sweep_image, (
+                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))"""
 
         if self.frame_index >= animation_delay:
             self.frame_index = 0
@@ -344,6 +359,8 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
+                    #if self.health < 0:
+                    #    self.dead = True
 
                     # make ow noise
                     self.ow_sound.play()
@@ -360,3 +377,8 @@ class Momotaro:
                         self.velocity[1] += -12
         else:
             self.iframes -= 1
+
+    """def momo_squish(self, surface):
+        self.active_image = self.squish_image
+        surface.blit(self.active_image, self.position)
+        pygame.time.wait(5)"""

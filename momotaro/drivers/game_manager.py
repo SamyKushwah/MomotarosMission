@@ -122,6 +122,8 @@ class GameManager:
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
                     pygame.mixer.pause()
                     self.lose_sound.play()
+                    #squish amimation
+                    #self.momotaro.momo_squish(self.image)
                     lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state

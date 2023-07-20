@@ -15,3 +15,4 @@ Personal Log:
         added them as well.
 7/19 -> Gathered sounds for attacking, being hit, gate movement, coin collection, and demon. Had bugs with looping sound
         for gate and demon. Fixed bug in gate sound.
+7/20 -> Fixed and finished sounds. Changed sprite colors for demons. Working on coding for death animation.
