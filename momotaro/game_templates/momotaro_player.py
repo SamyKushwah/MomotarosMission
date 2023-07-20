@@ -324,6 +324,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -331,6 +332,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
 
             #self.attack_power = 0
 
@@ -340,10 +342,13 @@ class Momotaro:
                 if self.get_rect().colliderect(demon.get_rect()):
                     # add demon noise
                     self.roar_sound.play()
+
                     self.health -= 5
+
                     # make ow noise
                     self.ow_sound.play()
                     #print("ow")
+
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
                     self.iframes = 20

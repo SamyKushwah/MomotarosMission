@@ -1,4 +1,4 @@
-from momotaro.scenes.levels import level_1A, level_1, level_3
+from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
 from momotaro.game_templates import momotaro_player, pet_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
@@ -21,19 +21,19 @@ class GameManager:
     def __init__(self, my_toolbox, level):
         self.my_toolbox = my_toolbox
         self.level_complete = False
-        self.momotaro = momotaro_player.Momotaro([300, 300])
-        self.pet = pet_player.Pet([400, 300])
+        self.momotaro = None
+        self.pet = None
         self.coins_collected = 0
         self.level_name = level
         match level:
-            case "level_1A":
-                self.level = level_1A.create_level(my_toolbox)
+            case "level_2":
+                self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
                 self.controls = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
             case "level_1":
-                self.level = level_1.create_level(my_toolbox)
+                self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
                 self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
             case "level_3":
-                self.level = level_3.create_level(my_toolbox)
+                self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
                 self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
@@ -256,7 +256,7 @@ class GameManager:
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
             level_coins[0] = coins_collected
-        elif level_name == "level_1A":
+        elif level_name == "level_2":
             level_coins[1] = coins_collected
         else:
             level_coins[2] = coins_collected
