@@ -1,6 +1,6 @@
 import pygame
-#from pygame import mixer
-#pygame.mixer.init()
+from pygame import mixer
+mixer.init()
 
 
 class Momotaro:
@@ -9,7 +9,7 @@ class Momotaro:
         self.velocity = [0.0, 0.0]
         self.standing = False
         self.hitbox = (50, 70)
-        self.gravity = 1.3
+        self.gravity = 1.0
         self.health = 100
         self.attacking = False
         self.external_forces = [0, 0]
@@ -17,7 +17,6 @@ class Momotaro:
         self.moving_direction = "idle"
         self.last_direction = "left"
         self.attacking_duration = 0
-        self.demon = None
 
         self.charging = False
         self.attacking = False  # True if attack button is released
@@ -100,20 +99,20 @@ class Momotaro:
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.3
-            self.velocity[0] += 0.3
+                self.velocity[0] += 0.2
+            self.velocity[0] += 0.2
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.3
-            self.velocity[0] -= 0.3
+                self.velocity[0] -= 0.2
+            self.velocity[0] -= 0.2
             self.moving_direction = "left"
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -143,10 +142,10 @@ class Momotaro:
         else:
             self.attacking_duration -= 1
 
-        if self.velocity[0] > 15:
-            self.velocity[0] = 15
-        elif self.velocity[0] < -15:
-            self.velocity[0] = -15
+        if self.velocity[0] > 12:
+            self.velocity[0] = 12
+        elif self.velocity[0] < -12:
+            self.velocity[0] = -12
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
@@ -262,9 +261,6 @@ class Momotaro:
                             if self.standing_on.type == "button" and self.standing_on == obstacle:
                                 #print("hello")
                                 obstacle.set_pushed(True)
-                            else:
-                                #print("bye")
-                                obstacle.set_pushed(False)
                         except AttributeError:
                             obstacle.set_pushed(False)
                 case "torigate":
@@ -276,7 +272,7 @@ class Momotaro:
                     gate_center_x = obstacle.get_rect().centerx
                     gate_center_y = obstacle.get_rect().centery
 
-                    margin = 40
+                    margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         obstacle.set_pushed(True)
                     else:  # fixed bug so now only when you are in gate range anf up you win
@@ -328,6 +324,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -335,20 +332,23 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
+                                self.roar_sound.play()
 
             #self.attack_power = 0
 
     def check_damage(self, demon_list):
         if self.iframes <= 0:
             for demon in demon_list:
-                self.demon = demon
                 if self.get_rect().colliderect(demon.get_rect()):
                     # add demon noise
                     self.roar_sound.play()
+
                     self.health -= 5
+
                     # make ow noise
                     self.ow_sound.play()
-                    print("ow")
+                    #print("ow")
+
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
                     self.iframes = 20

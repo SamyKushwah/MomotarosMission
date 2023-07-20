@@ -4,24 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added ruhi's coin fixes and jessica's new header changes">
-      <change afterPath="$PROJECT_DIR$/momotaro/audio/coin.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/momotaro/audio/ow.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/momotaro/audio/roar.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/momotaro/audio/strike.mp3" afterDir="false" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's level 2, changed it so that character spawn location is determined in each level file.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/audio/level_music.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/save_data/game_data" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/save_data/game_data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,39 +34,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/samyk/Documents/GitHub/MomotarosMission/momotaro/audio",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ckevi/Desktop/performant programming/projects/Ex3&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="PyConsoleOptionsProvider">
-    <option name="myPythonConsoleState">
-      <console-settings module-name="MomotarosMission" sdk-home="/home/samyk37/.virtualenvs/pythonProject/bin/python">
-        <option name="sdk">
-          <Sdk />
-        </option>
-        <option name="mySdkHome" value="/home/samyk37/.virtualenvs/pythonProject/bin/python" />
-        <option name="mySdk">
-          <Sdk />
-        </option>
-        <option name="myModuleName" value="MomotarosMission" />
-      </console-settings>
-    </option>
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\samyk\Documents\GitHub\MomotarosMission\momotaro\audio" />
-    </key>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -81,92 +58,8 @@
       <workItem from="1687412548396" duration="688000" />
       <workItem from="1687413827729" duration="8713000" />
       <workItem from="1687591840728" duration="4149000" />
-      <workItem from="1688889767921" duration="6816000" />
-      <workItem from="1689051834906" duration="26834000" />
-    </task>
-    <task id="LOCAL-00001" summary="added attacking animation based on whichever side the demon is on">
-      <created>1687414843843</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1687414843843</updated>
-    </task>
-    <task id="LOCAL-00002" summary="attacking based on ur direction">
-      <created>1687415083490</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1687415083490</updated>
-    </task>
-    <task id="LOCAL-00003" summary="attacking now plays while idle, fixed demon collision rectangle">
-      <created>1687415740777</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1687415740777</updated>
-    </task>
-    <task id="LOCAL-00004" summary="updated demon back and forth mvmnt">
-      <created>1687416328000</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1687416328000</updated>
-    </task>
-    <task id="LOCAL-00005" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
-      <created>1687421640599</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1687421640599</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
-      <created>1687422138739</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1687422138739</updated>
-    </task>
-    <task id="LOCAL-00007" summary="added end-level condition, walk into the center of the tori gate to end the level, which will bring you back to the level select screen">
-      <created>1687422649099</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1687422649099</updated>
-    </task>
-    <task id="LOCAL-00008" summary="added ruhi's poll_attack changes">
-      <created>1687423161674</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1687423161674</updated>
-    </task>
-    <task id="LOCAL-00009" summary="logged today's work">
-      <created>1687423399897</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1687423399897</updated>
-    </task>
-    <task id="LOCAL-00010" summary="updated demon class to reflect shawn's momotaro class">
-      <created>1687596143426</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1687596143426</updated>
-    </task>
-    <task id="LOCAL-00011" summary="updated demon class to reflect shawn's momotaro class">
-      <created>1687599174248</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1687599174248</updated>
-    </task>
-    <task id="LOCAL-00012" summary="updated demon class to reflect shawn's momotaro class">
-      <created>1687600727959</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1687600727959</updated>
+      <workItem from="1689067444194" duration="3092000" />
+      <workItem from="1689316618344" duration="17810000" />
     </task>
     <task id="LOCAL-00013" summary="getting close to merging again">
       <created>1687601744781</created>
@@ -413,39 +306,111 @@
       <option name="project" value="LOCAL" />
       <updated>1687766022896</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="updated worklog with hour estimates">
+      <created>1687767289294</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1687767289294</updated>
+    </task>
+    <task id="LOCAL-00049" summary="merged with shawn's dev release file organization&#10;&#10;added jessica's ui changes">
+      <created>1687774729599</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1687774729599</updated>
+    </task>
+    <task id="LOCAL-00050" summary="added sami's tori gate bug fix">
+      <created>1689068234504</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1689068234504</updated>
+    </task>
+    <task id="LOCAL-00051" summary="added shawn's player 2 updates">
+      <created>1689318534470</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1689318534470</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2">
+      <created>1689322262578</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322262578</updated>
+    </task>
+    <task id="LOCAL-00053" summary="updated kevin_worklog">
+      <created>1689322789763</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1689322789763</updated>
+    </task>
+    <task id="LOCAL-00054" summary="decreased momotaro friction">
+      <created>1689744132673</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1689744132673</updated>
+    </task>
+    <task id="LOCAL-00055" summary="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying.">
+      <created>1689752792031</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1689752792031</updated>
+    </task>
+    <task id="LOCAL-00056" summary="pet now dies when crushed">
+      <created>1689752934645</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1689752934645</updated>
+    </task>
+    <task id="LOCAL-00057" summary="demon now targets the closest one between momotaro and the pet">
+      <created>1689754628775</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1689754628775</updated>
+    </task>
+    <task id="LOCAL-00058" summary="updated worklog">
+      <created>1689754945376</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1689754945376</updated>
+    </task>
+    <task id="LOCAL-00059" summary="added sami's sound effects">
+      <created>1689812844029</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1689812844029</updated>
+    </task>
+    <task id="LOCAL-00060" summary="small fix cause i pasted it in  wrong">
+      <created>1689814318416</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1689814318416</updated>
+    </task>
+    <task id="LOCAL-00061" summary="added jessica's level 2, changed it so that character spawn location is determined in each level file.">
+      <created>1689816700749</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1689816700749</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added coin obstacle" />
-    <MESSAGE value="demons get knocked back upon getting hit, game manager coins collected now updates" />
-    <MESSAGE value="implemented jessica's ui header bar" />
-    <MESSAGE value="added jessica's images" />
-    <MESSAGE value="momotaro attack duration can be controlled" />
-    <MESSAGE value="updated all of ruhi's button and gate code to work with the new code.&#10;&#10;added test button and gate in level 1A" />
-    <MESSAGE value="includes sami's new button highlighting" />
-    <MESSAGE value="forgot to include the used font file" />
-    <MESSAGE value="included shawns new combat changes" />
-    <MESSAGE value="added new level to work on, added insta-death water, changed game manager end game checkers to not be event update reliant" />
-    <MESSAGE value="Added jessica's new graphics, fixed a pause menu bug where restarting would not restart&#10;&#10;New Levels added for working&#10;&#10;Clicking on level 2 will bring you to level 1A, the debugging level&#10;&#10;Clicking on level 1 will bring you to the work in progress level 1 for prototype demonstration" />
-    <MESSAGE value="added first segment for level 1&#10;&#10;added fail condition for falling out of the map (pushed by gate out of bounds)" />
-    <MESSAGE value="updated fence and button class to allow for custom sized fences" />
-    <MESSAGE value="included second part of level 1: platforming with moving platforms and water underneath" />
-    <MESSAGE value="added 2nd coin segment, demon obstacle, and diag moving platforms into level 1" />
     <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
     <MESSAGE value="commented out print statements" />
     <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
@@ -456,15 +421,30 @@
     <MESSAGE value="standing on a button now only opens its corresponding gate (Ruhi's changes)" />
     <MESSAGE value="fixed oval coins" />
     <MESSAGE value="added ruhi's coin fixes and jessica's new header changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added ruhi's coin fixes and jessica's new header changes" />
+    <MESSAGE value="updated worklog with hour estimates" />
+    <MESSAGE value="merged with shawn's dev release file organization&#10;&#10;added jessica's ui changes" />
+    <MESSAGE value="added the dist stuff, added ruhi's tutorial" />
+    <MESSAGE value="added sami's tori gate bug fix" />
+    <MESSAGE value="added shawn's player 2 updates" />
+    <MESSAGE value="added jessica's new level background designs&#10;&#10;known issues:&#10;demon update_movement() does not track momotaro, only player 2" />
+    <MESSAGE value="updated kevin_worklog" />
+    <MESSAGE value="decreased momotaro friction" />
+    <MESSAGE value="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying." />
+    <MESSAGE value="pet now dies when crushed" />
+    <MESSAGE value="demon now targets the closest one between momotaro and the pet" />
+    <MESSAGE value="updated worklog" />
+    <MESSAGE value="added sami's sound effects" />
+    <MESSAGE value="small fix cause i pasted it in  wrong" />
+    <MESSAGE value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
+    <option name="LAST_COMMIT_MESSAGE" value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689817806895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689761065060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
-    <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
-    <SUITE FILE_PATH="coverage/main_py$game_manager.coverage" NAME="game_manager Coverage Results" MODIFIED="1689148612525" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
+    <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$game_manager.coverage" NAME="game_manager Coverage Results" MODIFIED="1687717831583" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
   </component>
 </project>

@@ -1,5 +1,5 @@
 import pygame
-
+from math import dist
 '''
 Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
             (2-Dimensional). The Demons are subject to velocity changes and die on water. Demons take damage when hit
@@ -19,7 +19,6 @@ class Demon:
         self.standing_on = None
         self.moving_direction = "idle"
         self.iframes = 10
-        #self.in_detect_range = False
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/DemonSprites/DemonStanding.png").convert_alpha(), (70, 100))
 
@@ -36,7 +35,7 @@ class Demon:
                 also takes into account external velocity changes such as from getting hit by Momotaro or from
                 being on a moving platform.
     '''
-    def update_movement(self, momotaro):
+    def update_movement(self, momotaro, pet):
         # Demon subject to gravity
         if not self.standing:
             self.velocity[1] += self.gravity
@@ -52,29 +51,49 @@ class Demon:
             except AttributeError:
                 pass
 
-        # Check if Momotaro is within detection range
+        # Check if either pet or Momotaro is within detection range
         detection_rect = pygame.rect.Rect((0, 0), self.detection_hitbox)
         detection_rect.center = self.get_rect().center
+
+        targets = []
+
         momotaro_rect = momotaro.get_rect()
+        pet_rect = pet.get_rect()
+
         if detection_rect.colliderect(momotaro_rect):
-            #self.in_detect_range = True
-            if detection_rect.centerx < momotaro_rect.centerx:
-                self.moving_direction = "right"
-                self.velocity[0] += 0.2
+            targets.append(momotaro)
+
+        if detection_rect.colliderect(pet_rect):
+            targets.append(pet)
+
+        if len(targets) != 0:
+            dists = []
+            for target in targets:
+                dists.append(dist(target.get_rect().center, detection_rect.center))
+
+            target = targets[dists.index(min(dists))]
+
+            momotaro_rect = target.get_rect()
+            if detection_rect.colliderect(momotaro_rect):
+                if detection_rect.centerx < momotaro_rect.centerx:
+                    self.moving_direction = "right"
+                    self.velocity[0] += 0.2
+                else:
+                    self.moving_direction = "left"
+                    self.velocity[0] -= 0.2
+                if detection_rect.centery - momotaro_rect.centery > 100:
+                    if self.standing:
+                        self.velocity[1] = -23 + (self.external_forces[1] / 2)
+                        self.velocity[0] += self.external_forces[0]
+                        self.standing = False
             else:
-                self.moving_direction = "left"
-                self.velocity[0] -= 0.2
-            if detection_rect.centery - momotaro_rect.centery > 100:
-                if self.standing:
-                    self.velocity[1] = -23 + (self.external_forces[1] / 2)
-                    self.velocity[0] += self.external_forces[0]
-                    self.standing = False
+                self.moving_direction = "idle"
+                self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
+                if abs(self.velocity[0]) < 1:
+                    self.velocity[0] = 0
         else:
-            #self.in_detect_range = False
+            self.velocity[0] = 0
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
-            if abs(self.velocity[0]) < 1:
-                self.velocity[0] = 0
 
         # Limit max horizontal movement speed
         if self.velocity[0] > 12:

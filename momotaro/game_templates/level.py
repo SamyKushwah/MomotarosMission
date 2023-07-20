@@ -3,6 +3,7 @@ import math
 
 from momotaro.game_templates import demon, obstacles
 
+from momotaro.ui_templates import tutorial
 
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
@@ -12,10 +13,23 @@ class Level:
         self.collidable_list = []
         self.platform_list = []
         self.moving_platform_list = []
+        self.tutorial_text_list = []
         self.interactible_list = {}
         self.demon_list = []
-        self.background = background
-        self.header = Header()
+        self.type = background
+        if background == "mountains":
+            self.background = pygame.transform.scale(
+                pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
+            self.header = Header("mountains")
+        elif background == "cave":
+            self.background = pygame.transform.scale(
+                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 915))
+            self.header = Header("cave")
+        elif background == "bamboo":
+            self.background = pygame.transform.scale(
+                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 915))
+            self.header = Header("bamboo")
+
         self.stone_imgs = []
         self.water_img = None
 
@@ -70,16 +84,41 @@ class Level:
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
 
+    def add_tutorial_text(self,x,y,x_min,x_max,dimensions,text):
+        temp_text = tutorial.TutorialText((x,y), x_min, x_max, dimensions=dimensions, text= text)
+        self.tutorial_text_list.append(temp_text)
+
     def load_stone_imgs(self):
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BM).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BR).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(ML).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MM).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MR).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TL).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TM).png").convert_alpha())
-        self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png").convert_alpha())
+        if self.type == "mountains":
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BL).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BM).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(BR).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(ML).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MM).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(MR).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TL).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TM).png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone/Stone(TR).png").convert_alpha())
+        elif self.type == "cave":
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_BL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_BM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_BR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_ML.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_MM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_MR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_2/stone2_TR.png").convert_alpha())
+        elif self.type == "bamboo":
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_BR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_ML.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_MM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_MR.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TL.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TM.png").convert_alpha())
+            self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TR.png").convert_alpha())
 
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
@@ -272,18 +311,28 @@ class MovingPlatform(Platform):
                 self.__moving_down = True
 
 class Header:
-    def __init__(self):
+    def __init__(self, level_type):
         # load the images
-        self.health_front = pygame.image.load("images/level_1/HealthBarFront.png").convert_alpha()
-        self.health_back = pygame.image.load("images/level_1/HealthBarBack.png").convert_alpha()
-        self.header = pygame.image.load("images/level_1/header.png").convert_alpha()
-        self.coin_back = pygame.image.load("images/level_1/CoinBarBack.png").convert_alpha()
-        self.zero = pygame.image.load("images/level_1/zero.png").convert_alpha()
-        self.one = pygame.image.load("images/level_1/one.png").convert_alpha()
-        self.two = pygame.image.load("images/level_1/two.png").convert_alpha()
-        self.three = pygame.image.load("images/level_1/three.png").convert_alpha()
-        self.player_1_txt = pygame.image.load("images/level_1/player_one_txt.png").convert_alpha()
-        self.player_2_txt = pygame.image.load("images/level_1/player_two_txt.png").convert_alpha()
+        self.health_front = pygame.image.load("images/game_ui/HealthBarFront.png").convert_alpha()
+        if level_type == "mountains":
+            self.health_back = pygame.image.load("images/game_ui/HealthBarBack.png").convert_alpha()
+            self.header = pygame.image.load("images/game_ui/header.png").convert_alpha()
+            self.coin_back = pygame.image.load("images/game_ui/CoinBarBack.png").convert_alpha()
+        elif level_type == "cave":
+            self.health_back = pygame.image.load("images/game_ui/HealthBarBack2.png").convert_alpha()
+            self.header = pygame.image.load("images/game_ui/header2.png").convert_alpha()
+            self.coin_back = pygame.image.load("images/game_ui/CoinBarBack2.png").convert_alpha()
+        elif level_type == "bamboo":
+            self.health_back = pygame.image.load("images/game_ui/HealthBarBack3.png").convert_alpha()
+            self.header = pygame.image.load("images/game_ui/header3.png").convert_alpha()
+            self.coin_back = pygame.image.load("images/game_ui/CoinBarBack3.png").convert_alpha()
+
+        self.zero = pygame.image.load("images/game_ui/zero.png").convert_alpha()
+        self.one = pygame.image.load("images/game_ui/one.png").convert_alpha()
+        self.two = pygame.image.load("images/game_ui/two.png").convert_alpha()
+        self.three = pygame.image.load("images/game_ui/three.png").convert_alpha()
+        self.player_1_txt = pygame.image.load("images/game_ui/player_one_txt.png").convert_alpha()
+        self.player_2_txt = pygame.image.load("images/game_ui/player_two_txt.png").convert_alpha()
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
 
@@ -302,14 +351,14 @@ class Header:
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
 
-    def draw_header(self, surface, health, coins):
+    def draw_header(self, surface, momo_health, pet_health, coins):
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
         surface.blit(self.momo, (435, 10))
 
         surface.blit(self.health_back, (540, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (momo_health / 100)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -328,6 +377,6 @@ class Header:
         surface.blit(self.bird, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (pet_health / 50)
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))

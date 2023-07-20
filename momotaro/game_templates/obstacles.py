@@ -1,5 +1,6 @@
 import pygame
 
+
 class Obstacle:
     def __init__(self, x, y):
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
@@ -16,8 +17,10 @@ class Obstacle:
         fence_path = "audio/fence.mp3"
         self.fence_sound = pygame.mixer.Sound(fence_path)
         self.fence_sound.set_volume(0.3)
+
     def is_pushed(self):
         return self.pushed
+
     def get_rect(self):
         return self.__button_rect
 
@@ -87,6 +90,7 @@ class ButtonObstacle(Obstacle):
                 if self.fence.initial[1] < self.fence.y:
                     self.fence.y += self.fence_velocity
                     self.fence_moving = True
+
         # play the sound only once while the fence is moving
         # check whether sound is playing and only play if it is not
         if self.fence_moving and not self.sound_playing:
