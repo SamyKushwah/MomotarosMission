@@ -30,11 +30,6 @@ class GameManager:
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
-        # Creating pause button
-        pause_img = pygame.image.load("images/game_ui/pause_btn.png").convert_alpha()
-        pause_img = pygame.transform.scale(pause_img, (90, 70))
-        self.pause_btn = button.Button(pause_img)
-
         # Loading background image
         self.background = self.level.background
         # self.mountain_background = pygame.transform.scale(
@@ -55,13 +50,6 @@ class GameManager:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:  # if clicking, can click on pause button
-                    if self.pause_btn.is_clicked(
-                            self.my_toolbox.adjusted_mouse_pos(event.pos)):  # if clicked pause button
-                        return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
-                        if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            #print('restarting')
-                            return return_st
 
                 # if key pressing, can either be pausing or ending the game
                 elif event.type == pygame.KEYDOWN:

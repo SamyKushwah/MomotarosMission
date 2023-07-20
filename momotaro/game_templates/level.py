@@ -52,7 +52,7 @@ class Level:
     def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions)
+                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions, self.level_num)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
