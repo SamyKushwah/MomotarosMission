@@ -26,15 +26,22 @@ class GameManager:
         self.coins_collected = 0
         self.level_name = level
         match level:
-            case "level_2":
-                self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
+                self.controls_p1 = pygame.image.load("images/game_ui/controls_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls_p2.png").convert_alpha()
+
+            case "level_2":
+                self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
+                self.controls_p1 = pygame.image.load("images/game_ui/controls2_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls2_p2.png").convert_alpha()
+                self.controls_p1 = pygame.transform.scale(self.controls_p1, (150, 100))
+                self.controls_p2 = pygame.transform.scale(self.controls_p2, (150, 100))
+
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
+                self.controls_p1 = pygame.image.load("images/game_ui/controls3_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls3_p2.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -185,7 +192,14 @@ class GameManager:
         # Main Background
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
-        self.image.blit(self.controls, (170, 200))
+
+        if self.level_name == "level_1":
+            self.image.blit(self.controls_p1, (120, 200))
+            self.image.blit(self.controls_p2, (420, 200))
+
+        if self.level_name == "level_2":
+            self.image.blit(self.controls_p1, (100, 150))
+            self.image.blit(self.controls_p2, (300, 150))
 
         # Draw platforms
         for platform in self.level.platform_list:

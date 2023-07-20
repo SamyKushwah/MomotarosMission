@@ -6,7 +6,7 @@ from momotaro.game_templates import demon, obstacles
 from momotaro.ui_templates import tutorial
 
 class Level:
-    def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
+    def __init__(self, my_toolbox, level_num, level_width, level_height, background="cave"):
         self.width = level_width
         self.height = level_height
         self.level_num = level_num

@@ -82,7 +82,6 @@ def main():
 
             case "level_2":
                 # bring the user to level 2
-                # brings user to our debug level for now
                 pygame.mixer.pause()
                 level2_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_2")

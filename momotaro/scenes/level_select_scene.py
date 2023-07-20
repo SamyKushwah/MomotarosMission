@@ -2,11 +2,7 @@ import pygame
 import sys
 import os
 import pathlib
-<<<<<<<< HEAD:momotaro/scenes/level_select_scene.py
 from momotaro.ui_templates import button, screen_transition
-========
-from momotaro.ui_templates import button
->>>>>>>> kevin:build/lib/momotaro/scenes/level_select_scene.py
 from momotaro.drivers import toolbox
 
 import math
@@ -19,13 +15,7 @@ import math
 """
 
 
-<<<<<<<< HEAD:momotaro/scenes/level_select_scene.py
 def run(my_toolbox: toolbox.Toolbox, past_screen):
-========
-def run(my_toolbox: toolbox.Toolbox):
-
-    #os.chdir(pathlib.Path(__file__).parent.resolve().parent.resolve())
->>>>>>>> kevin:build/lib/momotaro/scenes/level_select_scene.py
 
     w, h = 1920, 1080
 
@@ -140,4 +130,3 @@ def run(my_toolbox: toolbox.Toolbox):
         pygame.display.flip()
 
         my_toolbox.clock.tick(60)
-
