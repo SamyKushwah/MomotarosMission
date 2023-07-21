@@ -105,6 +105,10 @@ class GameManager:
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
                 pygame.mixer.pause()
                 self.lose_sound.play()
+
+                # only momotaro has different death animations, when the bird dies, use momotaro's oni death
+                self.momotaro.death_type = "oni"
+
                 lose_rt = self.play_death_animation()
 
                 # Poll next scene from lose screen
@@ -119,6 +123,7 @@ class GameManager:
                     pygame.mixer.pause()
                     self.lose_sound.play()
                     self.momotaro.death_type = "crushed"
+                    self.momotaro.health = 0
                     lose_rt = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         return lose_rt
@@ -127,6 +132,7 @@ class GameManager:
                 if self.pet.position[
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     self.momotaro.death_type = "crushed"
+                    self.pet.health = 0
                     lose_rt = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         return lose_rt
@@ -240,6 +246,7 @@ class GameManager:
                 return lose_rt
 
         # Draw Header
+
         self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
 
         # self.pause_btn.draw(view_surface, (80, 65))
@@ -323,7 +330,7 @@ class GameManager:
                                 coin.draw(self.image)
 
             # Draw players
-            self.pet.draw(self.image)
+            #self.pet.draw(self.image)
             #index = round(float(self.momotaro.frame_index) / float(animation_delay)
 
             if index > 2:
@@ -347,7 +354,7 @@ class GameManager:
             view_surface = pygame.surface.Surface((1920, 1080))
 
             self.image.blit(self.momotaro.active_image, self.momotaro.position)
-
+            self.image.blit(self.pet.death_image, self.pet.position)
 
             if self.momotaro.get_rect().centerx <= 960:
                 special_x = 0
