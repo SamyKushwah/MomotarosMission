@@ -66,6 +66,32 @@ class Momotaro:
                                                          (400, 50))
         self.active_sweep_image = None
 
+        self.death_crush_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+
+        self.death_drown_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+
+        self.death_oni_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+
+        self.death_type = None
+
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
@@ -201,6 +227,7 @@ class Momotaro:
             try:
                 if self.standing_on.type == "water":
                     self.health = 0
+                    self.death_type = "drown"
             except AttributeError:
                 pass
 
@@ -348,6 +375,7 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
+                    self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()
