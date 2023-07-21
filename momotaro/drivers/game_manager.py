@@ -58,6 +58,9 @@ class GameManager:
         # self.mountain_background = pygame.transform.scale(
         # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
 
+        # Camera character locking
+        self.camera_on_momotaro = True
+
     '''
     Purpose: While the GameManager object is running, the main gameplay loop for the corresponding level occurs
     '''
@@ -90,6 +93,8 @@ class GameManager:
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             # print('restarting')
                             return return_st
+                    elif event.key == pygame.K_c:
+                        self.camera_on_momotaro = not self.camera_on_momotaro
                     # up button pressed (W) at the tori gate, ending the level
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
                         # add win sound
@@ -181,14 +186,22 @@ class GameManager:
     def draw(self):
         view_surface = pygame.surface.Surface((1920, 1080))
 
-        # Draw Background
+        # Draw Background based on who is centered
         # self.image.fill((70, 70, 180))
-        if self.momotaro.get_rect().centerx <= 960:
-            positional = 0 - (960 / 200)
-        elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-            positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+        if self.camera_on_momotaro:
+            if self.momotaro.get_rect().centerx <= 960:
+                positional = 0 - (960 / 200)
+            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+                positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+            else:
+                positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
         else:
-            positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+            if self.pet.get_rect().centerx <= 960:
+                positional = 0 - (960 / 200)
+            elif self.pet.get_rect().centerx >= self.level.width - 960:
+                positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+            else:
+                positional = self.pet.get_rect().centerx - (self.pet.get_rect().centerx / 200) - 960
 
         # Main Background
         self.image.blit(self.background, (positional, 100))
@@ -229,21 +242,30 @@ class GameManager:
         self.momotaro.draw(self.image)
         self.pet.draw(self.image)
 
-        if self.momotaro.get_rect().centerx <= 960:
-            special_x = 0
-        elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-            special_x = -(self.level.width - 1920)
+        # camera centers on different player based on camera toggle C
+        if self.camera_on_momotaro:
+            if self.momotaro.get_rect().centerx <= 960:
+                special_x = 0
+            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+                special_x = -(self.level.width - 1920)
+            else:
+                special_x = (-self.momotaro.get_rect().centerx) + (1920 / 2)
         else:
-            special_x = (-self.momotaro.get_rect().centerx) + (1920 / 2)
+            if self.pet.get_rect().centerx <= 960:
+                special_x = 0
+            elif self.pet.get_rect().centerx >= self.level.width - 960:
+                special_x = -(self.level.width - 1920)
+            else:
+                special_x = (-self.pet.get_rect().centerx) + (1920 / 2)
 
         view_surface.blit(self.image, (special_x, 0))
 
-        if self.pet.get_rect().centerx < -special_x or self.pet.get_rect().centerx > -special_x + 1920:
-            lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
+        #if self.pet.get_rect().centerx < -special_x or self.pet.get_rect().centerx > -special_x + 1920:
+        #    lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
 
-            # Poll next scene from lose screen
-            if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                return lose_rt
+        #    # Poll next scene from lose screen
+        #    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+        #        return lose_rt
 
         # Draw Header
 

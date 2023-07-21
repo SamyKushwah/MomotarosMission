@@ -93,3 +93,19 @@ Player movement number tweaking for a better feeling
 Shared our work done so far
 Fixed the bug where falling off a platform registered as getting crushed
 Fixed demon tracking bug so that it now attacks the closest player
+
+7/20/23
+9am - 12pm
+bug fixes, gameplay improvement
+discussed stakeholder meeting about our progress and goals for this last week
+planned out our goals for this weekend grind
+tested out different camera tracking methods
+planned out level 3 wireframe
+fully merged everyone's work
+
+7/21/23
+6pm - 12am
+implemented death animations (yes it took this long)
+fixed resulting bugs related to death animations
+created momotaro and bird death animation frames
+planned out controls page menu option
