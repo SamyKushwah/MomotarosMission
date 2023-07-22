@@ -96,9 +96,9 @@ class GameManager:
                         self.win_sound.play()
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
                         self.update_save_file(self.level_name, self.coins_collected)
+
                         # Poll the win game scene next scene
-                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
-                            return win_return
+                        return win_return
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
