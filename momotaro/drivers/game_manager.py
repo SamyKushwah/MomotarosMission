@@ -110,7 +110,7 @@ class GameManager:
                 self.lose_sound.play()
 
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
-                self.momotaro.death_type = "oni"
+                # self.momotaro.death_type = "oni"
 
                 lose_rt = self.play_death_animation()
 
@@ -360,18 +360,18 @@ class GameManager:
 
             if index > 2:
                 return lose_screen_scene.run(self.my_toolbox, self.level_name)
-
-            match self.momotaro.death_type:
-                case "crushed":
-                    self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                    self.momotaro.frame_index += 1
-                case "drown":
-                    self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                    self.momotaro.frame_index += 1
-                case "oni":
-                    self.momotaro.active_image = self.momotaro.death_oni_frames[index]
-                    self.momotaro.frame_index += 1
-
+            #print(self.momotaro.death_type)
+            if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
+                self.momotaro.active_image = self.momotaro.death_oni_frames[index]
+                self.momotaro.frame_index += 2
+            else:
+                match self.momotaro.death_type:
+                    case "crushed":
+                        self.momotaro.active_image = self.momotaro.death_crush_frames[index]
+                        self.momotaro.frame_index += 2
+                    case "drown":
+                        self.momotaro.active_image = self.momotaro.death_drown_frames[index]
+                        self.momotaro.frame_index += 2
             if self.momotaro.frame_index >= animation_delay:
                 self.momotaro.frame_index = 0
                 index += 1

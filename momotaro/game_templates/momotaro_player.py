@@ -76,9 +76,9 @@ class Momotaro:
         self.death_drown_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_drown2.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_drown3.png").convert_alpha(),
                                    (40, 70))]
         self.death_oni_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
@@ -371,7 +371,8 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
-                    self.death_type = "oni"
+
+                    #self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()
