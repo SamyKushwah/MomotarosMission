@@ -66,6 +66,29 @@ class Momotaro:
                                                          (400, 50))
         self.active_sweep_image = None
 
+        self.death_crush_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_drown_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_oni_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_type = None
+
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
@@ -178,15 +201,18 @@ class Momotaro:
                     self.standing = True
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    if self.velocity[1] > 0:
-                        #print("Clipping Warning! Teleporting up!")
-                        momotaro_rect.bottom = collidable_rect.top
-                        self.velocity[1] = 0
-                        self.standing = True
-                    else:
-                        #print("Clipping Warning! Teleporting down!")
-                        momotaro_rect.top = collidable_rect.bottom
-                        self.velocity[1] = 5
+                    self.standing = True
+                    self.standing_on = collidable
+
+                    # if self.velocity[1] > 0:
+                    #     #print("Clipping Warning! Teleporting up!")
+                    #     momotaro_rect.bottom = collidable_rect.top
+                    #     self.velocity[1] = 0
+                    #     self.standing = True
+                    # else:
+                    #     #print("Clipping Warning! Teleporting down!")
+                    #     momotaro_rect.top = collidable_rect.bottom
+                    #     self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -197,6 +223,7 @@ class Momotaro:
             try:
                 if self.standing_on.type == "water":
                     self.health = 0
+                    self.death_type = "drown"
             except AttributeError:
                 pass
 
@@ -344,6 +371,7 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
+                    self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()
