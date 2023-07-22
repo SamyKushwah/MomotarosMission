@@ -36,7 +36,8 @@ def create_level(my_toolbox):
     #level1.add_demon([3325, 400], 300)
 
     # add tori gate obstacle
-    level1.add_obstacle(600, 500, "torigate")
+    level1.add_obstacle(600, 500, "torigate", gate_num=1)
+    level1.add_obstacle(800, 500, "torigate", gate_num=2)
 
     #c oins
     level1.add_obstacle(600, 900, "coin")

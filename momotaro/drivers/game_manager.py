@@ -78,7 +78,7 @@ class GameManager:
                     pygame.quit()
                     sys.exit()
 
-                # if key pressing, can either be pausing or ending the game
+                # if key pressing, can either be pausing, ending the game, or changing the camera view
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
@@ -89,12 +89,13 @@ class GameManager:
                             # print('restarting')
                             return return_st
 
+                    # changing the camera view
                     elif event.key == pygame.K_c:
                         self.camera_on_momotaro = not self.camera_on_momotaro
 
-                    # up button pressed (W) at the tori gate, ending the level
-                    # if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed():
-                    if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
+                    # both players at their gates and either pressed up to end the game
+                    if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
+                            (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
                         pygame.mixer.pause()
                         self.win_sound.play()

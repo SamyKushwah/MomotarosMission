@@ -130,9 +130,13 @@ class Fence:
         return self.__fence_rect
 
 class ToriObstacle(Obstacle):
-    def __init__(self, x, y):
+    def __init__(self, x, y, gate_num):
         super().__init__(x, y)
-        self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate.png").convert_alpha()
+        self.gate_num = gate_num
+        if gate_num == 1:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate1.png").convert_alpha()
+        else:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate2.png").convert_alpha()
         self.scale_factor = 0.25
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)

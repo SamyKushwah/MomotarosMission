@@ -230,6 +230,26 @@ class Pet:
                         except AttributeError:
                             pass
 
+                case "torigate":
+                    center_x = self.get_rect().centerx
+                    center_y = self.get_rect().centery
+
+                    obstacles = list_of_obstacles[obstacle_type]
+                    pet_gate = None
+
+                    for obstacle in obstacles:
+                        if obstacle.gate_num == 2:
+                            pet_gate = obstacle
+
+                    gate_center_x = pet_gate.get_rect().centerx
+                    gate_center_y = pet_gate.get_rect().centery
+
+                    margin = 80
+                    if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
+                        pet_gate.set_pushed(True)
+                    else:  # fixed bug so now only when you are in gate range anf up you win
+                        pet_gate.set_pushed(False)
+
     def check_damage(self, demon_list):
         if self.iframes <= 0:
             for demon in demon_list:

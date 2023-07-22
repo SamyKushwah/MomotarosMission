@@ -294,16 +294,21 @@ class Momotaro:
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery
 
-                    obstacle = list_of_obstacles[obstacle_type][0]
+                    obstacles = list_of_obstacles[obstacle_type]
+                    momo_gate = None
 
-                    gate_center_x = obstacle.get_rect().centerx
-                    gate_center_y = obstacle.get_rect().centery
+                    for obstacle in obstacles:
+                        if obstacle.gate_num == 1:
+                            momo_gate = obstacle
+
+                    gate_center_x = momo_gate.get_rect().centerx
+                    gate_center_y = momo_gate.get_rect().centery
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        obstacle.set_pushed(True)
+                        momo_gate.set_pushed(True)
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        obstacle.set_pushed(False)
+                        momo_gate.set_pushed(False)
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:

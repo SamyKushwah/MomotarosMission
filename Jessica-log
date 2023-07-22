@@ -26,4 +26,6 @@
 7/19/23 - changed the 1A file to be level 2 and fixed any code to make that work. Added all level 2 components based off the wireframe Ruhi made.
 7/20/23 - changed the bird sprites to be a yellow color, added player 2 control UI and changed player 1 controls, began working on momotaro death animations,
           made the level 2 buttons red.
-7/22/23 - added functionality for the next button,
+7/22/23 - added functionality for the next button, changed spawn position of momotaro so he doesn't die immediately in level 2, added credits screen with
+          back button, removed extra image files that were unused and changed location of some, added functionality for each player to have a tori gate to
+          end the level,
