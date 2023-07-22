@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:momotaro/drivers/game_manager.py
+from momotaro.scenes.levels import level_2, level_1, level_3
+========
 from momotaro.scenes.levels import level_1A, level_1
+>>>>>>>> kevin:build/lib/momotaro/drivers/game_manager.py
 import pygame
 from momotaro.game_templates import momotaro_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
@@ -18,23 +22,31 @@ class GameManager:
         self.coins_collected = 0
         self.level_name = level
         match level:
-            case "level_1A":
-                self.level = level_1A.create_level(my_toolbox)
+            case "level_2":
+                self.level = level_2.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
             case "level_1":
                 self.level = level_1.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
+            case "level_3":
+                self.level = level_3.create_level(my_toolbox)
+                self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
-        # Creating pause button
-        pause_img = pygame.image.load("images/game_ui/pause_btn.png").convert_alpha()
-        pause_img = pygame.transform.scale(pause_img, (90, 70))
-        self.pause_btn = button.Button(pause_img)
-
         # Loading background image
+<<<<<<<< HEAD:momotaro/drivers/game_manager.py
+        self.background = self.level.background
+        # self.mountain_background = pygame.transform.scale(
+            # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
+
+
+========
         self.mountain_background = pygame.transform.scale(
         #    pygame.image.load("images/backgrounds/mountains/parallax-mountain-bg-reduced.png").convert_alpha(), (1920, 1080))
             pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
         #self.far_mountains = pygame.image.load("images/backgrounds/mountains/parallax-mountain-mountains-reduced.png").convert_alpha()
+>>>>>>>> kevin:build/lib/momotaro/drivers/game_manager.py
 
         self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
 
@@ -51,13 +63,6 @@ class GameManager:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:  # if clicking, can click on pause button
-                    if self.pause_btn.is_clicked(
-                            self.my_toolbox.adjusted_mouse_pos(event.pos)):  # if clicked pause button
-                        return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
-                        if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            #print('restarting')
-                            return return_st
 
                 # if key pressing, can either be pausing or ending the game
                 elif event.type == pygame.KEYDOWN:
@@ -125,6 +130,15 @@ class GameManager:
         view_surface = pygame.surface.Surface((1920, 1080))
 
         # Draw Background
+<<<<<<<< HEAD:momotaro/drivers/game_manager.py
+        # self.image.fill((70, 70, 180))
+        if self.momotaro.get_rect().centerx <= 960:
+            positional = 0 - (960 / 200)
+        elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+            positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+        else:
+            positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+========
         self.image.fill((70, 70, 180))
         match self.level.background:
             case "cave":
@@ -136,11 +150,15 @@ class GameManager:
                     positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
                 else:
                     positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+>>>>>>>> kevin:build/lib/momotaro/drivers/game_manager.py
 
-                # Main Background
-                self.image.blit(self.mountain_background, (positional, 100))
-                self.image.blit(self.mountain_background, (1920 + positional, 100))
+        # Main Background
+        self.image.blit(self.background, (positional, 100))
+        self.image.blit(self.background, (1920 + positional, 100))
+        self.image.blit(self.controls, (170, 200))
 
+<<<<<<<< HEAD:momotaro/drivers/game_manager.py
+========
                 self.image.blit(self.controls, (170, 200))
 
                 # Far Mountains
@@ -148,6 +166,7 @@ class GameManager:
                 #self.image.blit(self.far_mountains, (positional, 850))
                 #self.image.blit(self.far_mountains, (544 + positional, 850))
 
+>>>>>>>> kevin:build/lib/momotaro/drivers/game_manager.py
         # Draw platforms
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
@@ -204,7 +223,7 @@ class GameManager:
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
             level_coins[0] = coins_collected
-        elif level_name == "level_1A":
+        elif level_name == "level_2":
             level_coins[1] = coins_collected
         else:
             level_coins[2] = coins_collected

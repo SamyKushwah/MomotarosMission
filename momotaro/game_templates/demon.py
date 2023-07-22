@@ -1,5 +1,5 @@
 import pygame
-
+from math import dist
 '''
 Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
             (2-Dimensional). The Demons are subject to velocity changes and die on water. Demons take damage when hit
@@ -51,13 +51,28 @@ class Demon:
             except AttributeError:
                 pass
 
-        # Check if Momotaro is within detection range
+        # Check if either pet or Momotaro is within detection range
         detection_rect = pygame.rect.Rect((0, 0), self.detection_hitbox)
         detection_rect.center = self.get_rect().center
 
-        targets = [momotaro, pet]
+        targets = []
 
-        for target in targets:
+        momotaro_rect = momotaro.get_rect()
+        pet_rect = pet.get_rect()
+
+        if detection_rect.colliderect(momotaro_rect):
+            targets.append(momotaro)
+
+        if detection_rect.colliderect(pet_rect):
+            targets.append(pet)
+
+        if len(targets) != 0:
+            dists = []
+            for target in targets:
+                dists.append(dist(target.get_rect().center, detection_rect.center))
+
+            target = targets[dists.index(min(dists))]
+
             momotaro_rect = target.get_rect()
             if detection_rect.colliderect(momotaro_rect):
                 if detection_rect.centerx < momotaro_rect.centerx:
@@ -76,6 +91,9 @@ class Demon:
                 self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.05)
                 if abs(self.velocity[0]) < 1:
                     self.velocity[0] = 0
+        else:
+            self.velocity[0] = 0
+            self.moving_direction = "idle"
 
         # Limit max horizontal movement speed
         if self.velocity[0] > 12:

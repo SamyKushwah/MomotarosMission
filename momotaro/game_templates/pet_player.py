@@ -9,7 +9,7 @@ class Pet:
         self.velocity = [0.0, 0.0]
         self.standing = False
         self.hitbox = (35, 60)
-        self.gravity = 1.2
+        self.gravity = 0.8
         self.health = 50
         self.external_forces = [0, 0]
         self.standing_on = None
@@ -48,6 +48,9 @@ class Pet:
         self.hurt_left_image = pygame.transform.rotate(self.right_mvmnt_frames[0], 45)
         self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
+        self.death_image = pygame.transform.scale(pygame.image.load("images/player2/death.png").convert_alpha(),
+                                                  (40, 60))
+
 
     def update_bird_movement(self):
         if not self.standing:
@@ -68,7 +71,7 @@ class Pet:
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.1)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -88,10 +91,10 @@ class Pet:
             elif self.velocity[0] < -6:
                 self.velocity[0] = -6
         else:
-            if self.velocity[0] > 25:
-                self.velocity[0] = 25
-            elif self.velocity[0] < -25:
-                self.velocity[0] = -25
+            if self.velocity[0] > 15:
+                self.velocity[0] = 15
+            elif self.velocity[0] < -15:
+                self.velocity[0] = -15
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
@@ -131,15 +134,18 @@ class Pet:
                     self.standing = True
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    if self.velocity[1] > 0:
-                        #print("Clipping Warning! Teleporting up!")
-                        momotaro_rect.bottom = collidable_rect.top
-                        self.velocity[1] = 0
-                        self.standing = True
-                    else:
-                        #print("Clipping Warning! Teleporting down!")
-                        momotaro_rect.top = collidable_rect.bottom
-                        self.velocity[1] = 5
+                    self.standing = True
+                    self.standing_on = collidable
+
+                    #if self.velocity[1] > 0:
+                    #    #print("Clipping Warning! Teleporting up!")
+                    #    momotaro_rect.bottom = collidable_rect.top
+                    #    self.velocity[1] = 0
+                    #    self.standing = True
+                    #else:
+                    #    #print("Clipping Warning! Teleporting down!")
+                    #    momotaro_rect.top = collidable_rect.bottom
+                    #    self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),

@@ -130,4 +130,3 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
         pygame.display.flip()
 
         my_toolbox.clock.tick(60)
-
