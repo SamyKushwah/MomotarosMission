@@ -89,7 +89,11 @@ class GameManager:
                             # print('restarting')
                             return return_st
 
+                    elif event.key == pygame.K_c:
+                        self.camera_on_momotaro = not self.camera_on_momotaro
+
                     # up button pressed (W) at the tori gate, ending the level
+                    # if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed():
                     if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
                         # add win sound
                         pygame.mixer.pause()

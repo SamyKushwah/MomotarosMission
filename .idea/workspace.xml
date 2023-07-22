@@ -5,53 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessica's level 2, changed it so that character spawn location is determined in each level file.">
-      <change afterPath="$PROJECT_DIR$/momotaro/images/backgrounds/credits_bkgnd.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jessica-log" beforeDir="false" afterPath="$PROJECT_DIR$/Jessica-log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/lose_screen_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/momotaro/scenes/lose_screen_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/title_menu_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/momotaro/scenes/title_menu_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/build/lib/momotaro/game_templates/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/CoinBarBack.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/back_new.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/bkgnd.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/bkrnd_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/level_1_bkgnd (2).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/level_1_bkgnd_lightest.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/backgrounds/temp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/CoinBarBack.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/HealthBarBack.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/HealthBarFront.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/credits_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/header.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/one.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/player_one_txt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/player_two_txt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/three.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/two.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/level_1/zero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/lose_screen/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/lose_screen/home_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/lose_screen/lose_screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/backgrounds/lose_screen_bkgnd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/lose_screen/restart_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/pause_screen/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/pause_screen/home_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/pause_screen/pause_screen_bkgnd.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/backgrounds/pause_screen_bkgnd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/pause_screen/restart_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/pause_screen/resume_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/title_screen_scene_UI/title_screen_background.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/backgrounds/title_screen_bkgnd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/win_screen/home_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/win_screen/next_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/win_screen/restart_btn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/win_screen/win_screen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/save_data/game_data" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/save_data/game_data" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1A.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/lose_screen_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/lose_screen_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/pause_screen_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/pause_screen_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/title_menu_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/title_menu_scene.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/win_screen_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/win_screen_scene.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -508,6 +465,6 @@
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$momotaro_player.coverage" NAME="momotaro_player Coverage Results" MODIFIED="1689834854723" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/game_templates" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1689998449625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690005506158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
   </component>
 </project>
