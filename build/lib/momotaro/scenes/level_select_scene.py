@@ -2,7 +2,11 @@ import pygame
 import sys
 import os
 import pathlib
+<<<<<<<< HEAD:momotaro/scenes/level_select_scene.py
+from momotaro.ui_templates import button, screen_transition
+========
 from momotaro.ui_templates import button
+>>>>>>>> kevin:build/lib/momotaro/scenes/level_select_scene.py
 from momotaro.drivers import toolbox
 
 import math
@@ -15,9 +19,13 @@ import math
 """
 
 
+<<<<<<<< HEAD:momotaro/scenes/level_select_scene.py
+def run(my_toolbox: toolbox.Toolbox, past_screen):
+========
 def run(my_toolbox: toolbox.Toolbox):
 
     #os.chdir(pathlib.Path(__file__).parent.resolve().parent.resolve())
+>>>>>>>> kevin:build/lib/momotaro/scenes/level_select_scene.py
 
     w, h = 1920, 1080
 
@@ -124,6 +132,10 @@ def run(my_toolbox: toolbox.Toolbox):
         scene_screen.blit(lvl_2_coin_img, (w * (2.8 / 7), h * (8.15 / 11)))
         scene_screen.blit(lvl_3_coin_img, (w * (4.8 / 7), h * (8.15 / 10)))
         my_toolbox.draw_to_screen(scene_screen)
+
+        # past_screen.set_alpha(255)
+        # scene_screen.set_alpha(0)
+        # screen_transition.crossfade(past_screen, scene_screen, my_toolbox.screen, my_toolbox.clock, 60)
 
         pygame.display.flip()
 

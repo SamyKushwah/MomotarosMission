@@ -48,10 +48,8 @@ class Pet:
         self.hurt_left_image = pygame.transform.rotate(self.right_mvmnt_frames[0], 45)
         self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
-        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
-        roar_path = "audio/roar.mp3"
-        self.roar_sound = pygame.mixer.Sound(roar_path)
-        self.roar_sound.set_volume(0.15)
+        self.death_image = pygame.transform.scale(pygame.image.load("images/player2/death.png").convert_alpha(),
+                                                  (40, 60))
 
 
     def update_bird_movement(self):
@@ -136,15 +134,18 @@ class Pet:
                     self.standing = True
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    if self.velocity[1] > 0:
-                        #print("Clipping Warning! Teleporting up!")
-                        momotaro_rect.bottom = collidable_rect.top
-                        self.velocity[1] = 0
-                        self.standing = True
-                    else:
-                        #print("Clipping Warning! Teleporting down!")
-                        momotaro_rect.top = collidable_rect.bottom
-                        self.velocity[1] = 5
+                    self.standing = True
+                    self.standing_on = collidable
+
+                    #if self.velocity[1] > 0:
+                    #    #print("Clipping Warning! Teleporting up!")
+                    #    momotaro_rect.bottom = collidable_rect.top
+                    #    self.velocity[1] = 0
+                    #    self.standing = True
+                    #else:
+                    #    #print("Clipping Warning! Teleporting down!")
+                    #    momotaro_rect.top = collidable_rect.bottom
+                    #    self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -233,8 +234,6 @@ class Pet:
         if self.iframes <= 0:
             for demon in demon_list:
                 if self.get_rect().colliderect(demon.get_rect()):
-                    # add demon noise
-                    self.roar_sound.play()
                     self.health -= 5
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()

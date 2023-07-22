@@ -1,7 +1,6 @@
 import pygame
 from pygame import mixer
 mixer.init()
-from pygame import time
 
 
 class Momotaro:
@@ -31,7 +30,6 @@ class Momotaro:
         self.active_image = None
 
         self.frame_index = 0
-        #self.dead = False
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha(), (40, 70))
 
@@ -68,8 +66,28 @@ class Momotaro:
                                                          (400, 50))
         self.active_sweep_image = None
 
-        #self.squish_image = pygame.transform.scale(
-        #    pygame.image.load("images/MomotaroSprites/splat.png").convert_alpha(), (60, 70))
+        self.death_crush_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_drown_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_oni_frames = [
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+                                   (40, 70)),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+                                   (40, 70))]
+        self.death_type = None
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
@@ -89,7 +107,7 @@ class Momotaro:
         # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
         roar_path = "audio/roar.mp3"
         self.roar_sound = pygame.mixer.Sound(roar_path)
-        self.roar_sound.set_volume(0.15)
+        self.roar_sound.set_volume(0.3)
 
     def update_movement(self):
 
@@ -183,15 +201,18 @@ class Momotaro:
                     self.standing = True
                     self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    if self.velocity[1] > 0:
-                        #print("Clipping Warning! Teleporting up!")
-                        momotaro_rect.bottom = collidable_rect.top
-                        self.velocity[1] = 0
-                        self.standing = True
-                    else:
-                        #print("Clipping Warning! Teleporting down!")
-                        momotaro_rect.top = collidable_rect.bottom
-                        self.velocity[1] = 5
+                    self.standing = True
+                    self.standing_on = collidable
+
+                    # if self.velocity[1] > 0:
+                    #     #print("Clipping Warning! Teleporting up!")
+                    #     momotaro_rect.bottom = collidable_rect.top
+                    #     self.velocity[1] = 0
+                    #     self.standing = True
+                    # else:
+                    #     #print("Clipping Warning! Teleporting down!")
+                    #     momotaro_rect.top = collidable_rect.bottom
+                    #     self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -202,6 +223,7 @@ class Momotaro:
             try:
                 if self.standing_on.type == "water":
                     self.health = 0
+                    self.death_type = "drown"
             except AttributeError:
                 pass
 
@@ -240,11 +262,6 @@ class Momotaro:
                 elif self.attacking:
                     self.active_image = self.attacking_right_image
                     surface.blit(self.active_sweep_image, (self.get_rect().right, self.get_rect().top + 6))
-                """elif self.dead:
-                    print("dead right")
-                    self.active_image = self.squish_image
-                    surface.blit(self.active_sweep_image, (
-                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))"""
             case "left":
                 if self.charging:
                     self.active_image = self.charging_left_image
@@ -252,11 +269,6 @@ class Momotaro:
                     self.active_image = self.attacking_left_image
                     surface.blit(self.active_sweep_image, (
                         self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))
-                """elif self.dead:
-                    print("dead left")
-                    self.active_image = self.squish_image
-                    surface.blit(self.active_sweep_image, (
-                        self.get_rect().left - self.active_sweep_image.get_size()[0], self.get_rect().top + 6))"""
 
         if self.frame_index >= animation_delay:
             self.frame_index = 0
@@ -339,7 +351,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                #self.roar_sound.play()
+                                self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -347,7 +359,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                #self.roar_sound.play()
+                                self.roar_sound.play()
 
             #self.attack_power = 0
 
@@ -359,8 +371,7 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
-                    #if self.health < 0:
-                    #    self.dead = True
+                    self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()
@@ -377,8 +388,3 @@ class Momotaro:
                         self.velocity[1] += -12
         else:
             self.iframes -= 1
-
-    """def momo_squish(self, surface):
-        self.active_image = self.squish_image
-        surface.blit(self.active_image, self.position)
-        pygame.time.wait(5)"""
