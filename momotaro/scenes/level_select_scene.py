@@ -107,6 +107,7 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
 
     # driver loop setup
     running = True
+    transition = True
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -117,13 +118,13 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 # Check which button was clicked
                 if button_1.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_1"
+                    return "level_1", scene_screen
                 elif level_locks[0] != "locked" and button_2.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_2"
+                    return "level_2", scene_screen
                 elif level_locks[1] != "locked" and button_3.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_3"
+                    return "level_3", scene_screen
                 elif credits_btn.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "credits"
+                    return "credits", scene_screen
 
         credits_btn.draw(scene_screen, (w * (91 / 100), h * (96 / 100)), True)
 
@@ -133,22 +134,22 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
         scene_screen.blit(circle2_img, (w * (3 / 7), h * (6 / 10.5)))
         scene_screen.blit(circle3_img, (w * (5 / 7), h * (6 / 9.25)))
 
+        # draw correct buttons for each level
         button_1.draw(scene_screen, (w * (1.5 / 7), h * (4 / 5)), True)
-        if level_locks[0] != "locked":
-            button_2.draw(scene_screen, (w * (3.5 / 7), h * (7 / 10)), True)
-        if level_locks[1] != "locked":
-            button_3.draw(scene_screen, (w * (5.5 / 7), h * (7 / 9)), True)
-
         scene_screen.blit(lvl_1_coin_img, (w * (0.8 / 7), h * (5 / 6)))
         if level_locks[0] != "locked":
+            button_2.draw(scene_screen, (w * (3.5 / 7), h * (7 / 10)), True)
             scene_screen.blit(lvl_2_coin_img, (w * (2.8 / 7), h * (8.15 / 11)))
         if level_locks[1] != "locked":
+            button_3.draw(scene_screen, (w * (5.5 / 7), h * (7 / 9)), True)
             scene_screen.blit(lvl_3_coin_img, (w * (4.8 / 7), h * (8.15 / 10)))
-        my_toolbox.draw_to_screen(scene_screen)
 
-        # past_screen.set_alpha(255)
-        # scene_screen.set_alpha(0)
-        # screen_transition.crossfade(past_screen, scene_screen, my_toolbox.screen, my_toolbox.clock, 60)
+        # do the screen transition
+        if transition:
+            screen_transition.crossfade(past_screen, scene_screen, my_toolbox.screen, my_toolbox.clock, 10)
+            transition = False
+
+        my_toolbox.draw_to_screen(scene_screen)
 
         pygame.display.flip()
 
