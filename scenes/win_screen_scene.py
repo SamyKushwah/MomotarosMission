@@ -29,10 +29,11 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
     restart_img.fill((255, 255, 255, 0))
     button_restart = button.Button(restart_img, text="Restart")
 
-    # load next button image
-    next_img = pygame.Surface((400, 105), pygame.SRCALPHA)
-    next_img.fill((255, 255, 255, 0))
-    button_next = button.Button(next_img, text="Next")
+    # load next button image if not on last level (level 3)
+    if current_level != "level_3":
+        next_img = pygame.Surface((400, 105), pygame.SRCALPHA)
+        next_img.fill((255, 255, 255, 0))
+        button_next = button.Button(next_img, text="Next")
 
     # draw the background and buttons with scaled position
     scene_screen = pygame.surface.Surface((w, h))
@@ -46,7 +47,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
 
         button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
         button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
-        button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
+        if current_level != "level_3":
+            button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
 
         my_toolbox.draw_to_screen(scene_screen)
 
@@ -65,5 +67,11 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
                     return "level_selector"
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return current_level
+                elif current_level != "level_3" and button_next.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
+                    if current_level == "level_1":
+                        return "level_2"
+                    elif current_level == "level_2":
+                        return "level_3"
+
 
         my_toolbox.clock.tick(60)

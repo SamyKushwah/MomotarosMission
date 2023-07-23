@@ -7,7 +7,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/lose_screen/lose_screen.png").convert_alpha()
+    background = pygame.image.load("images/backgrounds/lose_screen_bkgnd.png").convert_alpha()
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image

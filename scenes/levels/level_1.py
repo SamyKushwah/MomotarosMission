@@ -1,4 +1,5 @@
 from game_templates import level
+from game_templates import momotaro_player, pet_player
 
 
 def create_level(my_toolbox):
@@ -30,7 +31,7 @@ def create_level(my_toolbox):
     level1.add_obstacle(1080, 600, "coin")  # coin 1
 
     # gate leading to after the first coin
-    level1.add_obstacle(1265, 1000, 'button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
+    level1.add_obstacle(1265, 1000, 'dog_button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
 
     # block to cover off the gate top
     level1.add_platform((1350, 130), (215, 500), facing_direction="all")
@@ -68,5 +69,10 @@ def create_level(my_toolbox):
     # add end goal torigate
     level1.add_platform((1560, 400), (350,50), facing_direction="up")
     level1.add_obstacle(1650, 340, "torigate") # end of the level marker
+    # level1.add_obstacle(500, 900, "torigate")
+    # level1.add_obstacle(700, 900, "torigate")
 
-    return level1
+    momotaro = momotaro_player.Momotaro([300, 300])
+    pet = pet_player.Pet([200, 300])
+
+    return level1, momotaro, pet
