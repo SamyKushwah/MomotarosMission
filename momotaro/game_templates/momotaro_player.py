@@ -83,16 +83,16 @@ class Momotaro:
         self.death_oni_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni2.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni3 (2).png").convert_alpha(),
                                    (40, 70))]
         self.death_type = None
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
-        self.coin_sound.set_volume(0.35)
+        self.coin_sound.set_volume(0.4)
 
         # loading in strike audio from royalty free webpage mixkit
         strike_path = "audio/strike.mp3"
@@ -107,7 +107,7 @@ class Momotaro:
         # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
         roar_path = "audio/roar.mp3"
         self.roar_sound = pygame.mixer.Sound(roar_path)
-        self.roar_sound.set_volume(0.3)
+        self.roar_sound.set_volume(0.2)
 
     def update_movement(self):
 
