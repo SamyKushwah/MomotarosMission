@@ -49,7 +49,7 @@ class Pet:
         self.hurt_right_image = pygame.transform.rotate(self.left_mvmnt_frames[0], 45)
 
         self.death_image = pygame.transform.scale(pygame.image.load("images/player2/death.png").convert_alpha(),
-                                                  (40, 60))
+                                                  (60, 50))
 
 
     def update_bird_movement(self):

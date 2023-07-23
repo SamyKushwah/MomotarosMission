@@ -279,18 +279,20 @@ class GameManager:
     def update_save_file(self, level_name, coins_collected):
         # get current info from the save file
         with open("save_data/game_data", 'r') as file:
-            level_coins = [line.rstrip() for line in file]
+            level_data = [line.rstrip() for line in file]
 
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
-            level_coins[0] = coins_collected
+            level_data[0] = coins_collected
+            level_data[3] = "unlocked"
         elif level_name == "level_2":
-            level_coins[1] = coins_collected
+            level_data[1] = coins_collected
+            level_data[4] = "unlocked"
         else:
-            level_coins[2] = coins_collected
+            level_data[2] = coins_collected
 
         with open("save_data/game_data", 'w') as file:
-            [file.write(str(coin) + "\n") for coin in level_coins]
+            [file.write(str(coin) + "\n") for coin in level_data]
 
     def play_death_animation(self):
         animation_delay = 50
