@@ -18,3 +18,4 @@ Personal Log:
 7/20 -> Fixed and finished sounds. Changed sprite colors for demons. Working on coding for death animation.
 7/22 -> Made death animation sprites for Momotaro for drowning and squash. Added level 3 music to merged code. 
         Fixed death animation code so death type showed up. Helped with 2 player win condition logic. 
+7/23 -> Made death animation for Momotaro when he dies through oni. Fixed audio. 
