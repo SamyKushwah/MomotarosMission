@@ -1,6 +1,6 @@
 import pygame
 import sys
-from ui_templates import button
+from ui_templates import button, screen_transition
 from drivers import toolbox
 
 """
@@ -9,7 +9,7 @@ from drivers import toolbox
 
 """
 
-def run(my_toolbox: toolbox.Toolbox):
+def run(my_toolbox: toolbox.Toolbox, past_screen):
 
     w, h = 1920, 1080
 
@@ -28,13 +28,11 @@ def run(my_toolbox: toolbox.Toolbox):
 
     # driver loop setup
     running = True
+    transition = True
     while running:
 
         # draw buttons with scaled position
         button_back.draw(scene_screen, (120, 50), True)
-
-        my_toolbox.draw_to_screen(scene_screen)
-        pygame.display.flip()
 
         for event in [pygame.event.wait()] + pygame.event.get():
             if event.type == pygame.QUIT:
@@ -43,6 +41,14 @@ def run(my_toolbox: toolbox.Toolbox):
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
                 if button_back.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_selector"
+                    return "level_selector", scene_screen
+
+        # do the screen transition
+        if transition:
+            screen_transition.crossfade(past_screen, scene_screen, my_toolbox.screen, my_toolbox.clock, 10)
+            transition = False
+
+        my_toolbox.draw_to_screen(scene_screen)
+        pygame.display.flip()
 
         my_toolbox.clock.tick(60)

@@ -28,7 +28,7 @@ def run(my_toolbox: toolbox.Toolbox):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "quit"
+                return "quit", scene_screen
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 # Screen was clicked somewhere

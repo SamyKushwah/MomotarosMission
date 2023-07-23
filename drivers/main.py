@@ -34,12 +34,17 @@ def main():
     # level 1 music setup using royalty free Shamisen Dance - By Steve Oxen
     level1_path = "audio/level1_music.mp3"
     level1_music = pygame.mixer.Sound(level1_path)
-    level1_music.set_volume(0.2)
+    level1_music.set_volume(0.1)
 
     # level 2 music setup using royalty free Misora (Traditional Japanese Music_03) from pixabay
     level2_path = "audio/level2_music.mp3"
     level2_music = pygame.mixer.Sound(level2_path)
-    level2_music.set_volume(0.3)
+    level2_music.set_volume(0.08)
+
+    # level 3 music setup using royalty free Koto (Traditional Japanese Music_01) from pixabay
+    level3_path = "audio/level3_music.mp3"
+    level3_music = pygame.mixer.Sound(level3_path)
+    level3_music.set_volume(0.1)
 
     last_state = ""
 
@@ -62,13 +67,13 @@ def main():
                 # bring user to the level selection page
                 if last_state != "title_menu":
                     background_music.play()
-                next_state = level_select_scene.run(my_toolbox, past_screen)
+                next_state, past_screen = level_select_scene.run(my_toolbox, past_screen)
 
             case "level_1":
                 pygame.mixer.pause()
                 level1_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_1")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_1", past_screen)
+                next_state, past_screen = my_game.run()
                 level1_music.stop()
                 last_state = "level1"
                 pass  # todo
@@ -77,21 +82,25 @@ def main():
                 # bring the user to level 2
                 pygame.mixer.pause()
                 level2_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_2")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_2", past_screen)
+                next_state, past_screen = my_game.run()
                 level2_music.stop()
                 last_state = "level2"
                 pass  # TODO
 
             case "level_3":
                 # bring the user to level 3
+                pygame.mixer.pause()
+                level3_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_3")
                 next_state = my_game.run()
+                level3_music.stop()
+                last_state = "level3"
                 pass  # TODO
 
             case "credits":
                 # bring the user to the credits page
-                next_state = credits_scene.run(my_toolbox)
+                next_state, past_screen = credits_scene.run(my_toolbox, past_screen)
 
             case "level_complete":
                 next_state = "level_selector"
