@@ -62,13 +62,13 @@ def main():
                 # bring user to the level selection page
                 if last_state != "title_menu":
                     background_music.play()
-                next_state = level_select_scene.run(my_toolbox, past_screen)
+                next_state, past_screen = level_select_scene.run(my_toolbox, past_screen)
 
             case "level_1":
                 pygame.mixer.pause()
                 level1_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_1")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_1", past_screen)
+                next_state, past_screen = my_game.run()
                 level1_music.stop()
                 last_state = "level1"
                 pass  # todo
@@ -77,21 +77,21 @@ def main():
                 # bring the user to level 2
                 pygame.mixer.pause()
                 level2_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_2")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_2", past_screen)
+                next_state, past_screen = my_game.run()
                 level2_music.stop()
                 last_state = "level2"
                 pass  # TODO
 
             case "level_3":
                 # bring the user to level 3
-                my_game = game_manager.GameManager(my_toolbox, "level_3")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_3", past_screen)
+                next_state, past_screen = my_game.run()
                 pass  # TODO
 
             case "credits":
                 # bring the user to the credits page
-                next_state = credits_scene.run(my_toolbox)
+                next_state, past_screen = credits_scene.run(my_toolbox, past_screen)
 
             case "level_complete":
                 next_state = "level_selector"

@@ -30,4 +30,4 @@
           back button, removed extra image files that were unused and changed location of some, added functionality for each player to have a tori gate to
           end the level, made a new death image for the bird
 7/23/23 - made levels lockable- created locked level images and made buttons unclickable if they are locked, added functionality to unlock levels as they
-          are completed
+          are completed, added crossfade transitions between every scene and screen change, updated control images to show the camera change command C,

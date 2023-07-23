@@ -68,8 +68,11 @@ def create_level(my_toolbox):
 
     # add end goal torigate
     level1.add_platform((1560, 400), (350,50), facing_direction="up")
-    level1.add_obstacle(1650, 330, "torigate", gate_num=1) # end of the level marker
-    level1.add_obstacle(1800, 330, "torigate", gate_num=2)
+    # level1.add_obstacle(1650, 330, "torigate", gate_num=1) # end of the level marker
+    # level1.add_obstacle(1800, 330, "torigate", gate_num=2)
+
+    level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
+    level1.add_obstacle(700, 950, "torigate", gate_num=2)
 
 
     momotaro = momotaro_player.Momotaro([300, 300])

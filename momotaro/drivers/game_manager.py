@@ -2,7 +2,7 @@ from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
 from momotaro.game_templates import momotaro_player, pet_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
-from momotaro.ui_templates import button
+from momotaro.ui_templates import screen_transition
 import sys
 #from pygame import mixer
 #pygame.mixer.init()
@@ -18,30 +18,28 @@ Purpose: The GameManager object contains level and player information and regula
 
 class GameManager:
 
-    def __init__(self, my_toolbox, level):
+    def __init__(self, my_toolbox, level, past_screen):
         self.my_toolbox = my_toolbox
         self.level_complete = False
         self.momotaro = None
         self.pet = None
         self.coins_collected = 0
         self.level_name = level
+        self.past_screen = past_screen
+        self.curr_screen = None
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls_p1 = pygame.image.load("images/game_ui/controls_p1.png").convert_alpha()
-                self.controls_p2 = pygame.image.load("images/game_ui/controls_p2.png").convert_alpha()
+                self.controls1 = pygame.image.load("images/game_ui/controls1.png").convert_alpha()
 
             case "level_2":
                 self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls_p1 = pygame.image.load("images/game_ui/controls2_p1.png").convert_alpha()
-                self.controls_p2 = pygame.image.load("images/game_ui/controls2_p2.png").convert_alpha()
-                self.controls_p1 = pygame.transform.scale(self.controls_p1, (150, 100))
-                self.controls_p2 = pygame.transform.scale(self.controls_p2, (150, 100))
+                self.controls2 = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
+                self.controls2 = pygame.transform.scale(self.controls2, (250, 160))
 
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls_p1 = pygame.image.load("images/game_ui/controls3_p1.png").convert_alpha()
-                self.controls_p2 = pygame.image.load("images/game_ui/controls3_p2.png").convert_alpha()
+                self.controls3 = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -69,6 +67,7 @@ class GameManager:
 
     def run(self):
         # run event handling for the level until lvl_complete == True or broken out of
+        transition = True
         while not self.level_complete:
             # Poll events/user inputs
             events = pygame.event.get()
@@ -82,12 +81,11 @@ class GameManager:
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
-                        return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
-
-                        # Poll pause scene next scene
+                        return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            # print('restarting')
-                            return return_st
+                            return return_st, pause_screen
+                        else:
+                            screen_transition.crossfade(pause_screen, self.curr_screen, self.my_toolbox.screen, self.my_toolbox.clock, 10)
 
                     # changing the camera view
                     elif event.key == pygame.K_c:
@@ -99,11 +97,11 @@ class GameManager:
                         # add win sound
                         pygame.mixer.pause()
                         self.win_sound.play()
-                        win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
+                        win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
 
                         # Poll the win game scene next scene
-                        return win_return
+                        return win_return, win_screen
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
@@ -113,11 +111,11 @@ class GameManager:
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
                 self.momotaro.death_type = "oni"
 
-                lose_rt = self.play_death_animation()
+                lose_rt, lose_screen = self.play_death_animation()
 
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                    return lose_rt
+                    return lose_rt, lose_screen
 
             # If momotaro is pushed below a block, he dies
 
@@ -130,23 +128,25 @@ class GameManager:
                     self.lose_sound.play()
                     self.momotaro.death_type = "crushed"
                     self.momotaro.health = 0
-                    lose_rt = self.play_death_animation()
+                    lose_rt, lose_screen = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                        return lose_rt
+                        return lose_rt, lose_screen
 
                 if self.pet.standing and self.pet.standing_on != None:
                     if self.pet.position[
                         1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                         self.momotaro.death_type = "crushed"
                         self.pet.health = 0
-                        lose_rt = self.play_death_animation()
+                        lose_rt, lose_screen = self.play_death_animation()
                         if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                            return lose_rt
+                            return lose_rt, lose_screen
 
             self.tick_physics()
-            val = self.draw()
+            val = self.draw(transition)
+            if transition:
+                transition = False
             if val is not None:
-                return val
+                return val, self.curr_screen
 
             self.my_toolbox.clock.tick(60)
 
@@ -184,7 +184,7 @@ class GameManager:
     Purpose: Calls the draw function of each object and draws backgrounds
     '''
 
-    def draw(self):
+    def draw(self, transition):
         view_surface = pygame.surface.Surface((1920, 1080))
 
         # Draw Background
@@ -207,12 +207,14 @@ class GameManager:
         self.image.blit(self.background, (1920 + positional, 100))
 
         if self.level_name == "level_1":
-            self.image.blit(self.controls_p1, (120, 200))
-            self.image.blit(self.controls_p2, (420, 200))
+            self.image.blit(self.controls1, (120, 160))
 
         if self.level_name == "level_2":
-            self.image.blit(self.controls_p1, (100, 150))
-            self.image.blit(self.controls_p2, (300, 150))
+            self.image.blit(self.controls2, (100, 150))
+
+        if self.level_name == "level_3":
+            self.image.blit(self.controls3, (120, 160))
+
 
         # Draw platforms
         for platform in self.level.platform_list:
@@ -269,6 +271,12 @@ class GameManager:
         # Draw Header
         self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
 
+        # do the screen transition
+        if transition:
+            screen_transition.crossfade(self.past_screen, view_surface, self.my_toolbox.screen, self.my_toolbox.clock,
+                                        10)
+
+        self.curr_screen = view_surface
         self.my_toolbox.draw_to_screen(view_surface)
         pygame.display.update()
 
@@ -319,13 +327,13 @@ class GameManager:
             self.image.blit(self.background, (1920 + positional, 100))
 
             if self.level_name == "level_1":
-                self.image.blit(self.controls_p1, (120, 200))
-                self.image.blit(self.controls_p2, (420, 200))
+                self.image.blit(self.controls1, (120, 160))
 
             if self.level_name == "level_2":
-                self.image.blit(self.controls_p1, (100, 150))
-                self.image.blit(self.controls_p2, (300, 150))
+                self.image.blit(self.controls2, (100, 150))
 
+            if self.level_name == "level_3":
+                self.image.blit(self.controls3, (120, 160))
 
             # Draw platforms
             for platform in self.level.platform_list:
@@ -362,7 +370,7 @@ class GameManager:
             # index = round(float(self.momotaro.frame_index) / float(animation_delay)
 
             if index > 2:
-                return lose_screen_scene.run(self.my_toolbox, self.level_name)
+                return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
 
             match self.momotaro.death_type:
                 case "crushed":
