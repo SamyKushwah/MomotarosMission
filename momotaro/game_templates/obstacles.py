@@ -35,9 +35,13 @@ class Obstacle:
         screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
 
 class ButtonObstacle(Obstacle):
-    def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions):
+    def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions, level_num):
         super().__init__(x, y)
-        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
+        if level_num == 1:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
+        elif level_num == 2:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button2.png").convert_alpha()
+
         self.fence = Fence(fence_int_position, fence_final_position, fence_dimensions)
         self.scale_factor = 0.5
         self.__width = int(self.button_image.get_width() * self.scale_factor)
@@ -126,9 +130,13 @@ class Fence:
         return self.__fence_rect
 
 class ToriObstacle(Obstacle):
-    def __init__(self, x, y):
+    def __init__(self, x, y, gate_num):
         super().__init__(x, y)
-        self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate.png").convert_alpha()
+        self.gate_num = gate_num
+        if gate_num == 1:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate1.png").convert_alpha()
+        else:
+            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate2.png").convert_alpha()
         self.scale_factor = 0.25
         self.__width = int(self.button_image.get_width() * self.scale_factor)
         self.__height = int(self.button_image.get_height() * self.scale_factor)

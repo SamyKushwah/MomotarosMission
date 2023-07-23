@@ -71,15 +71,15 @@ def create_level(my_toolbox):
     level2.add_demon([3900, 350], (300, 100))
 
     # add tori gate obstacle
-    level2.add_obstacle(3600, 350, "torigate")
-    level2.add_obstacle(3750, 350, "torigate")
+    level2.add_obstacle(3600, 350, "torigate", gate_num=1)
+    level2.add_obstacle(3750, 350, "torigate", gate_num=2)
 
     # add coins
     level2.add_obstacle(2775, 370, "coin")
     level2.add_obstacle(4300, 550, "coin")
     level2.add_obstacle(4815, 850, "coin")
 
-    momotaro = momotaro_player.Momotaro([300, 300])
+    momotaro = momotaro_player.Momotaro([300, 200])
     pet = pet_player.Pet([200, 500])
 
     return level2, momotaro, pet

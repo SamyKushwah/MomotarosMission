@@ -26,15 +26,22 @@ class GameManager:
         self.coins_collected = 0
         self.level_name = level
         match level:
-            case "level_2":
-                self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls.png").convert_alpha()
+                self.controls_p1 = pygame.image.load("images/game_ui/controls_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls_p2.png").convert_alpha()
+
+            case "level_2":
+                self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
+                self.controls_p1 = pygame.image.load("images/game_ui/controls2_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls2_p2.png").convert_alpha()
+                self.controls_p1 = pygame.transform.scale(self.controls_p1, (150, 100))
+                self.controls_p2 = pygame.transform.scale(self.controls_p2, (150, 100))
+
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
+                self.controls_p1 = pygame.image.load("images/game_ui/controls3_p1.png").convert_alpha()
+                self.controls_p2 = pygame.image.load("images/game_ui/controls3_p2.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -47,11 +54,6 @@ class GameManager:
         lose_path = "audio/lose.mp3"
         self.lose_sound = pygame.mixer.Sound(lose_path)
         self.lose_sound.set_volume(0.5)
-
-        # Creating pause button
-        pause_img = pygame.image.load("images/game_ui/pause_btn.png").convert_alpha()
-        pause_img = pygame.transform.scale(pause_img, (90, 70))
-        self.pause_btn = button.Button(pause_img)
 
         # Loading background image
         self.background = self.level.background
@@ -75,15 +77,8 @@ class GameManager:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == pygame.MOUSEBUTTONDOWN:  # if clicking, can click on pause button
-                    if self.pause_btn.is_clicked(
-                            self.my_toolbox.adjusted_mouse_pos(event.pos)):  # if clicked pause button
-                        return_st = pause_screen_scene.run(self.my_toolbox, self.level_name)
-                        if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            #  print('restarting')
-                            return return_st
 
-                # if key pressing, can either be pausing or ending the game
+                # if key pressing, can either be pausing, ending the game, or changing the camera view
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
@@ -93,18 +88,22 @@ class GameManager:
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             # print('restarting')
                             return return_st
+
+                    # changing the camera view
                     elif event.key == pygame.K_c:
                         self.camera_on_momotaro = not self.camera_on_momotaro
-                    # up button pressed (W) at the tori gate, ending the level
-                    if self.level.interactible_list["torigate"][0].is_pushed() and event.key == pygame.K_w:
+
+                    # both players at their gates and either pressed up to end the game
+                    if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
+                            (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
                         pygame.mixer.pause()
                         self.win_sound.play()
                         win_return = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected)
                         self.update_save_file(self.level_name, self.coins_collected)
+
                         # Poll the win game scene next scene
-                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
-                            return win_return
+                        return win_return
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
@@ -121,7 +120,9 @@ class GameManager:
                     return lose_rt
 
             # If momotaro is pushed below a block, he dies
-            
+
+            # If momotaro is pushed below a block, he dies
+
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
@@ -133,14 +134,14 @@ class GameManager:
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         return lose_rt
 
-            if self.pet.standing and self.pet.standing_on != None:
-                if self.pet.position[
-                    1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
-                    self.momotaro.death_type = "crushed"
-                    self.pet.health = 0
-                    lose_rt = self.play_death_animation()
-                    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                        return lose_rt
+                if self.pet.standing and self.pet.standing_on != None:
+                    if self.pet.position[
+                        1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
+                        self.momotaro.death_type = "crushed"
+                        self.pet.health = 0
+                        lose_rt = self.play_death_animation()
+                        if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                            return lose_rt
 
             self.tick_physics()
             val = self.draw()
@@ -186,8 +187,7 @@ class GameManager:
     def draw(self):
         view_surface = pygame.surface.Surface((1920, 1080))
 
-        # Draw Background based on who is centered
-        # self.image.fill((70, 70, 180))
+        # Draw Background
         if self.camera_on_momotaro:
             if self.momotaro.get_rect().centerx <= 960:
                 positional = 0 - (960 / 200)
@@ -202,11 +202,17 @@ class GameManager:
                 positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
             else:
                 positional = self.pet.get_rect().centerx - (self.pet.get_rect().centerx / 200) - 960
-
         # Main Background
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
-        self.image.blit(self.controls, (170, 200))
+
+        if self.level_name == "level_1":
+            self.image.blit(self.controls_p1, (120, 200))
+            self.image.blit(self.controls_p2, (420, 200))
+
+        if self.level_name == "level_2":
+            self.image.blit(self.controls_p1, (100, 150))
+            self.image.blit(self.controls_p2, (300, 150))
 
         # Draw platforms
         for platform in self.level.platform_list:
@@ -260,18 +266,9 @@ class GameManager:
 
         view_surface.blit(self.image, (special_x, 0))
 
-        #if self.pet.get_rect().centerx < -special_x or self.pet.get_rect().centerx > -special_x + 1920:
-        #    lose_rt = lose_screen_scene.run(self.my_toolbox, self.level_name)
-
-        #    # Poll next scene from lose screen
-        #    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-        #        return lose_rt
-
         # Draw Header
-
         self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
 
-        # self.pause_btn.draw(view_surface, (80, 65))
         self.my_toolbox.draw_to_screen(view_surface)
         pygame.display.update()
 
@@ -282,30 +279,31 @@ class GameManager:
     def update_save_file(self, level_name, coins_collected):
         # get current info from the save file
         with open("save_data/game_data", 'r') as file:
-            level_coins = [line.rstrip() for line in file]
+            level_data = [line.rstrip() for line in file]
 
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
-            level_coins[0] = coins_collected
+            level_data[0] = coins_collected
+            level_data[3] = "unlocked"
         elif level_name == "level_2":
-            level_coins[1] = coins_collected
+            level_data[1] = coins_collected
+            level_data[4] = "unlocked"
         else:
-            level_coins[2] = coins_collected
+            level_data[2] = coins_collected
 
         with open("save_data/game_data", 'w') as file:
-            [file.write(str(coin) + "\n") for coin in level_coins]
+            [file.write(str(coin) + "\n") for coin in level_data]
 
     def play_death_animation(self):
         animation_delay = 50
         index = 0
-        self.pet.velocity = [0,0]
+        self.pet.velocity = [0, 0]
         # draw the background
         # scene_screen = pygame.surface.Surface((w, h))
 
         # driver loop setup
         running = True
         while running:
-
 
             # Draw Background
             # self.image.fill((70, 70, 180))
@@ -319,7 +317,15 @@ class GameManager:
             # Main Background
             self.image.blit(self.background, (positional, 100))
             self.image.blit(self.background, (1920 + positional, 100))
-            self.image.blit(self.controls, (170, 200))
+
+            if self.level_name == "level_1":
+                self.image.blit(self.controls_p1, (120, 200))
+                self.image.blit(self.controls_p2, (420, 200))
+
+            if self.level_name == "level_2":
+                self.image.blit(self.controls_p1, (100, 150))
+                self.image.blit(self.controls_p2, (300, 150))
+
 
             # Draw platforms
             for platform in self.level.platform_list:
@@ -352,8 +358,8 @@ class GameManager:
                                 coin.draw(self.image)
 
             # Draw players
-            #self.pet.draw(self.image)
-            #index = round(float(self.momotaro.frame_index) / float(animation_delay)
+            # self.pet.draw(self.image)
+            # index = round(float(self.momotaro.frame_index) / float(animation_delay)
 
             if index > 2:
                 return lose_screen_scene.run(self.my_toolbox, self.level_name)

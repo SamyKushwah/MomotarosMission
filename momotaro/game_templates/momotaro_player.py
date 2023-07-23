@@ -73,7 +73,6 @@ class Momotaro:
                                    (40, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
                                    (40, 70))]
-
         self.death_drown_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
@@ -81,7 +80,6 @@ class Momotaro:
                                    (40, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
                                    (40, 70))]
-
         self.death_oni_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
@@ -89,7 +87,6 @@ class Momotaro:
                                    (40, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
                                    (40, 70))]
-
         self.death_type = None
 
         # loading in coin collection audio from royalty free webpage mixkit
@@ -150,12 +147,12 @@ class Momotaro:
                 self.standing = False
 
         if self.attacking_duration <= 0:
-            if keys[pygame.K_p]: # Momotaro is attacking
+            if keys[pygame.K_r]: # Momotaro is attacking
                 if not self.charging:
                     self.attack_power = 0.1
                 self.charging = True
                 self.attacking = False
-            elif not keys[pygame.K_p] and self.charging:
+            elif not keys[pygame.K_r] and self.charging:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
@@ -203,20 +200,19 @@ class Momotaro:
                     self.velocity[1] = 0
                     self.standing = True
                     self.standing_on = collidable
-
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
                     self.standing = True
                     self.standing_on = collidable
 
-                    #if self.velocity[1] > 0:
-                    #    #print("Clipping Warning! Teleporting up!")
-                    #    momotaro_rect.bottom = collidable_rect.top
-                    #    self.velocity[1] = 0
-                    #    self.standing = True
-                    #else:
-                    #    #print("Clipping Warning! Teleporting down!")
-                    #    momotaro_rect.top = collidable_rect.bottom
-                    #    self.velocity[1] = 5
+                    # if self.velocity[1] > 0:
+                    #     #print("Clipping Warning! Teleporting up!")
+                    #     momotaro_rect.bottom = collidable_rect.top
+                    #     self.velocity[1] = 0
+                    #     self.standing = True
+                    # else:
+                    #     #print("Clipping Warning! Teleporting down!")
+                    #     momotaro_rect.top = collidable_rect.bottom
+                    #     self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -298,16 +294,21 @@ class Momotaro:
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery
 
-                    obstacle = list_of_obstacles[obstacle_type][0]
+                    obstacles = list_of_obstacles[obstacle_type]
+                    momo_gate = None
 
-                    gate_center_x = obstacle.get_rect().centerx
-                    gate_center_y = obstacle.get_rect().centery
+                    for obstacle in obstacles:
+                        if obstacle.gate_num == 1:
+                            momo_gate = obstacle
+
+                    gate_center_x = momo_gate.get_rect().centerx
+                    gate_center_y = momo_gate.get_rect().centery
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        obstacle.set_pushed(True)
+                        momo_gate.set_pushed(True)
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        obstacle.set_pushed(False)
+                        momo_gate.set_pushed(False)
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
