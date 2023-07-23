@@ -27,6 +27,10 @@ class Pet:
 
         self.frame_index = 0
 
+        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
+        roar_path = "audio/roar.mp3"
+        self.roar_sound = pygame.mixer.Sound(roar_path)
+        self.roar_sound.set_volume(0.15)
 
         # BIRD IMAGES ----------------------------------
         self.bird_idle_image = None
@@ -393,11 +397,33 @@ class Pet:
                                 if self.digging:
                                     if self.get_rect().colliderect(obstacle.get_rect()):
                                         obstacle.type = "button"
+                case "torigate":
+                    center_x = self.get_rect().centerx
+                    center_y = self.get_rect().centery
+
+                    obstacles = list_of_obstacles[obstacle_type]
+                    pet_gate = None
+
+                    for obstacle in obstacles:
+                        if obstacle.gate_num == 2:
+                            pet_gate = obstacle
+
+                    gate_center_x = pet_gate.get_rect().centerx
+                    gate_center_y = pet_gate.get_rect().centery
+
+                    margin = 80
+                    if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
+                        pet_gate.set_pushed(True)
+                    else:  # fixed bug so now only when you are in gate range anf up you win
+                        pet_gate.set_pushed(False)
 
     def check_damage(self, demon_list):
         if self.iframes <= 0:
             for demon in demon_list:
                 if self.get_rect().colliderect(demon.get_rect()):
+                    # add demon noise
+                    self.roar_sound.play()
+
                     self.health -= 5
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
@@ -416,4 +442,4 @@ class Pet:
             case "bird":
                 surface.blit(self.bird_death_image, self.position)
             case "dog":
-                surface.blit(self.dog_death_image, self.position.)
+                surface.blit(self.dog_death_image, self.position)
