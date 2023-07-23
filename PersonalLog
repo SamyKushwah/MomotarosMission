@@ -16,3 +16,5 @@ Personal Log:
 7/19 -> Gathered sounds for attacking, being hit, gate movement, coin collection, and demon. Had bugs with looping sound
         for gate and demon. Fixed bug in gate sound.
 7/20 -> Fixed and finished sounds. Changed sprite colors for demons. Working on coding for death animation.
+7/22 -> Made death animation sprites for Momotaro for drowning and squash. Added level 3 music to merged code. 
+        Fixed death animation code so death type showed up. Helped with 2 player win condition logic. 
