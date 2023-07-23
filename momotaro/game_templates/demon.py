@@ -1,7 +1,7 @@
 import pygame
 from math import dist
 '''
-Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
+Purpose: Enemy object. Spawns at a specified location with a predetermined enemy detection range 
             (2-Dimensional). The Demons are subject to velocity changes and die on water. Demons take damage when hit
             by the sweep image from Momotaro's sword.
 '''

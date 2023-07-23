@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/demon.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/demon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/level.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/game_templates/pet_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/pet_player.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStand(Left).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStand(Left).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStand(Right).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStand(Right).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStanding.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStanding.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStrike(Left).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStrike(Left).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStrike(Right).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/DemonStrike(Right).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/Demonlift(Left).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/Demonlift(Left).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/DemonSprites/Demonlift(Right).png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/DemonSprites/Demonlift(Right).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush1.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush2.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush3.png" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/images/MomotaroSprites/momotaro_crush3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/images/player2/death.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,20 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/karen/OneDrive/Documents/GitHub/MomotarosMission/momotaro/images/backgrounds&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/karen/OneDrive/Documents/GitHub/MomotarosMission/momotaro/images/backgrounds",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\karen\OneDrive\Documents\GitHub\MomotarosMission\momotaro\images\credits_screen" />
@@ -88,13 +81,6 @@
       <workItem from="1689316618344" duration="17810000" />
       <workItem from="1689827945796" duration="8324000" />
       <workItem from="1690011863144" duration="2452000" />
-    </task>
-    <task id="LOCAL-00013" summary="getting close to merging again">
-      <created>1687601744781</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1687601744781</updated>
     </task>
     <task id="LOCAL-00014" summary="updated to shawns version">
       <created>1687602980898</created>
@@ -432,14 +418,20 @@
       <option name="project" value="LOCAL" />
       <updated>1689816700749</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen">
+      <created>1690101278147</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1690101278147</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="full level completed&#10;&#10;must press w when at the tori gate to end the level&#10;&#10;still need to make end game scene reflect the number of coins collected" />
     <MESSAGE value="commented out print statements" />
     <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
     <MESSAGE value="started commenting everything" />
@@ -464,11 +456,12 @@
     <MESSAGE value="added sami's sound effects" />
     <MESSAGE value="small fix cause i pasted it in  wrong" />
     <MESSAGE value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
-    <option name="LAST_COMMIT_MESSAGE" value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
+    <MESSAGE value="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$screen_transition.coverage" NAME="screen_transition Coverage Results" MODIFIED="1689056495888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/ui_templates" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690100958936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690103713443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$level_2.coverage" NAME="level_2 Coverage Results" MODIFIED="1689759631276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />

@@ -5,6 +5,7 @@ from momotaro.game_templates import demon, obstacles
 
 from momotaro.ui_templates import tutorial
 
+
 class Level:
     def __init__(self, my_toolbox, level_num, level_width, level_height, background="cave"):
         self.width = level_width
@@ -33,17 +34,19 @@ class Level:
         self.stone_imgs = []
         self.water_img = None
 
-    def add_platform(self, position, dimensions, platform_type = "stone", facing_direction="all", corners=False):
-        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, platform_type, facing_direction, corners)
+    def add_platform(self, position, dimensions, platform_type="stone", facing_direction="all", corners=False):
+        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, platform_type, facing_direction,
+                                 corners)
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
     def add_moving_platform(self, position, dimensions, max_speed, target, platform_type="stone",
                             facing_direction="all",
                             corners=False):
-        temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img, platform_type, facing_direction,
+        temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img,
+                                       platform_type, facing_direction,
                                        corners)
-        #print("Adding platform", temp_platform.get_rect())
+        # print("Adding platform", temp_platform.get_rect())
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -51,10 +54,11 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None, gate_num=None):
+    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions, self.level_num)
+                temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
+                                                         self.level_num)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
@@ -83,9 +87,26 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
+            case "dog_button":
+                temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
+                                                         self.level_num, dog=True)
+                try:
+                    self.interactible_list["button"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["button"] = [temp_obstacle]
 
-    def add_tutorial_text(self,x,y,x_min,x_max,dimensions,text):
-        temp_text = tutorial.TutorialText((x,y), x_min, x_max, dimensions=dimensions, text= text)
+                self.collidable_list.append(temp_obstacle)
+
+                temp_obstacle = temp_obstacle.fence
+                try:
+                    self.interactible_list["fence"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["fence"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+
+    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text)
         self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
@@ -248,7 +269,8 @@ class Platform:
 
 
 class MovingPlatform(Platform):
-    def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, platform_type, facing_direction="all", corners=False):
+    def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, platform_type,
+                 facing_direction="all", corners=False):
         super().__init__(position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners)
         self.__int_x = position[0]
         self.__int_y = position[1]
@@ -258,7 +280,7 @@ class MovingPlatform(Platform):
         self.initial = position
         self.target = target
         self.middle = [(self.initial[0] + self.target[0]) // 2, (self.initial[1] + self.target[1]) // 2]
-        #print("middle:", self.middle[0])
+        # print("middle:", self.middle[0])
 
     def movement(self):
         moved = [self.x - self.initial[0] + 1, self.y - self.initial[1] + 1]
@@ -266,13 +288,14 @@ class MovingPlatform(Platform):
         moved_target = [self.target[0] - self.initial[0], self.target[1] - self.initial[1]]
 
         if self.target[0] != self.initial[0]:
-            #print('move x')
+            # print('move x')
             x_progress = moved[0] / moved_target[0]
 
             if self.x < self.middle[0]:
                 speed_x = (moved[0] / moved_middle[0]) * self.max_speed + 1
             else:
-                speed_x = (1 - ((moved[0] - moved_middle[0]) / (moved_target[0] - moved_middle[0]))) * self.max_speed + 1
+                speed_x = (1 - (
+                            (moved[0] - moved_middle[0]) / (moved_target[0] - moved_middle[0]))) * self.max_speed + 1
             speed_x = min(round(speed_x), self.max_speed)
 
             if self.__moving_right:
@@ -295,7 +318,8 @@ class MovingPlatform(Platform):
             if self.y < self.middle[1]:
                 speed_y = (moved[1] / moved_middle[1]) * self.max_speed + 1
             else:
-                speed_y = (1 - ((moved[1] - moved_middle[1]) / (moved_target[1] - moved_middle[1]))) * self.max_speed + 1
+                speed_y = (1 - (
+                            (moved[1] - moved_middle[1]) / (moved_target[1] - moved_middle[1]))) * self.max_speed + 1
             speed_y = min(round(speed_y), self.max_speed)
 
             if self.__moving_down:
@@ -309,6 +333,7 @@ class MovingPlatform(Platform):
                 self.__moving_down = False
             elif self.y < self.initial[1]:
                 self.__moving_down = True
+
 
 class Header:
     def __init__(self, level_type):

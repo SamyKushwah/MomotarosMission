@@ -135,7 +135,7 @@ class Momotaro:
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.3)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -182,40 +182,41 @@ class Momotaro:
         self.standing = False
         self.external_forces = [0, 0]
         for collidable in collidables:
-            collidable_rect = collidable.get_rect()
-            if momotaro_rect.colliderect(collidable_rect):
-                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
-                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+            if collidable.type != "dog_button":
+                collidable_rect = collidable.get_rect()
+                if momotaro_rect.colliderect(collidable_rect):
+                    if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
+                            momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
-                    momotaro_rect.left = collidable_rect.right
-                    self.velocity[0] += 3
-                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
-                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                        momotaro_rect.left = collidable_rect.right
+                        self.velocity[0] += 3
+                    elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
+                            momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
-                    momotaro_rect.right = collidable_rect.left
-                    self.velocity[0] += -3
-                elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
-                    #momotaro_rect.top = collidable_rect.bottom
-                    self.velocity[1] = 3 + collidable.velocity[1]
-                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
-                        self.velocity[1] >= 0:
-                    momotaro_rect.bottom = collidable_rect.top
-                    self.velocity[1] = 0
-                    self.standing = True
-                    self.standing_on = collidable
-                elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    self.standing = True
-                    self.standing_on = collidable
+                        momotaro_rect.right = collidable_rect.left
+                        self.velocity[0] += -3
+                    elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
+                        # momotaro_rect.top = collidable_rect.bottom
+                        self.velocity[1] = 3 + collidable.velocity[1]
+                    elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
+                            self.velocity[1] >= 0:
+                        momotaro_rect.bottom = collidable_rect.top
+                        self.velocity[1] = 0
+                        self.standing = True
+                        self.standing_on = collidable
+                    elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
+                        self.standing = True
+                        self.standing_on = collidable
 
-                    # if self.velocity[1] > 0:
-                    #     #print("Clipping Warning! Teleporting up!")
-                    #     momotaro_rect.bottom = collidable_rect.top
-                    #     self.velocity[1] = 0
-                    #     self.standing = True
-                    # else:
-                    #     #print("Clipping Warning! Teleporting down!")
-                    #     momotaro_rect.top = collidable_rect.bottom
-                    #     self.velocity[1] = 5
+                        # if self.velocity[1] > 0:
+                        #     #print("Clipping Warning! Teleporting up!")
+                        #     momotaro_rect.bottom = collidable_rect.top
+                        #     self.velocity[1] = 0
+                        #     self.standing = True
+                        # else:
+                        #     #print("Clipping Warning! Teleporting down!")
+                        #     momotaro_rect.top = collidable_rect.bottom
+                        #     self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -286,13 +287,14 @@ class Momotaro:
             match obstacle_type:
                 case "button":
                     for obstacle in list_of_obstacles[obstacle_type]:
-                        #print(self.standing_on)
-                        try:
-                            if self.standing_on.type == "button" and self.standing_on == obstacle:
-                                #print("hello")
-                                obstacle.set_pushed(True)
-                        except AttributeError:
-                            obstacle.set_pushed(False)
+                        if obstacle.type != "dog_button":
+                            # print(self.standing_on)
+                            try:
+                                if self.standing_on.type == "button" and self.standing_on == obstacle:
+                                    # print("hello")
+                                    obstacle.set_pushed(True)
+                            except AttributeError:
+                                obstacle.set_pushed(False)
                 case "torigate":
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery

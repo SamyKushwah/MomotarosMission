@@ -31,7 +31,7 @@ def create_level(my_toolbox):
     level1.add_obstacle(1080, 600, "coin")  # coin 1
 
     # gate leading to after the first coin
-    level1.add_obstacle(1265, 1000, 'button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
+    level1.add_obstacle(1265, 1000, 'dog_button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
 
     # block to cover off the gate top
     level1.add_platform((1350, 130), (215, 500), facing_direction="all")
