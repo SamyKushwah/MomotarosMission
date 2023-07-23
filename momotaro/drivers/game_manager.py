@@ -327,13 +327,13 @@ class GameManager:
             self.image.blit(self.background, (1920 + positional, 100))
 
             if self.level_name == "level_1":
-                self.image.blit(self.controls_p1, (120, 200))
-                self.image.blit(self.controls_p2, (420, 200))
+                self.image.blit(self.controls1, (120, 160))
 
             if self.level_name == "level_2":
-                self.image.blit(self.controls_p1, (100, 150))
-                self.image.blit(self.controls_p2, (300, 150))
+                self.image.blit(self.controls2, (100, 150))
 
+            if self.level_name == "level_3":
+                self.image.blit(self.controls3, (120, 160))
 
             # Draw platforms
             for platform in self.level.platform_list:
