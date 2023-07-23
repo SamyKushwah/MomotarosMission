@@ -122,15 +122,15 @@ class Momotaro:
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.2
-            self.velocity[0] += 0.2
+                self.velocity[0] += 0.3
+            self.velocity[0] += 0.3
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.2
-            self.velocity[0] -= 0.2
+                self.velocity[0] -= 0.3
+            self.velocity[0] -= 0.3
             self.moving_direction = "left"
             self.last_direction = "left"
         else:
@@ -169,6 +169,9 @@ class Momotaro:
             self.velocity[0] = 12
         elif self.velocity[0] < -12:
             self.velocity[0] = -12
+
+        if self.velocity[1] > 20:
+            self.velocity[1] = 20
 
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]

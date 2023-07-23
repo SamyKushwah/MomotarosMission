@@ -9,7 +9,7 @@ class Pet:
         self.velocity = [0.0, 0.0]
         self.standing = False
         self.hitbox = (35, 60)
-        self.gravity = 0.8
+        self.gravity = 0.7
         self.health = 50
         self.external_forces = [0, 0]
         self.standing_on = None
