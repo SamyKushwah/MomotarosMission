@@ -35,7 +35,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
         button_home.draw(scene_screen, (1030, h * (12 / 13)), True)
         button_restart.draw(scene_screen, (1570, h * (12 / 13)), True)
 
-        for event in [pygame.event.wait()]+pygame.event.get():
+        events = pygame.event.get()
+        for event in events:
             if event.type == pygame.QUIT:
                 return "quit", scene_screen
             # Check if the mouse was clicked

@@ -46,12 +46,12 @@ class GameManager:
         # win music setup using Shamisen Dance - By Steve Oxen Stinger 2
         win_path = "audio/win.mp3"
         self.win_sound = pygame.mixer.Sound(win_path)
-        self.win_sound.set_volume(0.6)
+        self.win_sound.set_volume(0.7)
 
         # lose music setup using Ninja Ambush - By Steve Oxen Stringer 2
         lose_path = "audio/lose.mp3"
         self.lose_sound = pygame.mixer.Sound(lose_path)
-        self.lose_sound.set_volume(0.5)
+        self.lose_sound.set_volume(0.4)
 
         # Loading background image
         self.background = self.level.background
@@ -100,8 +100,11 @@ class GameManager:
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
 
-                        # Poll the win game scene next scene
-                        return win_return, win_screen
+                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
+                            # stopping win sound when new screen is selected
+                            self.win_sound.stop()
+                            # Poll the win game scene next scene
+                            return win_return, win_screen
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
@@ -109,12 +112,14 @@ class GameManager:
                 self.lose_sound.play()
 
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
-                self.momotaro.death_type = "oni"
+                #self.momotaro.death_type = "oni"
 
                 lose_rt, lose_screen = self.play_death_animation()
 
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                    # stopping lose sound when new state
+                    self.lose_sound.stop()
                     return lose_rt, lose_screen
 
             # If momotaro is pushed below a block, he dies
@@ -126,20 +131,27 @@ class GameManager:
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
                     pygame.mixer.pause()
                     self.lose_sound.play()
+                    # squish amimation
+                    # self.momotaro.momo_squish(self.image)
                     self.momotaro.death_type = "crushed"
                     self.momotaro.health = 0
                     lose_rt, lose_screen = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                        # stopping lose sound when new state
+                        self.lose_sound.stop()
                         return lose_rt, lose_screen
 
-                if self.pet.standing and self.pet.standing_on != None:
-                    if self.pet.position[
-                        1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
-                        self.momotaro.death_type = "crushed"
-                        self.pet.health = 0
-                        lose_rt, lose_screen = self.play_death_animation()
-                        if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
-                            return lose_rt, lose_screen
+            if self.pet.standing and self.pet.standing_on != None:
+                if self.pet.position[
+                    1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
+                    self.momotaro.death_type = "crushed"
+                    self.pet.health = 0
+                    self.lose_sound.play()
+                    lose_rt, lose_screen = self.play_death_animation()
+                    if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
+                        # stopping lose sound when new state
+                        self.lose_sound.stop()
+                        return lose_rt, lose_screen
 
             self.tick_physics()
             val = self.draw(transition)
@@ -372,16 +384,18 @@ class GameManager:
             if index > 2:
                 return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
 
-            match self.momotaro.death_type:
-                case "crushed":
-                    self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                    self.momotaro.frame_index += 1
-                case "drown":
-                    self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                    self.momotaro.frame_index += 1
-                case "oni":
-                    self.momotaro.active_image = self.momotaro.death_oni_frames[index]
-                    self.momotaro.frame_index += 1
+                # print(self.momotaro.death_type)
+            if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
+                self.momotaro.active_image = self.momotaro.death_oni_frames[index]
+                self.momotaro.frame_index += 2
+            else:
+                match self.momotaro.death_type:
+                    case "crushed":
+                        self.momotaro.active_image = self.momotaro.death_crush_frames[index]
+                        self.momotaro.frame_index += 2
+                    case "drown":
+                        self.momotaro.active_image = self.momotaro.death_drown_frames[index]
+                        self.momotaro.frame_index += 2
 
             if self.momotaro.frame_index >= animation_delay:
                 self.momotaro.frame_index = 0

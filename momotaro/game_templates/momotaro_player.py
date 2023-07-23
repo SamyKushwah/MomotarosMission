@@ -76,23 +76,23 @@ class Momotaro:
         self.death_drown_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_drown2.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_drown3.png").convert_alpha(),
                                    (40, 70))]
         self.death_oni_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush1.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush2.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni2.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_crush3.png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni3.png").convert_alpha(),
                                    (40, 70))]
         self.death_type = None
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
-        self.coin_sound.set_volume(0.35)
+        self.coin_sound.set_volume(0.5)
 
         # loading in strike audio from royalty free webpage mixkit
         strike_path = "audio/strike.mp3"
@@ -107,7 +107,7 @@ class Momotaro:
         # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
         roar_path = "audio/roar.mp3"
         self.roar_sound = pygame.mixer.Sound(roar_path)
-        self.roar_sound.set_volume(0.3)
+        self.roar_sound.set_volume(0.2)
 
     def update_movement(self):
 
@@ -359,7 +359,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -367,7 +367,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
 
             #self.attack_power = 0
 
@@ -379,7 +379,7 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
-                    self.death_type = "oni"
+                    #self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()
