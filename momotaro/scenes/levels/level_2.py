@@ -3,7 +3,7 @@ from momotaro.game_templates import momotaro_player, pet_player
 
 
 def create_level(my_toolbox):
-    level2 = level.Level(my_toolbox, 2, 5100, 5000, background="cave")
+    level2 = level.Level(my_toolbox, 2, 5100, 5000, background="bamboo")
     level2.load_water_img()
     level2.load_stone_imgs()
 
