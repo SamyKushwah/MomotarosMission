@@ -85,14 +85,14 @@ class Momotaro:
                                    (40, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni2.png").convert_alpha(),
                                    (40, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni3 (2).png").convert_alpha(),
+            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni3.png").convert_alpha(),
                                    (40, 70))]
         self.death_type = None
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
-        self.coin_sound.set_volume(0.4)
+        self.coin_sound.set_volume(0.5)
 
         # loading in strike audio from royalty free webpage mixkit
         strike_path = "audio/strike.mp3"
@@ -122,20 +122,20 @@ class Momotaro:
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.2
-            self.velocity[0] += 0.2
+                self.velocity[0] += 0.3
+            self.velocity[0] += 0.3
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.2
-            self.velocity[0] -= 0.2
+                self.velocity[0] -= 0.3
+            self.velocity[0] -= 0.3
             self.moving_direction = "left"
             self.last_direction = "left"
         else:
             self.moving_direction = "idle"
-            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
+            self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.3)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
 
@@ -170,6 +170,9 @@ class Momotaro:
         elif self.velocity[0] < -12:
             self.velocity[0] = -12
 
+        if self.velocity[1] > 20:
+            self.velocity[1] = 20
+
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
 
@@ -179,40 +182,41 @@ class Momotaro:
         self.standing = False
         self.external_forces = [0, 0]
         for collidable in collidables:
-            collidable_rect = collidable.get_rect()
-            if momotaro_rect.colliderect(collidable_rect):
-                if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
-                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+            if collidable.type != "dog_button":
+                collidable_rect = collidable.get_rect()
+                if momotaro_rect.colliderect(collidable_rect):
+                    if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
+                            momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
-                    momotaro_rect.left = collidable_rect.right
-                    self.velocity[0] += 3
-                elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
-                        momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
+                        momotaro_rect.left = collidable_rect.right
+                        self.velocity[0] += 3
+                    elif abs(momotaro_rect.right - collidable_rect.left) < pixel_margin and not abs(
+                            momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
-                    momotaro_rect.right = collidable_rect.left
-                    self.velocity[0] += -3
-                elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
-                    #momotaro_rect.top = collidable_rect.bottom
-                    self.velocity[1] = 3 + collidable.velocity[1]
-                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
-                        self.velocity[1] >= 0:
-                    momotaro_rect.bottom = collidable_rect.top
-                    self.velocity[1] = 0
-                    self.standing = True
-                    self.standing_on = collidable
-                elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    self.standing = True
-                    self.standing_on = collidable
+                        momotaro_rect.right = collidable_rect.left
+                        self.velocity[0] += -3
+                    elif abs(momotaro_rect.top - collidable_rect.bottom) < pixel_margin:
+                        # momotaro_rect.top = collidable_rect.bottom
+                        self.velocity[1] = 3 + collidable.velocity[1]
+                    elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
+                            self.velocity[1] >= 0:
+                        momotaro_rect.bottom = collidable_rect.top
+                        self.velocity[1] = 0
+                        self.standing = True
+                        self.standing_on = collidable
+                    elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
+                        self.standing = True
+                        self.standing_on = collidable
 
-                    # if self.velocity[1] > 0:
-                    #     #print("Clipping Warning! Teleporting up!")
-                    #     momotaro_rect.bottom = collidable_rect.top
-                    #     self.velocity[1] = 0
-                    #     self.standing = True
-                    # else:
-                    #     #print("Clipping Warning! Teleporting down!")
-                    #     momotaro_rect.top = collidable_rect.bottom
-                    #     self.velocity[1] = 5
+                        # if self.velocity[1] > 0:
+                        #     #print("Clipping Warning! Teleporting up!")
+                        #     momotaro_rect.bottom = collidable_rect.top
+                        #     self.velocity[1] = 0
+                        #     self.standing = True
+                        # else:
+                        #     #print("Clipping Warning! Teleporting down!")
+                        #     momotaro_rect.top = collidable_rect.bottom
+                        #     self.velocity[1] = 5
 
         if self.standing_on is not None:
             test_rect = pygame.rect.Rect((self.position[0] - 5, self.position[1] - 1),
@@ -283,27 +287,33 @@ class Momotaro:
             match obstacle_type:
                 case "button":
                     for obstacle in list_of_obstacles[obstacle_type]:
-                        #print(self.standing_on)
-                        try:
-                            if self.standing_on.type == "button" and self.standing_on == obstacle:
-                                #print("hello")
-                                obstacle.set_pushed(True)
-                        except AttributeError:
-                            obstacle.set_pushed(False)
+                        if obstacle.type != "dog_button":
+                            # print(self.standing_on)
+                            try:
+                                if self.standing_on.type == "button" and self.standing_on == obstacle:
+                                    # print("hello")
+                                    obstacle.set_pushed(True)
+                            except AttributeError:
+                                obstacle.set_pushed(False)
                 case "torigate":
                     momo_center_x = self.get_rect().centerx
                     momo_center_y = self.get_rect().centery
 
-                    obstacle = list_of_obstacles[obstacle_type][0]
+                    obstacles = list_of_obstacles[obstacle_type]
+                    momo_gate = None
 
-                    gate_center_x = obstacle.get_rect().centerx
-                    gate_center_y = obstacle.get_rect().centery
+                    for obstacle in obstacles:
+                        if obstacle.gate_num == 1:
+                            momo_gate = obstacle
+
+                    gate_center_x = momo_gate.get_rect().centerx
+                    gate_center_y = momo_gate.get_rect().centery
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        obstacle.set_pushed(True)
+                        momo_gate.set_pushed(True)
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        obstacle.set_pushed(False)
+                        momo_gate.set_pushed(False)
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
@@ -351,7 +361,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
@@ -359,7 +369,7 @@ class Momotaro:
                                 demon.velocity[1] += -15
                                 demon.attacked = True
                                 demon.iframes = 20
-                                self.roar_sound.play()
+                                #self.roar_sound.play()
 
             #self.attack_power = 0
 
@@ -371,7 +381,6 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 5
-
                     #self.death_type = "oni"
 
                     # make ow noise

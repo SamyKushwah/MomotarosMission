@@ -1,10 +1,10 @@
 import pygame
 import sys
-from momotaro.ui_templates import button
+from momotaro.ui_templates import button, screen_transition
 from momotaro.drivers import toolbox
 
 
-def run(my_toolbox: toolbox.Toolbox, current_level, coins):
+def run(my_toolbox: toolbox.Toolbox, current_level, coins, past_screen):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
@@ -43,6 +43,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
 
     # driver loop setup
     running = True
+    transition = True
     while running:
 
         button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
@@ -50,28 +51,30 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins):
         if current_level != "level_3":
             button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
 
-        my_toolbox.draw_to_screen(scene_screen)
-
-        pygame.display.flip()
-
-        my_toolbox.clock.tick(60)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "quit"
+                return "quit", scene_screen
 
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
 
                 if button_home.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return "level_selector"
+                    return "level_selector", scene_screen
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    return current_level
+                    return current_level, scene_screen
                 elif current_level != "level_3" and button_next.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     if current_level == "level_1":
-                        return "level_2"
+                        return "level_2", scene_screen
                     elif current_level == "level_2":
-                        return "level_3"
+                        return "level_3", scene_screen
 
+         # do the screen transition
+        if transition:
+            screen_transition.crossfade(past_screen, scene_screen, my_toolbox.screen, my_toolbox.clock, 10)
+            transition = False
+
+        my_toolbox.draw_to_screen(scene_screen)
+        pygame.display.flip()
 
         my_toolbox.clock.tick(60)
