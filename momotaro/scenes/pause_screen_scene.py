@@ -12,7 +12,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
     background = pygame.transform.scale(background, (w, h))
 
     # load home button image
-    home_img = pygame.Surface((400, 110), pygame.SRCALPHA)
+    home_img = pygame.Surface((400, 106), pygame.SRCALPHA)
     home_img.fill((255, 255, 255, 0))
     button_home = button.Button(home_img, text="Home")
 
@@ -25,6 +25,11 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
     resume_img = pygame.Surface((575, 115), pygame.SRCALPHA)
     resume_img.fill((255, 255, 255, 0))
     button_resume = button.Button(resume_img, text="Resume")
+
+    # load controls button image
+    controls_img = pygame.Surface((647, 103), pygame.SRCALPHA)
+    controls_img.fill((255, 255, 255, 0))
+    button_controls = button.Button(controls_img, text="Controls")
 
     # draw the background
     scene_screen = pygame.surface.Surface((w, h))
@@ -45,6 +50,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
                     return "level_selector", scene_screen
                 elif button_restart.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return current_level, scene_screen
+                elif button_controls.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
+                    return "controls", scene_screen
                 elif button_resume.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "resume", scene_screen
             elif event.type == pygame.KEYDOWN:
@@ -52,9 +59,10 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
                     return "resume", scene_screen
 
         # draw the buttons with scaled position
-        button_resume.draw(scene_screen, (w / 2, h * (6 / 13)), True)
-        button_restart.draw(scene_screen, (w / 2, h * (8 / 13)), True)
-        button_home.draw(scene_screen, (w / 2, h * (10 / 13)), True)
+        button_resume.draw(scene_screen, (w / 2, h * (5.5 / 13)), True)
+        button_restart.draw(scene_screen, (w / 2, h * (7.5 / 13)), True)
+        button_home.draw(scene_screen, (w / 2, h * (9.5 / 13)), True)
+        button_controls.draw(scene_screen,(w / 2, h * (11.5 / 13)), True)
 
         # do the screen transition
         if transition:

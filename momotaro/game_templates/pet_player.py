@@ -32,6 +32,21 @@ class Pet:
         self.roar_sound = pygame.mixer.Sound(roar_path)
         self.roar_sound.set_volume(0.15)
 
+        # loading tweet sound when pet changes to bird from toyalty free webpage mixkit
+        bird_path = "audio/bird.mp3"
+        self.bird_sound = pygame.mixer.Sound(bird_path)
+        self.bird_sound.set_volume(0.1)
+
+        # loading bark sound when pet changes to dog from toyalty free webpage mixkit
+        dog_path = "audio/dog.mp3"
+        self.dog_sound = pygame.mixer.Sound(dog_path)
+        self.dog_sound.set_volume(0.1)
+
+        # loading hoot sound when pet changes to monkey from toyalty free webpage mixkit
+        monkey_path = "audio/monkey.mp3"
+        self.monkey_sound = pygame.mixer.Sound(monkey_path)
+        self.monkey_sound.set_volume(0.1)
+
         # BIRD IMAGES ----------------------------------
         self.bird_idle_image = None
         self.right_bird_mvmnt_frames = None
@@ -210,9 +225,28 @@ class Pet:
         if keys[pygame.K_SLASH]:
             if not self.switchdb:
                 self.switch()
+                # matching sound for each animal when it changes
+                match self.pet:
+                    case "bird":
+                        # stop previous pet sounds and play bird
+                        self.dog_sound.stop()
+                        self.monkey_sound.stop()
+                        self.bird_sound.play()
+                    case "dog":
+                        # stop previous pet sounds and play dog
+                        self.bird_sound.stop()
+                        self.monkey_sound.stop()
+                        self.dog_sound.play()
+                    # case "monkey":
+                    # stop previous pet sounds and play monkey
+                    # self.dog_sound.stop()
+                    # self.bird_sound.stop()
+                    # self.monkey_sound.play()
                 self.switchdb = True
         else:
             self.switchdb = False
+            # self.bird_sound.stop()
+            # self.dog_sound.stop()
         match self.pet:
             case "bird":
                 self.update_bird_movement()
