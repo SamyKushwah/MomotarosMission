@@ -29,13 +29,13 @@ def create_level(my_toolbox):
     level3.add_moving_platform((500, 300), (100, 50), 2, (500, 525), facing_direction="up")
     level3.add_moving_platform((850, 300), (100, 50), 2, (850, 775), facing_direction="up")
 
-    level3.add_moving_platform((-2000, 0), (2000, 820), 1, (0, 0), facing_direction="up")
+    level3.add_moving_platform((-2000, 0), (2000, 800), 0.75, (0, 0), facing_direction="up")
     #over water at top for momotaro
     level3.add_moving_platform((2750, 350), (100, 35), 2, (3150, 350), facing_direction="up")
     level3.add_moving_platform((3700, 350), (100, 35), 2, (4100, 350), facing_direction="up")
 
     # add regular platforms
-    level3.add_platform((50, 750), (1800 - 40, 70), facing_direction="up")
+    level3.add_platform((50, 750), (1800 - 40, 50), facing_direction="up")
     #level3.add_platform((1050, 750), (1000, 140), facing_direction="up")# first section (top)
     #level3.add_platform((50, 300), (250, 200), facing_direction=None)
     level3.add_platform((650, 300), (100, 450), facing_direction=None)
@@ -70,7 +70,7 @@ def create_level(my_toolbox):
     level3.add_platform((300, 1080 - 70), (200, 70), platform_type="water")  # water section 1 (bottom)
     level3.add_platform((650, 1080 - 70), (200, 70), platform_type="water")  # water section 2 (bottom)
     level3.add_platform((1000, 1080 - 70), (200, 70), platform_type="water")
-    level3.add_platform((750, 749), (300, 70), platform_type="water")  # water section 1 (bottom)
+    level3.add_platform((750, 749), (300, 30), platform_type="water")  # water section 1 (bottom)
     level3.add_platform((2750 + 750 - 300, 799), (300, 50), platform_type="water")
     level3.add_platform((2450 + 50, 575), (50, 35), platform_type="water")
     level3.add_platform((3700, 1080 - 71), (600, 35), platform_type="water")
@@ -108,7 +108,7 @@ def create_level(my_toolbox):
     level3.add_obstacle(4300, 550, "coin")
     level3.add_obstacle(4815, 850, "coin")
 
-    momotaro = momotaro_player.Momotaro([3600, 300])
+    momotaro = momotaro_player.Momotaro([200, 300])
     pet = pet_player.Pet([200, 900])
 
     return level3, momotaro, pet
