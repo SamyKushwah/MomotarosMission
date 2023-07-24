@@ -54,7 +54,7 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins, past_screen):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "quit"
+                return "quit", scene_screen
 
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:

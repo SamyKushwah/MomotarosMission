@@ -186,6 +186,7 @@ class GameManager:
         self.pet.check_collisions(self.level.collidable_list)
         self.pet.check_collision_interactible(self.level.interactible_list, self)
         self.pet.check_damage(self.level.demon_list)
+        self.pet.check_damage(self.level.demon_list)
 
         #print(self.momotaro.position)
         for demon in self.level.demon_list:
@@ -281,7 +282,8 @@ class GameManager:
         view_surface.blit(self.image, (special_x, 0))
 
         # Draw Header
-        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
+        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
+                                      self.pet.pet)
 
         # do the screen transition
         if transition:
@@ -430,8 +432,8 @@ class GameManager:
             view_surface.blit(self.image, (special_x, 0))
 
             # Draw Header
-            self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
+            self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
+                                          self.pet.pet)
 
-            # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
