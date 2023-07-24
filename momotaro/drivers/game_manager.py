@@ -1,7 +1,7 @@
 from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
 from momotaro.game_templates import momotaro_player, pet_player
-from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
+from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene, control_scene
 from momotaro.ui_templates import screen_transition
 import sys
 #from pygame import mixer
@@ -27,6 +27,9 @@ class GameManager:
         self.level_name = level
         self.past_screen = past_screen
         self.curr_screen = None
+        self.return_control = ""
+        self.return_st = ""
+        self.pause = False
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
@@ -81,9 +84,22 @@ class GameManager:
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
-                        return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
-                        if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
-                            return return_st, pause_screen
+                        self.return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                        # going to control screen
+                        while self.return_st == "controls":
+                            self.return_st = control_scene.run(self.my_toolbox, pause_screen)
+                            # quit game when x on controls screen
+                            if self.return_st == "quit":
+                                pygame.quit()
+                                sys.exit()
+                            # when back is clicked, go to pause screen
+                            while self.return_st == "back":
+                                self.curr_screen = pause_screen
+                                self.return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name,
+                                                                                      self.curr_screen)
+                            #return return_st, pause_screen
+                        if self.return_st == "level_selector" or self.return_st == self.level_name:  # break out of running level
+                            return self.return_st, pause_screen
                         else:
                             screen_transition.crossfade(pause_screen, self.curr_screen, self.my_toolbox.screen, self.my_toolbox.clock, 10)
 
@@ -401,15 +417,15 @@ class GameManager:
             if self.momotaro.health <= 0:
                 if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
                     self.momotaro.active_image = self.momotaro.death_oni_frames[index]
-                    self.momotaro.frame_index += 2
+                    self.momotaro.frame_index += 1.5
                 else:
                     match self.momotaro.death_type:
                         case "crushed":
                             self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
                         case "drown":
                             self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
@@ -429,7 +445,7 @@ class GameManager:
             else:
                 self.pet.draw_death(self.image)
                 self.image.blit(self.momotaro.active_image, self.momotaro.position)
-                self.momotaro.frame_index += 2
+                self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
