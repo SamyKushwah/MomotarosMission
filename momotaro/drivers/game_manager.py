@@ -227,6 +227,20 @@ class GameManager:
         if self.level_name == "level_3":
             self.image.blit(self.controls3, (120, 160))
 
+        # Draw obstacles
+        for interactible_key in self.level.interactible_list.keys():
+            match interactible_key:
+                case "button":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "torigate":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "coin":
+                    # self.level.coins_collected = 0
+                    for coin in self.level.interactible_list[interactible_key]:
+                        if not coin.collected:
+                            coin.draw(self.image)
 
         # Draw platforms
         for platform in self.level.platform_list:
@@ -243,20 +257,7 @@ class GameManager:
             else:
                 self.level.demon_list.remove(demon)
 
-        # Draw obstacles
-        for interactible_key in self.level.interactible_list.keys():
-            match interactible_key:
-                case "button":
-                    for obstacle in self.level.interactible_list[interactible_key]:
-                        obstacle.draw(self.image)
-                case "torigate":
-                    for obstacle in self.level.interactible_list[interactible_key]:
-                        obstacle.draw(self.image)
-                case "coin":
-                    # self.level.coins_collected = 0
-                    for coin in self.level.interactible_list[interactible_key]:
-                        if not coin.collected:
-                            coin.draw(self.image)
+
 
         # Draw players
         self.momotaro.draw(self.image)
@@ -347,6 +348,21 @@ class GameManager:
             if self.level_name == "level_3":
                 self.image.blit(self.controls3, (120, 160))
 
+            # Draw obstacles
+            for interactible_key in self.level.interactible_list.keys():
+                match interactible_key:
+                    case "button":
+                        for obstacle in self.level.interactible_list[interactible_key]:
+                            obstacle.draw(self.image)
+                    case "torigate":
+                        for obstacle in self.level.interactible_list[interactible_key]:
+                            obstacle.draw(self.image)
+                    case "coin":
+                        # self.level.coins_collected = 0
+                        for coin in self.level.interactible_list[interactible_key]:
+                            if not coin.collected:
+                                coin.draw(self.image)
+
             # Draw platforms
             for platform in self.level.platform_list:
                 platform.draw_platform(self.image)
@@ -362,20 +378,7 @@ class GameManager:
                 else:
                     self.level.demon_list.remove(demon)
 
-            # Draw obstacles
-            for interactible_key in self.level.interactible_list.keys():
-                match interactible_key:
-                    case "button":
-                        for obstacle in self.level.interactible_list[interactible_key]:
-                            obstacle.draw(self.image)
-                    case "torigate":
-                        for obstacle in self.level.interactible_list[interactible_key]:
-                            obstacle.draw(self.image)
-                    case "coin":
-                        # self.level.coins_collected = 0
-                        for coin in self.level.interactible_list[interactible_key]:
-                            if not coin.collected:
-                                coin.draw(self.image)
+
 
             view_surface = pygame.surface.Surface((1920, 1080))
 
