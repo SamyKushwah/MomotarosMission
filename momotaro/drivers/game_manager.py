@@ -162,6 +162,7 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
+                    pygame.mixer.pause()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
