@@ -109,3 +109,13 @@ implemented death animations (yes it took this long)
 fixed resulting bugs related to death animations
 created momotaro and bird death animation frames
 planned out controls page menu option
+
+7/22/23
+1pm-6pm
+Bug fixes and merging codebases
+Discussed things we can add visually
+
+7/23/23
+Team meeting
+Listed all the things that need to be done
+Discussed overall gameplay feeling

@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added shawnsn stuff" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="gates drawn under the platforms now">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kevin_worklog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/kevin_worklog.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/level.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,13 +77,6 @@
       <workItem from="1689316618344" duration="17810000" />
       <workItem from="1689827945796" duration="8324000" />
       <workItem from="1690011863144" duration="2452000" />
-    </task>
-    <task id="LOCAL-00015" summary="updated to shawns version">
-      <created>1687603001466</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1687603001466</updated>
     </task>
     <task id="LOCAL-00016" summary="updated to shawns version">
       <created>1687603603634</created>
@@ -416,14 +414,20 @@
       <option name="project" value="LOCAL" />
       <updated>1690103972344</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="gates drawn under the platforms now">
+      <created>1690175636371</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1690175636371</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ruhi's changes, fixed some menu bugs" />
     <MESSAGE value="started commenting everything" />
     <MESSAGE value="added all of jessicas changes sheesh" />
     <MESSAGE value="added new comments to code, demons now die when landing on water" />
@@ -448,7 +452,8 @@
     <MESSAGE value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
     <MESSAGE value="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen" />
     <MESSAGE value="added shawnsn stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="added shawnsn stuff" />
+    <MESSAGE value="gates drawn under the platforms now" />
+    <option name="LAST_COMMIT_MESSAGE" value="gates drawn under the platforms now" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$screen_transition.coverage" NAME="screen_transition Coverage Results" MODIFIED="1689056495888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/ui_templates" />

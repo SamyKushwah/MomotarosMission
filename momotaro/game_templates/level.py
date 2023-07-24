@@ -1,7 +1,7 @@
 import pygame
 import math
 
-from momotaro.game_templates import demon, obstacles
+from momotaro.game_templates import demon, obstacles, pet_player
 
 from momotaro.ui_templates import tutorial
 
@@ -18,6 +18,7 @@ class Level:
         self.interactible_list = {}
         self.demon_list = []
         self.type = background
+        self.pet_image = None
         if background == "mountains":
             self.background = pygame.transform.scale(
                 pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
@@ -337,6 +338,7 @@ class MovingPlatform(Platform):
 
 class Header:
     def __init__(self, level_type):
+        # prev_pet = "bird"
         # load the images
         self.health_front = pygame.image.load("images/game_ui/HealthBarFront.png").convert_alpha()
         if level_type == "mountains":
@@ -360,6 +362,7 @@ class Header:
         self.player_2_txt = pygame.image.load("images/game_ui/player_two_txt.png").convert_alpha()
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
+        self.dog = pygame.image.load("images/player2/dog_idle_right.png").convert_alpha()
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
@@ -375,8 +378,9 @@ class Header:
         # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
+        self.dog = pygame.transform.scale(self.dog, (60, 80))
 
-    def draw_header(self, surface, momo_health, pet_health, coins):
+    def draw_header(self, surface, momo_health, pet_health, coins, pet):
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
@@ -399,7 +403,10 @@ class Header:
             surface.blit(self.three, (900, 15))
 
         surface.blit(self.player_2_txt, (1080, 30))
-        surface.blit(self.bird, (1305, 10))
+        if pet == "bird":
+            surface.blit(self.bird, (1305, 10))
+        elif pet == "dog":
+            surface.blit(self.dog, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)
