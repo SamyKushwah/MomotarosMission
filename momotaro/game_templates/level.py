@@ -55,7 +55,7 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None):
+    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None, dog_y=None):
         match type:
             case "button":
                 temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
@@ -90,7 +90,7 @@ class Level:
                     self.interactible_list["coin"] = [temp_obs]
             case "dog_button":
                 temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
-                                                         self.level_num, dog=True)
+                                                         self.level_num, dog=True, dog_int_y=dog_y)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
@@ -363,6 +363,7 @@ class Header:
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
         self.dog = pygame.image.load("images/player2/dog_idle_right.png").convert_alpha()
+        self.monkey = pygame.image.load("images/player2/monkey_idle.png").convert_alpha()
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
@@ -378,6 +379,7 @@ class Header:
         self.momo = pygame.transform.scale(self.momo, (50, 80))
         self.bird = pygame.transform.scale(self.bird, (50, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
+        self.monkey = pygame.transform.scale(self.monkey, (60, 80))
 
     def draw_header(self, surface, momo_health, pet_health, coins, pet):
 
@@ -407,7 +409,8 @@ class Header:
             surface.blit(self.bird, (1305, 10))
         elif pet == "dog":
             surface.blit(self.dog, (1305, 10))
-
+        elif pet == "monkey":
+            surface.blit(self.dog, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)
