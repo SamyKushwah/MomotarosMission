@@ -144,7 +144,7 @@ class GameManager:
             if self.pet.standing and self.pet.standing_on != None:
                 if self.pet.position[
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
-                    self.momotaro.death_type = "crushed"
+                    # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
@@ -377,41 +377,55 @@ class GameManager:
                             if not coin.collected:
                                 coin.draw(self.image)
 
-            # Draw players
-            # self.pet.draw(self.image)
-            # index = round(float(self.momotaro.frame_index) / float(animation_delay)
+            view_surface = pygame.surface.Surface((1920, 1080))
 
             if index > 2:
                 return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
 
-                # print(self.momotaro.death_type)
-            if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
-                self.momotaro.active_image = self.momotaro.death_oni_frames[index]
+            # if momotaro is the one who died, play his death animation and leave P2 alone
+            if self.momotaro.health <= 0:
+                if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
+                    self.momotaro.active_image = self.momotaro.death_oni_frames[index]
+                    self.momotaro.frame_index += 2
+                else:
+                    match self.momotaro.death_type:
+                        case "crushed":
+                            self.momotaro.active_image = self.momotaro.death_crush_frames[index]
+                            self.momotaro.frame_index += 2
+                        case "drown":
+                            self.momotaro.active_image = self.momotaro.death_drown_frames[index]
+                            self.momotaro.frame_index += 2
+
+                if self.momotaro.frame_index >= animation_delay:
+                    self.momotaro.frame_index = 0
+                    index += 1
+
+                self.image.blit(self.momotaro.active_image, self.momotaro.position)
+                self.image.blit(self.pet.active_image, self.pet.position)
+
+                if self.momotaro.get_rect().centerx <= 960:
+                    special_x = 0
+                elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+                    special_x = -(self.level.width - 1920)
+                else:
+                    special_x = (-self.momotaro.get_rect().centerx) + (1920 / 2)
+
+            # if P2 is the one who died, play their animation and leave momotaro alone
+            else:
+                self.pet.draw_death(self.image)
+                self.image.blit(self.momotaro.active_image, self.momotaro.position)
                 self.momotaro.frame_index += 2
-            else:
-                match self.momotaro.death_type:
-                    case "crushed":
-                        self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                        self.momotaro.frame_index += 2
-                    case "drown":
-                        self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                        self.momotaro.frame_index += 2
 
-            if self.momotaro.frame_index >= animation_delay:
-                self.momotaro.frame_index = 0
-                index += 1
+                if self.momotaro.frame_index >= animation_delay:
+                    self.momotaro.frame_index = 0
+                    index += 1
 
-            view_surface = pygame.surface.Surface((1920, 1080))
-
-            self.image.blit(self.momotaro.active_image, self.momotaro.position)
-            self.image.blit(self.pet.death_image, self.pet.position)
-
-            if self.momotaro.get_rect().centerx <= 960:
-                special_x = 0
-            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-                special_x = -(self.level.width - 1920)
-            else:
-                special_x = (-self.momotaro.get_rect().centerx) + (1920 / 2)
+                if self.pet.get_rect().centerx <= 960:
+                    special_x = 0
+                elif self.pet.get_rect().centerx >= self.level.width - 960:
+                    special_x = -(self.level.width - 1920)
+                else:
+                    special_x = (-self.pet.get_rect().centerx) + (1920 / 2)
 
             view_surface.blit(self.image, (special_x, 0))
 

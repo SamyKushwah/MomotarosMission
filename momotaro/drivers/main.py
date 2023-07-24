@@ -92,8 +92,8 @@ def main():
                 # bring the user to level 3
                 pygame.mixer.pause()
                 level3_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_3")
-                next_state = my_game.run()
+                my_game = game_manager.GameManager(my_toolbox, "level_3", past_screen)
+                next_state, past_screen = my_game.run()
                 level3_music.stop()
                 last_state = "level3"
                 pass  # TODO
