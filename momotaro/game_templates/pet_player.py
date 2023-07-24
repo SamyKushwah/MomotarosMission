@@ -222,7 +222,7 @@ class Pet:
 
     def update_movement(self):
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_SLASH]: # press / to change pet
+        if keys[pygame.K_SLASH]:
             if not self.switchdb:
                 self.switch()
                 # matching sound for each animal when it changes
@@ -238,15 +238,15 @@ class Pet:
                         self.monkey_sound.stop()
                         self.dog_sound.play()
                     # case "monkey":
-                        # stop previous pet sounds and play monkey
-                        # self.dog_sound.stop()
-                        # self.bird_sound.stop()
-                        # self.monkey_sound.play()
+                    # stop previous pet sounds and play monkey
+                    # self.dog_sound.stop()
+                    # self.bird_sound.stop()
+                    # self.monkey_sound.play()
                 self.switchdb = True
         else:
-            #self.bird_sound.stop()
-            #self.dog_sound.stop()
             self.switchdb = False
+            # self.bird_sound.stop()
+            # self.dog_sound.stop()
         match self.pet:
             case "bird":
                 self.update_bird_movement()

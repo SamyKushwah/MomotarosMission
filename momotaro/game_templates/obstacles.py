@@ -37,8 +37,9 @@ class Obstacle:
 
 class ButtonObstacle(Obstacle):
     def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions, level_num,
-                 dog=False):
+                 dog=False, dog_int_y=None):
         super().__init__(x, y)
+        self.dog_button_img = pygame.image.load("images/ObstacleButtonSprites/dog_symbol.png").convert_alpha()
         if level_num == 1:
             self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
         elif level_num == 2:
@@ -57,6 +58,11 @@ class ButtonObstacle(Obstacle):
         self.type = "button"
         if dog:
             self.type = "dog_button"
+            self.__int_y_dog = dog_int_y
+            self.__width_dog = int(self.dog_button_img.get_width() * self.scale_factor)
+            self.__height_dog = int(self.dog_button_img.get_height() * self.scale_factor)
+            self.__button_rect_dog = self.dog_button_img.get_rect(x=self.__int_x, y=self.__int_y_dog)
+
         self.velocity = (0, 0)
         self.fence_moving = False
         self.sound_playing = False
@@ -77,6 +83,9 @@ class ButtonObstacle(Obstacle):
             self.__button_rect.center = (self.__int_x, self.__int_y)
             screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
             self.move_fence_to_new_pos()
+        elif self.type == "dog_button":
+            self.dog_button_img = pygame.transform.scale(self.dog_button_img, (self.__width_dog, self.__height_dog))
+            screen.blit(self.dog_button_img, (self.__int_x - (self.__width_dog / 2), self.__int_y_dog - (self.__height_dog / 2)))
         self.fence.draw(screen)
 
     def move_fence_to_new_pos(self):

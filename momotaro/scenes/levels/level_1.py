@@ -31,7 +31,7 @@ def create_level(my_toolbox):
     level1.add_obstacle(1080, 600, "coin")  # coin 1
 
     # gate leading to after the first coin
-    level1.add_obstacle(1265, 1000, 'dog_button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
+    level1.add_obstacle(1265, 1000, 'dog_button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500), dog_y=825)
 
     # block to cover off the gate top
     level1.add_platform((1350, 130), (215, 500), facing_direction="all")
@@ -68,11 +68,12 @@ def create_level(my_toolbox):
 
     # add end goal torigate
     level1.add_platform((1560, 400), (350,50), facing_direction="up")
-    # level1.add_obstacle(1650, 330, "torigate", gate_num=1) # end of the level marker
-    # level1.add_obstacle(1800, 330, "torigate", gate_num=2)
+    level1.add_obstacle(1650, 330, "torigate", gate_num=1) # end of the level marker
+    level1.add_obstacle(1800, 330, "torigate", gate_num=2)
 
-    level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
-    level1.add_obstacle(700, 950, "torigate", gate_num=2)
+    # debugging to end level quick
+    # level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
+    # level1.add_obstacle(700, 950, "torigate", gate_num=2)
 
 
     momotaro = momotaro_player.Momotaro([300, 300])

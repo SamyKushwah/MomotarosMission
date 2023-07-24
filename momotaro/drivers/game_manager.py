@@ -30,19 +30,16 @@ class GameManager:
         self.return_control = ""
         self.return_st = ""
         self.pause = False
+
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls1 = pygame.image.load("images/game_ui/controls1.png").convert_alpha()
 
             case "level_2":
                 self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls2 = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
-                self.controls2 = pygame.transform.scale(self.controls2, (250, 160))
 
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls3 = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -84,22 +81,18 @@ class GameManager:
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
-                        self.return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                        return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
                         # going to control screen
-                        while self.return_st == "controls":
-                            self.return_st = control_scene.run(self.my_toolbox, pause_screen)
-                            # quit game when x on controls screen
-                            if self.return_st == "quit":
-                                pygame.quit()
-                                sys.exit()
-                            # when back is clicked, go to pause screen
-                            elif self.return_st == "back":
-                                #self.curr_screen = pause_screen
-                                self.return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name,
-                                                                                      pause_screen)
-                            #return return_st, pause_screen
-                        if self.return_st == "level_selector" or self.return_st == self.level_name:  # break out of running level
-                            return self.return_st, pause_screen
+
+                        while return_st == "controls":
+                            control_st, control_screen = control_scene.run(self.my_toolbox, pause_screen)
+                            if control_st == "quit":
+                                return control_st, control_screen
+                            else:
+                                return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, control_screen)
+
+                        if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
+                            return return_st, pause_screen
                         else:
                             screen_transition.crossfade(pause_screen, self.curr_screen, self.my_toolbox.screen, self.my_toolbox.clock, 10)
 
@@ -235,30 +228,6 @@ class GameManager:
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
 
-        if self.level_name == "level_1":
-            self.image.blit(self.controls1, (120, 160))
-
-        if self.level_name == "level_2":
-            self.image.blit(self.controls2, (100, 150))
-
-        if self.level_name == "level_3":
-            self.image.blit(self.controls3, (120, 160))
-
-        # Draw obstacles
-        for interactible_key in self.level.interactible_list.keys():
-            match interactible_key:
-                case "button":
-                    for obstacle in self.level.interactible_list[interactible_key]:
-                        obstacle.draw(self.image)
-                case "torigate":
-                    for obstacle in self.level.interactible_list[interactible_key]:
-                        obstacle.draw(self.image)
-                case "coin":
-                    # self.level.coins_collected = 0
-                    for coin in self.level.interactible_list[interactible_key]:
-                        if not coin.collected:
-                            coin.draw(self.image)
-
         # Draw platforms
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
@@ -274,7 +243,20 @@ class GameManager:
             else:
                 self.level.demon_list.remove(demon)
 
-
+        # Draw obstacles
+        for interactible_key in self.level.interactible_list.keys():
+            match interactible_key:
+                case "button":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "torigate":
+                    for obstacle in self.level.interactible_list[interactible_key]:
+                        obstacle.draw(self.image)
+                case "coin":
+                    # self.level.coins_collected = 0
+                    for coin in self.level.interactible_list[interactible_key]:
+                        if not coin.collected:
+                            coin.draw(self.image)
 
         # Draw players
         self.momotaro.draw(self.image)
@@ -344,53 +326,18 @@ class GameManager:
         running = True
         while running:
 
-            if self.momotaro.health <= 0:
-                self.camera_on_momotaro = True
+            # Draw Background
+            # self.image.fill((70, 70, 180))
+            if self.momotaro.get_rect().centerx <= 960:
+                positional = 0 - (960 / 200)
+            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+                positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
             else:
-                self.camera_on_momotaro = False
-                # Draw Background
-            if self.camera_on_momotaro:
-                if self.momotaro.get_rect().centerx <= 960:
-                    positional = 0 - (960 / 200)
-                elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-                    positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
-                else:
-                    positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
-            else:
-                if self.pet.get_rect().centerx <= 960:
-                    positional = 0 - (960 / 200)
-                elif self.pet.get_rect().centerx >= self.level.width - 960:
-                    positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
-                else:
-                    positional = self.pet.get_rect().centerx - (self.pet.get_rect().centerx / 200) - 960
+                positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
 
             # Main Background
             self.image.blit(self.background, (positional, 100))
             self.image.blit(self.background, (1920 + positional, 100))
-
-            if self.level_name == "level_1":
-                self.image.blit(self.controls1, (120, 160))
-
-            if self.level_name == "level_2":
-                self.image.blit(self.controls2, (100, 150))
-
-            if self.level_name == "level_3":
-                self.image.blit(self.controls3, (120, 160))
-
-            # Draw obstacles
-            for interactible_key in self.level.interactible_list.keys():
-                match interactible_key:
-                    case "button":
-                        for obstacle in self.level.interactible_list[interactible_key]:
-                            obstacle.draw(self.image)
-                    case "torigate":
-                        for obstacle in self.level.interactible_list[interactible_key]:
-                            obstacle.draw(self.image)
-                    case "coin":
-                        # self.level.coins_collected = 0
-                        for coin in self.level.interactible_list[interactible_key]:
-                            if not coin.collected:
-                                coin.draw(self.image)
 
             # Draw platforms
             for platform in self.level.platform_list:
@@ -407,7 +354,20 @@ class GameManager:
                 else:
                     self.level.demon_list.remove(demon)
 
-
+            # Draw obstacles
+            for interactible_key in self.level.interactible_list.keys():
+                match interactible_key:
+                    case "button":
+                        for obstacle in self.level.interactible_list[interactible_key]:
+                            obstacle.draw(self.image)
+                    case "torigate":
+                        for obstacle in self.level.interactible_list[interactible_key]:
+                            obstacle.draw(self.image)
+                    case "coin":
+                        # self.level.coins_collected = 0
+                        for coin in self.level.interactible_list[interactible_key]:
+                            if not coin.collected:
+                                coin.draw(self.image)
 
             view_surface = pygame.surface.Surface((1920, 1080))
 
@@ -465,6 +425,5 @@ class GameManager:
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
 
-            # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
