@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="gates drawn under the platforms now">
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added jessicas changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kevin_worklog.txt" beforeDir="false" afterPath="$PROJECT_DIR$/kevin_worklog.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/ui_templates/tutorial.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/ui_templates/tutorial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,13 +77,6 @@
       <workItem from="1689316618344" duration="17810000" />
       <workItem from="1689827945796" duration="8324000" />
       <workItem from="1690011863144" duration="2452000" />
-    </task>
-    <task id="LOCAL-00016" summary="updated to shawns version">
-      <created>1687603603634</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1687603603634</updated>
     </task>
     <task id="LOCAL-00017" summary="updated to shawns version">
       <created>1687603767768</created>
@@ -421,14 +414,20 @@
       <option name="project" value="LOCAL" />
       <updated>1690175636371</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="added jessicas changes">
+      <created>1690176823528</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1690176823528</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="started commenting everything" />
     <MESSAGE value="added all of jessicas changes sheesh" />
     <MESSAGE value="added new comments to code, demons now die when landing on water" />
     <MESSAGE value="added more comments to code" />
@@ -453,15 +452,16 @@
     <MESSAGE value="added all of sammys additions&#10;merged from jessica's branch&#10;fixed a bug where having no events kept you dead on the game screen" />
     <MESSAGE value="added shawnsn stuff" />
     <MESSAGE value="gates drawn under the platforms now" />
-    <option name="LAST_COMMIT_MESSAGE" value="gates drawn under the platforms now" />
+    <MESSAGE value="added jessicas changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="added jessicas changes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$screen_transition.coverage" NAME="screen_transition Coverage Results" MODIFIED="1689056495888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/ui_templates" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690175087833" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690214255698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
     <SUITE FILE_PATH="coverage/main_py$level_2.coverage" NAME="level_2 Coverage Results" MODIFIED="1689759631276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
-    <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1687762832605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
+    <SUITE FILE_PATH="coverage/main_py$level_1.coverage" NAME="level_1 Coverage Results" MODIFIED="1690212425610" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$controllable.coverage" NAME="controllable Coverage Results" MODIFIED="1687414469988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$level_1A.coverage" NAME="level_1A Coverage Results" MODIFIED="1687420166220" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$level_3.coverage" NAME="level_3 Coverage Results" MODIFIED="1690015998342" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/scenes/levels" />

@@ -106,8 +106,8 @@ class Level:
 
                 self.collidable_list.append(temp_obstacle)
 
-    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text):
-        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text)
+    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text, font_size=30):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text, font_size=font_size)
         self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
