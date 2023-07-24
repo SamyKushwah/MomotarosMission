@@ -19,3 +19,6 @@ Personal Log:
 7/22 -> Made death animation sprites for Momotaro for drowning and squash. Added level 3 music to merged code. 
         Fixed death animation code so death type showed up. Helped with 2 player win condition logic. 
 7/23 -> Made death animation for Momotaro when he dies through oni. Fixed audio. 
+7/24 -> Made controls screen code. Fixed pause screen to add controls button. Fixed transition from pause to controls in
+        game_manager. Added audio transitions for pet changes including bark, tweet, hoot. Slowed down frame rate for
+        death.
