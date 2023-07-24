@@ -17,6 +17,7 @@ class Momotaro:
         self.moving_direction = "idle"
         self.last_direction = "left"
         self.attacking_duration = 0
+        self.charging_bounce = False
 
         self.charging = False
         self.attacking = False  # True if attack button is released
@@ -30,6 +31,11 @@ class Momotaro:
         self.active_image = None
 
         self.frame_index = 0
+
+        # loading charging sound when momotaro charges from royalty free webpage mixkit
+        charge_path = "audio/charge_effect.mp3"
+        self.charge_sound = pygame.mixer.Sound(charge_path)
+        self.charge_sound.set_volume(0.08)
 
         self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha(), (40, 70))
 
@@ -152,16 +158,24 @@ class Momotaro:
                     self.attack_power = 0.1
                 self.charging = True
                 self.attacking = False
+                if self.charging_bounce:
+                    #self.charge_sound.play(-1)
+                    pass # TODO charging sound is very bad!
+                self.charging_bounce = False
             elif not keys[pygame.K_r] and self.charging:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
                 self.strike_sound.play()
+                self.charge_sound.stop()
+                self.charging_bounce = True
             else:
                 self.charging = False
                 self.attacking = False
                 self.attacking_duration = 0
                 self.attack_power = 0.1
+                self.charge_sound.stop()
+                self.charging_bounce = True
         else:
             self.attacking_duration -= 1
 
@@ -341,6 +355,8 @@ class Momotaro:
                 self.attack_power = 1
             else:
                 self.attack_power += 0.01
+        else:
+            self.charge_sound.stop()
 
         if self.attacking:
             sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))

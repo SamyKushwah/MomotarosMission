@@ -38,6 +38,26 @@ class Pet:
         self.roar_sound = pygame.mixer.Sound(roar_path)
         self.roar_sound.set_volume(0.15)
 
+        # loading tweet sound when pet changes to bird from royalty free webpage mixkit
+        bird_path = "audio/bird.mp3"
+        self.bird_sound = pygame.mixer.Sound(bird_path)
+        self.bird_sound.set_volume(0.1)
+
+        # loading bark sound when pet changes to dog from royalty free webpage mixkit
+        dog_path = "audio/dog.mp3"
+        self.dog_sound = pygame.mixer.Sound(dog_path)
+        self.dog_sound.set_volume(0.1)
+
+        # loading hoot sound when pet changes to monkey from royalty free webpage mixkit
+        monkey_path = "audio/monkey.mp3"
+        self.monkey_sound = pygame.mixer.Sound(monkey_path)
+        self.monkey_sound.set_volume(0.1)
+
+        # loading flap sound when bird flies  from royalty free webpage mixkit
+        wing_path = "audio/wing_flap.mp3"
+        self.wing_sound = pygame.mixer.Sound(wing_path)
+        self.wing_sound.set_volume(0.05)
+        
         # BIRD IMAGES ----------------------------------
         self.bird_idle_image = None
         self.right_bird_mvmnt_frames = None
@@ -65,6 +85,8 @@ class Pet:
 
         self.bird_death_image = pygame.transform.scale(
             pygame.image.load("images/player2/bird_death.png").convert_alpha(), (50, 60))
+
+
         ##################
 
         # DOG IMAGES -------------------
@@ -286,6 +308,7 @@ class Pet:
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
                 self.jumped = True
+                self.wing_sound.play()
         else:
             self.jumped = False
 
@@ -323,6 +346,23 @@ class Pet:
                 self.switch()
                 self.switchdb = True
                 self.rotator = random.randint(0, 360)
+                # matching sound for each animal when it changes
+                match self.pet:
+                    case "bird":
+                        # stop previous pet sounds and play bird
+                        self.dog_sound.stop()
+                        self.monkey_sound.stop()
+                        self.bird_sound.play()
+                    case "dog":
+                        # stop previous pet sounds and play dog
+                        self.bird_sound.stop()
+                        self.monkey_sound.stop()
+                        self.dog_sound.play()
+                    case "monkey":
+                    # stop previous pet sounds and play monkey
+                        self.dog_sound.stop()
+                        self.bird_sound.stop()
+                        self.monkey_sound.play()
         else:
             self.switchdb = False
 

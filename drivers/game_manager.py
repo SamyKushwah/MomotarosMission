@@ -1,11 +1,12 @@
 from scenes.levels import level_2, level_1, level_3
 import pygame
 from game_templates import momotaro_player, pet_player
-from scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
+from scenes import pause_screen_scene, win_screen_scene, lose_screen_scene, control_scene
 from ui_templates import screen_transition
 import sys
 #from pygame import mixer
 #pygame.mixer.init()
+
 
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
@@ -27,6 +28,9 @@ class GameManager:
         self.level_name = level
         self.past_screen = past_screen
         self.curr_screen = None
+        self.return_control = ""
+        self.return_st = ""
+        self.pause = False
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
@@ -82,6 +86,15 @@ class GameManager:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
                         return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                        # going to control screen
+                        while return_st == "controls":
+                            control_st, control_screen = control_scene.run(self.my_toolbox, pause_screen)
+                            if control_st == "quit":
+                                return control_st, control_screen
+                            else:
+                                return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name,
+                                                                                 control_screen)
+
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             return return_st, pause_screen
                         else:
@@ -146,6 +159,7 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
+                    pygame.mixer.pause()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
@@ -284,7 +298,7 @@ class GameManager:
         view_surface.blit(self.image, (special_x, 0))
 
         # Draw Header
-        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
+        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected, self.pet.pet)
 
         # do the screen transition
         if transition:
@@ -402,15 +416,15 @@ class GameManager:
             if self.momotaro.health <= 0:
                 if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
                     self.momotaro.active_image = self.momotaro.death_oni_frames[index]
-                    self.momotaro.frame_index += 2
+                    self.momotaro.frame_index += 1.5
                 else:
                     match self.momotaro.death_type:
                         case "crushed":
                             self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
                         case "drown":
                             self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
@@ -430,7 +444,7 @@ class GameManager:
             else:
                 self.pet.draw_death(self.image)
                 self.image.blit(self.momotaro.active_image, self.momotaro.position)
-                self.momotaro.frame_index += 2
+                self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
@@ -446,7 +460,8 @@ class GameManager:
             view_surface.blit(self.image, (special_x, 0))
 
             # Draw Header
-            self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected)
+            self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
+                                          self.pet.pet)
 
             # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
