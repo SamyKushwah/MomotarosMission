@@ -31,4 +31,4 @@
           end the level, made a new death image for the bird
 7/23/23 - made levels lockable- created locked level images and made buttons unclickable if they are locked, added functionality to unlock levels as they
           are completed, added crossfade transitions between every scene and screen change, updated control images to show the camera change command C
-7/24/23 - changed death animations to only play for the character that died, made monkey sprite, 
+7/24/23 - changed death animations to only play for the character that died, made monkey sprite, made the header update with the current pet in play,
