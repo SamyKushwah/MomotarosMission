@@ -93,10 +93,10 @@ class GameManager:
                                 pygame.quit()
                                 sys.exit()
                             # when back is clicked, go to pause screen
-                            while self.return_st == "back":
-                                self.curr_screen = pause_screen
+                            elif self.return_st == "back":
+                                #self.curr_screen = pause_screen
                                 self.return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name,
-                                                                                      self.curr_screen)
+                                                                                      pause_screen)
                             #return return_st, pause_screen
                         if self.return_st == "level_selector" or self.return_st == self.level_name:  # break out of running level
                             return self.return_st, pause_screen

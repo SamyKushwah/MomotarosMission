@@ -40,7 +40,7 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 # back button and fade
                 if button_back.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
-                    screen_transition.crossfade(scene_screen, past_screen, my_toolbox.screen, my_toolbox.clock, 10)
+                    screen_transition.crossfade(scene_screen, past_screen, my_toolbox.screen, my_toolbox.clock, 25)
                     return "back"
 
         # do the screen transition
