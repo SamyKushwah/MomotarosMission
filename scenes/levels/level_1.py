@@ -19,6 +19,8 @@ def create_level(my_toolbox):
     level1.add_platform((0, 1080 - 70), (1700, 70))  # bottom wall part 1
     level1.add_platform((0, 0), (5100, 140), facing_direction="down")  # top wall
 
+
+
     # fix the corners
     level1.add_platform((-10, 70), (70, 70), facing_direction=None)
     level1.add_platform((5040, 70), (70, 70), facing_direction=None)
@@ -29,6 +31,9 @@ def create_level(my_toolbox):
     level1.add_platform((400, 800), (300, 50), facing_direction="up")  # platform 1 for coin 1
     level1.add_platform((900, 690), (300, 50), facing_direction="up")  # platform 2 for coin 1
     level1.add_obstacle(1080, 600, "coin")  # coin 1
+
+    # add spikes
+    level1.add_spikes(position=(1150, 980), dimensions=(100, 50), vase_position=(1000, 960), duration = 200)
 
     # gate leading to after the first coin
     level1.add_obstacle(1265, 1000, 'dog_button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))

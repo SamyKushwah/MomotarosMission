@@ -185,6 +185,13 @@ class Momotaro:
             if collidable.type != "dog_button":
                 collidable_rect = collidable.get_rect()
                 if momotaro_rect.colliderect(collidable_rect):
+                    if collidable.type == "spikes":
+                        if collidable.active:
+                            self.health = 0
+                            self.death_type = "drown"
+                        else:
+                            continue
+                        return
                     if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
                             momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
@@ -230,6 +237,7 @@ class Momotaro:
                     self.death_type = "drown"
             except AttributeError:
                 pass
+
 
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
@@ -326,11 +334,6 @@ class Momotaro:
                 #case "fence":
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
-
-
-
-
-
 
     def check_attacking(self, demon_list):
         if self.charging:
