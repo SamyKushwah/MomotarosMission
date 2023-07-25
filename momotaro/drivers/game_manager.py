@@ -257,6 +257,9 @@ class GameManager:
                     for coin in self.level.interactible_list[interactible_key]:
                         if not coin.collected:
                             coin.draw(self.image)
+                case "vase":
+                    for vase in self.level.interactible_list[interactible_key]:
+                        vase.draw(self.image)
 
         # Draw players
         self.momotaro.draw(self.image)
@@ -326,14 +329,27 @@ class GameManager:
         running = True
         while running:
 
-            # Draw Background
             # self.image.fill((70, 70, 180))
-            if self.momotaro.get_rect().centerx <= 960:
-                positional = 0 - (960 / 200)
-            elif self.momotaro.get_rect().centerx >= self.level.width - 960:
-                positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+            if self.momotaro.health <= 0:
+                self.camera_on_momotaro = True
+
             else:
-                positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+                self.camera_on_momotaro = False
+            # Draw Background
+            if self.camera_on_momotaro:
+                if self.momotaro.get_rect().centerx <= 960:
+                    positional = 0 - (960 / 200)
+                elif self.momotaro.get_rect().centerx >= self.level.width - 960:
+                    positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+                else:
+                    positional = self.momotaro.get_rect().centerx - (self.momotaro.get_rect().centerx / 200) - 960
+            else:
+                if self.pet.get_rect().centerx <= 960:
+                    positional = 0 - (960 / 200)
+                elif self.pet.get_rect().centerx >= self.level.width - 960:
+                    positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
+                else:
+                    positional = self.pet.get_rect().centerx - (self.pet.get_rect().centerx / 200) - 960
 
             # Main Background
             self.image.blit(self.background, (positional, 100))
@@ -368,6 +384,9 @@ class GameManager:
                         for coin in self.level.interactible_list[interactible_key]:
                             if not coin.collected:
                                 coin.draw(self.image)
+                    case "vase":
+                        for vase in self.level.interactible_list[interactible_key]:
+                            vase.draw(self.image)
 
             view_surface = pygame.surface.Surface((1920, 1080))
 

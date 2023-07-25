@@ -191,3 +191,39 @@ class CoinObstacle(Obstacle):
         self.__button_rect = self.button_image.get_rect()
         self.__button_rect.center = (self.__int_x, self.__int_y)
         screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
+
+class VaseObstacle:
+    def __init__(self, x, y, spikes, duration):
+        self.vase_image = pygame.transform.scale(
+            pygame.image.load("images/ObstacleButtonSprites/vase.png").convert_alpha(), (45, 65))
+        self.break_1 = pygame.transform.scale(
+            pygame.image.load("images/ObstacleButtonSprites/vase_break_1.png").convert_alpha(), (45, 65))
+        self.break_2 = pygame.transform.scale(
+            pygame.image.load("images/ObstacleButtonSprites/vase_break_2.png").convert_alpha(), (45, 65))
+        self.type = "vase"
+        self.broken = 0
+        self.hitbox = (50, 70)
+        self.x = x
+        self.y = y
+        self.spikes = spikes
+        self.velocity = (0, 0)
+        self.duration = duration
+    def get_rect(self):
+        if self.broken:
+            return pygame.rect.Rect(-5, -5, 0, 0)
+        return pygame.rect.Rect(self.x, self.y, self.hitbox[0], self.hitbox[1])
+    def draw(self, surface):
+        if self.broken == 0:
+            surface.blit(self.vase_image, (self.x, self.y))
+        elif self.broken < self.duration - 5:
+            surface.blit(self.break_2, (self.x, self.y))
+        elif self.broken <= self.duration:
+            surface.blit(self.break_1, (self.x, self.y))
+        if self.broken == 1:
+            self.spikes.active = True
+        if self.broken > 0:
+            self.broken -= 1
+    def break_vase(self):
+        if self.broken == 0:
+            self.broken = self.duration
+            self.spikes.active = False
