@@ -99,7 +99,7 @@ def create_level(my_toolbox):
                         fence_dimensions=(100, 300))
         # second bottom gate
 
-    level3.add_spikes((2700, 300), (600, 100), vase_position=(2500, 515), duration=200)
+    level3.add_spikes((2700, 300), (600, 100), vase_position=(2500, 515), duration=500)
 
     level3.add_obstacle(3400, 670, 'dog_button', fence_initial=(3300, 290), fence_final=(3300, 590), fence_dimensions=(100, 300), dog_y=550)
 

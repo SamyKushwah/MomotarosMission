@@ -9,6 +9,7 @@ def create_level(my_toolbox):
     level1.load_stone_imgs()
 
     # add tutorial text
+    level1.add_tutorial_text(550, 200, 0, 900, 450, 1080, (100, 100), "Press ESC to view menu options and controls.")
     level1.add_tutorial_text(550,500,0,900,450,1080,(100,100),"Player 1: Use W, A, and D to move around and jump.", font_size=30)
     level1.add_tutorial_text(580,550,0,900,450,1080,(100,100),"Player 2: Use the arrow keys to move around and jump.", font_size=30)
 
