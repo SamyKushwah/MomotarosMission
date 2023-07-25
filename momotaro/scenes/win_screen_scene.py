@@ -46,11 +46,13 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins, past_screen):
     transition = True
     while running:
 
-        button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
-        button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
         if current_level != "level_3":
+            button_home.draw(scene_screen, (w * (1 / 7), h * (12 / 13)), True)
+            button_restart.draw(scene_screen, (w * (1 / 2), h * (12 / 13)), True)
             button_next.draw(scene_screen, (w * (6 / 7), h * (12 / 13)), True)
-
+        else:
+            button_home.draw(scene_screen, (500, h * (12 / 13)), True)
+            button_restart.draw(scene_screen, (1300, h * (12 / 13)), True)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

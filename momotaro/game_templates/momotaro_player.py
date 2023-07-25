@@ -17,6 +17,7 @@ class Momotaro:
         self.moving_direction = "idle"
         self.last_direction = "left"
         self.attacking_duration = 0
+        self.charging_bounce = False
 
         self.charging = False
         self.attacking = False  # True if attack button is released
@@ -89,6 +90,11 @@ class Momotaro:
                                    (40, 70))]
         self.death_type = None
 
+        # loading charging sound when momotaro charges from royalty free webpage mixkit
+        charge_path = "audio/charge_effect.mp3"
+        self.charge_sound = pygame.mixer.Sound(charge_path)
+        self.charge_sound.set_volume(0.08)
+
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
         self.coin_sound = pygame.mixer.Sound(coin_path)
@@ -152,16 +158,24 @@ class Momotaro:
                     self.attack_power = 0.1
                 self.charging = True
                 self.attacking = False
+                if self.charging_bounce:
+                    # self.charge_sound.play(-1)
+                    pass  # TODO charging sound is very bad!
+                self.charging_bounce = False
             elif not keys[pygame.K_r] and self.charging:
                 self.attacking = True
                 self.charging = False
                 self.attacking_duration = 10
                 self.strike_sound.play()
+                self.charge_sound.stop()
+                self.charging_bounce = True
             else:
                 self.charging = False
                 self.attacking = False
                 self.attacking_duration = 0
                 self.attack_power = 0.1
+                self.charge_sound.stop()
+                self.charging_bounce = True
         else:
             self.attacking_duration -= 1
 
@@ -185,6 +199,13 @@ class Momotaro:
             if collidable.type != "dog_button":
                 collidable_rect = collidable.get_rect()
                 if momotaro_rect.colliderect(collidable_rect):
+                    if collidable.type == "spikes":
+                        if collidable.active:
+                            self.health = 0
+                            self.death_type = "oni"
+                        else:
+                            continue
+                        return
                     if (abs(momotaro_rect.left - collidable_rect.right) < pixel_margin) and not abs(
                             momotaro_rect.top - collidable_rect.bottom) < pixel_margin and not abs(
                         momotaro_rect.bottom - collidable_rect.top) < pixel_margin:
@@ -311,9 +332,9 @@ class Momotaro:
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        momo_gate.set_pushed(True)
+                        momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        momo_gate.set_pushed(False)
+                        momo_gate.pushed = False
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
@@ -327,17 +348,14 @@ class Momotaro:
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
 
-
-
-
-
-
     def check_attacking(self, demon_list):
         if self.charging:
             if self.attack_power >= 1:
                 self.attack_power = 1
             else:
                 self.attack_power += 0.01
+        else:
+            self.charge_sound.stop()
 
         if self.attacking:
             sweep_size = ((self.swing_size[0] * self.attack_power), (self.swing_size[1]))
@@ -380,7 +398,7 @@ class Momotaro:
                     # add demon noise
                     self.roar_sound.play()
 
-                    self.health -= 5
+                    self.health -= 10
                     #self.death_type = "oni"
 
                     # make ow noise

@@ -1,7 +1,7 @@
 from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
 from momotaro.game_templates import momotaro_player, pet_player
-from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene
+from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene, control_scene
 from momotaro.ui_templates import screen_transition
 import sys
 #from pygame import mixer
@@ -27,19 +27,19 @@ class GameManager:
         self.level_name = level
         self.past_screen = past_screen
         self.curr_screen = None
+        self.return_control = ""
+        self.return_st = ""
+        self.pause = False
+
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls1 = pygame.image.load("images/game_ui/controls1.png").convert_alpha()
 
             case "level_2":
                 self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls2 = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
-                self.controls2 = pygame.transform.scale(self.controls2, (250, 160))
 
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls3 = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -82,6 +82,15 @@ class GameManager:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
                         return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                        # going to control screen
+
+                        while return_st == "controls":
+                            control_st, control_screen = control_scene.run(self.my_toolbox, pause_screen)
+                            if control_st == "quit":
+                                return control_st, control_screen
+                            else:
+                                return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, control_screen)
+
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             return return_st, pause_screen
                         else:
@@ -92,7 +101,7 @@ class GameManager:
                         self.camera_on_momotaro = not self.camera_on_momotaro
 
                     # both players at their gates and either pressed up to end the game
-                    if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
+                    if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
                         pygame.mixer.pause()
@@ -100,7 +109,7 @@ class GameManager:
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
 
-                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
+                        if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
                             # Poll the win game scene next scene
@@ -146,6 +155,7 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
+                    pygame.mixer.pause()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
@@ -218,15 +228,6 @@ class GameManager:
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
 
-        if self.level_name == "level_1":
-            self.image.blit(self.controls1, (120, 160))
-
-        if self.level_name == "level_2":
-            self.image.blit(self.controls2, (100, 150))
-
-        if self.level_name == "level_3":
-            self.image.blit(self.controls3, (120, 160))
-
         # Draw obstacles
         for interactible_key in self.level.interactible_list.keys():
             match interactible_key:
@@ -241,14 +242,19 @@ class GameManager:
                     for coin in self.level.interactible_list[interactible_key]:
                         if not coin.collected:
                             coin.draw(self.image)
+                case "vase":
+                    for vase in self.level.interactible_list[interactible_key]:
+                        vase.draw(self.image)
 
         # Draw platforms
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+        # Draw text
         for text in self.level.tutorial_text_list:
-            text.draw(self.image, self.momotaro.position[0])
+            text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
+                      self.pet.position[1])
 
         # Draw demons
         for demon in self.level.demon_list:
@@ -327,11 +333,13 @@ class GameManager:
         running = True
         while running:
 
+            # self.image.fill((70, 70, 180))
             if self.momotaro.health <= 0:
                 self.camera_on_momotaro = True
+
             else:
                 self.camera_on_momotaro = False
-                # Draw Background
+            # Draw Background
             if self.camera_on_momotaro:
                 if self.momotaro.get_rect().centerx <= 960:
                     positional = 0 - (960 / 200)
@@ -351,15 +359,6 @@ class GameManager:
             self.image.blit(self.background, (positional, 100))
             self.image.blit(self.background, (1920 + positional, 100))
 
-            if self.level_name == "level_1":
-                self.image.blit(self.controls1, (120, 160))
-
-            if self.level_name == "level_2":
-                self.image.blit(self.controls2, (100, 150))
-
-            if self.level_name == "level_3":
-                self.image.blit(self.controls3, (120, 160))
-
             # Draw obstacles
             for interactible_key in self.level.interactible_list.keys():
                 match interactible_key:
@@ -374,23 +373,24 @@ class GameManager:
                         for coin in self.level.interactible_list[interactible_key]:
                             if not coin.collected:
                                 coin.draw(self.image)
+                    case "vase":
+                        for vase in self.level.interactible_list[interactible_key]:
+                            vase.draw(self.image)
 
             # Draw platforms
-            for platform in self.level.platform_list:
-                platform.draw_platform(self.image)
-            for platform in self.level.moving_platform_list:
-                platform.draw_platform(self.image)
-            for text in self.level.tutorial_text_list:
-                text.draw(self.image, self.momotaro.position[0])
+                for platform in self.level.platform_list:
+                    platform.draw_platform(self.image)
+                for platform in self.level.moving_platform_list:
+                    platform.draw_platform(self.image)
+                for text in self.level.tutorial_text_list:
+                    text.draw(self.image, self.momotaro.position[0])
 
             # Draw demons
-            for demon in self.level.demon_list:
-                if demon.health > 0:
-                    demon.draw(self.image)
-                else:
-                    self.level.demon_list.remove(demon)
-
-
+                for demon in self.level.demon_list:
+                    if demon.health > 0:
+                        demon.draw(self.image)
+                    else:
+                        self.level.demon_list.remove(demon)
 
             view_surface = pygame.surface.Surface((1920, 1080))
 
@@ -401,15 +401,15 @@ class GameManager:
             if self.momotaro.health <= 0:
                 if self.momotaro.death_type != "crushed" and self.momotaro.death_type != "drown":
                     self.momotaro.active_image = self.momotaro.death_oni_frames[index]
-                    self.momotaro.frame_index += 2
+                    self.momotaro.frame_index += 1.5
                 else:
                     match self.momotaro.death_type:
                         case "crushed":
                             self.momotaro.active_image = self.momotaro.death_crush_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
                         case "drown":
                             self.momotaro.active_image = self.momotaro.death_drown_frames[index]
-                            self.momotaro.frame_index += 2
+                            self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
@@ -429,7 +429,7 @@ class GameManager:
             else:
                 self.pet.draw_death(self.image)
                 self.image.blit(self.momotaro.active_image, self.momotaro.position)
-                self.momotaro.frame_index += 2
+                self.momotaro.frame_index += 1.5
 
                 if self.momotaro.frame_index >= animation_delay:
                     self.momotaro.frame_index = 0
@@ -448,6 +448,5 @@ class GameManager:
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
 
-            # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
