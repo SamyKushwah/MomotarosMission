@@ -82,6 +82,11 @@ class GameManager:
                 elif event.type == pygame.KEYDOWN:
                     # pause button pressed
                     if event.key == pygame.K_ESCAPE:
+                        for interactible_key in self.level.interactible_list.keys():
+                            match interactible_key:
+                                case "button":
+                                    for obstacle in self.level.interactible_list[interactible_key]:
+                                        obstacle.fence_sound.set_volume(0)
                         return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
                         # going to control screen
 
@@ -95,6 +100,11 @@ class GameManager:
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             return return_st, pause_screen
                         else:
+                            for interactible_key in self.level.interactible_list.keys():
+                                match interactible_key:
+                                    case "button":
+                                        for obstacle in self.level.interactible_list[interactible_key]:
+                                            obstacle.fence_sound.set_volume(0.3)
                             screen_transition.crossfade(pause_screen, self.curr_screen, self.my_toolbox.screen, self.my_toolbox.clock, 10)
 
                     # changing the camera view
