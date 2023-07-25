@@ -1,11 +1,9 @@
-WEEK 1 (6/12-6/19)
 Created Level class, created Platform class
 Added controllable to Level
 Added Momotaro to Level
 Created Demon class
 Added interaction between demon and controllable
 
-WEEK 2 (6/19-6/26)
 Created moving platforms
 created boats
 Made water lethal
@@ -17,3 +15,7 @@ debugged level
 debugged obstacles
 created following tutorial text in order to 
     effectively introduce new features (not in prototype)
+
+created wireframes for updated level 1, 2, 3
+recolored all dog sprites
+put together level 3 in game
