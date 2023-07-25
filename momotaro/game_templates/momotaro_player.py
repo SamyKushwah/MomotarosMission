@@ -1,7 +1,5 @@
 import pygame
-from pygame import mixer
 pygame.mixer.init()
-
 
 class Momotaro:
     def __init__(self, spawn_position):
@@ -41,10 +39,6 @@ class Momotaro:
         self.left_mvmnt_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png").convert_alpha(), (60, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png").convert_alpha(), (60, 70))]
-
-        self.left_attack_frames = [
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png").convert_alpha(), (60, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))]
 
         self.attacking_left_image = pygame.transform.scale(
             pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))
@@ -356,9 +350,6 @@ class Momotaro:
                             self.coin_sound.play()
                             #print('coin collected')
                             obj.coins_collected += 1
-                #case "fence":
-                #    for fence in list_of_obstacles[obstacle_type]:
-                #        if self.get_rect().colliderect(fence.get_rect()):
 
     def check_attacking(self, demon_list):
         if self.charging:

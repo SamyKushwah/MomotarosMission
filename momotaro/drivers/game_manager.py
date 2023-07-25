@@ -1,11 +1,8 @@
 from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
-from momotaro.game_templates import momotaro_player, pet_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene, control_scene
 from momotaro.ui_templates import screen_transition
 import sys
-#from pygame import mixer
-#pygame.mixer.init()
 
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
@@ -56,8 +53,6 @@ class GameManager:
 
         # Loading background image
         self.background = self.level.background
-        # self.mountain_background = pygame.transform.scale(
-        # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
 
         # Camera character locking
         self.camera_on_momotaro = True
@@ -138,9 +133,6 @@ class GameManager:
                 self.level_music.stop()
                 self.lose_sound.play()
 
-                # only momotaro has different death animations, when the bird dies, use momotaro's oni death
-                #self.momotaro.death_type = "oni"
-
                 lose_rt, lose_screen = self.play_death_animation()
                 pygame.mixer.pause()
                 # Poll next scene from lose screen
@@ -150,9 +142,6 @@ class GameManager:
                     return lose_rt, lose_screen
 
             # If momotaro is pushed below a block, he dies
-
-            # If momotaro is pushed below a block, he dies
-
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
@@ -349,8 +338,6 @@ class GameManager:
         animation_delay = 50
         index = 0
         self.pet.velocity = [0, 0]
-        # draw the background
-        # scene_screen = pygame.surface.Surface((w, h))
 
         # driver loop setup
         running = True
@@ -478,6 +465,5 @@ class GameManager:
             # Draw Header
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
-
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()
