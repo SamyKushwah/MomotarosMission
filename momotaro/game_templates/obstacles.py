@@ -68,6 +68,8 @@ class ButtonObstacle():
     def is_pushed(self):
         return self.pushed
 
+    def stop_fence_sound(self):
+        self.fence_sound.stop()
     def get_rect(self):
         return self.__button_rect
 

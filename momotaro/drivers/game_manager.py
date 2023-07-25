@@ -108,10 +108,15 @@ class GameManager:
                         # pygame.mixer.pause()
                         self.level_music.stop()
                         self.win_sound.play()
+                        for interactible_key in self.level.interactible_list.keys():
+                            match interactible_key:
+                                case "button":
+                                    for obstacle in self.level.interactible_list[interactible_key]:
+                                        obstacle.stop_fence_sound()
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
                         pygame.mixer.pause()
-                        if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
+                        if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit" or win_return == 'level_1':
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
                             # Poll the win game scene next scene
