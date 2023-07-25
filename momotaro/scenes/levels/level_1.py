@@ -61,7 +61,7 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(2350, 700, 2200, 2800, 500,1080,(100, 100), "Press / to swap to Dog.", font_size=25)
     level1.add_tutorial_text(2415, 750, 2200, 2800, 500,1080,(100, 100), "Use . as Dog to sniff for hidden buttons.", font_size=25)
 
-    # monkey section (NOT IMPLEMENTED YET)
+    # monkey section
     level1.add_spikes((3300, 1000), (400, 100), vase_position=(3200, 950), duration=500)
 
     level1.add_tutorial_text(3300, 650, 2800, 3500, 500, 1080, (100, 100), "                    Player 2:", font_size=25)
@@ -97,7 +97,7 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(2500, 200, 2400, 2900, 0,400,(100,100), "Press C to swap the camera focus between players", font_size=25)
 
     # add third coin and oni behind the rightmost gate
-    level1.add_demon([4630, 200], (450, 450))
+    #level1.add_demon([4630, 200], (450, 450))
     level1.add_obstacle(4900, 235, 'coin')
 
 

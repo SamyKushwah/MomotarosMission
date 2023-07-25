@@ -137,10 +137,8 @@ class GameManager:
                 # pygame.mixer.pause()
                 self.level_music.stop()
                 self.lose_sound.play()
-
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
                 #self.momotaro.death_type = "oni"
-
                 lose_rt, lose_screen = self.play_death_animation()
                 pygame.mixer.pause()
                 # Poll next scene from lose screen
@@ -417,6 +415,13 @@ class GameManager:
             view_surface = pygame.surface.Surface((1920, 1080))
 
             if index > 2:
+                # stopping fence sound when game ends
+                for interactible_key in self.level.interactible_list.keys():
+                    print("gate" + interactible_key)
+                    match interactible_key:
+                        case "button":
+                            for obstacle in self.level.interactible_list[interactible_key]:
+                                obstacle.stop_fence_sound()
                 return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
 
             # if momotaro is the one who died, play his death animation and leave P2 alone
