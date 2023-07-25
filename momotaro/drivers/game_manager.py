@@ -117,7 +117,7 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
-                pygame.mixer.pause()
+                # pygame.mixer.pause()
                 self.lose_sound.play()
 
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
@@ -382,8 +382,10 @@ class GameManager:
                     platform.draw_platform(self.image)
                 for platform in self.level.moving_platform_list:
                     platform.draw_platform(self.image)
+                # Draw text
                 for text in self.level.tutorial_text_list:
-                    text.draw(self.image, self.momotaro.position[0])
+                    text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
+                              self.pet.position[0], self.pet.position[1])
 
             # Draw demons
                 for demon in self.level.demon_list:

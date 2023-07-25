@@ -410,7 +410,7 @@ class Header:
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
-        self.bird = pygame.transform.scale(self.bird, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (60, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
 
