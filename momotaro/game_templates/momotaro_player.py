@@ -22,7 +22,7 @@ class Momotaro:
         self.charging = False
         self.attacking = False  # True if attack button is released
         self.attack_power = 0.1  # 0 - 1 decimal
-        self.attack_damage = 50
+        self.attack_damage = 75
         self.iframes = 0
 
         self.idle_image = None
@@ -342,7 +342,7 @@ class Momotaro:
                     gate_center_x = momo_gate.get_rect().centerx
                     gate_center_y = momo_gate.get_rect().centery
 
-                    margin = 60
+                    margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win

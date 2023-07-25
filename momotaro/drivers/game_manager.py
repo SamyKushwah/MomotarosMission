@@ -332,13 +332,16 @@ class GameManager:
 
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
-            level_data[0] = coins_collected
+            if int(level_data[0]) < coins_collected:
+                level_data[0] = coins_collected
             level_data[3] = "unlocked"
         elif level_name == "level_2":
-            level_data[1] = coins_collected
+            if int(level_data[1]) < coins_collected:
+                level_data[1] = coins_collected
             level_data[4] = "unlocked"
         else:
-            level_data[2] = coins_collected
+            if int(level_data[2]) < coins_collected:
+                level_data[2] = coins_collected
 
         with open("save_data/game_data", 'w') as file:
             [file.write(str(coin) + "\n") for coin in level_data]
@@ -357,7 +360,6 @@ class GameManager:
             # self.image.fill((70, 70, 180))
             if self.momotaro.health <= 0:
                 self.camera_on_momotaro = True
-
             else:
                 self.camera_on_momotaro = False
             # Draw Background
@@ -411,6 +413,7 @@ class GameManager:
             # Draw demons
                 for demon in self.level.demon_list:
                     if demon.health > 0:
+                        demon.velocity = [0, 0]
                         demon.draw(self.image)
                     else:
                         self.level.demon_list.remove(demon)
@@ -418,6 +421,12 @@ class GameManager:
             view_surface = pygame.surface.Surface((1920, 1080))
 
             if index > 2:
+                # stopping fence sound when game ends
+                for interactible_key in self.level.interactible_list.keys():
+                    match interactible_key:
+                        case "button":
+                            for obstacle in self.level.interactible_list[interactible_key]:
+                                obstacle.stop_fence_sound()
                 return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
 
             # if momotaro is the one who died, play his death animation and leave P2 alone

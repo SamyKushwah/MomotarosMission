@@ -107,8 +107,6 @@ class Demon:
 
             if len(targets) != 0:
                 if self.roar_activate:
-                    #self.roar_sound.stop()
-                    #self.roar_sound.play()
                     self.roar_activate = False
                 dists = []
                 for target in targets:
@@ -243,6 +241,9 @@ class Demon:
 
         if index > 1:
             index = 1
+
+        if self.velocity == [0, 0]:
+            self.moving_direction = "idle"
 
         match self.moving_direction:
             case "idle":

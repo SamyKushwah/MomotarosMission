@@ -45,12 +45,12 @@ def create_level(my_toolbox):
 
     #level2.add_moving_platform((2450, 900), (200, 50), 3, (2900, 545), facing_direction="up")  # before tori gates
     #level2.add_moving_platform((2000, 900), (200, 50), 2, (2000, 545), facing_direction="up")
-    level2.add_moving_platform((2500, 545), (250, 50), 2, (2500, 700), facing_direction="up")
+    level2.add_moving_platform((2500, 545), (250, 50), 2, (2500, 800), facing_direction="up")
     level2.add_moving_platform((2900, 500), (250, 50), 2, (2900, 800), facing_direction="up")
     level2.add_moving_platform((3300, 445), (250, 50), 2, (3300, 900), facing_direction="up")
 
     # add regular platforms
-    level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
+    level2.add_platform((1450, 480), (100, 300), facing_direction="down") #bird parkour
     level2.add_platform((1750, 480), (100, 100), facing_direction="down")
 
     level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
@@ -60,11 +60,11 @@ def create_level(my_toolbox):
     level2.add_platform((70, 340), (280, 140), facing_direction="up")       # first section (top)
     level2.add_platform((350, 410), (370, 70),  facing_direction=None)
     level2.add_platform((720, 410), (280, 210),  facing_direction=None)
-    level2.add_platform((480, 590), (240, 30), facing_direction="up")
+    level2.add_platform((480, 590), (250, 30), facing_direction="up")
     level2.add_platform((1000, 340), (280, 420), facing_direction="up")
     level2.add_platform((1280, 480), (750, 70), facing_direction=None)
     level2.add_platform((2030, 410), (250, 140), facing_direction="up")
-    level2.add_platform((1400, 330), (510, 50), facing_direction="up")      # above second water section (top)
+    level2.add_platform((1350, 330), (560, 50), facing_direction="up")      # above second water section (top)
 
     #level2.add_platform((2450, 545), (200, 50), facing_direction="up")      # solo floating platform
 
@@ -92,7 +92,7 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 350 - 50, "torigate", gate_num=2)
 
     # add coins
-    level2.add_obstacle(2350 - 30, 900, "coin")
+    level2.add_obstacle(2350 - 30, 850, "coin")
     level2.add_obstacle(4800, 800, "coin")
     level2.add_obstacle(1930, 300, "coin")
 
