@@ -13,11 +13,6 @@ class Obstacle:
         self.pushed = False
         self.type = "button"
 
-        # loading fence sound royalty free from evanto elements
-        fence_path = "audio/fence.mp3"
-        self.fence_sound = pygame.mixer.Sound(fence_path)
-        self.fence_sound.set_volume(0.3)
-
     def is_pushed(self):
         return self.pushed
 
@@ -35,10 +30,10 @@ class Obstacle:
         screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
 
 
-class ButtonObstacle(Obstacle):
+class ButtonObstacle():
     def __init__(self, button_position, fence_int_position, fence_final_position, x, y, fence_dimensions, level_num,
                  dog=False, dog_int_y=None):
-        super().__init__(x, y)
+        # super().__init__(x, y)
         self.dog_button_img = pygame.image.load("images/ObstacleButtonSprites/dog_symbol.png").convert_alpha()
         self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button2.png").convert_alpha()
 
@@ -64,8 +59,16 @@ class ButtonObstacle(Obstacle):
         self.fence_moving = False
         self.sound_playing = False
 
+        # loading fence sound royalty free from evanto elements
+        fence_path = "audio/fence.mp3"
+        self.fence_sound = pygame.mixer.Sound(fence_path)
+        self.fence_sound.set_volume(0.3)
+
     def is_pushed(self):
         return self.pushed
+
+    def stop_fence_sound(self):
+        self.fence_sound.stop()
 
     def get_rect(self):
         return self.__button_rect
@@ -73,13 +76,16 @@ class ButtonObstacle(Obstacle):
     def set_pushed(self, push):
         self.pushed = push
 
-    def draw(self, screen):
+    def draw(self, screen, momohealth):
         if self.type == "button":
             self.button_image = pygame.transform.scale(self.button_image, (self.__width, self.__height))
             self.__button_rect = self.button_image.get_rect()
             self.__button_rect.center = (self.__int_x, self.__int_y)
             screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
-            self.move_fence_to_new_pos()
+            if momohealth > 0:
+                self.move_fence_to_new_pos()
+            else:
+                self.fence_sound.stop()
         elif self.type == "dog_button":
             self.dog_button_img = pygame.transform.scale(self.dog_button_img, (self.__width_dog, self.__height_dog))
             screen.blit(self.dog_button_img, (self.__int_x - (self.__width_dog / 2), self.__int_y_dog - (self.__height_dog / 2)))

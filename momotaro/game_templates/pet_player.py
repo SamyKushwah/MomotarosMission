@@ -167,6 +167,11 @@ class Pet:
             pygame.image.load("images/player2/cloud.png").convert_alpha(), (149, 100))
         self.cloud_image.set_alpha(50)
 
+        # loading ouch sound from royalty free webpage mixkit
+        ow_path = "audio/smack.mp3"
+        self.ow_sound = pygame.mixer.Sound(ow_path)
+        self.ow_sound.set_volume(0.35)
+
     def update_monkey_movement(self):
         if not self.standing:
             self.velocity[1] += self.gravity
@@ -376,6 +381,8 @@ class Pet:
                 self.update_monkey_movement()
         for peach in self.peaches:
             peach.poll_movement()
+        if self.iframes > 0:
+            self.iframes -= 1
 
     def check_collisions(self, collidables):
         pixel_margin = 30
@@ -636,25 +643,19 @@ class Pet:
                     else:  # fixed bug so now only when you are in gate range anf up you win
                         pet_gate.pushed = False
 
-    def check_damage(self, demon_list):
+    def hit(self, direction):
         if self.iframes <= 0:
-            for demon in demon_list:
-                if self.get_rect().colliderect(demon.get_rect()):
-                    # add demon noise
-                    self.roar_sound.play()
-
-                    self.health -= 10
-                    momotaro_rect = self.get_rect()
-                    collidable_rect = demon.get_rect()
-                    self.iframes = 20
-                    if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
-                        self.velocity[0] += 6
-                        self.velocity[1] += -12
-                    else:
-                        self.velocity[0] += -6
-                        self.velocity[1] += -12
-        else:
-            self.iframes -= 1
+            # add demon noise
+            self.ow_sound.play()
+            self.health -= 8
+            self.iframes = 20
+            match direction:
+                case "left":
+                    self.velocity[0] += -15
+                    self.velocity[1] += -12
+                case "right":
+                    self.velocity[0] += 15
+                    self.velocity[1] += -12
 
     def draw_death(self, surface):
         match self.pet:

@@ -111,8 +111,8 @@ def create_level(my_toolbox):
     level1.add_obstacle(1650, 350 - 50, "torigate", gate_num=1) # end of the level marker
     level1.add_obstacle(1800, 350 - 50, "torigate", gate_num=2)
 
-    #level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
-    #level1.add_obstacle(700, 950, "torigate", gate_num=2)
+    # level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
+    # level1.add_obstacle(700, 950, "torigate", gate_num=2)
 
 
     momotaro = momotaro_player.Momotaro([300, 300])
