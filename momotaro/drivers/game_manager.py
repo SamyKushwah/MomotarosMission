@@ -311,13 +311,16 @@ class GameManager:
 
         # depending on which level you are currently on, update the information
         if level_name == "level_1":
-            level_data[0] = coins_collected
+            if int(level_data[0]) < coins_collected:
+                level_data[0] = coins_collected
             level_data[3] = "unlocked"
         elif level_name == "level_2":
-            level_data[1] = coins_collected
+            if int(level_data[1]) < coins_collected:
+                level_data[1] = coins_collected
             level_data[4] = "unlocked"
         else:
-            level_data[2] = coins_collected
+            if int(level_data[2]) < coins_collected:
+                level_data[2] = coins_collected
 
         with open("save_data/game_data", 'w') as file:
             [file.write(str(coin) + "\n") for coin in level_data]

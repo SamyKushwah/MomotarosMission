@@ -92,7 +92,7 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 350 - 50, "torigate", gate_num=2)
 
     # add coins
-    level2.add_obstacle(2350 - 30, 900, "coin")
+    level2.add_obstacle(2350 - 30, 850, "coin")
     level2.add_obstacle(4800, 800, "coin")
     level2.add_obstacle(1930, 300, "coin")
 
