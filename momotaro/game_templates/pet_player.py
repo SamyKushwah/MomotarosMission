@@ -625,9 +625,9 @@ class Pet:
 
                     margin = 80
                     if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
-                        pet_gate.set_pushed(True)
+                        pet_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        pet_gate.set_pushed(False)
+                        pet_gate.pushed = False
 
     def check_damage(self, demon_list):
         if self.iframes <= 0:

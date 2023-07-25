@@ -332,13 +332,15 @@ class Momotaro:
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        momo_gate.set_pushed(True)
+                        momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        momo_gate.set_pushed(False)
+                        momo_gate.pushed = False
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
+                            print("momo rect:", self.get_rect())
+                            print("collding with coin at ", coin.get_rect())
                             coin.collected = True
                             # play coin collected audio
                             self.coin_sound.play()

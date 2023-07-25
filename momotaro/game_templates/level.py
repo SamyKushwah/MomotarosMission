@@ -120,8 +120,8 @@ class Level:
                     self.interactible_list["vase"] = [temp_obstacle]
                 self.collidable_list.append(temp_obstacle)
 
-    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text, font_size=30):
-        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text,
+    def add_tutorial_text(self, x, y, x_min, x_max, y_min,y_max, dimensions, text, font_size=30):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max,y_min, y_max, dimensions=dimensions, text=text,
                                               font_size=font_size)
         self.tutorial_text_list.append(temp_text)
 

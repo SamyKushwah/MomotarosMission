@@ -5,11 +5,213 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="added shawnsn stuff">
+      <change beforePath="$PROJECT_DIR$/.idea/MomotarosMission.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MomotarosMission.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/DemonStand(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/DemonStand(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/DemonStanding.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/DemonStrike(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/DemonStrike(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/Demonlift(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DemonSprites/Demonlift(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/drivers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/drivers/game_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/drivers/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/drivers/snapitc.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/drivers/toolbox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/demon.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/level.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/momotaro_player.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/game_templates/obstacles.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/DemonStand(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/DemonStand(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/DemonStanding.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/DemonStrike(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/DemonStrike(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/Demonlift(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/Demonlift(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/DemonSprites/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoLiftKat(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoLiftKat(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoStandSide(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoStandingIdle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoStandingSide(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoStrike(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoStrike(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoWalkingbl(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoWalkingbl(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoWalkingfl(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/MomoWalkingfl(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/momotaroidle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/momotarowalkleftA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/momotarowalkleftB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/momotarowalkrightA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/momotarowalkrightB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/swing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/MomotaroSprites/swing_left.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/Button.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/FireWoodFence.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/PushBlock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/WoodFence.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/ObstacleButtonSprites/torigate.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/CoinBarBack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/back_new.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/bkgnd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/bkrnd_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/level_1_bkgnd (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/level_1_bkgnd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/level_1_bkgnd_lightest.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/backgrounds/temp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/game_ui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/game_ui/controls.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/game_ui/pause_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/CoinBarBack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/HealthBarBack.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/HealthBarFront.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/header.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/one.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/player_one_txt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/player_two_txt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/three.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/two.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_1/zero.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/0-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/1-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/2-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/3-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/circle1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/circle2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/circle3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/credits.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/gold_coin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/level-title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/level_select_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/level_select_scene_UI/select-level-txt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/lose_screen/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/lose_screen/home_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/lose_screen/lose_screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/lose_screen/restart_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/pause_screen/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/pause_screen/home_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/pause_screen/pause_screen_bkgnd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/pause_screen/restart_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/pause_screen/resume_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/player2/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/player2/bird.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/FloatingStone(L).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/FloatingStone(M).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/FloatingStone(R).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(BL).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(BM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(BR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(ML).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(MM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(MR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(TL).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(TM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/Stone(TR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/stone/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/tiles/watertile.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/title_screen_scene_UI/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/title_screen_scene_UI/main-title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/title_screen_scene_UI/title_screen_background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/home_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/next_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/restart_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/win_screen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/win_screen_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/win_screen_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/win_screen_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/images/win_screen/win_screen_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/save_data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/save_data/game_data" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/level_select_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/levels/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/levels/level_1.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/levels/level_1A.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/lose_screen_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/pause_screen_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/title_menu_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/scenes/win_screen_scene.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/ui_templates/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/lib/momotaro/ui_templates/button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/game_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/drivers/toolbox.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/button_obstacle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/demon.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/level.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_templates/push_obstacle.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/DemonStand(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/DemonStand(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/DemonStanding.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/DemonStrike(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/DemonStrike(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/Demonlift(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/DemonSprites/Demonlift(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoLiftKat(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoLiftKat(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoStandSide(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoStandingIdle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoStandingSide(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoStrike(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoStrike(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoWalkingbl(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoWalkingbl(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoWalkingfl(Left).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/MomoWalkingfl(Right).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/momotarowalkleftA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/momotarowalkleftB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/momotarowalkrightA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/MomotaroSprites/momotarowalkrightB.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ObstacleButtonSprites/FireWoodFence.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ObstacleButtonSprites/PushBlock.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/ObstacleButtonSprites/WoodFence.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/0-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/1-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/2-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/3-gold-coins.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/circle1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/circle2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/circle3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/credits.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/level-title.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/level_select_scene_UI/select-level-txt.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/FloatingStone(L).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/FloatingStone(M).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/FloatingStone(R).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(BL).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(BM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(BR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(ML).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(MM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(MR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(TL).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(TM).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/tiles/stone/Stone(TR).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/title_screen_scene_UI/main-title.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/drivers/game_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/level.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/level.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/momotaro_player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/obstacles.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/game_templates/pet_player.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/game_templates/pet_player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/momotaro/save_data/game_data" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/save_data/game_data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/momotaro/scenes/win_screen_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/win_screen_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/scenes/levels/level_3.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/scenes/levels/level_3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/momotaro/ui_templates/tutorial.py" beforeDir="false" afterPath="$PROJECT_DIR$/momotaro/ui_templates/tutorial.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +239,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/karen/OneDrive/Documents/GitHub/MomotarosMission/momotaro/images/backgrounds&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "ruhi",
+    "last_opened_file_path": "C:/Users/karen/OneDrive/Documents/GitHub/MomotarosMission/momotaro/images/backgrounds",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\karen\OneDrive\Documents\GitHub\MomotarosMission\momotaro\images\credits_screen" />

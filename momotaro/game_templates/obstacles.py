@@ -141,56 +141,40 @@ class Fence:
         return self.__fence_rect
 
 
-class ToriObstacle(Obstacle):
+class ToriObstacle:
     def __init__(self, x, y, gate_num):
-        super().__init__(x, y)
         self.gate_num = gate_num
         if gate_num == 1:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate1.png").convert_alpha()
+            self.tori_image = pygame.transform.scale((pygame.image.load("images/ObstacleButtonSprites/torigate1.png").convert_alpha()), (100, 100))
         else:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/torigate2.png").convert_alpha()
-        self.scale_factor = 0.25
-        self.__width = int(self.button_image.get_width() * self.scale_factor)
-        self.__height = int(self.button_image.get_height() * self.scale_factor)
-        self.__button_rect = self.button_image.get_rect(x=x, y=y)
-        self.__int_x = x
-        self.__int_y = y
+            self.tori_image = pygame.transform.scale((pygame.image.load("images/ObstacleButtonSprites/torigate2.png").convert_alpha()), (100, 100))
+        self.x = x
+        self.y = y
 
         # 'Pushed' for gate means activated -> ending level
         self.pushed = False
         self.type = "torigate"
 
     def draw(self, screen):
-        self.button_image = pygame.transform.scale(self.button_image, (self.__width, self.__height))
-        self.__button_rect = self.button_image.get_rect()
-        self.__button_rect.center = (self.__int_x, self.__int_y)
-        screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
+        screen.blit(self.tori_image, (self.x, self.y))
+
+    def get_rect(self):
+        return pygame.rect.Rect(((self.x, self.y), self.tori_image.get_size()))
 
 
-class CoinObstacle(Obstacle):
+class CoinObstacle:
     def __init__(self, x, y):
-        super().__init__(x, y)
-        self.button_image = pygame.image.load("images/level_select_scene_UI/gold_coin.png").convert_alpha()
-        self.scale_factor = 1
-        # self.__width = int(self.button_image.get_width() * self.scale_factor)
-        # self.__height = int(self.button_image.get_height() * self.scale_factor)
-        self.__width = 80
-        self.__height = 80
-        self.__int_x = x
-        self.__int_y = y
-        # self.button_image = pygame.transform.scale(self.button_image, (800,800))
-
-        self.__button_rect = self.button_image.get_rect(x=x, y=y)
-
-        # 'collected' for coin means activated -> collected
+        self.coin_image = pygame.transform.scale(pygame.image.load("images/level_select_scene_UI/gold_coin.png").convert_alpha(), (90, 91))
+        self.x = x
+        self.y = y
         self.collected = False
         self.type = "coin"
 
     def draw(self, screen):
-        self.button_image = pygame.transform.scale(self.button_image, (self.__width, self.__height))
-        self.__button_rect = self.button_image.get_rect()
-        self.__button_rect.center = (self.__int_x, self.__int_y)
-        screen.blit(self.button_image, (self.__int_x - (self.__width / 2), self.__int_y - (self.__height / 2)))
+        screen.blit(self.coin_image, (self.x, self.y))
+
+    def get_rect(self):
+        return pygame.rect.Rect(((self.x, self.y), self.coin_image.get_size()))
 
 class VaseObstacle:
     def __init__(self, x, y, spikes, duration):
