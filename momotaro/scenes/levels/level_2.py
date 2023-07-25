@@ -45,12 +45,12 @@ def create_level(my_toolbox):
 
     #level2.add_moving_platform((2450, 900), (200, 50), 3, (2900, 545), facing_direction="up")  # before tori gates
     #level2.add_moving_platform((2000, 900), (200, 50), 2, (2000, 545), facing_direction="up")
-    level2.add_moving_platform((2500, 545), (250, 50), 2, (2500, 700), facing_direction="up")
+    level2.add_moving_platform((2500, 545), (250, 50), 2, (2500, 800), facing_direction="up")
     level2.add_moving_platform((2900, 500), (250, 50), 2, (2900, 800), facing_direction="up")
     level2.add_moving_platform((3300, 445), (250, 50), 2, (3300, 900), facing_direction="up")
 
     # add regular platforms
-    level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
+    level2.add_platform((1450, 480), (100, 300), facing_direction="down") #bird parkour
     level2.add_platform((1750, 480), (100, 100), facing_direction="down")
 
     level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
