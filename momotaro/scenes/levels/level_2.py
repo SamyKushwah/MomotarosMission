@@ -28,7 +28,7 @@ def create_level(my_toolbox):
     level2.add_platform((4600, 1080 - 71), (430, 70), platform_type="water")   # water section 3 (bottom)
     level2.add_platform((2500, 1080 - 71), (1150, 70), platform_type="water")
 
-    level2.add_spikes((2300, 1080-100), (150, 100), vase_position=(2800 + 17, 485), duration=600)
+    level2.add_spikes((2300, 1080 - 100), (150, 100), vase_position=(2800 + 17, 485), duration=300)
     level2.add_platform((2800, 550), (70, 50), facing_direction="up")
 
     level2.add_platform((350, 340 + 20), (650, 70), platform_type="water")          # water section 1 (top)
@@ -50,11 +50,11 @@ def create_level(my_toolbox):
     level2.add_moving_platform((3300, 445), (250, 50), 2, (3300, 900), facing_direction="up")
 
     # add regular platforms
-    level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
-    level2.add_platform((1750, 480), (100, 100), facing_direction="down")
+    # level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
+    # level2.add_platform((1750, 480), (100, 100), facing_direction="down")
 
-    level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
-    level2.add_platform((1750, 650), (100, 850), facing_direction="up")
+    # level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
+    # level2.add_platform((1750, 650), (100, 850), facing_direction="up")
 
 
     level2.add_platform((70, 340), (280, 140), facing_direction="up")       # first section (top)
@@ -92,7 +92,7 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 350 - 50, "torigate", gate_num=2)
 
     # add coins
-    level2.add_obstacle(2350 - 30, 850, "coin")
+    level2.add_obstacle(2350 - 30, 900, "coin")
     level2.add_obstacle(4800, 800, "coin")
     level2.add_obstacle(1930, 300, "coin")
 

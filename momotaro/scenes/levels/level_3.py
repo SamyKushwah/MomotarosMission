@@ -15,7 +15,6 @@ def create_level(my_toolbox):
     level3.add_platform((850, 1000), (150, 85), facing_direction="up", corners=True)
     level3.add_platform((1200, 1080 - 80), (2500, 85), facing_direction="up", corners=True)                                           # bottom wall section 3
     level3.add_platform((4300, 1080 - 80), (750, 85), facing_direction="up", corners=True)                                           # bottom wall section 4
-    # 3030
 
     # fix the corners
     level3.add_platform((-10, 85), (70, 70), facing_direction=None)
