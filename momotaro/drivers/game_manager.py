@@ -109,7 +109,7 @@ class GameManager:
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
 
-                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
+                        if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
                             # Poll the win game scene next scene

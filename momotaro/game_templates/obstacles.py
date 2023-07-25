@@ -40,10 +40,7 @@ class ButtonObstacle(Obstacle):
                  dog=False, dog_int_y=None):
         super().__init__(x, y)
         self.dog_button_img = pygame.image.load("images/ObstacleButtonSprites/dog_symbol.png").convert_alpha()
-        if level_num == 1:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button.png").convert_alpha()
-        elif level_num == 2:
-            self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button2.png").convert_alpha()
+        self.button_image = pygame.image.load("images/ObstacleButtonSprites/Button2.png").convert_alpha()
 
         self.fence = Fence(fence_int_position, fence_final_position, fence_dimensions)
         self.scale_factor = 0.5
