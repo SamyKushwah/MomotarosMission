@@ -22,3 +22,7 @@ Personal Log:
 7/24 -> Made controls screen code. Fixed pause screen to add controls button. Fixed transition from pause to controls in
         game_manager. Added audio transitions for pet changes including bark, tweet, hoot. Slowed down frame rate for
         death.
+7/25 -> Made throw and break vase noises. Added spike sprite. Increased damage from demons. Fixed sound bug where
+        death by demon does not turn off all the sounds. Added fence sound stopping when any other screen is played.
+        Fixing dog sprites to be better.
+        
