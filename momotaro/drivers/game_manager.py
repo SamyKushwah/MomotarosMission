@@ -228,21 +228,6 @@ class GameManager:
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
 
-        # Draw platforms
-        for platform in self.level.platform_list:
-            platform.draw_platform(self.image)
-        for platform in self.level.moving_platform_list:
-            platform.draw_platform(self.image)
-        for text in self.level.tutorial_text_list:
-            text.draw(self.image, self.momotaro.position[0])
-
-        # Draw demons
-        for demon in self.level.demon_list:
-            if demon.health > 0:
-                demon.draw(self.image)
-            else:
-                self.level.demon_list.remove(demon)
-
         # Draw obstacles
         for interactible_key in self.level.interactible_list.keys():
             match interactible_key:
@@ -260,6 +245,25 @@ class GameManager:
                 case "vase":
                     for vase in self.level.interactible_list[interactible_key]:
                         vase.draw(self.image)
+
+        # Draw platforms
+        for platform in self.level.platform_list:
+            platform.draw_platform(self.image)
+        for platform in self.level.moving_platform_list:
+            platform.draw_platform(self.image)
+        # Draw text
+        for text in self.level.tutorial_text_list:
+            text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
+                      self.pet.position[1])
+
+        # Draw demons
+        for demon in self.level.demon_list:
+            if demon.health > 0:
+                demon.draw(self.image)
+            else:
+                self.level.demon_list.remove(demon)
+
+
 
         # Draw players
         self.momotaro.draw(self.image)
@@ -355,21 +359,6 @@ class GameManager:
             self.image.blit(self.background, (positional, 100))
             self.image.blit(self.background, (1920 + positional, 100))
 
-            # Draw platforms
-            for platform in self.level.platform_list:
-                platform.draw_platform(self.image)
-            for platform in self.level.moving_platform_list:
-                platform.draw_platform(self.image)
-            for text in self.level.tutorial_text_list:
-                text.draw(self.image, self.momotaro.position[0])
-
-            # Draw demons
-            for demon in self.level.demon_list:
-                if demon.health > 0:
-                    demon.draw(self.image)
-                else:
-                    self.level.demon_list.remove(demon)
-
             # Draw obstacles
             for interactible_key in self.level.interactible_list.keys():
                 match interactible_key:
@@ -387,6 +376,21 @@ class GameManager:
                     case "vase":
                         for vase in self.level.interactible_list[interactible_key]:
                             vase.draw(self.image)
+
+            # Draw platforms
+                for platform in self.level.platform_list:
+                    platform.draw_platform(self.image)
+                for platform in self.level.moving_platform_list:
+                    platform.draw_platform(self.image)
+                for text in self.level.tutorial_text_list:
+                    text.draw(self.image, self.momotaro.position[0])
+
+            # Draw demons
+                for demon in self.level.demon_list:
+                    if demon.health > 0:
+                        demon.draw(self.image)
+                    else:
+                        self.level.demon_list.remove(demon)
 
             view_surface = pygame.surface.Surface((1920, 1080))
 
