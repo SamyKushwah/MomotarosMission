@@ -45,8 +45,8 @@ class TutorialText(pygame.sprite.Sprite):
         # text_surface = None
         if self.font is not None and self.text is not None:
             # creating red text
-            if curr_x > self.x_max:
-                self.done = True
+            #if curr_x > self.x_max:
+            #    self.done = True
             if not self.done and self.x_min < curr_x < self.x_max:
                 surface.blit(self.text_surface, self.text_rect)
 

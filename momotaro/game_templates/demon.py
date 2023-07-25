@@ -1,7 +1,7 @@
 import pygame
 from math import dist
 '''
-Purpose: Enemy object in Momotaro. Spawn at a specified location with a predetermined enemy detection range 
+Purpose: Enemy object. Spawns at a specified location with a predetermined enemy detection range 
             (2-Dimensional). The Demons are subject to velocity changes and die on water. Demons take damage when hit
             by the sweep image from Momotaro's sword.
 '''
@@ -29,6 +29,9 @@ class Demon:
                                    pygame.transform.scale(pygame.image.load("images/DemonSprites/Demonlift(Left).png").convert_alpha(), (70, 100))]
         self.frame_index = 0
         self.active_image = 0
+
+        self.health_holder = pygame.transform.scale(pygame.image.load("images/DemonSprites/health_holder.png").convert_alpha(), (120, 10))
+        self.health_bar = pygame.transform.scale(pygame.image.load("images/DemonSprites/health.png").convert_alpha(), (120, 8))
 
     '''
     Purpose: If Momotaro is within the demon's detection range, then it will start moving towards him. The movement
@@ -198,6 +201,13 @@ class Demon:
             self.frame_index = 0
 
         surface.blit(self.active_image, self.position)
+        surface.blit(pygame.transform.scale(self.health_bar, (
+        self.health_bar.get_width() * self.health / 100, self.health_bar.get_height())), (
+                     self.position[0] - (self.health_holder.get_width() / 2) + (self.active_image.get_width() / 2),
+                     self.position[1] - 30))
+        surface.blit(self.health_holder, (
+        self.position[0] - (self.health_holder.get_width() / 2) + (self.active_image.get_width() / 2),
+        self.position[1] - 30))
 
     def get_rect(self):
         return pygame.rect.Rect(self.position, self.hitbox)
