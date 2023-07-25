@@ -10,17 +10,16 @@ def create_level(my_toolbox):
     level3.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")        # left wall
     level3.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")                     # right wall
     level3.add_platform((0, 0), (5100, 140), facing_direction="down")                            # top wall
-    level3.add_platform((0, 1080 - 80), (300, 80))
-    level3.add_platform((500, 1080 - 80), (150, 80))                                            # bottom wall section 1
-    level3.add_platform((850, 1080 - 80), (150, 80))
-    #level3.add_platform((1000, 1080 - 69), (200, 70))                                           # bottom wall section 3
-    level3.add_platform((1200, 1080 - 80), (2500, 80))                                           # bottom wall section 3
-    level3.add_platform((4300, 1080 - 80), (750, 80))                                           # bottom wall section 4
+    level3.add_platform((0, 1000), (300, 85), facing_direction="up", corners=True)
+    level3.add_platform((500, 1000), (150, 85), facing_direction="up", corners=True)                                            # bottom wall section 1
+    level3.add_platform((850, 1000), (150, 85), facing_direction="up", corners=True)
+    level3.add_platform((1200, 1080 - 80), (2500, 85), facing_direction="up", corners=True)                                           # bottom wall section 3
+    level3.add_platform((4300, 1080 - 80), (750, 85), facing_direction="up", corners=True)                                           # bottom wall section 4
     # 3030
 
     # fix the corners
-    level3.add_platform((-10, 70), (70, 70), facing_direction=None)
-    level3.add_platform((5040, 70), (70, 70), facing_direction=None)
+    level3.add_platform((-10, 85), (70, 70), facing_direction=None)
+    level3.add_platform((5040, 85), (70, 70), facing_direction=None)
     level3.add_platform((-10, 1080 - 70), (70, 70), facing_direction=None)
     level3.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
@@ -87,14 +86,14 @@ def create_level(my_toolbox):
     level3.add_platform((3700, 444), (500, 25), facing_direction=None)
 
     # add button/gate obstacles
-    level3.add_obstacle(600, 1000, "button", fence_initial=(700, 150),  fence_final=(700, 0), fence_dimensions=(100, 300))
-    level3.add_obstacle(1300, 1000, "button", fence_initial=(1150, 600),  fence_final=(1150, 450), fence_dimensions=(100, 300))
-    level3.add_obstacle(950, 1000, "button", fence_initial=(1750, 150),  fence_final=(1750, 0), fence_dimensions=(100, 300))# first top gate
-    level3.add_obstacle(2650, 400, "button", fence_initial=(2800 - 30, 925), fence_final=(2800 - 30, 700),
+    level3.add_obstacle(600, 992, "button", fence_initial=(700, 150),  fence_final=(700, 0), fence_dimensions=(100, 300))
+    level3.add_obstacle(1300, 992, "button", fence_initial=(1150, 600),  fence_final=(1150, 450), fence_dimensions=(100, 300))
+    level3.add_obstacle(950, 992, "button", fence_initial=(1750, 150),  fence_final=(1750, 0), fence_dimensions=(100, 300))# first top gate
+    level3.add_obstacle(2650, 395, "button", fence_initial=(2800 - 30, 925), fence_final=(2800 - 30, 700),
                         fence_dimensions=(70, 300*7/10))
-    level3.add_obstacle((2750 + 500 + 200), 400, "button", fence_initial=(3850, 850), fence_final=(3850, 1000),
+    level3.add_obstacle((2750 + 500 + 200), 395, "button", fence_initial=(3850, 850), fence_final=(3850, 1000),
                         fence_dimensions=(100, 300))
-    level3.add_obstacle(3700 + 700, 400, "button", fence_initial=(4350, 900),
+    level3.add_obstacle(3700 + 700, 395, "button", fence_initial=(4350, 900),
                         fence_final=(4350, 750),
                         fence_dimensions=(100, 300))
         # second bottom gate

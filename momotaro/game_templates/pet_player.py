@@ -68,20 +68,20 @@ class Pet:
         self.right_bird_mvmnt_frames = None
         self.left_bird_mvmnt_frames = None
 
-        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_left.png").convert_alpha(),(40, 70))
-        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_left.png").convert_alpha(),(40, 70))
+        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_left.png").convert_alpha(),(45, 70))
+        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_left.png").convert_alpha(),(45, 70))
 
-        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_right.png").convert_alpha(),(40, 70))
-        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_right.png").convert_alpha(), (40, 70))
+        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_right.png").convert_alpha(),(45, 70))
+        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_right.png").convert_alpha(), (45, 70))
 
 
         self.right_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_1.png").convert_alpha(), (30, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_2.png").convert_alpha(), (40, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/walking_right_1.png").convert_alpha(), (35, 60)),
+            pygame.transform.scale(pygame.image.load("images/player2/walking_right_2.png").convert_alpha(), (45, 60))]
 
         self.left_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_1.png").convert_alpha(), (30, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_2.png").convert_alpha(), (35, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/walking_left_1.png").convert_alpha(), (35, 60)),
+            pygame.transform.scale(pygame.image.load("images/player2/walking_left_2.png").convert_alpha(), (40, 60))]
 
         self.bird_idle_image = self.right_bird_mvmnt_frames[0]
 
@@ -89,7 +89,7 @@ class Pet:
         self.bird_hurt_right_image = pygame.transform.rotate(self.left_bird_mvmnt_frames[0], 45)
 
         self.bird_death_image = pygame.transform.scale(
-            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (50, 60))
+            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (55, 60))
         ##################
 
         # DOG IMAGES -------------------
@@ -134,33 +134,33 @@ class Pet:
 
         # MONKEY IMAGES ----------------------------------
         self.right_monkey_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_1.png").convert_alpha(), (45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_2.png").convert_alpha(), (45, 66))]
 
         self.left_monkey_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(),(40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(),(45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_2.png").convert_alpha(), (45, 66))]
 
         self.monkey_idle_image_left = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_idle_left.png").convert_alpha(), (40, 61))
+            pygame.image.load("images/player2/monkey_idle_left.png").convert_alpha(), (45, 66))
 
         self.monkey_idle_image_right = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha(), (40, 61))
+            pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha(), (45, 66))
 
         self.monkey_death_image = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_death.png").convert_alpha(), (61, 40))
+            pygame.image.load("images/player2/monkey_death.png").convert_alpha(), (65, 45))
 
         self.monkey_hurt_left_image = pygame.transform.rotate(self.right_monkey_mvmnt_frames[0], 45)
 
         self.monkey_hurt_right_image = pygame.transform.rotate(self.left_monkey_mvmnt_frames[0], 45)
 
         self.right_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(), (45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(), (45, 65))]
 
         self.left_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(), (45, 65)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(), (45, 65))]
         #####################
 
         self.cloud_image = pygame.transform.scale(
