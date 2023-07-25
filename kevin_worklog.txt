@@ -138,7 +138,7 @@ lots of playtesting
 finishing level 3 design
 
 7/25-26/23
-11:30pm - 1:30am
+11:30pm - 2:00am
 finishing level 3 design
 outside user play testing
 merging code bases and ironing out bugs

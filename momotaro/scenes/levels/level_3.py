@@ -122,8 +122,8 @@ def create_level(my_toolbox):
     level3.add_obstacle(2060, 300, "coin")
     level3.add_obstacle(1550, 650, "coin")
 
-    #momotaro = momotaro_player.Momotaro([200, 300])
-    momotaro = momotaro_player.Momotaro([200, 900])
+    momotaro = momotaro_player.Momotaro([200, 300])
+    #momotaro = momotaro_player.Momotaro([200, 900])
     pet = pet_player.Pet([200, 900])
 
     return level3, momotaro, pet
