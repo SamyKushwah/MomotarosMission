@@ -413,7 +413,7 @@ class GameManager:
                         case "button":
                             for obstacle in self.level.interactible_list[interactible_key]:
                                 obstacle.stop_fence_sound()
-                return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                return lose_screen_scene.run(self.my_toolbox, self.level_name, view_surface)
 
             # if momotaro is the one who died, play his death animation and leave P2 alone
             if self.momotaro.health <= 0:
