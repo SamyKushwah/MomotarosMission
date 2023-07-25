@@ -6,7 +6,7 @@ def run(my_toolbox: toolbox.Toolbox):
     w, h = 1920, 1080
 
     # load background image and scale it to fit in the screen window
-    background = pygame.image.load("images/title_screen_scene_UI/title_screen_bkgnd.png").convert_alpha()
+    background = pygame.image.load("images/backgrounds/title_screen_bkgnd.png").convert_alpha()
     background = pygame.transform.scale(background, (w, h))
 
     # load title image
@@ -28,7 +28,7 @@ def run(my_toolbox: toolbox.Toolbox):
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "quit"
+                return "quit", scene_screen
             # Check if the mouse was clicked
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 # Screen was clicked somewhere

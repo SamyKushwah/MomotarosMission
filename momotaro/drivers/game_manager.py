@@ -477,8 +477,10 @@ class GameManager:
             view_surface.blit(self.image, (special_x, 0))
 
             # Draw Header
+            print(self.momotaro.health)
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
 
+            self.curr_screen = view_surface
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()

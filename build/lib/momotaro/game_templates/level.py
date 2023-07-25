@@ -1,47 +1,60 @@
 import pygame
 import math
 
-from momotaro.game_templates import demon, obstacles
+from momotaro.game_templates import demon, obstacles, pet_player
+
+from momotaro.ui_templates import tutorial
 
 
 class Level:
-    def __init__(self, my_toolbox, level_num, level_width, level_height, background = "cave"):
+    def __init__(self, my_toolbox, level_num, level_width, level_height, background="cave"):
         self.width = level_width
         self.height = level_height
         self.level_num = level_num
         self.collidable_list = []
         self.platform_list = []
         self.moving_platform_list = []
+        self.tutorial_text_list = []
         self.interactible_list = {}
         self.demon_list = []
+        self.spikes_list = []
         self.type = background
+        self.pet_image = None
         if background == "mountains":
             self.background = pygame.transform.scale(
-            pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("mountains")
         elif background == "cave":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("cave")
         elif background == "bamboo":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("bamboo")
 
         self.stone_imgs = []
         self.water_img = None
+        self.spike_img = None
 
-    def add_platform(self, position, dimensions, platform_type = "stone", facing_direction="all", corners=False):
-        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, platform_type, facing_direction, corners)
+    def add_spikes(self, position, dimensions, vase_position, facing_direction="all", corners=False, duration=100):
+        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, self.spike_img, "spikes",
+                                 facing_direction, corners)
+        self.platform_list.append(temp_platform)
+        self.collidable_list.append(temp_platform)
+        self.add_obstacle(vase_position[0], vase_position[1], "spike_vase", spikes=temp_platform, duration=duration)
+
+    def add_platform(self, position, dimensions, platform_type="stone", facing_direction="all", corners=False):
+        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, self.spike_img, platform_type, facing_direction,
+                                 corners)
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
     def add_moving_platform(self, position, dimensions, max_speed, target, platform_type="stone",
                             facing_direction="all",
                             corners=False):
-        temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img, platform_type, facing_direction,
-                                       corners)
-        #print("Adding platform", temp_platform.get_rect())
+        temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img, self.spike_img,
+                                       platform_type, facing_direction, corners)
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -49,10 +62,11 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type, fence_initial = None, fence_final = None, fence_dimensions = None):
+    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None, spikes=None, duration=100, dog_y=None):
         match type:
             case "button":
-                temp_obstacle = obstacles.ButtonObstacle((x,y), fence_initial, fence_final, x, y, fence_dimensions, self.level_num)
+                temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
+                                                         self.level_num)
                 try:
                     self.interactible_list["button"] += [temp_obstacle]
                 except KeyError:
@@ -69,7 +83,7 @@ class Level:
                 self.collidable_list.append(temp_obstacle)
 
             case "torigate":
-                temp_obs = obstacles.ToriObstacle(x, y)
+                temp_obs = obstacles.ToriObstacle(x, y, gate_num)
                 try:
                     self.interactible_list["torigate"] += [temp_obs]
                 except KeyError:
@@ -81,6 +95,35 @@ class Level:
                     self.interactible_list["coin"] += [temp_obs]
                 except KeyError:
                     self.interactible_list["coin"] = [temp_obs]
+            case "dog_button":
+                temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
+                                                         self.level_num, dog=True, dog_int_y=dog_y)
+                try:
+                    self.interactible_list["button"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["button"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+
+                temp_obstacle = temp_obstacle.fence
+                try:
+                    self.interactible_list["fence"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["fence"] = [temp_obstacle]
+
+                self.collidable_list.append(temp_obstacle)
+            case "spike_vase":
+                temp_obstacle = obstacles.VaseObstacle(x, y, spikes, duration)
+                try:
+                    self.interactible_list["vase"] += [temp_obstacle]
+                except KeyError:
+                    self.interactible_list["vase"] = [temp_obstacle]
+                self.collidable_list.append(temp_obstacle)
+
+    def add_tutorial_text(self, x, y, x_min, x_max, y_min,y_max, dimensions, text, font_size=30):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max,y_min, y_max, dimensions=dimensions, text=text,
+                                              font_size=font_size)
+        self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
         if self.type == "mountains":
@@ -114,20 +157,22 @@ class Level:
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TM.png").convert_alpha())
             self.stone_imgs.append(pygame.image.load("images/tiles/stone_3/stone3_TR.png").convert_alpha())
 
-
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
+        self.spike_img = pygame.image.load("images/ObstacleButtonSprites/spikes.png").convert_alpha()
 
 
 class Platform:
-    def __init__(self, position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners=False):
+    def __init__(self, position, dimensions, stone_imgs, water_img, spike_img, platform_type, facing_direction, corners=False):
         self.width = dimensions[0]
         self.height = dimensions[1]
         self.x = position[0]
         self.y = position[1]
-        self.image = pygame.surface.Surface(dimensions)
+        self.image = pygame.surface.Surface(dimensions, pygame.SRCALPHA)
+        self.image.fill((0, 0, 0, 0))
         self.velocity = [0, 0]
         self.type = platform_type
+        self.active = True
         match platform_type:
             case "stone":
                 BL = stone_imgs[4]
@@ -193,6 +238,16 @@ class Platform:
                 TL = water_img
                 TM = water_img
                 TR = water_img
+            case "spikes":
+                BL = spike_img
+                BM = spike_img
+                BR = spike_img
+                ML = spike_img
+                MM = spike_img
+                MR = spike_img
+                TL = spike_img
+                TM = spike_img
+                TR = spike_img
 
         BL = pygame.transform.scale(BL, (70, 70))
         BM = pygame.transform.scale(BM, (70, 70))
@@ -239,12 +294,18 @@ class Platform:
         return pygame.rect.Rect((self.x, self.y), (self.width, self.height))
 
     def draw_platform(self, surface):
-        surface.blit(self.image, (self.x, self.y))
+        if self.active:
+            surface.blit(self.image, (self.x, self.y))
+        else:
+            temp_image = self.image.copy()
+            temp_image.set_alpha(20)
+            surface.blit(temp_image, (self.x, self.y))
 
 
 class MovingPlatform(Platform):
-    def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, platform_type, facing_direction="all", corners=False):
-        super().__init__(position, dimensions, stone_imgs, water_img, platform_type, facing_direction, corners)
+    def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, spike_img, platform_type,
+                 facing_direction="all", corners=False):
+        super().__init__(position, dimensions, stone_imgs, water_img, spike_img, platform_type, facing_direction, corners)
         self.__int_x = position[0]
         self.__int_y = position[1]
         self.__moving_right = True
@@ -253,7 +314,7 @@ class MovingPlatform(Platform):
         self.initial = position
         self.target = target
         self.middle = [(self.initial[0] + self.target[0]) // 2, (self.initial[1] + self.target[1]) // 2]
-        #print("middle:", self.middle[0])
+        # print("middle:", self.middle[0])
 
     def movement(self):
         moved = [self.x - self.initial[0] + 1, self.y - self.initial[1] + 1]
@@ -261,13 +322,14 @@ class MovingPlatform(Platform):
         moved_target = [self.target[0] - self.initial[0], self.target[1] - self.initial[1]]
 
         if self.target[0] != self.initial[0]:
-            #print('move x')
+            # print('move x')
             x_progress = moved[0] / moved_target[0]
 
             if self.x < self.middle[0]:
                 speed_x = (moved[0] / moved_middle[0]) * self.max_speed + 1
             else:
-                speed_x = (1 - ((moved[0] - moved_middle[0]) / (moved_target[0] - moved_middle[0]))) * self.max_speed + 1
+                speed_x = (1 - (
+                            (moved[0] - moved_middle[0]) / (moved_target[0] - moved_middle[0]))) * self.max_speed + 1
             speed_x = min(round(speed_x), self.max_speed)
 
             if self.__moving_right:
@@ -290,7 +352,8 @@ class MovingPlatform(Platform):
             if self.y < self.middle[1]:
                 speed_y = (moved[1] / moved_middle[1]) * self.max_speed + 1
             else:
-                speed_y = (1 - ((moved[1] - moved_middle[1]) / (moved_target[1] - moved_middle[1]))) * self.max_speed + 1
+                speed_y = (1 - (
+                            (moved[1] - moved_middle[1]) / (moved_target[1] - moved_middle[1]))) * self.max_speed + 1
             speed_y = min(round(speed_y), self.max_speed)
 
             if self.__moving_down:
@@ -305,8 +368,10 @@ class MovingPlatform(Platform):
             elif self.y < self.initial[1]:
                 self.__moving_down = True
 
+
 class Header:
     def __init__(self, level_type):
+        # prev_pet = "bird"
         # load the images
         self.health_front = pygame.image.load("images/game_ui/HealthBarFront.png").convert_alpha()
         if level_type == "mountains":
@@ -330,6 +395,8 @@ class Header:
         self.player_2_txt = pygame.image.load("images/game_ui/player_two_txt.png").convert_alpha()
         self.momo = pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha()
         self.bird = pygame.image.load("images/player2/bird.png").convert_alpha()
+        self.dog = pygame.image.load("images/player2/dog_idle_right.png").convert_alpha()
+        self.monkey = pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha()
 
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
@@ -342,18 +409,21 @@ class Header:
         self.three = pygame.transform.scale(self.three, (125, 65))
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
-        # self.player_2_txt = pygame.transform.scale(self.player_2_txt, (145, 50))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
-        self.bird = pygame.transform.scale(self.bird, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (60, 80))
+        self.dog = pygame.transform.scale(self.dog, (60, 80))
+        self.monkey = pygame.transform.scale(self.monkey, (60, 80))
 
-    def draw_header(self, surface, health, coins):
+    def draw_header(self, surface, momo_health, pet_health, coins, pet):
+
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
         surface.blit(self.momo, (435, 10))
 
         surface.blit(self.health_back, (540, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (momo_health / 100)
+
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -369,9 +439,16 @@ class Header:
             surface.blit(self.three, (900, 15))
 
         surface.blit(self.player_2_txt, (1080, 30))
-        surface.blit(self.bird, (1305, 10))
+        if pet == "bird":
+            surface.blit(self.bird, (1305, 10))
+        elif pet == "dog":
+            surface.blit(self.dog, (1305, 10))
+        elif pet == "monkey":
+            surface.blit(self.monkey, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
-        health_len = 225 * (health / 100)
+        health_len = 225 * (pet_health / 50)
+        if health_len < 0:
+            health_len = 0
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))
