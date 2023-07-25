@@ -359,7 +359,6 @@ class GameManager:
             # self.image.fill((70, 70, 180))
             if self.momotaro.health <= 0:
                 self.camera_on_momotaro = True
-
             else:
                 self.camera_on_momotaro = False
             # Draw Background
@@ -413,6 +412,7 @@ class GameManager:
             # Draw demons
                 for demon in self.level.demon_list:
                     if demon.health > 0:
+                        demon.velocity = [0, 0]
                         demon.draw(self.image)
                     else:
                         self.level.demon_list.remove(demon)
@@ -422,7 +422,6 @@ class GameManager:
             if index > 2:
                 # stopping fence sound when game ends
                 for interactible_key in self.level.interactible_list.keys():
-                    print("gate" + interactible_key)
                     match interactible_key:
                         case "button":
                             for obstacle in self.level.interactible_list[interactible_key]:

@@ -32,4 +32,5 @@
 7/23/23 - made levels lockable- created locked level images and made buttons unclickable if they are locked, added functionality to unlock levels as they
           are completed, added crossfade transitions between every scene and screen change, updated control images to show the camera change command C
 7/24/23 - changed death animations to only play for the character that died, made monkey sprite, made the header update with the current pet in play,
-          created a controls page, made dog sniffing symbol,
+          created a controls page, made dog sniffing symbol
+7/25/23 - merged everyone's code together, corrected multiple bugs and minor fixes
