@@ -208,6 +208,10 @@ class VaseObstacle:
         self.spikes = spikes
         self.velocity = (0, 0)
         self.duration = duration
+        # vase break sound setup using royalty free mixkit
+        break_path = "audio/break.mp3"
+        self.break_sound = pygame.mixer.Sound(break_path)
+        self.break_sound.set_volume(0.1)
     def get_rect(self):
         if self.broken:
             return pygame.rect.Rect(-5, -5, 0, 0)
@@ -225,5 +229,7 @@ class VaseObstacle:
             self.broken -= 1
     def break_vase(self):
         if self.broken == 0:
+            # play vase broken sound
+            self.break_sound.play()
             self.broken = self.duration
             self.spikes.active = False

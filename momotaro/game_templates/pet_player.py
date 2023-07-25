@@ -58,6 +58,11 @@ class Pet:
         self.wing_sound = pygame.mixer.Sound(wing_path)
         self.wing_sound.set_volume(0.05)
 
+        # loading flap sound when bird flies  from royalty free webpage mixkit
+        throw_path = "audio/throw1.mp3"
+        self.throw_sound = pygame.mixer.Sound(throw_path)
+        self.throw_sound.set_volume(0.05)
+
         # BIRD IMAGES ----------------------------------
         self.bird_idle_image = None
         self.right_bird_mvmnt_frames = None
@@ -195,6 +200,8 @@ class Pet:
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
         if keys[pygame.K_PERIOD] and self.throw_frame == 0:
+            # play throw sound
+            self.throw_sound.play()
             self.throw_frame = 15
         if self.velocity[0] > 10:
             self.velocity[0] = 10
