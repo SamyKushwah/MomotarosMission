@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="updated level 1 and some small changes to the tutorial class and the add_tutorial_text function" />
+    <list default="true" id="4d63270c-3d0c-4886-8e8d-49fed6fba0d3" name="Changes" comment="updated worklog">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,13 +74,6 @@
       <workItem from="1689316618344" duration="17810000" />
       <workItem from="1689827945796" duration="8324000" />
       <workItem from="1690011863144" duration="2452000" />
-    </task>
-    <task id="LOCAL-00018" summary="new momotaro attacking form, charge p for longer and stronger attack">
-      <created>1687670681638</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1687670681638</updated>
     </task>
     <task id="LOCAL-00019" summary="new momotaro attacking form, charge p for longer and stronger attack">
       <created>1687671591409</created>
@@ -416,7 +411,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690214332310</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="updated worklog">
+      <created>1690214723606</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1690214723606</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +441,6 @@
     <MESSAGE value="decresed momotaro acceleration and max speed.&#10;fixed bug with walking off platform and instantly dying." />
     <MESSAGE value="pet now dies when crushed" />
     <MESSAGE value="demon now targets the closest one between momotaro and the pet" />
-    <MESSAGE value="updated worklog" />
     <MESSAGE value="added sami's sound effects" />
     <MESSAGE value="small fix cause i pasted it in  wrong" />
     <MESSAGE value="added jessica's level 2, changed it so that character spawn location is determined in each level file." />
@@ -448,11 +449,12 @@
     <MESSAGE value="gates drawn under the platforms now" />
     <MESSAGE value="added jessicas changes" />
     <MESSAGE value="updated level 1 and some small changes to the tutorial class and the add_tutorial_text function" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated level 1 and some small changes to the tutorial class and the add_tutorial_text function" />
+    <MESSAGE value="updated worklog" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated worklog" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/main_py$screen_transition.coverage" NAME="screen_transition Coverage Results" MODIFIED="1689056495888" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/ui_templates" />
-    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690214255698" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/drivers" />
+    <SUITE FILE_PATH="coverage/main_py$main.coverage" NAME="main Coverage Results" MODIFIED="1690250305946" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../shawnshit/MomotarosMission/drivers" />
     <SUITE FILE_PATH="coverage/main_py$level_2.coverage" NAME="level_2 Coverage Results" MODIFIED="1689759631276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/momotaro/scenes/levels" />
     <SUITE FILE_PATH="coverage/main_py$momotaro.coverage" NAME="momotaro Coverage Results" MODIFIED="1687677830043" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/game_templates" />
     <SUITE FILE_PATH="coverage/main_py$win_screen_scene.coverage" NAME="win_screen_scene Coverage Results" MODIFIED="1687686155974" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scenes" />
