@@ -61,6 +61,11 @@ class GameManager:
         # Camera character locking
         self.camera_on_momotaro = True
 
+        # loading growl sound when demon attacks momotaro from royalty free webpage mixkit
+        roar_path = "audio/roar.mp3"
+        self.roar_sound = pygame.mixer.Sound(roar_path)
+        self.roar_sound.set_volume(0.2)
+
     '''
     Purpose: While the GameManager object is running, the main gameplay loop for the corresponding level occurs
     '''
@@ -189,13 +194,11 @@ class GameManager:
         self.momotaro.update_movement()
         self.momotaro.check_collisions(self.level.collidable_list)
         self.momotaro.check_collision_interactible(self.level.interactible_list, self)
-        self.momotaro.check_damage(self.level.demon_list)
         self.momotaro.check_attacking(self.level.demon_list)
 
         self.pet.update_movement()
         self.pet.check_collisions(self.level.collidable_list)
         self.pet.check_collision_interactible(self.level.interactible_list, self)
-        self.pet.check_damage(self.level.demon_list)
 
         #print(self.momotaro.position)
         for demon in self.level.demon_list:
@@ -228,21 +231,6 @@ class GameManager:
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
 
-        # Draw platforms
-        for platform in self.level.platform_list:
-            platform.draw_platform(self.image)
-        for platform in self.level.moving_platform_list:
-            platform.draw_platform(self.image)
-        for text in self.level.tutorial_text_list:
-            text.draw(self.image, self.momotaro.position[0])
-
-        # Draw demons
-        for demon in self.level.demon_list:
-            if demon.health > 0:
-                demon.draw(self.image)
-            else:
-                self.level.demon_list.remove(demon)
-
         # Draw obstacles
         for interactible_key in self.level.interactible_list.keys():
             match interactible_key:
@@ -260,6 +248,24 @@ class GameManager:
                 case "vase":
                     for vase in self.level.interactible_list[interactible_key]:
                         vase.draw(self.image)
+
+        # Draw platforms
+        for platform in self.level.platform_list:
+            platform.draw_platform(self.image)
+        for platform in self.level.moving_platform_list:
+            platform.draw_platform(self.image)
+        for text in self.level.tutorial_text_list:
+            text.draw(self.image, self.momotaro.position[0])
+
+        # Draw demons
+        for demon in self.level.demon_list:
+            if demon.health > 0:
+                demon.draw(self.image)
+            else:
+                self.roar_sound.play()
+                self.level.demon_list.remove(demon)
+
+
 
         # Draw players
         self.momotaro.draw(self.image)
