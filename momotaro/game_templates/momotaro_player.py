@@ -22,7 +22,7 @@ class Momotaro:
         self.charging = False
         self.attacking = False  # True if attack button is released
         self.attack_power = 0.1  # 0 - 1 decimal
-        self.attack_damage = 50
+        self.attack_damage = 75
         self.iframes = 0
 
         self.idle_image = None

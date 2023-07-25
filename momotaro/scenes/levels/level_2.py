@@ -60,11 +60,11 @@ def create_level(my_toolbox):
     level2.add_platform((70, 340), (280, 140), facing_direction="up")       # first section (top)
     level2.add_platform((350, 410), (370, 70),  facing_direction=None)
     level2.add_platform((720, 410), (280, 210),  facing_direction=None)
-    level2.add_platform((480, 590), (240, 30), facing_direction="up")
+    level2.add_platform((480, 590), (250, 30), facing_direction="up")
     level2.add_platform((1000, 340), (280, 420), facing_direction="up")
     level2.add_platform((1280, 480), (750, 70), facing_direction=None)
     level2.add_platform((2030, 410), (250, 140), facing_direction="up")
-    level2.add_platform((1400, 330), (510, 50), facing_direction="up")      # above second water section (top)
+    level2.add_platform((1350, 330), (560, 50), facing_direction="up")      # above second water section (top)
 
     #level2.add_platform((2450, 545), (200, 50), facing_direction="up")      # solo floating platform
 
@@ -92,7 +92,7 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 350 - 50, "torigate", gate_num=2)
 
     # add coins
-    level2.add_obstacle(2350 - 30, 900, "coin")
+    level2.add_obstacle(2350 - 30, 850, "coin")
     level2.add_obstacle(4800, 800, "coin")
     level2.add_obstacle(1930, 300, "coin")
 
