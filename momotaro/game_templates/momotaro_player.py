@@ -350,11 +350,6 @@ class Momotaro:
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
 
-
-
-
-
-
     def check_attacking(self, demon_list):
         if self.charging:
             if self.attack_power >= 1:
@@ -405,7 +400,7 @@ class Momotaro:
                     # add demon noise
                     self.roar_sound.play()
 
-                    self.health -= 5
+                    self.health -= 10
                     #self.death_type = "oni"
 
                     # make ow noise

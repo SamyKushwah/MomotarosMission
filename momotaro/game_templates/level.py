@@ -159,7 +159,7 @@ class Level:
 
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
-        self.spike_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
+        self.spike_img = pygame.image.load("images/ObstacleButtonSprites/spikes.png").convert_alpha()
 
 
 class Platform:
@@ -168,7 +168,8 @@ class Platform:
         self.height = dimensions[1]
         self.x = position[0]
         self.y = position[1]
-        self.image = pygame.surface.Surface(dimensions)
+        self.image = pygame.surface.Surface(dimensions, pygame.SRCALPHA)
+        self.image.fill((0, 0, 0, 0))
         self.velocity = [0, 0]
         self.type = platform_type
         self.active = True
@@ -409,7 +410,7 @@ class Header:
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
-        self.bird = pygame.transform.scale(self.bird, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (60, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
 

@@ -9,6 +9,7 @@ def create_level(my_toolbox):
     level1.load_stone_imgs()
 
     # add tutorial text
+    level1.add_tutorial_text(550, 200, 0, 900, 450, 1080, (100, 100), "Press ESC to view menu options and controls.")
     level1.add_tutorial_text(550,500,0,900,450,1080,(100,100),"Player 1: Use W, A, and D to move around and jump.", font_size=30)
     level1.add_tutorial_text(580,550,0,900,450,1080,(100,100),"Player 2: Use the arrow keys to move around and jump.", font_size=30)
 
@@ -31,7 +32,7 @@ def create_level(my_toolbox):
     # add platforms
     level1.add_platform((400, 800), (300, 50), facing_direction="up")  # platform 1 for coin 1
     level1.add_platform((900, 690), (300, 50), facing_direction="up")  # platform 2 for coin 1
-    level1.add_obstacle(1080, 600, "coin")  # coin 1
+    level1.add_obstacle(1004, 525, "coin")  # coin 1
 
     # gate leading to after the first coin
     level1.add_obstacle(1265, 1000, 'button', fence_initial=(1458, 780), fence_final=(1458, 540), fence_dimensions=(200, 500))
@@ -90,14 +91,14 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(3600, 200, 2600, 4800, 0,400,(100,100), "Demons will charge after you if you get too close.", font_size=25)
     level1.add_tutorial_text(3600, 250, 2600, 4800, 0,400,(100,100), "Player 1 press and hold R to charge up an attack.", font_size=25)
     level1.add_tutorial_text(3600, 300, 2600, 4800, 0,400,(100,100), "The longer you hold, the stronger and longer your attack will be.", font_size=25)
-    level1.add_obstacle(2460, 280, 'coin')
+    level1.add_obstacle(2460, 235, 'coin')
 
     # tutorial text above button to switch cameras
     level1.add_tutorial_text(2500, 200, 2400, 2900, 0,400,(100,100), "Press C to swap the camera focus between players", font_size=25)
 
     # add third coin and oni behind the rightmost gate
     level1.add_demon([4630, 200], (450, 450))
-    level1.add_obstacle(4900, 280, 'coin')
+    level1.add_obstacle(4900, 235, 'coin')
 
 
     # add end goal torigate

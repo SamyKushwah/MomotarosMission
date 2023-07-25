@@ -164,7 +164,7 @@ class ToriObstacle:
 
 class CoinObstacle:
     def __init__(self, x, y):
-        self.coin_image = pygame.transform.scale(pygame.image.load("images/level_select_scene_UI/gold_coin.png").convert_alpha(), (90, 91))
+        self.coin_image = pygame.transform.scale(pygame.image.load("images/level_select_scene_UI/gold_coin.png").convert_alpha(), (92, 91))
         self.x = x
         self.y = y
         self.collected = False
@@ -192,6 +192,10 @@ class VaseObstacle:
         self.spikes = spikes
         self.velocity = (0, 0)
         self.duration = duration
+        # vase break sound setup using royalty free mixkit
+        break_path = "audio/break.mp3"
+        self.break_sound = pygame.mixer.Sound(break_path)
+        self.break_sound.set_volume(0.1)
     def get_rect(self):
         if self.broken:
             return pygame.rect.Rect(-5, -5, 0, 0)
@@ -209,5 +213,7 @@ class VaseObstacle:
             self.broken -= 1
     def break_vase(self):
         if self.broken == 0:
+            # play vase broken sound
+            self.break_sound.play()
             self.broken = self.duration
             self.spikes.active = False

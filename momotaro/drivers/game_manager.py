@@ -117,7 +117,7 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
-                pygame.mixer.pause()
+                # pygame.mixer.pause()
                 self.lose_sound.play()
 
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
@@ -227,6 +227,7 @@ class GameManager:
         # Main Background
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
+
         # Draw obstacles
         for interactible_key in self.level.interactible_list.keys():
             match interactible_key:
@@ -254,12 +255,14 @@ class GameManager:
         for text in self.level.tutorial_text_list:
             text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
                       self.pet.position[1])
+
         # Draw demons
         for demon in self.level.demon_list:
             if demon.health > 0:
                 demon.draw(self.image)
             else:
                 self.level.demon_list.remove(demon)
+
 
 
         # Draw players
@@ -375,21 +378,21 @@ class GameManager:
                             vase.draw(self.image)
 
             # Draw platforms
-            for platform in self.level.platform_list:
-                platform.draw_platform(self.image)
-            for platform in self.level.moving_platform_list:
-                platform.draw_platform(self.image)
-
+                for platform in self.level.platform_list:
+                    platform.draw_platform(self.image)
+                for platform in self.level.moving_platform_list:
+                    platform.draw_platform(self.image)
+                # Draw text
+                for text in self.level.tutorial_text_list:
+                    text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
+                              self.pet.position[0], self.pet.position[1])
 
             # Draw demons
-            for demon in self.level.demon_list:
-                if demon.health > 0:
-                    demon.draw(self.image)
-                else:
-                    self.level.demon_list.remove(demon)
-
-
-
+                for demon in self.level.demon_list:
+                    if demon.health > 0:
+                        demon.draw(self.image)
+                    else:
+                        self.level.demon_list.remove(demon)
 
             view_surface = pygame.surface.Surface((1920, 1080))
 
