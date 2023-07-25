@@ -28,7 +28,7 @@ def create_level(my_toolbox):
     level2.add_platform((4600, 1080 - 71), (430, 70), platform_type="water")   # water section 3 (bottom)
     level2.add_platform((2500, 1080 - 71), (1150, 70), platform_type="water")
 
-    level2.add_spikes((2300, 1080 - 70), (150, 100), vase_position=(2800 + 17, 485), duration=300)
+    level2.add_spikes((2300, 1080-100), (150, 100), vase_position=(2800 + 17, 485), duration=600)
     level2.add_platform((2800, 550), (70, 50), facing_direction="up")
 
     level2.add_platform((350, 340 + 20), (650, 70), platform_type="water")          # water section 1 (top)
