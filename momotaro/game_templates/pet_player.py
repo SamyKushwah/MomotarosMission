@@ -665,7 +665,7 @@ class Pet:
                 surface.blit(self.dog_death_image, self.position)
             case "monkey":
                 if self.standing_on.type == "water":
-                    surface.blit(self.monkey_death_image, (self.position[0], self.position[1]+30))
+                    surface.blit(self.monkey_death_image, (self.position[0], self.position[1] + 30))
                 else:
                     surface.blit(self.monkey_death_image, self.position)
 

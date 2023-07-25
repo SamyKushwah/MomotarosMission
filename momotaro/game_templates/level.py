@@ -371,7 +371,6 @@ class MovingPlatform(Platform):
 
 class Header:
     def __init__(self, level_type):
-        # prev_pet = "bird"
         # load the images
         self.health_front = pygame.image.load("images/game_ui/HealthBarFront.png").convert_alpha()
         if level_type == "mountains":
