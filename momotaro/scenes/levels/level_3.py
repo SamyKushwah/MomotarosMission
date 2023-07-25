@@ -109,9 +109,9 @@ def create_level(my_toolbox):
 
     # add demons
     level3.add_demon([1610, 300], (300, 100))
-    level3.add_demon([2400, 400], (300, 100))
+    level3.add_demon([2350, 400], (300, 100))
     level3.add_demon([2050, 700], (300, 100))
-    level3.add_demon([3900, 400], (300, 100))
+    level3.add_demon([3900, 200], (300, 100))
 
     # add tori gate obstacle
     level3.add_obstacle(4550, 300, "torigate", gate_num=1)
@@ -122,7 +122,8 @@ def create_level(my_toolbox):
     level3.add_obstacle(2060, 300, "coin")
     level3.add_obstacle(1550, 650, "coin")
 
-    momotaro = momotaro_player.Momotaro([200, 300])
+    #momotaro = momotaro_player.Momotaro([200, 300])
+    momotaro = momotaro_player.Momotaro([200, 900])
     pet = pet_player.Pet([200, 900])
 
     return level3, momotaro, pet

@@ -85,8 +85,8 @@ def create_level(my_toolbox):
 
     # add demons
     level2.add_demon([1655, 200], (300, 100))
-    level2.add_demon([2775, 1000], (700, 300))
-    level2.add_demon([3900, 350], (300, 100))
+    #level2.add_demon([2775, 1000], (700, 300))
+    level2.add_demon([3900, 200], (300, 100))
 
     # add tori gate obstacle
     level2.add_obstacle(3950, 350 - 50, "torigate", gate_num=1)

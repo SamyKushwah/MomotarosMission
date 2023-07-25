@@ -209,16 +209,15 @@ class Demon:
                     self.standing = True
                     self.standing_on = collidable
                 # Try to resolve getting pushed into a platform by teleporting up and out the platform
+                elif abs(momotaro_rect.bottom - collidable_rect.top) < pixel_margin and not self.standing and \
+                        self.velocity[1] >= 0:
+                    momotaro_rect.bottom = collidable_rect.top
+                    self.velocity[1] = 0
+                    self.standing = True
+                    self.standing_on = collidable
                 elif collidable_rect.top < momotaro_rect.centery < collidable_rect.bottom:
-                    if self.velocity[1] > 0:
-                        # print("Clipping Warning! Teleporting up!")
-                        momotaro_rect.bottom = collidable_rect.top
-                        self.velocity[1] = 0
-                        self.standing = True
-                    else:
-                        # print("Clipping Warning! Teleporting down!")
-                        momotaro_rect.top = collidable_rect.bottom
-                        self.velocity[1] = 5
+                    self.standing = True
+                    self.standing_on = collidable
 
         # Make standing_on = None if in the air
         if self.standing_on is not None:
@@ -226,6 +225,11 @@ class Demon:
                                          (self.hitbox[0] + 10, self.hitbox[1] + 10))
             if not test_rect.colliderect(self.standing_on.get_rect()):
                 self.standing_on = None
+
+        if self.standing and self.standing_on != None and self.position[
+                    1] + self.get_rect().height // 2 > self.standing_on.get_rect().top:
+            self.health = 0
+
 
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y

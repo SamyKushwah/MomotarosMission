@@ -88,7 +88,7 @@ def create_level(my_toolbox):
     level1.add_obstacle(2500, 390, "button", fence_initial=(4230, 200), fence_final=(4230, -20), fence_dimensions=(100, 400))
 
     # add demon and second coin
-    level1.add_demon([3300, 380], (500,500))
+    level1.add_demon([3300, 250], (500,500))
     level1.add_tutorial_text(3600, 200, 2600, 4800, 0,400,(100,100), "Demons will charge after you if you get too close.", font_size=25)
     level1.add_tutorial_text(3600, 250, 2600, 4800, 0,400,(100,100), "Player 1 press and hold R to charge up an attack.", font_size=25)
     level1.add_tutorial_text(3600, 300, 2600, 4800, 0,400,(100,100), "The longer you hold, the stronger and longer your attack will be.", font_size=25)
