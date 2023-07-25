@@ -50,11 +50,11 @@ def create_level(my_toolbox):
     level2.add_moving_platform((3300, 445), (250, 50), 2, (3300, 900), facing_direction="up")
 
     # add regular platforms
-    level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
-    level2.add_platform((1750, 480), (100, 100), facing_direction="down")
+    # level2.add_platform((1450, 480), (100, 400), facing_direction="down") #bird parkour
+    # level2.add_platform((1750, 480), (100, 100), facing_direction="down")
 
-    level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
-    level2.add_platform((1750, 650), (100, 850), facing_direction="up")
+    # level2.add_platform((1450, 950), (100, 450), facing_direction="up")  # bird parkour
+    # level2.add_platform((1750, 650), (100, 850), facing_direction="up")
 
 
     level2.add_platform((70, 340), (280, 140), facing_direction="up")       # first section (top)

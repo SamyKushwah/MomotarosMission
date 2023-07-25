@@ -10,12 +10,12 @@ def create_level(my_toolbox):
 
     # add tutorial text
     level1.add_tutorial_text(550, 200, 0, 900, 450, 1080, (100, 100), "Press ESC to view menu options and controls.")
-    level1.add_tutorial_text(550,500,0,900,450,1080,(100,100),"Player 1: Use W, A, and D to move around and jump.", font_size=30)
-    level1.add_tutorial_text(580,550,0,900,450,1080,(100,100),"Player 2: Use the arrow keys to move around and jump.", font_size=30)
+    level1.add_tutorial_text(520,500,0,900,450,1080,(100,100),"Player 1: Use W, A, and D to move around and jump.", font_size=25)
+    level1.add_tutorial_text(550,550,0,900,450,1080,(100,100),"Player 2: Use the arrow keys to move around and jump.", font_size=25)
 
-    level1.add_tutorial_text(1030,400,680,1200,450,1080,(100,100),"Only Player 1 can collect coins.", font_size=30)
+    level1.add_tutorial_text(1030,400,680,1200,450,1080,(100,100),"Only Player 1 can collect coins.", font_size=25)
 
-    level1.add_tutorial_text(1200,850,1100,1500,450,1080,(100,100),"Stand on the button to raise the gate.", font_size=30)
+    level1.add_tutorial_text(1050,850,1100,1500,450,1080,(100,100),"Stand on the button to raise the gate.", font_size=25)
 
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")  # left wall
@@ -47,8 +47,9 @@ def create_level(my_toolbox):
     level1.add_platform((1840, 605), (150, 50))
     level1.add_platform((1990, 410), (150, 300))
 
-    level1.add_tutorial_text(1750, 700, 1500, 2100, 500,1080,dimensions=(100, 100), text="Bird can jump multiple times.", font_size=23)
-    level1.add_tutorial_text(1780, 800, 1500, 2100, 500,1080,(100, 100), "Use Bird to reach high platforms.", font_size=23)
+    level1.add_tutorial_text(1773, 700, 1500, 2100, 500,1080,dimensions=(100, 100), text="Bird can jump multiple times.", font_size=25)
+    level1.add_tutorial_text(1780, 740, 1500, 2100, 500,1080,(100, 100), "Use Bird to reach high", font_size=25)
+    level1.add_tutorial_text(1780, 780, 1500, 2100, 500, 1080, (100, 100), "platforms.", font_size=25)
 
     # third gate, must use dog
     level1.add_obstacle(2630, 1000, "dog_button", fence_initial=(2762, 820), fence_final=(2762, 540),
@@ -57,17 +58,17 @@ def create_level(my_toolbox):
     # platforms blocking off the button and gate top
     level1.add_platform((2690, 410), (150, 300))
 
-    level1.add_tutorial_text(2300, 650, 2200, 2800, 500,1080,(100, 100), "Player 2:", font_size=25)
-    level1.add_tutorial_text(2350, 700, 2200, 2800, 500,1080,(100, 100), "Press / to swap to Dog.", font_size=25)
-    level1.add_tutorial_text(2415, 750, 2200, 2800, 500,1080,(100, 100), "Use . as Dog to sniff for hidden buttons.", font_size=25)
-
+    level1.add_tutorial_text(2415, 550, 2200, 2800, 500,1080,(100, 100), "Player 2:", font_size=25)
+    level1.add_tutorial_text(2415, 600, 2200, 2800, 500,1080,(100, 100), "Press / to swap to Dog.", font_size=25)
+    level1.add_tutorial_text(2415, 650, 2200, 2800, 500,1080,(100, 100), "Use . as Dog to sniff for hidden", font_size=25)
+    level1.add_tutorial_text(2415, 700, 2200, 2800, 500, 1080, (100, 100), "buttons.", font_size=25)
     # monkey section (NOT IMPLEMENTED YET)
     level1.add_spikes((3300, 1000), (400, 100), vase_position=(3200, 950), duration=500)
 
     level1.add_tutorial_text(3300, 650, 2800, 3500, 500, 1080, (100, 100), "                    Player 2:", font_size=25)
     level1.add_tutorial_text(3300, 700, 2800, 3500, 500, 1080, (100, 100), "             Press / to swap to Monkey.", font_size=25)
     level1.add_tutorial_text(3300, 750, 2800, 3500, 500, 1080, (100, 100), "Use . as Monkey to break vase and momentarily hide spikes.",
-                             font_size=25)
+                             font_size=20)
     # moving platform and water section
     level1.add_platform((3930, 1015), (700, 70), platform_type="water")
     level1.add_moving_platform(position=(3900, 900), dimensions=(200, 50), max_speed=3, target=(4500, 900))
@@ -97,7 +98,6 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(2500, 200, 2400, 2900, 0,400,(100,100), "Press C to swap the camera focus between players", font_size=25)
 
     # add third coin and oni behind the rightmost gate
-    level1.add_demon([4630, 200], (450, 450))
     level1.add_obstacle(4900, 235, 'coin')
 
 
@@ -108,11 +108,11 @@ def create_level(my_toolbox):
                              "       to complete the level.", font_size=20)
 
     level1.add_platform((1560, 400), (2200,50), facing_direction="up")
-    level1.add_obstacle(1650, 350 - 50, "torigate", gate_num=1) # end of the level marker
-    level1.add_obstacle(1800, 350 - 50, "torigate", gate_num=2)
+    # level1.add_obstacle(1650, 350 - 50, "torigate", gate_num=1) # end of the level marker
+    # level1.add_obstacle(1800, 350 - 50, "torigate", gate_num=2)
 
-    # level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
-    # level1.add_obstacle(700, 950, "torigate", gate_num=2)
+    level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
+    level1.add_obstacle(700, 950, "torigate", gate_num=2)
 
 
     momotaro = momotaro_player.Momotaro([300, 300])
