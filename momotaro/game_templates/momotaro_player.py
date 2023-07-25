@@ -403,7 +403,7 @@ class Momotaro:
                     # add demon noise
                     self.roar_sound.play()
 
-                    self.health -= 5
+                    self.health -= 10
                     #self.death_type = "oni"
 
                     # make ow noise

@@ -643,7 +643,7 @@ class Pet:
                     # add demon noise
                     self.roar_sound.play()
 
-                    self.health -= 5
+                    self.health -= 10
                     momotaro_rect = self.get_rect()
                     collidable_rect = demon.get_rect()
                     self.iframes = 20
