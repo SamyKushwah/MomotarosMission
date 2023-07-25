@@ -70,6 +70,7 @@ class GameManager:
         # run event handling for the level until lvl_complete == True or broken out of
         transition = True
         while not self.level_complete:
+            print(self.pet.position)
             # Poll events/user inputs
             events = pygame.event.get()
             for event in events:

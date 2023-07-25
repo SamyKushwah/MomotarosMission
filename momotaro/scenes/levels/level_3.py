@@ -30,7 +30,7 @@ def create_level(my_toolbox):
     level3.add_moving_platform((-2000, 0), (2000, 800), 0.75, (0, 0), facing_direction="up")
     #over water at top for momotaro
     #level3.add_moving_platform((2750, 350), (100, 35), 2, (3150, 350), facing_direction="up")
-    level3.add_moving_platform((3700, 350), (100, 35), 2, (4100, 350), facing_direction="up")
+    #level3.add_moving_platform((3700, 350), (100, 35), 2, (4100, 350), facing_direction="up")
 
     # add regular platforms
     level3.add_platform((50, 750), (600, 50), facing_direction="up")
@@ -45,14 +45,12 @@ def create_level(my_toolbox):
 
     level3.add_platform((2000, 70), (50, 450 + 50 + 330), facing_direction=None)
     level3.add_platform((2450, 400), (50, 450 + 50), facing_direction=None)
-    level3.add_platform((2450 - 150, 700), (150, 50), facing_direction="up")
     level3.add_platform((2050, 800), (150, 50), facing_direction="up")
-    level3.add_platform((2050, 600), (150, 50), facing_direction="up")
-    level3.add_platform((2450 - 150, 450), (150, 50), facing_direction="up")
+    level3.add_platform((2450 - 150, 575), (150, 50), facing_direction="up")
     level3.add_platform((2050, 400), (150, 50), facing_direction="up")
-    level3.add_platform((2450, 400), (1100, 70), facing_direction="up")
-    level3.add_platform((3250, 400), (450, 70), facing_direction="up")
-    level3.add_platform((4200, 400), (600, 70), facing_direction="up")
+    level3.add_platform((2450, 400), (2400, 70), facing_direction="up")
+    #level3.add_platform((3250, 400), (450, 70), facing_direction="up")
+    #level3.add_platform((4200, 400), (600, 70), facing_direction="up")
     #level3.add_platform((2450, 400), (2450, 70), facing_direction="up")
 
 
@@ -60,7 +58,7 @@ def create_level(my_toolbox):
     level3.add_platform((2750 + 750 - 200, 675), (200, 35), facing_direction="up")
     level3.add_platform((3500, 400), (70, 450 + 20), facing_direction="up")
 
-    level3.add_platform((3850, 850), (300, 50), facing_direction="up")
+    #level3.add_platform((3850, 850), (300, 50), facing_direction="up")
     level3.add_platform((4300, 450), (100, 375), facing_direction=None)
 
     level3.add_platform((4700, 400), (100, 500), facing_direction="up")
@@ -81,18 +79,23 @@ def create_level(my_toolbox):
     level3.add_platform((3700, 1125 - 71), (600, 25), facing_direction=None)
     #level3.add_platform((2750, 419), (500, 25), platform_type="water")
     #level3.add_platform((2750, 444), (500, 25), facing_direction=None)
-    level3.add_platform((3700, 419), (500, 25), platform_type="water")
+    #level3.add_platform((3700, 419), (500, 25), platform_type="water")
     level3.add_platform((3700, 444), (500, 25), facing_direction=None)
 
     # add button/gate obstacles
     level3.add_obstacle(570, 992, "button", fence_initial=(700, 150),  fence_final=(700, 0), fence_dimensions=(100, 300))
     level3.add_obstacle(1270, 992, "button", fence_initial=(1150, 600),  fence_final=(1150, 450), fence_dimensions=(100, 300))
     level3.add_obstacle(920, 992, "dog_button", fence_initial=(1750, 150),  fence_final=(1750, 0), fence_dimensions=(100, 300), dog_y=900)# first top gate
-    level3.add_obstacle(3300, 395, "button", fence_initial=(2800 - 30, 925), fence_final=(2800 - 30, 700),
+    level3.add_obstacle(3600, 395, "button", fence_initial=(2800 , 925), fence_final=(2800 , 700),
                         fence_dimensions=(70, 300*7/10))
-    level3.add_obstacle(3650, 395, "button", fence_initial=(3850, 850), fence_final=(3850, 1000),
+    level3.add_obstacle(4050, 395, "button", fence_initial=(3950, 750), fence_final=(3950, 600),
                         fence_dimensions=(100, 300))
-    level3.add_obstacle(4400, 395, "button", fence_initial=(4350, 900),
+    # add surrounding platforms for walls
+    level3.add_platform(position=(3900, 470), dimensions=(110, 300), facing_direction="down")
+    level3.add_platform(position=(3900,900), dimensions=(110, 200), facing_direction="up")
+
+
+    level3.add_obstacle(4350, 395, "button", fence_initial=(4350, 900),
                         fence_final=(4350, 600),
                         fence_dimensions=(100, 300))
     level3.add_obstacle(3400, 670, "button", fence_initial=(3500, 250),
@@ -105,22 +108,21 @@ def create_level(my_toolbox):
     #level3.add_obstacle(3400, 670, 'dog_button', fence_initial=(3300, 290), fence_final=(3300, 590), fence_dimensions=(100, 300), dog_y=550)
 
     # add demons
-    level3.add_demon([1655, 300], (300, 100))
+    level3.add_demon([1610, 300], (300, 100))
     level3.add_demon([2400, 400], (300, 100))
-    level3.add_demon([2050, 500], (300, 100))
     level3.add_demon([2050, 700], (300, 100))
-    level3.add_demon([3300, 400], (300, 100))
+    level3.add_demon([3900, 400], (300, 100))
 
     # add tori gate obstacle
     level3.add_obstacle(4550, 300, "torigate", gate_num=1)
     level3.add_obstacle(4700, 300, "torigate", gate_num=2)
 
     # add coins
-    level3.add_obstacle(3775, 370, "coin")
-    level3.add_obstacle(4300, 550, "coin")
-    level3.add_obstacle(4815, 850, "coin")
+    level3.add_obstacle(4200, 280, "coin")
+    level3.add_obstacle(2060, 300, "coin")
+    level3.add_obstacle(1550, 650, "coin")
 
-    momotaro = momotaro_player.Momotaro([2500, 300])
-    pet = pet_player.Pet([2500, 900])
+    momotaro = momotaro_player.Momotaro([200, 300])
+    pet = pet_player.Pet([200, 900])
 
     return level3, momotaro, pet

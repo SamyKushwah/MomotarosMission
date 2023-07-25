@@ -342,7 +342,7 @@ class Momotaro:
                     gate_center_x = momo_gate.get_rect().centerx
                     gate_center_y = momo_gate.get_rect().centery
 
-                    margin = 80
+                    margin = 60
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
                         momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
