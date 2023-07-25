@@ -7,7 +7,6 @@ import sys
 #from pygame import mixer
 #pygame.mixer.init()
 
-
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
             interactions with the environment provided by the level.
@@ -31,19 +30,16 @@ class GameManager:
         self.return_control = ""
         self.return_st = ""
         self.pause = False
+
         match level:
             case "level_1":
                 self.level, self.momotaro, self.pet = level_1.create_level(my_toolbox)
-                self.controls1 = pygame.image.load("images/game_ui/controls1.png").convert_alpha()
 
             case "level_2":
                 self.level, self.momotaro, self.pet = level_2.create_level(my_toolbox)
-                self.controls2 = pygame.image.load("images/game_ui/controls2.png").convert_alpha()
-                self.controls2 = pygame.transform.scale(self.controls2, (250, 160))
 
             case "level_3":
                 self.level, self.momotaro, self.pet = level_3.create_level(my_toolbox)
-                self.controls3 = pygame.image.load("images/game_ui/controls3.png").convert_alpha()
 
         self.image = pygame.surface.Surface((self.level.width, self.level.height))
 
@@ -87,13 +83,13 @@ class GameManager:
                     if event.key == pygame.K_ESCAPE:
                         return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
                         # going to control screen
+
                         while return_st == "controls":
                             control_st, control_screen = control_scene.run(self.my_toolbox, pause_screen)
                             if control_st == "quit":
                                 return control_st, control_screen
                             else:
-                                return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name,
-                                                                                 control_screen)
+                                return_st, pause_screen = pause_screen_scene.run(self.my_toolbox, self.level_name, control_screen)
 
                         if return_st == "level_selector" or return_st == self.level_name:  # break out of running level
                             return return_st, pause_screen
@@ -105,7 +101,7 @@ class GameManager:
                         self.camera_on_momotaro = not self.camera_on_momotaro
 
                     # both players at their gates and either pressed up to end the game
-                    if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
+                    if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
                         pygame.mixer.pause()
@@ -113,7 +109,7 @@ class GameManager:
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
 
-                        if win_return == "level_selector" or win_return == self.level_name or win_return == "quit":
+                        if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
                             # Poll the win game scene next scene
@@ -232,16 +228,6 @@ class GameManager:
         self.image.blit(self.background, (positional, 100))
         self.image.blit(self.background, (1920 + positional, 100))
 
-        if self.level_name == "level_1":
-            self.image.blit(self.controls1, (120, 160))
-
-        if self.level_name == "level_2":
-            self.image.blit(self.controls2, (100, 150))
-
-        if self.level_name == "level_3":
-            self.image.blit(self.controls3, (120, 160))
-
-
         # Draw platforms
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
@@ -298,7 +284,8 @@ class GameManager:
         view_surface.blit(self.image, (special_x, 0))
 
         # Draw Header
-        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected, self.pet.pet)
+        self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
+                                      self.pet.pet)
 
         # do the screen transition
         if transition:
@@ -342,8 +329,10 @@ class GameManager:
         running = True
         while running:
 
+            # self.image.fill((70, 70, 180))
             if self.momotaro.health <= 0:
                 self.camera_on_momotaro = True
+
             else:
                 self.camera_on_momotaro = False
             # Draw Background
@@ -361,18 +350,10 @@ class GameManager:
                     positional = (self.level.width - 960) - ((self.level.width - 960) / 200) - 960
                 else:
                     positional = self.pet.get_rect().centerx - (self.pet.get_rect().centerx / 200) - 960
+
             # Main Background
             self.image.blit(self.background, (positional, 100))
             self.image.blit(self.background, (1920 + positional, 100))
-
-            if self.level_name == "level_1":
-                self.image.blit(self.controls1, (120, 160))
-
-            if self.level_name == "level_2":
-                self.image.blit(self.controls2, (100, 150))
-
-            if self.level_name == "level_3":
-                self.image.blit(self.controls3, (120, 160))
 
             # Draw platforms
             for platform in self.level.platform_list:
@@ -463,6 +444,5 @@ class GameManager:
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
 
-            # self.pause_btn.draw(view_surface, (80, 65))
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()

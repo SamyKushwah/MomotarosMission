@@ -1,6 +1,6 @@
-import copy
-import random
 import pygame
+import random
+import copy
 from pygame import mixer
 mixer.init()
 
@@ -38,17 +38,17 @@ class Pet:
         self.roar_sound = pygame.mixer.Sound(roar_path)
         self.roar_sound.set_volume(0.15)
 
-        # loading tweet sound when pet changes to bird from royalty free webpage mixkit
+        # loading tweet sound when pet changes to bird from toyalty free webpage mixkit
         bird_path = "audio/bird.mp3"
         self.bird_sound = pygame.mixer.Sound(bird_path)
         self.bird_sound.set_volume(0.1)
 
-        # loading bark sound when pet changes to dog from royalty free webpage mixkit
+        # loading bark sound when pet changes to dog from toyalty free webpage mixkit
         dog_path = "audio/dog.mp3"
         self.dog_sound = pygame.mixer.Sound(dog_path)
         self.dog_sound.set_volume(0.1)
 
-        # loading hoot sound when pet changes to monkey from royalty free webpage mixkit
+        # loading hoot sound when pet changes to monkey from toyalty free webpage mixkit
         monkey_path = "audio/monkey.mp3"
         self.monkey_sound = pygame.mixer.Sound(monkey_path)
         self.monkey_sound.set_volume(0.1)
@@ -57,7 +57,7 @@ class Pet:
         wing_path = "audio/wing_flap.mp3"
         self.wing_sound = pygame.mixer.Sound(wing_path)
         self.wing_sound.set_volume(0.05)
-        
+
         # BIRD IMAGES ----------------------------------
         self.bird_idle_image = None
         self.right_bird_mvmnt_frames = None
@@ -85,8 +85,6 @@ class Pet:
 
         self.bird_death_image = pygame.transform.scale(
             pygame.image.load("images/player2/bird_death.png").convert_alpha(), (50, 60))
-
-
         ##################
 
         # DOG IMAGES -------------------
@@ -98,21 +96,26 @@ class Pet:
             pygame.transform.scale(pygame.image.load("images/player2/dog_walk_left_1.png").convert_alpha(), (60, 65)),
             pygame.transform.scale(pygame.image.load("images/player2/dog_walk_left_2.png").convert_alpha(), (60, 65))]
 
-        self.dog_idle_image_left = pygame.transform.scale(pygame.image.load("images/player2/dog_idle_left.png").convert_alpha(), (60, 65))
-        self.dog_idle_image_right = pygame.transform.scale(pygame.image.load("images/player2/dog_idle_right.png").convert_alpha(), (60, 65))
-
+        self.dog_idle_image_left = pygame.transform.scale(
+            pygame.image.load("images/player2/dog_idle_left.png").convert_alpha(), (60, 65))
+        self.dog_idle_image_right = pygame.transform.scale(
+            pygame.image.load("images/player2/dog_idle_right.png").convert_alpha(), (60, 65))
 
         self.dog_hurt_left_image = pygame.transform.rotate(self.right_dog_mvmnt_frames[0], 45)
         self.dog_hurt_right_image = pygame.transform.rotate(self.left_dog_mvmnt_frames[0], 45)
 
         # SNIFFING
         self.right_dog_sniffing_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_right_1.png").convert_alpha(), (60, 65)),
-            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_right_2.png").convert_alpha(), (60, 65))]
+            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_right_1.png").convert_alpha(),
+                                   (60, 65)),
+            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_right_2.png").convert_alpha(),
+                                   (60, 65))]
 
         self.left_dog_sniffing_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_left_1.png").convert_alpha(), (60, 65)),
-            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_left_2.png").convert_alpha(), (60, 65))]
+            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_left_1.png").convert_alpha(),
+                                   (60, 65)),
+            pygame.transform.scale(pygame.image.load("images/player2/dog_sniffing_walk_left_2.png").convert_alpha(),
+                                   (60, 65))]
 
         self.dog_sniffing_idle_image_left = pygame.transform.scale(
             pygame.image.load("images/player2/dog_sniffing_idle_left.png").convert_alpha(), (60, 65))
@@ -121,6 +124,7 @@ class Pet:
 
         self.dog_death_image = pygame.transform.scale(
             pygame.image.load("images/player2/dog_death.png").convert_alpha(), (60, 65))
+
         ##################
 
         # MONKEY IMAGES ----------------------------------
@@ -129,11 +133,12 @@ class Pet:
             pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_2.png").convert_alpha(), (40, 61))]
 
         self.left_monkey_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(), (40, 61)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(),(40, 61)),
             pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_2.png").convert_alpha(), (40, 61))]
 
         self.monkey_idle_image_left = pygame.transform.scale(
             pygame.image.load("images/player2/monkey_idle_left.png").convert_alpha(), (40, 61))
+
         self.monkey_idle_image_right = pygame.transform.scale(
             pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha(), (40, 61))
 
@@ -141,19 +146,16 @@ class Pet:
             pygame.image.load("images/player2/monkey_death.png").convert_alpha(), (61, 40))
 
         self.monkey_hurt_left_image = pygame.transform.rotate(self.right_monkey_mvmnt_frames[0], 45)
+
         self.monkey_hurt_right_image = pygame.transform.rotate(self.left_monkey_mvmnt_frames[0], 45)
 
         self.right_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(),
-                                   (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(),
-                                   (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(), (40, 61)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(), (40, 61))]
 
         self.left_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(),
-                                   (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(),
-                                   (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(), (40, 61)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(), (40, 61))]
         #####################
 
         self.cloud_image = pygame.transform.scale(
@@ -163,11 +165,9 @@ class Pet:
     def update_monkey_movement(self):
         if not self.standing:
             self.velocity[1] += self.gravity
-
         if self.standing_on is not None:
             self.external_forces[0] += round(self.standing_on.velocity[0])
             self.external_forces[1] += round(self.standing_on.velocity[1])
-
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
             # add walking sound
@@ -188,31 +188,25 @@ class Pet:
             self.velocity[0] = float(self.velocity[0]) - (self.velocity[0] * 0.2)
             if abs(self.velocity[0]) < 1:
                 self.velocity[0] = 0
-
         if keys[pygame.K_UP]:
             # add sound of jumping here
             if self.standing:
                 self.velocity[1] = -16 + (self.external_forces[1] / 2)
                 self.velocity[0] += self.external_forces[0]
                 self.standing = False
-
         if keys[pygame.K_PERIOD] and self.throw_frame == 0:
             self.throw_frame = 15
-
         if self.velocity[0] > 10:
             self.velocity[0] = 10
         elif self.velocity[0] < -10:
             self.velocity[0] = -10
-
         if self.digging:
             if self.velocity[0] > 3:
                 self.velocity[0] = 3
             elif self.velocity[0] < -3:
                 self.velocity[0] = -3
-
         self.position[0] += self.velocity[0] + self.external_forces[0]
         self.position[1] += self.velocity[1] + self.external_forces[1]
-
         if self.throw_frame == 10:
             match self.last_direction:
                 case "left":
@@ -359,7 +353,7 @@ class Pet:
                         self.monkey_sound.stop()
                         self.dog_sound.play()
                     case "monkey":
-                    # stop previous pet sounds and play monkey
+                        # stop previous pet sounds and play monkey
                         self.dog_sound.stop()
                         self.bird_sound.stop()
                         self.monkey_sound.play()
@@ -485,7 +479,6 @@ class Pet:
                     case "left":
                         self.active_image = self.left_flying
 
-
         surface.blit(self.active_image, self.position)
 
     def draw_dog(self, surface):
@@ -545,12 +538,9 @@ class Pet:
             animation_delay = 6
         else:
             animation_delay = 4
-
         index = round(float(self.frame_index) / float(animation_delay))
-
         if index > 1:
             index = 1
-
         match self.moving_direction:
             case "idle":
                 match self.last_direction:
@@ -566,10 +556,8 @@ class Pet:
                 self.active_image = self.left_monkey_mvmnt_frames[index]
                 if self.standing:
                     self.frame_index += 1
-
         if self.frame_index >= animation_delay:
             self.frame_index = 0
-
         if self.throw_frame > 8:
             match self.last_direction:
                 case "left":
@@ -582,7 +570,6 @@ class Pet:
                     self.active_image = self.left_monkey_throw_frames[1]
                 case "right":
                     self.active_image = self.right_monkey_throw_frames[1]
-
         surface.blit(self.active_image, self.position)
 
     def draw(self, surface):
@@ -595,11 +582,11 @@ class Pet:
                 self.draw_monkey(surface)
         for peach in self.peaches:
             peach.draw(surface)
-
         if self.change_frames > 0:
             temp_cloud = pygame.transform.rotate(self.cloud_image.copy(), self.rotator)
             temp_cloud.set_alpha(self.change_frames * 10)
-            surface.blit(temp_cloud, (self.get_rect().x - (temp_cloud.get_width() / 2) + 10, self.get_rect().y - (temp_cloud.get_height() / 3)))
+            surface.blit(temp_cloud, (
+            self.get_rect().x - (temp_cloud.get_width() / 2) + 10, self.get_rect().y - (temp_cloud.get_height() / 3)))
             self.rotator += 10
 
     def get_rect(self):
@@ -638,9 +625,9 @@ class Pet:
 
                     margin = 80
                     if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
-                        pet_gate.set_pushed(True)
+                        pet_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        pet_gate.set_pushed(False)
+                        pet_gate.pushed = False
 
     def check_damage(self, demon_list):
         if self.iframes <= 0:
@@ -669,11 +656,11 @@ class Pet:
             case "dog":
                 surface.blit(self.dog_death_image, self.position)
             case "monkey":
+
                 surface.blit(self.monkey_death_image, self.position)
 
     def delete_peach(self, peach):
         self.peaches.remove(peach)
-
 
 class Peach:
     def __init__(self, position, velocity, owner):
@@ -726,4 +713,3 @@ class Peach:
             surface.blit(self.explode_2, self.peach_position)
         elif self.exploding <= 6:
             surface.blit(self.explode_3, self.peach_position)
-

@@ -1,9 +1,7 @@
-import copy
-
 import pygame
 import math
 
-from game_templates import demon, obstacles
+from game_templates import demon, obstacles, pet_player
 
 from ui_templates import tutorial
 
@@ -21,13 +19,14 @@ class Level:
         self.demon_list = []
         self.spikes_list = []
         self.type = background
+        self.pet_image = None
         if background == "mountains":
             self.background = pygame.transform.scale(
                 pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
             self.header = Header("mountains")
         elif background == "cave":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 1080))
+                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 915))
             self.header = Header("cave")
         elif background == "bamboo":
             self.background = pygame.transform.scale(
@@ -38,13 +37,12 @@ class Level:
         self.water_img = None
         self.spike_img = None
 
-    def add_spikes(self, position, dimensions, vase_position, facing_direction = "all", corners = False, duration = 100):
-        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, self.spike_img, "spikes", facing_direction,
-                                 corners)
+    def add_spikes(self, position, dimensions, vase_position, facing_direction="all", corners=False, duration=100):
+        temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, self.spike_img, "spikes",
+                                 facing_direction, corners)
         self.platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
-        self.add_obstacle(vase_position[0], vase_position[1], "spike_vase", spikes=temp_platform, duration = duration)
-
+        self.add_obstacle(vase_position[0], vase_position[1], "spike_vase", spikes=temp_platform, duration=duration)
 
     def add_platform(self, position, dimensions, platform_type="stone", facing_direction="all", corners=False):
         temp_platform = Platform(position, dimensions, self.stone_imgs, self.water_img, self.spike_img, platform_type, facing_direction,
@@ -56,9 +54,7 @@ class Level:
                             facing_direction="all",
                             corners=False):
         temp_platform = MovingPlatform(position, dimensions, max_speed, target, self.stone_imgs, self.water_img, self.spike_img,
-                                       platform_type, facing_direction,
-                                       corners)
-        # print("Adding platform", temp_platform.get_rect())
+                                       platform_type, facing_direction, corners)
         self.moving_platform_list.append(temp_platform)
         self.collidable_list.append(temp_platform)
 
@@ -66,7 +62,7 @@ class Level:
         temp_demon = demon.Demon(spawn_position, detection_range)
         self.demon_list.append(temp_demon)
 
-    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None, spikes=None, duration = 100, dog_y=None):
+    def add_obstacle(self, x, y, type, fence_initial=None, fence_final=None, fence_dimensions=None, gate_num=None, spikes=None, duration=100, dog_y=None):
         match type:
             case "button":
                 temp_obstacle = obstacles.ButtonObstacle((x, y), fence_initial, fence_final, x, y, fence_dimensions,
@@ -122,12 +118,11 @@ class Level:
                     self.interactible_list["vase"] += [temp_obstacle]
                 except KeyError:
                     self.interactible_list["vase"] = [temp_obstacle]
-
                 self.collidable_list.append(temp_obstacle)
 
-
-    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text):
-        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text)
+    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text, font_size=30):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text,
+                                              font_size=font_size)
         self.tutorial_text_list.append(temp_text)
 
     def load_stone_imgs(self):
@@ -242,7 +237,6 @@ class Platform:
                 TL = water_img
                 TM = water_img
                 TR = water_img
-
             case "spikes":
                 BL = spike_img
                 BM = spike_img
@@ -305,6 +299,7 @@ class Platform:
             temp_image = self.image.copy()
             temp_image.set_alpha(20)
             surface.blit(temp_image, (self.x, self.y))
+
 
 class MovingPlatform(Platform):
     def __init__(self, position, dimensions, max_speed, target, stone_imgs, water_img, spike_img, platform_type,
@@ -447,7 +442,7 @@ class Header:
         elif pet == "dog":
             surface.blit(self.dog, (1305, 10))
         elif pet == "monkey":
-            surface.blit(self.dog, (1305, 10))
+            surface.blit(self.monkey, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)

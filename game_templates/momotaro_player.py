@@ -32,11 +32,6 @@ class Momotaro:
 
         self.frame_index = 0
 
-        # loading charging sound when momotaro charges from royalty free webpage mixkit
-        charge_path = "audio/charge_effect.mp3"
-        self.charge_sound = pygame.mixer.Sound(charge_path)
-        self.charge_sound.set_volume(0.08)
-
         self.idle_image = pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaroidle.png").convert_alpha(), (40, 70))
 
         self.right_mvmnt_frames = [
@@ -94,6 +89,11 @@ class Momotaro:
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotaro_oni3.png").convert_alpha(),
                                    (40, 70))]
         self.death_type = None
+
+        # loading charging sound when momotaro charges from royalty free webpage mixkit
+        charge_path = "audio/charge_effect.mp3"
+        self.charge_sound = pygame.mixer.Sound(charge_path)
+        self.charge_sound.set_volume(0.08)
 
         # loading in coin collection audio from royalty free webpage mixkit
         coin_path = "audio/coin.mp3"
@@ -159,8 +159,8 @@ class Momotaro:
                 self.charging = True
                 self.attacking = False
                 if self.charging_bounce:
-                    #self.charge_sound.play(-1)
-                    pass # TODO charging sound is very bad!
+                    # self.charge_sound.play(-1)
+                    pass  # TODO charging sound is very bad!
                 self.charging_bounce = False
             elif not keys[pygame.K_r] and self.charging:
                 self.attacking = True
@@ -202,7 +202,7 @@ class Momotaro:
                     if collidable.type == "spikes":
                         if collidable.active:
                             self.health = 0
-                            self.death_type = "drown"
+                            self.death_type = "oni"
                         else:
                             continue
                         return
@@ -251,7 +251,6 @@ class Momotaro:
                     self.death_type = "drown"
             except AttributeError:
                 pass
-
 
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y
@@ -333,13 +332,15 @@ class Momotaro:
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        momo_gate.set_pushed(True)
+                        momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        momo_gate.set_pushed(False)
+                        momo_gate.pushed = False
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
                         if self.get_rect().colliderect(coin.get_rect()) and not coin.collected:
+                            print("momo rect:", self.get_rect())
+                            print("collding with coin at ", coin.get_rect())
                             coin.collected = True
                             # play coin collected audio
                             self.coin_sound.play()
@@ -348,6 +349,11 @@ class Momotaro:
                 #case "fence":
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
+
+
+
+
+
 
     def check_attacking(self, demon_list):
         if self.charging:
