@@ -129,3 +129,9 @@ Discussed overall gameplay feeling
 Revamped level 1
 Added tutorial text for level 1
 Updated tutorial.py class
+
+7/25/23
+7pm-9pm
+last minute additions and level tweeks
+merged codebases
+lots of playtesting
