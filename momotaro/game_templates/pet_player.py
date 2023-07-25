@@ -58,7 +58,7 @@ class Pet:
         self.wing_sound = pygame.mixer.Sound(wing_path)
         self.wing_sound.set_volume(0.05)
 
-        # loading flap sound when bird flies  from royalty free webpage mixkit
+        # loading throw sound when monkey throws peach  from royalty free webpage mixkit
         throw_path = "audio/throw1.mp3"
         self.throw_sound = pygame.mixer.Sound(throw_path)
         self.throw_sound.set_volume(0.05)
@@ -68,20 +68,20 @@ class Pet:
         self.right_bird_mvmnt_frames = None
         self.left_bird_mvmnt_frames = None
 
-        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_left.png").convert_alpha(),(40, 70))
-        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_left.png").convert_alpha(),(40, 70))
+        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_left.png").convert_alpha(),(45, 70))
+        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_left.png").convert_alpha(),(45, 70))
 
-        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_right.png").convert_alpha(),(40, 70))
-        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_right.png").convert_alpha(), (40, 70))
+        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_right.png").convert_alpha(),(45, 70))
+        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_right.png").convert_alpha(), (45, 70))
 
 
         self.right_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_1.png").convert_alpha(), (30, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_2.png").convert_alpha(), (40, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/walking_right_1.png").convert_alpha(), (35, 60)),
+            pygame.transform.scale(pygame.image.load("images/player2/walking_right_2.png").convert_alpha(), (45, 60))]
 
         self.left_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_1.png").convert_alpha(), (30, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_2.png").convert_alpha(), (35, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/walking_left_1.png").convert_alpha(), (35, 60)),
+            pygame.transform.scale(pygame.image.load("images/player2/walking_left_2.png").convert_alpha(), (40, 60))]
 
         self.bird_idle_image = self.right_bird_mvmnt_frames[0]
 
@@ -89,7 +89,7 @@ class Pet:
         self.bird_hurt_right_image = pygame.transform.rotate(self.left_bird_mvmnt_frames[0], 45)
 
         self.bird_death_image = pygame.transform.scale(
-            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (50, 60))
+            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (55, 60))
         ##################
 
         # DOG IMAGES -------------------
@@ -134,38 +134,43 @@ class Pet:
 
         # MONKEY IMAGES ----------------------------------
         self.right_monkey_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_1.png").convert_alpha(), (45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_right_2.png").convert_alpha(), (45, 66))]
 
         self.left_monkey_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(),(40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_1.png").convert_alpha(),(45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_walk_left_2.png").convert_alpha(), (45, 66))]
 
         self.monkey_idle_image_left = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_idle_left.png").convert_alpha(), (40, 61))
+            pygame.image.load("images/player2/monkey_idle_left.png").convert_alpha(), (45, 66))
 
         self.monkey_idle_image_right = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha(), (40, 61))
+            pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha(), (45, 66))
 
         self.monkey_death_image = pygame.transform.scale(
-            pygame.image.load("images/player2/monkey_death.png").convert_alpha(), (61, 40))
+            pygame.image.load("images/player2/monkey_death.png").convert_alpha(), (65, 45))
 
         self.monkey_hurt_left_image = pygame.transform.rotate(self.right_monkey_mvmnt_frames[0], 45)
 
         self.monkey_hurt_right_image = pygame.transform.rotate(self.left_monkey_mvmnt_frames[0], 45)
 
         self.right_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_1.png").convert_alpha(), (45, 66)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_right_2.png").convert_alpha(), (45, 65))]
 
         self.left_monkey_throw_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(), (40, 61)),
-            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(), (40, 61))]
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_1.png").convert_alpha(), (45, 65)),
+            pygame.transform.scale(pygame.image.load("images/player2/monkey_throw_left_2.png").convert_alpha(), (45, 65))]
         #####################
 
         self.cloud_image = pygame.transform.scale(
             pygame.image.load("images/player2/cloud.png").convert_alpha(), (149, 100))
         self.cloud_image.set_alpha(50)
+
+        # loading ouch sound from royalty free webpage mixkit
+        ow_path = "audio/smack.mp3"
+        self.ow_sound = pygame.mixer.Sound(ow_path)
+        self.ow_sound.set_volume(0.35)
 
     def update_monkey_movement(self):
         if not self.standing:
@@ -376,6 +381,8 @@ class Pet:
                 self.update_monkey_movement()
         for peach in self.peaches:
             peach.poll_movement()
+        if self.iframes > 0:
+            self.iframes -= 1
 
     def check_collisions(self, collidables):
         pixel_margin = 30
@@ -632,29 +639,23 @@ class Pet:
 
                     margin = 80
                     if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
-                        pet_gate.set_pushed(True)
+                        pet_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        pet_gate.set_pushed(False)
+                        pet_gate.pushed = False
 
-    def check_damage(self, demon_list):
+    def hit(self, direction):
         if self.iframes <= 0:
-            for demon in demon_list:
-                if self.get_rect().colliderect(demon.get_rect()):
-                    # add demon noise
-                    self.roar_sound.play()
-
-                    self.health -= 10
-                    momotaro_rect = self.get_rect()
-                    collidable_rect = demon.get_rect()
-                    self.iframes = 20
-                    if abs(momotaro_rect.left - collidable_rect.right) < abs(momotaro_rect.right - collidable_rect.left):
-                        self.velocity[0] += 6
-                        self.velocity[1] += -12
-                    else:
-                        self.velocity[0] += -6
-                        self.velocity[1] += -12
-        else:
-            self.iframes -= 1
+            # add demon noise
+            self.ow_sound.play()
+            self.health -= 8
+            self.iframes = 20
+            match direction:
+                case "left":
+                    self.velocity[0] += -15
+                    self.velocity[1] += -12
+                case "right":
+                    self.velocity[0] += 15
+                    self.velocity[1] += -12
 
     def draw_death(self, surface):
         match self.pet:

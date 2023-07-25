@@ -22,15 +22,15 @@ class Level:
         self.pet_image = None
         if background == "mountains":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("mountains")
         elif background == "cave":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_2_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("cave")
         elif background == "bamboo":
             self.background = pygame.transform.scale(
-                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 915))
+                pygame.image.load("images/backgrounds/level_3_bkgnd.png").convert_alpha(), (1920, 1080))
             self.header = Header("bamboo")
 
         self.stone_imgs = []
@@ -120,8 +120,8 @@ class Level:
                     self.interactible_list["vase"] = [temp_obstacle]
                 self.collidable_list.append(temp_obstacle)
 
-    def add_tutorial_text(self, x, y, x_min, x_max, dimensions, text, font_size=30):
-        temp_text = tutorial.TutorialText((x, y), x_min, x_max, dimensions=dimensions, text=text,
+    def add_tutorial_text(self, x, y, x_min, x_max, y_min,y_max, dimensions, text, font_size=30):
+        temp_text = tutorial.TutorialText((x, y), x_min, x_max,y_min, y_max, dimensions=dimensions, text=text,
                                               font_size=font_size)
         self.tutorial_text_list.append(temp_text)
 
@@ -159,7 +159,7 @@ class Level:
 
     def load_water_img(self):
         self.water_img = pygame.image.load("images/tiles/watertile.png").convert_alpha()
-        self.spike_img = pygame.image.load("images/tiles/spikes.png").convert_alpha()
+        self.spike_img = pygame.image.load("images/ObstacleButtonSprites/spikes.png").convert_alpha()
 
 
 class Platform:
@@ -410,7 +410,7 @@ class Header:
         self.player_1_txt = pygame.transform.scale(self.player_1_txt, (200, 40))
         self.player_2_txt = pygame.transform.scale(self.player_2_txt, (200, 40))
         self.momo = pygame.transform.scale(self.momo, (50, 80))
-        self.bird = pygame.transform.scale(self.bird, (50, 80))
+        self.bird = pygame.transform.scale(self.bird, (60, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
 
@@ -423,6 +423,7 @@ class Header:
 
         surface.blit(self.health_back, (540, 15))
         health_len = 225 * (momo_health / 100)
+
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -447,5 +448,7 @@ class Header:
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)
+        if health_len < 0:
+            health_len = 0
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))

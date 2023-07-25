@@ -5,7 +5,6 @@ import pathlib
 from momotaro.drivers import toolbox
 from momotaro.drivers import game_manager
 from momotaro.scenes import level_select_scene, title_menu_scene, credits_scene
-from momotaro.ui_templates import screen_transition
 
 '''
 Purpose: Main driver/executable for the game. Based on the state passing in by each scene, the game will 
