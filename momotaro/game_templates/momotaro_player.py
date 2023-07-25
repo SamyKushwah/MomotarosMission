@@ -332,9 +332,9 @@ class Momotaro:
 
                     margin = 80
                     if (abs(momo_center_x - gate_center_x) < margin) and (abs(momo_center_y - gate_center_y) < margin):
-                        momo_gate.set_pushed(True)
+                        momo_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win
-                        momo_gate.set_pushed(False)
+                        momo_gate.pushed = False
 
                 case "coin":
                     for coin in list_of_obstacles[obstacle_type]:
@@ -347,11 +347,6 @@ class Momotaro:
                 #case "fence":
                 #    for fence in list_of_obstacles[obstacle_type]:
                 #        if self.get_rect().colliderect(fence.get_rect()):
-
-
-
-
-
 
     def check_attacking(self, demon_list):
         if self.charging:
@@ -403,7 +398,7 @@ class Momotaro:
                     # add demon noise
                     self.roar_sound.play()
 
-                    self.health -= 5
+                    self.health -= 10
                     #self.death_type = "oni"
 
                     # make ow noise

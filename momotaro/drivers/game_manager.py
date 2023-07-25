@@ -101,7 +101,7 @@ class GameManager:
                         self.camera_on_momotaro = not self.camera_on_momotaro
 
                     # both players at their gates and either pressed up to end the game
-                    if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
+                    if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
                         pygame.mixer.pause()

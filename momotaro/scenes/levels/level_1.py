@@ -96,12 +96,14 @@ def create_level(my_toolbox):
 
     # add end goal torigate
     level1.add_platform((1560, 400), (2200,50), facing_direction="up")
-    level1.add_obstacle(1650, 350, "torigate", gate_num=1) # end of the level marker
-    level1.add_obstacle(1800, 350, "torigate", gate_num=2)
+    #level1.add_obstacle(1650, 350, "torigate", gate_num=1) # end of the level marker
+    #level1.add_obstacle(1800, 350, "torigate", gate_num=2)
 
-    #level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
-    #level1.add_obstacle(700, 950, "torigate", gate_num=2)
+    level1.add_obstacle(500, 950, "torigate", gate_num=1)  # end of the level marker
+    level1.add_obstacle(700, 950, "torigate", gate_num=2)
 
+    # add vase
+    level1.add_spikes((500, 750), (100, 45), (400, 950))
 
     momotaro = momotaro_player.Momotaro([300, 300])
     pet = pet_player.Pet([200, 300])
