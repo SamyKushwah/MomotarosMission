@@ -24,5 +24,6 @@ Personal Log:
         death.
 7/25 -> Made throw and break vase noises. Added spike sprite. Increased damage from demons. Fixed sound bug where
         death by demon does not turn off all the sounds. Added fence sound stopping when any other screen is played.
-        Fixed fence for when 2nd player loses. Fixing dog sprites to be better. Checking for bugs.
+        Fixed fence for when 2nd player loses. Fixing dog sprites to be better. Checking for bugs. Making new monkey
+        sprite for death. Fixing death position for monkey when on water.
         
