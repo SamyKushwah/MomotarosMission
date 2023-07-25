@@ -18,7 +18,7 @@ Purpose: The GameManager object contains level and player information and regula
 
 class GameManager:
 
-    def __init__(self, my_toolbox, level, past_screen):
+    def __init__(self, my_toolbox, level, past_screen, level_music):
         self.my_toolbox = my_toolbox
         self.level_complete = False
         self.momotaro = None
@@ -30,6 +30,7 @@ class GameManager:
         self.return_control = ""
         self.return_st = ""
         self.pause = False
+        self.level_music = level_music
 
         match level:
             case "level_1":
@@ -104,11 +105,12 @@ class GameManager:
                     if self.level.interactible_list["torigate"][0].is_pushed() and self.level.interactible_list["torigate"][1].is_pushed() and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
-                        pygame.mixer.pause()
+                        # pygame.mixer.pause()
+                        self.level_music.stop()
                         self.win_sound.play()
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
-
+                        pygame.mixer.pause()
                         if win_return == "level_selector" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
@@ -117,14 +119,15 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
-                pygame.mixer.pause()
+                # pygame.mixer.pause()
+                self.level_music.stop()
                 self.lose_sound.play()
 
                 # only momotaro has different death animations, when the bird dies, use momotaro's oni death
                 #self.momotaro.death_type = "oni"
 
                 lose_rt, lose_screen = self.play_death_animation()
-
+                pygame.mixer.pause()
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     # stopping lose sound when new state
@@ -138,13 +141,15 @@ class GameManager:
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
-                    pygame.mixer.pause()
+                    # pygame.mixer.pause()
+                    self.level_music.stop()
                     self.lose_sound.play()
                     # squish amimation
                     # self.momotaro.momo_squish(self.image)
                     self.momotaro.death_type = "crushed"
                     self.momotaro.health = 0
                     lose_rt, lose_screen = self.play_death_animation()
+                    pygame.mixer.pause()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
@@ -155,9 +160,11 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
-                    pygame.mixer.pause()
+                    # pygame.mixer.pause()
+                    self.level_music.stop()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
+                    pygame.mixer.pause()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
@@ -248,7 +255,7 @@ class GameManager:
             match interactible_key:
                 case "button":
                     for obstacle in self.level.interactible_list[interactible_key]:
-                        obstacle.draw(self.image)
+                        obstacle.draw(self.image, self.momotaro.health)
                 case "torigate":
                     for obstacle in self.level.interactible_list[interactible_key]:
                         obstacle.draw(self.image)
@@ -375,7 +382,7 @@ class GameManager:
                 match interactible_key:
                     case "button":
                         for obstacle in self.level.interactible_list[interactible_key]:
-                            obstacle.draw(self.image)
+                            obstacle.draw(self.image, self.momotaro.health)
                     case "torigate":
                         for obstacle in self.level.interactible_list[interactible_key]:
                             obstacle.draw(self.image)

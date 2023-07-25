@@ -1,6 +1,6 @@
 import pygame
 from pygame import mixer
-mixer.init()
+pygame.mixer.init()
 
 
 class Momotaro:
@@ -404,7 +404,8 @@ class Momotaro:
                     self.roar_sound.play()
 
                     self.health -= 10
-                    #self.death_type = "oni"
+                    if self.health <= 0:
+                        self.death_type = "oni"
 
                     # make ow noise
                     self.ow_sound.play()

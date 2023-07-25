@@ -72,7 +72,7 @@ def main():
             case "level_1":
                 pygame.mixer.pause()
                 level1_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_1", past_screen)
+                my_game = game_manager.GameManager(my_toolbox, "level_1", past_screen, level1_music)
                 next_state, past_screen = my_game.run()
                 level1_music.stop()
                 last_state = "level1"
@@ -82,7 +82,7 @@ def main():
                 # bring the user to level 2
                 pygame.mixer.pause()
                 level2_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_2", past_screen)
+                my_game = game_manager.GameManager(my_toolbox, "level_2", past_screen, level2_music)
                 next_state, past_screen = my_game.run()
                 level2_music.stop()
                 last_state = "level2"
@@ -92,7 +92,7 @@ def main():
                 # bring the user to level 3
                 pygame.mixer.pause()
                 level3_music.play(loops=-1)
-                my_game = game_manager.GameManager(my_toolbox, "level_3", past_screen)
+                my_game = game_manager.GameManager(my_toolbox, "level_3", past_screen, level3_music)
                 next_state, past_screen = my_game.run()
                 level3_music.stop()
                 last_state = "level3"
