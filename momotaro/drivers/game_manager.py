@@ -461,6 +461,7 @@ class GameManager:
                     special_x = (-self.pet.get_rect().centerx) + (1920 / 2)
 
             view_surface.blit(self.image, (special_x, 0))
+
             # Draw Header
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
                                           self.pet.pet)
