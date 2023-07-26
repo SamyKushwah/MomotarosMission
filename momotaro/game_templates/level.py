@@ -371,7 +371,6 @@ class MovingPlatform(Platform):
 
 class Header:
     def __init__(self, level_type):
-        # prev_pet = "bird"
         # load the images
         self.health_front = pygame.image.load("images/game_ui/HealthBarFront.png").convert_alpha()
         if level_type == "mountains":
@@ -398,6 +397,12 @@ class Header:
         self.dog = pygame.image.load("images/player2/dog_idle_right.png").convert_alpha()
         self.monkey = pygame.image.load("images/player2/monkey_idle_right.png").convert_alpha()
 
+        # highlighted image
+        self.momo_highlighted = pygame.image.load("images/MomotaroSprites/momotaro_highlighted.png").convert_alpha()
+        self.bird_highlighted = pygame.image.load("images/player2/bird_highlighted.png").convert_alpha()
+        self.dog_highlighted = pygame.image.load("images/player2/dog_highlighted.png").convert_alpha()
+        self.monkey_highlighted = pygame.image.load("images/player2/monkey_highlighted.png").convert_alpha()
+
         # scale images
         self.health_front = pygame.transform.scale(self.health_front, (225, 30))
         self.health_back = pygame.transform.scale(self.health_back, (300, 65))
@@ -413,17 +418,26 @@ class Header:
         self.bird = pygame.transform.scale(self.bird, (60, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
+        self.momo_highlighted = pygame.transform.scale(self.momo_highlighted, (60, 95))
+        self.bird_highlighted = pygame.transform.scale(self.bird_highlighted, (70, 95))
+        self.dog_highlighted = pygame.transform.scale(self.dog_highlighted, (70, 95))
+        self.monkey_highlighted = pygame.transform.scale(self.monkey_highlighted, (70, 95))
 
-    def draw_header(self, surface, momo_health, pet_health, coins, pet):
+    def draw_header(self, surface, momo_health, pet_health, coins, pet, on_momotaro):
 
         # draw images to the screen
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
-        surface.blit(self.momo, (435, 10))
+        if on_momotaro:
+            surface.blit(self.momo_highlighted, (435, 10))
+        else:
+            surface.blit(self.momo, (435, 10))
 
         surface.blit(self.health_back, (540, 15))
         health_len = 225 * (momo_health / 100)
 
+        if health_len < 0:
+            health_len = 0
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (598.5, 32))
 
@@ -439,16 +453,23 @@ class Header:
             surface.blit(self.three, (900, 15))
 
         surface.blit(self.player_2_txt, (1080, 30))
-        if pet == "bird":
-            surface.blit(self.bird, (1305, 10))
-        elif pet == "dog":
-            surface.blit(self.dog, (1305, 10))
-        elif pet == "monkey":
-            surface.blit(self.monkey, (1305, 10))
+
+        if on_momotaro:
+            if pet == "bird":
+                surface.blit(self.bird, (1305, 10))
+            elif pet == "dog":
+                surface.blit(self.dog, (1305, 10))
+            elif pet == "monkey":
+                surface.blit(self.monkey, (1305, 10))
+        else:
+            if pet == "bird":
+                surface.blit(self.bird_highlighted, (1305, 10))
+            elif pet == "dog":
+                surface.blit(self.dog_highlighted, (1305, 10))
+            elif pet == "monkey":
+                surface.blit(self.monkey_highlighted, (1305, 10))
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)
-        if health_len < 0:
-            health_len = 0
         self.health_front = pygame.transform.scale(self.health_front, (health_len, 30))
         surface.blit(self.health_front, (1468.5, 32))

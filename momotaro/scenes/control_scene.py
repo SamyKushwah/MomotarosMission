@@ -41,6 +41,9 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
                 # back button and fade
                 if button_back.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "back", scene_screen
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         # do the screen transition
         if transition:

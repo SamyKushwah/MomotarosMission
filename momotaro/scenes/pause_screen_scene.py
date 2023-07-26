@@ -57,6 +57,8 @@ def run(my_toolbox: toolbox.Toolbox, current_level, past_screen):
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     return "resume", scene_screen
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         # draw the buttons with scaled position
         button_resume.draw(scene_screen, (w / 2, h * (5.5 / 13)), True)

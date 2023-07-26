@@ -55,6 +55,9 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         # next_state will be returned by each scene
         match next_state:

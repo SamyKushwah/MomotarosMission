@@ -33,6 +33,9 @@ def run(my_toolbox: toolbox.Toolbox):
             elif event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
                 # Screen was clicked somewhere
                 return "level_selector", scene_screen
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         # draw the background and title
         my_toolbox.clock.tick(60)

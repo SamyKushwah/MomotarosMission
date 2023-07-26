@@ -70,6 +70,9 @@ def run(my_toolbox: toolbox.Toolbox, current_level, coins, past_screen):
                         return "level_2", scene_screen
                     elif current_level == "level_2":
                         return "level_3", scene_screen
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
          # do the screen transition
         if transition:

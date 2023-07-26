@@ -13,7 +13,8 @@ def create_level(my_toolbox):
     level2.add_platform((0, 0), (5100, 140), facing_direction="down")                            # top wall
     level2.add_platform((0, 1080 - 70), (300, 70))                                               # bottom wall section 1
     level2.add_platform((1000, 1080 - 70), (280, 70))                                            # bottom wall section 2
-    level2.add_platform((2030, 1080 - 70), (3070, 70))                                           # bottom wall section 3
+    level2.add_platform((2030, 1080 - 70), (470, 70))                                           # bottom wall section 3
+    level2.add_platform((3650, 1010), (950, 70))
     # 2030
 
     # fix the corners
@@ -23,12 +24,12 @@ def create_level(my_toolbox):
     level2.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add water sections
-    level2.add_platform((300, 1080 - 70), (700, 70), platform_type="water")    # water section 1 (bottom)
-    level2.add_platform((1280, 1080 - 70), (750, 70), platform_type="water")   # water section 2 (bottom)
-    level2.add_platform((4600, 1080 - 71), (430, 70), platform_type="water")   # water section 3 (bottom)
-    level2.add_platform((2500, 1080 - 71), (1150, 70), platform_type="water")
+    level2.add_platform((300, 1080 - 60), (700, 70), platform_type="water")    # water section 1 (bottom)
+    level2.add_platform((1280, 1080 - 60), (750, 70), platform_type="water")   # water section 2 (bottom)
+    level2.add_platform((4600, 1080 - 61), (430, 70), platform_type="water")   # water section 3 (bottom)
+    level2.add_platform((2500, 1080 - 61), (1150, 70), platform_type="water")
 
-    level2.add_spikes((2300, 1080 - 100), (150, 100), vase_position=(2800 + 17, 485), duration=300)
+    level2.add_spikes((2300, 1040 - 100), (175, 100), vase_position=(2800 + 17, 485), duration=300)
     level2.add_platform((2800, 550), (70, 50), facing_direction="up")
 
     level2.add_platform((350, 340 + 20), (650, 70), platform_type="water")          # water section 1 (top)
@@ -76,7 +77,7 @@ def create_level(my_toolbox):
 
     # add button/gate obstacles
     level2.add_obstacle(600, 580, "button", fence_initial=(1075, 140),  fence_final=(1075, -60), fence_dimensions=(150, 400))     # first top gate
-    level2.add_obstacle(1200, 330, "button", fence_initial=(2105, 210), fence_final=(2105, -60), fence_dimensions=(150, 400))     # second top gate
+    level2.add_obstacle(1200, 335, "button", fence_initial=(2105, 210), fence_final=(2105, -60), fence_dimensions=(150, 400))     # second top gate
     level2.add_obstacle(4850, 495, "dog_button", fence_initial=(3775, 200), fence_final=(3775, -60), fence_dimensions=(150, 400),dog_y=300)     # third top gate
     level2.add_obstacle(3950, 1000, "button", fence_initial=(4675, 822), fence_final=(4675, 320), fence_dimensions=(150, 400))    # fourth top gate
     level2.add_obstacle(1210, 1000, "button", fence_initial=(2105, 778), fence_final=(2105, 320), fence_dimensions=(150, 465))    # first bottom gate
@@ -86,6 +87,9 @@ def create_level(my_toolbox):
     level2.add_demon([1655, 200], (500, 200))
     level2.add_demon([2775, 1000], (700, 300))
     level2.add_demon([3900, 350], (300, 100))
+    level2.add_demon([1655, 200], (450, 100))
+    # level2.add_demon([2775, 1000], (700, 300))
+    level2.add_demon([3900, 200], (450, 100))
 
     # add tori gate obstacle
     level2.add_obstacle(3950, 350 - 50, "torigate", gate_num=1)
