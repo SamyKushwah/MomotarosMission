@@ -4,12 +4,9 @@ One-line build command:
 python setup.py sdist
 
 Installation Package Executable:
-"\dist\momotaro-1.0-py3-none-any.whl"
+"\dist\momotaro-1.0.tar.gz"
 
-Recommended installation command: pip install momotaro-1.0-py3-none-any.whl
+Recommended installation command: pip install mmomotaro-1.0.tar.gz
 
 Link to repository:
 https://github.com/SamyKushwah/MomotarosMission/
-
-Run Executable Command:
-play_momotaro
