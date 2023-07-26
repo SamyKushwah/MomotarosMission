@@ -128,7 +128,7 @@ class GameManager:
                                         obstacle.stop_fence_sound()
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
-                        pygame.mixer.pause()
+                        pygame.mixer.stop()
                         if win_return == "level_selector" or win_return == "level_1" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
@@ -142,7 +142,7 @@ class GameManager:
                 self.lose_sound.play()
 
                 lose_rt, lose_screen = self.play_death_animation()
-                pygame.mixer.pause()
+                pygame.mixer.stop()
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     # stopping lose sound when new state
@@ -161,7 +161,7 @@ class GameManager:
                     self.momotaro.death_type = "crushed"
                     self.momotaro.health = 0
                     lose_rt, lose_screen = self.play_death_animation()
-                    pygame.mixer.pause()
+                    pygame.mixer.stop()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
@@ -176,7 +176,7 @@ class GameManager:
                     self.level_music.stop()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
-                    pygame.mixer.pause()
+                    pygame.mixer.stop()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
