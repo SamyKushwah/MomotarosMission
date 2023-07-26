@@ -268,9 +268,9 @@ class GameManager:
                         vase.draw(self.image)
 
         # Draw platforms
-        for platform in self.level.platform_list:
-            platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
+            platform.draw_platform(self.image)
+        for platform in self.level.platform_list:
             platform.draw_platform(self.image)
         # Draw text
         for text in self.level.tutorial_text_list:
@@ -400,17 +400,17 @@ class GameManager:
                         for vase in self.level.interactible_list[interactible_key]:
                             vase.draw(self.image)
 
-            # Draw platforms
-                for platform in self.level.platform_list:
-                    platform.draw_platform(self.image)
+                # Draw platforms
                 for platform in self.level.moving_platform_list:
+                    platform.draw_platform(self.image)
+                for platform in self.level.platform_list:
                     platform.draw_platform(self.image)
                 # Draw text
                 for text in self.level.tutorial_text_list:
                     text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
                               self.pet.position[0], self.pet.position[1])
 
-            # Draw demons
+                # Draw demons
                 for demon in self.level.demon_list:
                     if demon.health > 0:
                         demon.velocity = [0, 0]
