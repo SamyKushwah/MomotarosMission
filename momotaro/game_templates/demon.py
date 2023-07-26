@@ -227,9 +227,8 @@ class Demon:
                 self.standing_on = None
 
         if self.standing and self.standing_on != None and self.position[
-                    1] + self.get_rect().height // 2 > self.standing_on.get_rect().top:
+            1] + self.get_rect().height // 2 > self.standing_on.get_rect().top:
             self.health = 0
-
 
         self.position[0] = momotaro_rect.x
         self.position[1] = momotaro_rect.y

@@ -21,3 +21,11 @@ class Toolbox:
         adjusted_x = (mouse_loc[0] / self.screen.get_width()) * 1920
         adjusted_y = (mouse_loc[1] / self.screen.get_height()) * 1080
         return adjusted_x, adjusted_y
+
+    def fullscreen(self):
+        pygame.display.toggle_fullscreen()
+        if not pygame.display.is_fullscreen():
+            os.environ['SDL_VIDEO_CENTERED'] = '1'
+            self.screen = pygame.display.set_mode(
+                (pygame.display.Info().current_w - 10, pygame.display.Info().current_h - 50),
+                pygame.RESIZABLE)

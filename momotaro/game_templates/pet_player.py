@@ -10,8 +10,8 @@ class Pet:
         self.position = spawn_position
         self.velocity = [0.0, 0.0]
         self.standing = False
-        self.hitbox = (35, 60)
-        self.gravity = 0.8
+        self.hitbox = (70, 65)
+        self.gravity = 1.15
         self.health = 50
         self.external_forces = [0, 0]
         self.standing_on = None
@@ -64,32 +64,28 @@ class Pet:
         self.throw_sound.set_volume(0.05)
 
         # BIRD IMAGES ----------------------------------
-        self.bird_idle_image = None
-        self.right_bird_mvmnt_frames = None
-        self.left_bird_mvmnt_frames = None
+        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_left.png").convert_alpha(), (70, 70))
+        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/bird_flapping_left.png").convert_alpha(), (70, 70))
 
-        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_left.png").convert_alpha(),(45, 70))
-        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_left.png").convert_alpha(),(45, 70))
-
-        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/flying_right.png").convert_alpha(),(45, 70))
-        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/flapping_right.png").convert_alpha(), (45, 70))
-
+        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_right.png").convert_alpha(), (70, 70))
+        self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/bird_flapping_right.png").convert_alpha(), (70, 70))
 
         self.right_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_1.png").convert_alpha(), (35, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_right_2.png").convert_alpha(), (45, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/bird_walk_right_1.png").convert_alpha(), (62, 70)),
+            pygame.transform.scale(pygame.image.load("images/player2/bird_walk_right_2.png").convert_alpha(), (65, 70))]
 
         self.left_bird_mvmnt_frames = [
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_1.png").convert_alpha(), (35, 60)),
-            pygame.transform.scale(pygame.image.load("images/player2/walking_left_2.png").convert_alpha(), (40, 60))]
+            pygame.transform.scale(pygame.image.load("images/player2/bird_walk_left_1.png").convert_alpha(), (62, 70)),
+            pygame.transform.scale(pygame.image.load("images/player2/bird_walk_left_2.png").convert_alpha(), (65, 70))]
 
-        self.bird_idle_image = self.right_bird_mvmnt_frames[0]
+        self.bird_right_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird.png").convert_alpha(), (63, 70))
+        self.bird_left_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird_idle_left.png").convert_alpha(), (63, 70))
 
         self.bird_hurt_left_image = pygame.transform.rotate(self.right_bird_mvmnt_frames[0], 45)
-        self.bird_hurt_right_image = pygame.transform.rotate(self.left_bird_mvmnt_frames[0], 45)
+        self.bird_hurt_right_image = pygame.transform.rotate(self.left_bird_mvmnt_frames[0], 325)
 
         self.bird_death_image = pygame.transform.scale(
-            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (55, 60))
+            pygame.image.load("images/player2/bird_death.png").convert_alpha(), (75, 70))
         ##################
 
         # DOG IMAGES -------------------
@@ -182,14 +178,14 @@ class Pet:
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
             # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.2
+                self.velocity[0] += 1
             self.velocity[0] += 0.2
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
             # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.2
+                self.velocity[0] -= 1
             self.velocity[0] -= 0.2
             self.moving_direction = "left"
             self.last_direction = "left"
@@ -241,14 +237,14 @@ class Pet:
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
             # add walking sound
             if self.velocity[0] < 0:
-                self.velocity[0] += 0.2
+                self.velocity[0] += 1
             self.velocity[0] += 0.2
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
             # add walking sound
             if self.velocity[0] > 0:
-                self.velocity[0] -= 0.2
+                self.velocity[0] -= 1
             self.velocity[0] -= 0.2
             self.moving_direction = "left"
             self.last_direction = "left"
@@ -294,11 +290,17 @@ class Pet:
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT] and not keys[pygame.K_LEFT]:
-            self.velocity[0] += 0.3
+            # add walking sound
+            if self.velocity[0] < 0:
+                self.velocity[0] += 1
+            self.velocity[0] += 0.2
             self.moving_direction = "right"
             self.last_direction = "right"
         elif keys[pygame.K_LEFT] and not keys[pygame.K_RIGHT]:
-            self.velocity[0] -= 0.3
+            # add walking sound
+            if self.velocity[0] > 0:
+                self.velocity[0] -= 1
+            self.velocity[0] -= 0.2
             self.moving_direction = "left"
             self.last_direction = "left"
         else:
@@ -465,9 +467,9 @@ class Pet:
             case "idle":
                     match self.last_direction:
                         case "right":
-                            self.active_image = self.right_bird_mvmnt_frames[0]
+                            self.active_image = self.bird_right_idle_image
                         case "left":
-                            self.active_image = self.left_bird_mvmnt_frames[0]
+                            self.active_image = self.bird_left_idle_image
             case "right":
                 self.active_image = self.right_bird_mvmnt_frames[index]
                 if self.standing:
@@ -664,8 +666,10 @@ class Pet:
             case "dog":
                 surface.blit(self.dog_death_image, self.position)
             case "monkey":
-
-                surface.blit(self.monkey_death_image, self.position)
+                if self.standing_on.type == "water":
+                    surface.blit(self.monkey_death_image, (self.position[0], self.position[1] + 30))
+                else:
+                    surface.blit(self.monkey_death_image, self.position)
 
     def delete_peach(self, peach):
         self.peaches.remove(peach)

@@ -19,7 +19,7 @@ def create_level(my_toolbox):
     # fix the corners
     level3.add_platform((-10, 85), (70, 70), facing_direction=None)
     level3.add_platform((5040, 85), (70, 70), facing_direction=None)
-    level3.add_platform((-10, 1080 - 70), (70, 70), facing_direction=None)
+    level3.add_platform((-10, 1000), (70, 70), facing_direction=None)
     level3.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add moving platforms throughout
@@ -123,7 +123,7 @@ def create_level(my_toolbox):
     level3.add_obstacle(1550, 650, "coin")
 
     momotaro = momotaro_player.Momotaro([200, 300])
-    #momotaro = momotaro_player.Momotaro([200, 900])
+    # momotaro = momotaro_player.Momotaro([200, 900])
     pet = pet_player.Pet([200, 900])
 
     return level3, momotaro, pet

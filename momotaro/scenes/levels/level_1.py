@@ -13,9 +13,9 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(520,500,0,900,450,1080,(100,100),"Player 1: Use W, A, and D to move around and jump.", font_size=25)
     level1.add_tutorial_text(550,550,0,900,450,1080,(100,100),"Player 2: Use the arrow keys to move around and jump.", font_size=25)
 
-    level1.add_tutorial_text(1030,400,680,1200,450,1080,(100,100),"Only Player 1 can collect coins.", font_size=25)
+    level1.add_tutorial_text(1030,400,680,1200,0,1080,(100,100),"Only Player 1 can collect coins.", font_size=25)
 
-    level1.add_tutorial_text(1050,850,1100,1500,450,1080,(100,100),"Stand on the button to raise the gate.", font_size=25)
+    level1.add_tutorial_text(1050,850,1100,1500,0,1080,(100,100),"Stand on the button to raise the gate.", font_size=25)
 
     # add four walls
     level1.add_platform(position=(0, 0), dimensions=(71, 1080), facing_direction="right")  # left wall
@@ -74,8 +74,8 @@ def create_level(my_toolbox):
     level1.add_moving_platform(position=(3900, 900), dimensions=(200, 50), max_speed=3, target=(4500, 900))
     level1.add_platform((4630, 1010), (400, 70))
 
-    level1.add_tutorial_text(4000, 700, 3700, 5100, 500,1080, (100,100), text="Players will die if they touch water.")
-    level1.add_tutorial_text(4000, 750, 3700, 5100, 500,1080, (100,100), text="Avoid it using the platforms.")
+    level1.add_tutorial_text(4000, 700, 3700, 5100, 400,1080, (100,100), text="Players will die if they touch water.")
+    level1.add_tutorial_text(4000, 750, 3700, 5100, 400,1080, (100,100), text="Avoid it using the platforms.")
 
     # Platforms connecting the bottom half to the upper half
     level1.add_platform((4830, 810), (200, 50))

@@ -1,11 +1,8 @@
 from momotaro.scenes.levels import level_2, level_1, level_3
 import pygame
-from momotaro.game_templates import momotaro_player, pet_player
 from momotaro.scenes import pause_screen_scene, win_screen_scene, lose_screen_scene, control_scene
 from momotaro.ui_templates import screen_transition
 import sys
-#from pygame import mixer
-#pygame.mixer.init()
 
 '''
 Purpose: The GameManager object contains level and player information and regularly updates and polls player 
@@ -54,10 +51,13 @@ class GameManager:
         self.lose_sound = pygame.mixer.Sound(lose_path)
         self.lose_sound.set_volume(0.4)
 
+        # Camera change sound effect
+        camera_path = "audio/camera_change.mp3"
+        self.camera_sound = pygame.mixer.Sound(camera_path)
+        self.camera_sound.set_volume(0.3)
+
         # Loading background image
         self.background = self.level.background
-        # self.mountain_background = pygame.transform.scale(
-        # pygame.image.load("images/backgrounds/level_1_bkgnd.png").convert_alpha(), (1920, 915))
 
         # Camera character locking
         self.camera_on_momotaro = True
@@ -70,7 +70,6 @@ class GameManager:
         # run event handling for the level until lvl_complete == True or broken out of
         transition = True
         while not self.level_complete:
-            #print(self.pet.position)
             # Poll events/user inputs
             events = pygame.event.get()
             for event in events:
@@ -111,12 +110,14 @@ class GameManager:
                     # changing the camera view
                     elif event.key == pygame.K_c:
                         self.camera_on_momotaro = not self.camera_on_momotaro
+                        self.camera_sound.play()
+                    if event.key == pygame.K_F11:
+                        self.my_toolbox.fullscreen()
 
                     # both players at their gates and either pressed up to end the game
                     if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
-                        # pygame.mixer.pause()
                         self.level_music.stop()
                         self.win_sound.play()
                         for interactible_key in self.level.interactible_list.keys():
@@ -126,7 +127,7 @@ class GameManager:
                                         obstacle.stop_fence_sound()
                         win_return, win_screen = win_screen_scene.run(self.my_toolbox, self.level_name, self.coins_collected, self.curr_screen)
                         self.update_save_file(self.level_name, self.coins_collected)
-                        pygame.mixer.pause()
+                        pygame.mixer.stop()
                         if win_return == "level_selector" or win_return == "level_1" or win_return == "level_2" or win_return == "level_3" or win_return == "quit":
                             # stopping win sound when new screen is selected
                             self.win_sound.stop()
@@ -135,15 +136,11 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
-                # pygame.mixer.pause()
                 self.level_music.stop()
                 self.lose_sound.play()
 
-                # only momotaro has different death animations, when the bird dies, use momotaro's oni death
-                #self.momotaro.death_type = "oni"
-
                 lose_rt, lose_screen = self.play_death_animation()
-                pygame.mixer.pause()
+                pygame.mixer.stop()
                 # Poll next scene from lose screen
                 if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                     # stopping lose sound when new state
@@ -151,13 +148,9 @@ class GameManager:
                     return lose_rt, lose_screen
 
             # If momotaro is pushed below a block, he dies
-
-            # If momotaro is pushed below a block, he dies
-
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
-                    # pygame.mixer.pause()
                     self.level_music.stop()
                     self.lose_sound.play()
                     # squish amimation
@@ -165,7 +158,7 @@ class GameManager:
                     self.momotaro.death_type = "crushed"
                     self.momotaro.health = 0
                     lose_rt, lose_screen = self.play_death_animation()
-                    pygame.mixer.pause()
+                    pygame.mixer.stop()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
@@ -176,11 +169,10 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
-                    # pygame.mixer.pause()
                     self.level_music.stop()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
-                    pygame.mixer.pause()
+                    pygame.mixer.stop()
                     if lose_rt == "level_selector" or lose_rt == self.level_name or lose_rt == "quit":
                         # stopping lose sound when new state
                         self.lose_sound.stop()
@@ -272,6 +264,7 @@ class GameManager:
             platform.draw_platform(self.image)
         for platform in self.level.platform_list:
             platform.draw_platform(self.image)
+
         # Draw text
         for text in self.level.tutorial_text_list:
             text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
@@ -310,7 +303,7 @@ class GameManager:
 
         # Draw Header
         self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
-                                      self.pet.pet)
+                                      self.pet.pet, self.camera_on_momotaro)
 
         # do the screen transition
         if transition:
@@ -350,8 +343,6 @@ class GameManager:
         animation_delay = 50
         index = 0
         self.pet.velocity = [0, 0]
-        # draw the background
-        # scene_screen = pygame.surface.Surface((w, h))
 
         # driver loop setup
         running = True
@@ -400,17 +391,18 @@ class GameManager:
                         for vase in self.level.interactible_list[interactible_key]:
                             vase.draw(self.image)
 
-                # Draw platforms
+            # Draw platforms
                 for platform in self.level.moving_platform_list:
                     platform.draw_platform(self.image)
                 for platform in self.level.platform_list:
                     platform.draw_platform(self.image)
+
                 # Draw text
                 for text in self.level.tutorial_text_list:
                     text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
                               self.pet.position[0], self.pet.position[1])
 
-                # Draw demons
+            # Draw demons
                 for demon in self.level.demon_list:
                     if demon.health > 0:
                         demon.velocity = [0, 0]
@@ -427,7 +419,7 @@ class GameManager:
                         case "button":
                             for obstacle in self.level.interactible_list[interactible_key]:
                                 obstacle.stop_fence_sound()
-                return lose_screen_scene.run(self.my_toolbox, self.level_name, self.curr_screen)
+                return lose_screen_scene.run(self.my_toolbox, self.level_name, view_surface)
 
             # if momotaro is the one who died, play his death animation and leave P2 alone
             if self.momotaro.health <= 0:
@@ -477,10 +469,7 @@ class GameManager:
             view_surface.blit(self.image, (special_x, 0))
 
             # Draw Header
-            #print(self.momotaro.health)
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
-                                          self.pet.pet)
-
-            self.curr_screen = view_surface
+                                          self.pet.pet, self.camera_on_momotaro)
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()

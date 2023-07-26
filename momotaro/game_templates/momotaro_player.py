@@ -1,7 +1,5 @@
 import pygame
-from pygame import mixer
 pygame.mixer.init()
-
 
 class Momotaro:
     def __init__(self, spawn_position):
@@ -41,10 +39,6 @@ class Momotaro:
         self.left_mvmnt_frames = [
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftA.png").convert_alpha(), (60, 70)),
             pygame.transform.scale(pygame.image.load("images/MomotaroSprites/momotarowalkleftB.png").convert_alpha(), (60, 70))]
-
-        self.left_attack_frames = [
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoLiftKat(Left).png").convert_alpha(), (60, 70)),
-            pygame.transform.scale(pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))]
 
         self.attacking_left_image = pygame.transform.scale(
             pygame.image.load("images/MomotaroSprites/MomoStrike(Left).png").convert_alpha(), (60, 70))
@@ -124,9 +118,9 @@ class Momotaro:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_d] and not keys[pygame.K_a]:
             # add walking sound
+            if self.velocity[0] < 1:
+                self.velocity[0] += 1
             if not self.charging:
-                if self.velocity[0] < 0:
-                    self.velocity[0] += 0.2
                 self.velocity[0] += 0.3
             else:
                 self.velocity[0] += 0.05
@@ -134,9 +128,9 @@ class Momotaro:
             self.last_direction = "right"
         elif keys[pygame.K_a] and not keys[pygame.K_d]:
             # add walking sound
+            if self.velocity[0] > 1:
+                self.velocity[0] -= 1
             if not self.charging:
-                if self.velocity[0] > 0:
-                    self.velocity[0] -= 0.2
                 self.velocity[0] -= 0.3
             else:
                 self.velocity[0] -= 0.05
@@ -356,18 +350,15 @@ class Momotaro:
                             self.coin_sound.play()
                             #print('coin collected')
                             obj.coins_collected += 1
-                #case "fence":
-                #    for fence in list_of_obstacles[obstacle_type]:
-                #        if self.get_rect().colliderect(fence.get_rect()):
 
     def check_attacking(self, demon_list):
         if self.charging:
             if self.attack_power >= 0.4:
                 self.attack_power = 0.4
-                self.charging = False
-                self.attacking = True
-                self.attacking_duration = 10
-                self.strike_sound.play()
+                # self.charging = False
+                # self.attacking = True
+                # self.attacking_duration = 10
+                # self.strike_sound.play()
             else:
                 self.attack_power += 0.01
 
@@ -389,28 +380,30 @@ class Momotaro:
                         case "right":
                             if attack_rect_right.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
-                                if self.attack_power > 0.1:
-                                    demon.velocity[0] += 30 * self.attack_power
+                                if self.attack_power > 0.2:
+                                    demon.velocity[0] += 45 * self.attack_power
                                     demon.velocity[1] += -30 * self.attack_power
+                                    demon.iframes += 25 * self.attack_power
                                 demon.attacked = True
-                                demon.iframes = 10 + 15 * self.attack_power
+                                demon.iframes += 5
                                 self.demon_ow_sound.play()
 
                         case "left":
                             if attack_rect_left.colliderect(demon.get_rect()):
                                 demon.health -= (self.attack_damage * self.attack_power)
-                                if self.attack_power > 0.1:
-                                    demon.velocity[0] += -30 * self.attack_power
+                                if self.attack_power > 0.2:
+                                    demon.velocity[0] += -45 * self.attack_power
                                     demon.velocity[1] += -30 * self.attack_power
+                                    demon.iframes += 25 * self.attack_power
                                 demon.attacked = True
-                                demon.iframes = 10 + 15 * self.attack_power
+                                demon.iframes += 5
                                 self.demon_ow_sound.play()
 
     def hit(self, direction):
         if self.iframes <= 0:
             # add hit noise
             self.ow_sound.play()
-            self.health -= 5
+            self.health -= 15
             self.iframes = 20
             match direction:
                 case "left":
