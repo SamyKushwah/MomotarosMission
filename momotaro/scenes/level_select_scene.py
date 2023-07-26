@@ -125,6 +125,9 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
                     return "level_3", scene_screen
                 elif credits_btn.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "credits", scene_screen
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         credits_btn.draw(scene_screen, (w * (91 / 100), h * (96 / 100)), True)
 

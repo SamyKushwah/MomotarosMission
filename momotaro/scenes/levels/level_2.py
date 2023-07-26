@@ -29,7 +29,7 @@ def create_level(my_toolbox):
     level2.add_platform((4600, 1080 - 61), (430, 70), platform_type="water")   # water section 3 (bottom)
     level2.add_platform((2500, 1080 - 61), (1150, 70), platform_type="water")
 
-    level2.add_spikes((2300, 1080 - 100), (150, 100), vase_position=(2800 + 17, 485), duration=300)
+    level2.add_spikes((2300, 1040 - 100), (175, 100), vase_position=(2800 + 17, 485), duration=300)
     level2.add_platform((2800, 550), (70, 50), facing_direction="up")
 
     level2.add_platform((350, 340 + 20), (650, 70), platform_type="water")          # water section 1 (top)
@@ -84,9 +84,9 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 1000, "button", fence_initial=(4250, 778), fence_final=(4250, 330), fence_dimensions=(150, 465))    # second bottom gate
 
     # add demons
-    level2.add_demon([1655, 200], (300, 100))
+    level2.add_demon([1655, 200], (450, 100))
     # level2.add_demon([2775, 1000], (700, 300))
-    level2.add_demon([3900, 200], (300, 100))
+    level2.add_demon([3900, 200], (450, 100))
 
     # add tori gate obstacle
     level2.add_obstacle(3950, 350 - 50, "torigate", gate_num=1)
