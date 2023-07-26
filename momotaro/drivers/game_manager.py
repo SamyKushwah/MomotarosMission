@@ -51,6 +51,11 @@ class GameManager:
         self.lose_sound = pygame.mixer.Sound(lose_path)
         self.lose_sound.set_volume(0.4)
 
+        # Camera change sound effect
+        camera_path = "audio/camera_change.mp3"
+        self.camera_sound = pygame.mixer.Sound(camera_path)
+        self.camera_sound.set_volume(0.3)
+
         # Loading background image
         self.background = self.level.background
 
@@ -105,6 +110,9 @@ class GameManager:
                     # changing the camera view
                     elif event.key == pygame.K_c:
                         self.camera_on_momotaro = not self.camera_on_momotaro
+                        self.camera_sound.play()
+                    if event.key == pygame.K_F11:
+                        self.my_toolbox.fullscreen()
 
                     # both players at their gates and either pressed up to end the game
                     if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
@@ -298,7 +306,7 @@ class GameManager:
 
         # Draw Header
         self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
-                                      self.pet.pet)
+                                      self.pet.pet, self.camera_on_momotaro)
 
         # do the screen transition
         if transition:
@@ -464,6 +472,6 @@ class GameManager:
 
             # Draw Header
             self.level.header.draw_header(view_surface, self.momotaro.health, self.pet.health, self.coins_collected,
-                                          self.pet.pet)
+                                          self.pet.pet, self.camera_on_momotaro)
             self.my_toolbox.draw_to_screen(view_surface)
             pygame.display.update()

@@ -42,6 +42,9 @@ def run(my_toolbox: toolbox.Toolbox, past_screen):
 
                 if button_back.is_clicked(my_toolbox.adjusted_mouse_pos(event.pos)):
                     return "level_selector", scene_screen
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F11:
+                    my_toolbox.fullscreen()
 
         # do the screen transition
         if transition:

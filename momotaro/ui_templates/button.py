@@ -24,6 +24,11 @@ class Button(pygame.sprite.Sprite):
         self.hover = False
         self.mous_pos = None
 
+        # lose music setup using Ninja Ambush - By Steve Oxen Stringer 2
+        sound_path = "audio/menu_select.mp3"
+        self.sound = pygame.mixer.Sound(sound_path)
+        self.sound.set_volume(0.6)
+
     def draw(self, surface, location, highlight=False):
         # drawing button
         self.rect.center = location
@@ -55,6 +60,8 @@ class Button(pygame.sprite.Sprite):
                     surface.blit(text_surface, text_rect)
 
     def is_clicked(self, mouse_pos):
+        if self.rect.collidepoint(mouse_pos):
+            self.sound.play()
         return self.rect.collidepoint(mouse_pos)
 
 # https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite
