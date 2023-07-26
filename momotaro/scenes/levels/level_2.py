@@ -12,9 +12,10 @@ def create_level(my_toolbox):
     level2.add_platform((5100 - 70, 0), (70, 1080), facing_direction="left")                     # right wall
     level2.add_platform((0, 0), (5100, 140), facing_direction="down")                            # top wall
     level2.add_platform((0, 1080 - 70), (300, 70))                                               # bottom wall section 1
-    level2.add_platform((1000, 1080 - 70), (280, 70))                                            # bottom wall section 2
-    level2.add_platform((2030, 1080 - 70), (470, 70))                                           # bottom wall section 3
+    level2.add_platform((1000, 1080 - 70), (280, 70))
+    level2.add_platform((2030, 1080 - 70), (470, 70))  # bottom wall section 3
     level2.add_platform((3650, 1010), (950, 70))
+    # bottom wall section 3
     # 2030
 
     # fix the corners
@@ -24,12 +25,12 @@ def create_level(my_toolbox):
     level2.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add water sections
-    level2.add_platform((300, 1080 - 60), (700, 70), platform_type="water")    # water section 1 (bottom)
-    level2.add_platform((1280, 1080 - 60), (750, 70), platform_type="water")   # water section 2 (bottom)
-    level2.add_platform((4600, 1080 - 61), (430, 70), platform_type="water")   # water section 3 (bottom)
-    level2.add_platform((2500, 1080 - 61), (1150, 70), platform_type="water")
+    level2.add_platform((300, 1080 - 65), (700, 70), platform_type="water")    # water section 1 (bottom)
+    level2.add_platform((1280, 1080 - 65), (750, 70), platform_type="water")   # water section 2 (bottom)
+    level2.add_platform((4600, 1080 - 65), (430, 70), platform_type="water")   # water section 3 (bottom)
+    level2.add_platform((2500, 1080 - 65), (1150, 70), platform_type="water")
 
-    level2.add_spikes((2300, 1040 - 100), (175, 100), vase_position=(2800 + 17, 485), duration=300)
+    level2.add_spikes((2300, 1080 - 100), (150, 100), vase_position=(2800 + 17, 485), duration=300)
     level2.add_platform((2800, 550), (70, 50), facing_direction="up")
 
     level2.add_platform((350, 340 + 20), (650, 70), platform_type="water")          # water section 1 (top)
@@ -84,13 +85,9 @@ def create_level(my_toolbox):
     level2.add_obstacle(4100, 1000, "button", fence_initial=(4250, 778), fence_final=(4250, 330), fence_dimensions=(150, 465))    # second bottom gate
 
     # add demons
-    level2.add_demon([1655, 200], (450, 100))
+    level2.add_demon([1655, 200], (500, 200))
     # level2.add_demon([2775, 1000], (700, 300))
-<<<<<<< Updated upstream
-    level2.add_demon([3900, 200], (450, 100))
-=======
     level2.add_demon([3900, 350], (350, 100))
->>>>>>> Stashed changes
 
     # add tori gate obstacle
     level2.add_obstacle(3950, 350 - 50, "torigate", gate_num=1)

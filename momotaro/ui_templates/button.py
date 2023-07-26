@@ -13,8 +13,6 @@ class Button(pygame.sprite.Sprite):
     font_path = "snapitc.ttf"
     #font_size = 135
 
-
-
     def __init__(self, image, font=font_path, lwd=None, text=None, font_size=135):
         pygame.sprite.Sprite.__init__(self)
         self.font = font

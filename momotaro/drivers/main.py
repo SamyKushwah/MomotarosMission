@@ -10,8 +10,6 @@ from momotaro.scenes import level_select_scene, title_menu_scene, credits_scene
 Purpose: Main driver/executable for the game. Based on the state passing in by each scene, the game will 
             transition between various states. 
 '''
-
-
 def main():
     my_toolbox = toolbox.Toolbox()
 
@@ -74,7 +72,7 @@ def main():
                 next_state, past_screen = level_select_scene.run(my_toolbox, past_screen)
 
             case "level_1":
-                pygame.mixer.stop()
+                pygame.mixer.pause()
                 level1_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_1", past_screen, level1_music)
                 next_state, past_screen = my_game.run()
@@ -84,7 +82,7 @@ def main():
 
             case "level_2":
                 # bring the user to level 2
-                pygame.mixer.stop()
+                pygame.mixer.pause()
                 level2_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_2", past_screen, level2_music)
                 next_state, past_screen = my_game.run()
@@ -94,7 +92,7 @@ def main():
 
             case "level_3":
                 # bring the user to level 3
-                pygame.mixer.stop()
+                pygame.mixer.pause()
                 level3_music.play(loops=-1)
                 my_game = game_manager.GameManager(my_toolbox, "level_3", past_screen, level3_music)
                 next_state, past_screen = my_game.run()

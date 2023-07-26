@@ -64,10 +64,10 @@ class Pet:
         self.throw_sound.set_volume(0.05)
 
         # BIRD IMAGES ----------------------------------
-        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_left.png").convert_alpha(),(70, 70))
-        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/bird_flapping_left.png").convert_alpha(),(70, 70))
+        self.left_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_left.png").convert_alpha(), (70, 70))
+        self.left_flapping = pygame.transform.scale(pygame.image.load("images/player2/bird_flapping_left.png").convert_alpha(), (70, 70))
 
-        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_right.png").convert_alpha(),(70, 70))
+        self.right_flying = pygame.transform.scale(pygame.image.load("images/player2/bird_flying_right.png").convert_alpha(), (70, 70))
         self.right_flapping = pygame.transform.scale(pygame.image.load("images/player2/bird_flapping_right.png").convert_alpha(), (70, 70))
 
         self.right_bird_mvmnt_frames = [
@@ -78,8 +78,8 @@ class Pet:
             pygame.transform.scale(pygame.image.load("images/player2/bird_walk_left_1.png").convert_alpha(), (62, 70)),
             pygame.transform.scale(pygame.image.load("images/player2/bird_walk_left_2.png").convert_alpha(), (65, 70))]
 
-        self.bird_right_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird.png").convert_alpha(),(63, 70))
-        self.bird_left_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird_idle_left.png").convert_alpha(),(63, 70))
+        self.bird_right_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird.png").convert_alpha(), (63, 70))
+        self.bird_left_idle_image = pygame.transform.scale(pygame.image.load("images/player2/bird_idle_left.png").convert_alpha(), (63, 70))
 
         self.bird_hurt_left_image = pygame.transform.rotate(self.right_bird_mvmnt_frames[0], 45)
         self.bird_hurt_right_image = pygame.transform.rotate(self.left_bird_mvmnt_frames[0], 325)
@@ -639,7 +639,7 @@ class Pet:
                     gate_center_x = pet_gate.get_rect().centerx
                     gate_center_y = pet_gate.get_rect().centery
 
-                    margin = 80
+                    margin = 60
                     if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
                         pet_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win

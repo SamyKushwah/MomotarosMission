@@ -355,10 +355,10 @@ class Momotaro:
         if self.charging:
             if self.attack_power >= 0.4:
                 self.attack_power = 0.4
-                #self.charging = False
-                #self.attacking = True
-                #self.attacking_duration = 10
-                #self.strike_sound.play()
+                # self.charging = False
+                # self.attacking = True
+                # self.attacking_duration = 10
+                # self.strike_sound.play()
             else:
                 self.attack_power += 0.01
 
