@@ -156,10 +156,10 @@ class Demon:
             self.moving_direction = self.last_direction
 
         # Limit max horizontal movement speed
-        if self.velocity[0] > 4 and self.iframes == 0:
-            self.velocity[0] = 4
-        elif self.velocity[0] < -4 and self.iframes == 0:
-            self.velocity[0] = -4
+        if self.velocity[0] > 6 and self.iframes == 0:
+            self.velocity[0] = 6
+        elif self.velocity[0] < -6 and self.iframes == 0:
+            self.velocity[0] = -6
 
         # Update position with calculated velocity
         self.position[0] += self.velocity[0] + self.external_forces[0]
@@ -168,6 +168,8 @@ class Demon:
         # Invincibility frames -- cannot be attacked too recently by Momotaro
         if self.iframes > 0:
             self.iframes -= 1
+        elif self.iframes < 0:
+            self.iframes = 0
 
         if self.charge_frames > 0:
             self.charge_frames -= 1
