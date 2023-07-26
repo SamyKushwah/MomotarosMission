@@ -70,7 +70,6 @@ class GameManager:
         # run event handling for the level until lvl_complete == True or broken out of
         transition = True
         while not self.level_complete:
-            print(self.pet.position)
             # Poll events/user inputs
             events = pygame.event.get()
             for event in events:
@@ -149,7 +148,6 @@ class GameManager:
                     # stopping lose sound when new state
                     self.lose_sound.stop()
                     return lose_rt, lose_screen
-
             # If momotaro is pushed below a block, he dies
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[

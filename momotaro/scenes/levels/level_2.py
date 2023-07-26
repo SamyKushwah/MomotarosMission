@@ -23,8 +23,8 @@ def create_level(my_toolbox):
     level2.add_platform((5040, 1080 - 70), (70, 70), facing_direction=None)
 
     # add water sections
-    level2.add_platform((300, 1080 - 70), (700, 70), platform_type="water")    # water section 1 (bottom)
-    level2.add_platform((1280, 1080 - 70), (750, 70), platform_type="water")   # water section 2 (bottom)
+    level2.add_platform((300, 1080 - 71), (700, 70), platform_type="water")    # water section 1 (bottom)
+    level2.add_platform((1280, 1080 - 71), (750, 70), platform_type="water")   # water section 2 (bottom)
     level2.add_platform((4600, 1080 - 71), (430, 70), platform_type="water")   # water section 3 (bottom)
     level2.add_platform((2500, 1080 - 71), (1150, 70), platform_type="water")
 
