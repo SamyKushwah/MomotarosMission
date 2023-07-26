@@ -86,7 +86,11 @@ def create_level(my_toolbox):
     # add demons
     level2.add_demon([1655, 200], (450, 100))
     # level2.add_demon([2775, 1000], (700, 300))
+<<<<<<< Updated upstream
     level2.add_demon([3900, 200], (450, 100))
+=======
+    level2.add_demon([3900, 350], (350, 100))
+>>>>>>> Stashed changes
 
     # add tori gate obstacle
     level2.add_obstacle(3950, 350 - 50, "torigate", gate_num=1)
