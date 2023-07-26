@@ -70,9 +70,9 @@ def create_level(my_toolbox):
     level1.add_tutorial_text(3300, 750, 2800, 3500, 500, 1080, (100, 100), "Use . as Monkey to break vase and momentarily hide spikes.",
                              font_size=20)
     # moving platform and water section
-    level1.add_platform((3930, 1015), (700, 70), platform_type="water")
+    level1.add_platform((3930, 1015), (670, 70), platform_type="water")
     level1.add_moving_platform(position=(3900, 900), dimensions=(200, 50), max_speed=3, target=(4500, 900))
-    level1.add_platform((4630, 1010), (400, 70))
+    level1.add_platform((4600, 1010), (430, 70))
 
     level1.add_tutorial_text(4000, 700, 3700, 5100, 400,1080, (100,100), text="Players will die if they touch water.")
     level1.add_tutorial_text(4000, 750, 3700, 5100, 400,1080, (100,100), text="Avoid it using the platforms.")
