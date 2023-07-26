@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name="momotaro",  # Name of the PyPI package
-    version="0.1",
+    version="1.0",
     packages=find_packages(),
     url="https://github.com/SamyKushwah/MomotarosMission",
     #license="GPL 3",

@@ -1,15 +1,12 @@
-Momotaro's Mission is a Japanese-inspired platformer puzzle game made for PC. Based on the folktale "Momotaro", Momotaro's Mission follows Momotaro on his journey home. Fight demons, evade obstacles, and collect coins in order to complete levels. Move left and right with A and D keys, and jump with W. Press and hold the P key to charge an attack that grows in size and power, and release the key to attack.
+Momotaro's Mission is a Japanese-inspired platformer puzzle game made for PC. Based on the folktale "Momotaro", Momotaro's Mission follows Momotaro on his journey home. Fight demons, evade obstacles, and collect coins in order to complete levels. Move left and right as Momotaro with A and D keys, and jump with W. Press and hold the R key to charge an attack that grows in size and power, and release the key to stop attacking. Move left and right as the Pet with left and right arrow keys, and jump with up arrow. Press / to swap between the bird, dog, and monkey. As the dog, press . to sniff for hidden buttons. As the monkey, press . to throw peaches at demon vases to disable spike traps.
 
 One-line build command:
-python setup.py bdist_wheel
+python setup.py sdist
 
 Installation Package Executable:
-"\dist\momotaro-0.1-py3-none-any.whl"
+"\dist\momotaro-1.0-py3-none-any.whl"
 
-Recommended installation command: pip install momotaro-0.1-py3-none-any.whl
+Recommended installation command: pip install momotaro-1.0-py3-none-any.whl
 
 Link to repository:
 https://github.com/SamyKushwah/MomotarosMission/
-
-Run Executable Command:
-play_momotaro

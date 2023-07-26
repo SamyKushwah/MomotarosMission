@@ -420,8 +420,8 @@ class Header:
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
         self.momo_highlighted = pygame.transform.scale(self.momo_highlighted, (57, 90))
         self.bird_highlighted = pygame.transform.scale(self.bird_highlighted, (60, 90))
-        self.dog_highlighted = pygame.transform.scale(self.dog_highlighted, (60, 90))
-        self.monkey_highlighted = pygame.transform.scale(self.monkey_highlighted, (60, 90))
+        self.dog_highlighted = pygame.transform.scale(self.dog_highlighted, (62, 90))
+        self.monkey_highlighted = pygame.transform.scale(self.monkey_highlighted, (62, 90))
 
     def draw_header(self, surface, momo_health, pet_health, coins, pet, on_momotaro):
 

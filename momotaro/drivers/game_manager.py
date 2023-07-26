@@ -260,10 +260,11 @@ class GameManager:
                         vase.draw(self.image)
 
         # Draw platforms
-        for platform in self.level.platform_list:
-            platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+        for platform in self.level.platform_list:
+            platform.draw_platform(self.image)
+
         # Draw text
         for text in self.level.tutorial_text_list:
             text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
@@ -391,10 +392,11 @@ class GameManager:
                             vase.draw(self.image)
 
             # Draw platforms
-                for platform in self.level.platform_list:
-                    platform.draw_platform(self.image)
                 for platform in self.level.moving_platform_list:
                     platform.draw_platform(self.image)
+                for platform in self.level.platform_list:
+                    platform.draw_platform(self.image)
+
                 # Draw text
                 for text in self.level.tutorial_text_list:
                     text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
