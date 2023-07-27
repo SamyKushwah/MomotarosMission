@@ -639,7 +639,7 @@ class Pet:
                     gate_center_x = pet_gate.get_rect().centerx
                     gate_center_y = pet_gate.get_rect().centery
 
-                    margin = 80
+                    margin = 60
                     if (abs(center_x - gate_center_x) < margin) and (abs(center_y - gate_center_y) < margin):
                         pet_gate.pushed = True
                     else:  # fixed bug so now only when you are in gate range anf up you win

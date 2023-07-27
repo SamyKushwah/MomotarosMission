@@ -418,10 +418,10 @@ class Header:
         self.bird = pygame.transform.scale(self.bird, (60, 80))
         self.dog = pygame.transform.scale(self.dog, (60, 80))
         self.monkey = pygame.transform.scale(self.monkey, (60, 80))
-        self.momo_highlighted = pygame.transform.scale(self.momo_highlighted, (60, 95))
-        self.bird_highlighted = pygame.transform.scale(self.bird_highlighted, (70, 95))
-        self.dog_highlighted = pygame.transform.scale(self.dog_highlighted, (70, 95))
-        self.monkey_highlighted = pygame.transform.scale(self.monkey_highlighted, (70, 95))
+        self.momo_highlighted = pygame.transform.scale(self.momo_highlighted, (57, 90))
+        self.bird_highlighted = pygame.transform.scale(self.bird_highlighted, (60, 90))
+        self.dog_highlighted = pygame.transform.scale(self.dog_highlighted, (62, 90))
+        self.monkey_highlighted = pygame.transform.scale(self.monkey_highlighted, (62, 90))
 
     def draw_header(self, surface, momo_health, pet_health, coins, pet, on_momotaro):
 
@@ -429,9 +429,9 @@ class Header:
         surface.blit(self.header, (-200, 0))
         surface.blit(self.player_1_txt, (210, 30))
         if on_momotaro:
-            surface.blit(self.momo_highlighted, (435, 10))
+            surface.blit(self.momo_highlighted, (433, 7))
         else:
-            surface.blit(self.momo, (435, 10))
+            surface.blit(self.momo, (435, 8))
 
         surface.blit(self.health_back, (540, 15))
         health_len = 225 * (momo_health / 100)
@@ -463,11 +463,11 @@ class Header:
                 surface.blit(self.monkey, (1305, 10))
         else:
             if pet == "bird":
-                surface.blit(self.bird_highlighted, (1305, 10))
+                surface.blit(self.bird_highlighted, (1304, 7))
             elif pet == "dog":
-                surface.blit(self.dog_highlighted, (1305, 10))
+                surface.blit(self.dog_highlighted, (1304, 7))
             elif pet == "monkey":
-                surface.blit(self.monkey_highlighted, (1305, 10))
+                surface.blit(self.monkey_highlighted, (1304, 7))
 
         surface.blit(self.health_back, (1410, 15))
         health_len = 225 * (pet_health / 50)

@@ -118,7 +118,6 @@ class GameManager:
                     if self.level.interactible_list["torigate"][0].pushed and self.level.interactible_list["torigate"][1].pushed and \
                             (event.key == pygame.K_w or event.key == pygame.K_UP):
                         # add win sound
-                        # pygame.mixer.pause()
                         self.level_music.stop()
                         self.win_sound.play()
                         for interactible_key in self.level.interactible_list.keys():
@@ -137,7 +136,6 @@ class GameManager:
 
             # Checking for if the game is over/failed (Momo dead or out of bounds)
             if self.momotaro.health <= 0 or self.momotaro.position[1] > 4000 or self.pet.health <= 0:
-                # pygame.mixer.pause()
                 self.level_music.stop()
                 self.lose_sound.play()
 
@@ -153,7 +151,6 @@ class GameManager:
             if self.momotaro.standing and self.momotaro.standing_on != None:
                 if self.momotaro.position[
                     1] + self.momotaro.get_rect().height // 2 > self.momotaro.standing_on.get_rect().top:
-                    # pygame.mixer.pause()
                     self.level_music.stop()
                     self.lose_sound.play()
                     # squish amimation
@@ -172,7 +169,6 @@ class GameManager:
                     1] + self.pet.get_rect().height // 2 > self.pet.standing_on.get_rect().top:
                     # self.momotaro.death_type = "crushed"
                     self.pet.health = 0
-                    # pygame.mixer.pause()
                     self.level_music.stop()
                     self.lose_sound.play()
                     lose_rt, lose_screen = self.play_death_animation()
@@ -264,10 +260,11 @@ class GameManager:
                         vase.draw(self.image)
 
         # Draw platforms
-        for platform in self.level.platform_list:
-            platform.draw_platform(self.image)
         for platform in self.level.moving_platform_list:
             platform.draw_platform(self.image)
+        for platform in self.level.platform_list:
+            platform.draw_platform(self.image)
+
         # Draw text
         for text in self.level.tutorial_text_list:
             text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1], self.pet.position[0],
@@ -395,10 +392,11 @@ class GameManager:
                             vase.draw(self.image)
 
             # Draw platforms
-                for platform in self.level.platform_list:
-                    platform.draw_platform(self.image)
                 for platform in self.level.moving_platform_list:
                     platform.draw_platform(self.image)
+                for platform in self.level.platform_list:
+                    platform.draw_platform(self.image)
+
                 # Draw text
                 for text in self.level.tutorial_text_list:
                     text.draw(self.image, self.momotaro.position[0], self.momotaro.position[1],
